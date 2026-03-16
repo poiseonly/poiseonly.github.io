@@ -602,7 +602,7 @@
                     brand's awareness while building trust with your consumer through the following media inputs:
                     campaign development + features, product design, content creation, or speaking engagements.</p>
 
-                <a href="mailto:info@24thavenue.com" class="contact-email">info@24thavenue.com</a>
+                <a href="mailto:moyorpoise@gmail.com" class="contact-email">moyorpoise@gmail.com</a>
 
                 <div class="contact-details">
                     <p><i class="fas fa-map-pin"></i> Lagos, Nigeria</p>
@@ -616,58 +616,65 @@
             </div>
 
             <div class="contact-form">
-                <form id="contactForm">
-                    <div class="form-group">
-                        <label>Name *</label>
-                        <input type="text" id="name" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Email *</label>
-                        <input type="email" id="email" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Subject</label>
-                        <input type="text" id="subject">
-                    </div>
-
-                    <div class="form-group">
-                        <label>Interested In</label>
-                        <div class="checkbox-group">
-                            <div class="checkbox-item">
-                                <input type="checkbox" value="Interior Design"> Interior Design
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" value="Creative Direction"> Creative Direction
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" value="Brand Partnerships"> Brand Partnerships
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" value="Speaking Engagement"> Speaking Engagement
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" value="Product Design"> Product Design
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" value="General Inquiry"> General Inquiry
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Message *</label>
-                        <textarea id="message" rows="4" required placeholder="Tell us about your project..."></textarea>
-                    </div>
-
-                    <button type="submit" class="btn">Submit</button>
-
-                    <div id="formFeedback" style="margin-top: 1rem; text-align: center; color: #b89b7b;"></div>
-                </form>
+    <form action="https://formsubmit.co/moyorpoise@gmail.com" method="POST">
+        <!-- FormSubmit.co configuration -->
+        <input type="hidden" name="_subject" value="New 24th Avenue Website Inquiry">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_next" value="https://poiseonly.github.io/thank-you.html">
+        
+        <!-- Name field -->
+        <div class="form-group">
+            <label>Name *</label>
+            <input type="text" name="name" placeholder="Enter your name..." required>
+        </div>
+        
+        <!-- Email field -->
+        <div class="form-group">
+            <label>Email *</label>
+            <input type="email" name="email" placeholder="Email address..." required>
+        </div>
+        
+        <!-- Subject field -->
+        <div class="form-group">
+            <label>Subject</label>
+            <input type="text" name="subject" placeholder="Subject line...">
+        </div>
+        
+        <!-- Checkbox options (Interested In) -->
+        <div class="form-group">
+            <label>Interested In:</label>
+            <div class="checkbox-group">
+                <div class="checkbox-item">
+                    <input type="checkbox" name="interest[]" value="Interior Design"> Interior Design
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" name="interest[]" value="Creative Direction"> Creative Direction
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" name="interest[]" value="Brand Partnerships"> Brand Partnerships
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" name="interest[]" value="Speaking Engagement"> Speaking Engagement
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" name="interest[]" value="Product Design"> Product Design
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" name="interest[]" value="General Inquiry"> General Inquiry
+                </div>
             </div>
         </div>
-    </section>
+        
+        <!-- Message field -->
+        <div class="form-group">
+            <label>Message *</label>
+            <textarea name="message" placeholder="Write a message..." rows="4" required></textarea>
+        </div>
+        
+        <!-- Submit button -->
+        <button type="submit" class="btn">Submit</button>
+    </form>
+</div>
 
     <!-- Footer -->
     <footer class="footer">
