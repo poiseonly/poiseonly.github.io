@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>Contact | 24th Avenue</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: #ffffff;
+            color: #1a1a1a;
+            line-height: 1.6;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 1.2rem;
+            background: #ffffff;
+            border-bottom: 1px solid #f0f0f0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 1.3rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            text-decoration: none;
+            color: #1a1a1a;
+        }
+
+        .menu-icon {
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            left: -100%;
+            width: 85%;
+            height: 100vh;
+            background: #ffffff;
+            z-index: 2000;
+            padding: 2rem 1.5rem;
+            transition: 0.3s ease;
+            box-shadow: 2px 0 20px rgba(0,0,0,0.1);
+            overflow-y: auto;
+        }
+
+        .mobile-menu.active {
+            left: 0;
+        }
+
+        .close-menu {
+            text-align: right;
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+            cursor: pointer;
+        }
+
+        .mobile-menu-links {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .mobile-menu-links a {
+            text-decoration: none;
+            color: #1a1a1a;
+            font-size: 1.2rem;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-bottom: 1px solid #f0f0f0;
+            padding-bottom: 0.8rem;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1500;
+            display: none;
+        }
+
+        .overlay.active {
+            display: block;
+        }
+
+        .desktop-nav {
+            display: none;
+        }
+
+        .page-header {
+            padding: 2rem 1.5rem 1rem;
+            text-align: center;
+        }
+
+        .page-header h1 {
+            font-size: 2.2rem;
+            font-weight: 300;
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-container {
+            padding: 1.5rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .contact-info {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .contact-info h2 {
+            font-size: 1.8rem;
+            font-weight: 300;
+            margin-bottom: 1rem;
+        }
+
+        .contact-info p {
+            color: #4a4a4a;
+            margin-bottom: 2rem;
+        }
+
+        .contact-details {
+            background: #f9f9f9;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .contact-details p {
+            margin-bottom: 0.8rem;
+        }
+
+        .contact-details i {
+            color: #b89b7b;
+            width: 25px;
+        }
+
+        .contact-form {
+            background: #ffffff;
+            border: 1px solid #f0f0f0;
+            padding: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #666;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #e0e0e0;
+            font-size: 1rem;
+            transition: 0.2s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #b89b7b;
+        }
+
+        .checkbox-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.8rem;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .checkbox-item input[type="checkbox"] {
+            width: auto;
+        }
+
+        .btn {
+            background: #b89b7b;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: 0.3s;
+            width: 100%;
+            font-weight: 400;
+        }
+
+        .btn:hover {
+            background: #8b7a66;
+        }
+
+        .form-footer {
+            text-align: center;
+            margin-top: 2rem;
+            color: #888;
+            font-size: 0.9rem;
+        }
+
+        .footer {
+            background: #1a1a1a;
+            color: #ffffff;
+            padding: 2.5rem 1.5rem;
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .footer-logo {
+            font-size: 1.8rem;
+            font-weight: 300;
+            margin-bottom: 1rem;
+            color: #ffffff;
+        }
+
+        .footer-email {
+            font-size: 1.1rem;
+            color: #b89b7b;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid #b89b7b;
+            padding-bottom: 5px;
+            width: fit-content;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .footer-links a {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .footer-social {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .footer-social a {
+            color: #ffffff;
+            font-size: 1.3rem;
+        }
+
+        .footer-copyright {
+            font-size: 0.8rem;
+            color: #888;
+            margin-top: 2rem;
+        }
+
+        @media (min-width: 768px) {
+            .navbar {
+                padding: 1.5rem 3rem;
+            }
+            
+            .menu-icon {
+                display: none;
+            }
+            
+            .desktop-nav {
+                display: flex;
+                gap: 2rem;
+            }
+            
+            .desktop-nav a {
+                text-decoration: none;
+                color: #1a1a1a;
+                font-size: 0.9rem;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+            }
+            
+            .contact-container {
+                padding: 3rem;
+            }
+            
+            .checkbox-group {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="index.html" class="logo">24TH AVENUE</a>
+        <div class="menu-icon" onclick="openMenu()"><i class="fas fa-bars"></i></div>
+        <div class="desktop-nav">
+            <a href="index.html">HOME</a>
+            <a href="studio.html">STUDIO</a>
+            <a href="founder.html">FOUNDER</a>
+            <a href="press.html">PRESS</a>
+            <a href="work.html">WORK</a>
+            <a href="contact.html">CONTACT</a>
+        </div>
+    </nav>
+
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="close-menu" onclick="closeMenu()"><i class="fas fa-times"></i></div>
+        <div class="mobile-menu-links">
+            <a href="index.html" onclick="closeMenu()">HOME</a>
+            <a href="studio.html" onclick="closeMenu()">STUDIO</a>
+            <a href="founder.html" onclick="closeMenu()">FOUNDER</a>
+            <a href="press.html" onclick="closeMenu()">PRESS</a>
+            <a href="work.html" onclick="closeMenu()">WORK</a>
+            <a href="contact.html" onclick="closeMenu()">CONTACT</a>
+        </div>
+    </div>
+    <div class="overlay" id="overlay" onclick="closeMenu()"></div>
+
+    <div class="page-header">
+        <h1>CONTACT</h1>
+        <p>let's collaborate</p>
+    </div>
+
+    <div class="contact-container">
+        <div class="contact-info">
+            <h2>Let's Create Together</h2>
+            <p>Whether you'd like to partner with our studio or founder, let's work together to increase your brand's awareness while building trust with your consumer.</p>
+        </div>
+
+        <div class="contact-details">
+            <p><i class="fas fa-map-pin"></i> Los Angeles, CA</p>
+            <p><i class="fas fa-envelope"></i> info@24thavenue.com</p>
+            <p><i class="fas fa-phone"></i> +1 (323) 555-0123</p>
+            <p><i class="fab fa-instagram"></i> @24thavenue</p>
+            <p><i class="fab fa-pinterest"></i> 24thavenue</p>
+        </div>
+
+        <div class="contact-form">
+            <form action="https://formsubmit.co/info@24thavenue.com" method="POST">
+                <input type="hidden" name="_subject" value="New 24th Avenue Website Inquiry">
+                <input type="hidden" name="_captcha" value="false">
+                <input type="hidden" name="_next" value="https://24thavenue.github.io/thank-you.html">
+                <input type="hidden" name="_template" value="table">
+
+                <div class="form-group">
+                    <label>Name *</label>
+                    <input type="text" name="Name" placeholder="Enter your name" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Email *</label>
+                    <input type="email" name="Email" placeholder="Email address" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Phone</label>
+                    <input type="tel" name="Phone" placeholder="Phone number">
+                </div>
+
+                <div class="form-group">
+                    <label>Subject</label>
+                    <input type="text" name="Subject" placeholder="Subject line">
+                </div>
+
+                <div class="form-group">
+                    <label>Interested In</label>
+                    <div class="checkbox-group">
+                        <div class="checkbox-item">
+                            <input type="checkbox" name="Interest[]" value="Interior Design"> Interior Design
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" name="Interest[]" value="Creative Direction"> Creative Direction
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" name="Interest[]" value="Brand Partnerships"> Brand Partnerships
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" name="Interest[]" value="Speaking Engagement"> Speaking Engagement
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" name="Interest[]" value="Product Design"> Product Design
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" name="Interest[]" value="General Inquiry"> General Inquiry
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Message *</label>
+                    <textarea name="Message" placeholder="Tell us about your project..." rows="5" required></textarea>
+                </div>
+
+                <button type="submit" class="btn">Send Message</button>
+                
+                <div class="form-footer">
+                    <p>We'll respond within 24-48 hours</p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-logo">24TH AVENUE</div>
+        <a href="mailto:moyorpoise@gmail.com" class="footer-email">moyorpoise@gmail.com</a>
+        <p style="margin-bottom: 1rem;">Los Angeles, CA</p>
+        <div class="footer-links">
+            <a href="index.html">HOME</a>
+            <a href="studio.html">STUDIO</a>
+            <a href="founder.html">FOUNDER</a>
+            <a href="press.html">PRESS</a>
+            <a href="work.html">WORK</a>
+            <a href="contact.html">CONTACT</a>
+        </div>
+        <div class="footer-social">
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-pinterest"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+        <div class="footer-copyright">
+            © 2024 24TH AVENUE DESIGN STUDIO. ALL RIGHTS RESERVED.
+        </div>
+    </footer>
+
+    <script>
+        function openMenu() {
+            document.getElementById('mobileMenu').classList.add('active');
+            document.getElementById('overlay').classList.add('active');
+        }
+        
+        function closeMenu() {
+            document.getElementById('mobileMenu').classList.remove('active');
+            document.getElementById('overlay').classList.remove('active');
+        }
+    </script>
+</body>
+</html>
