@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>Work | 24th Avenue</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: #ffffff;
+            color: #1a1a1a;
+            line-height: 1.6;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 1.2rem;
+            background: #ffffff;
+            border-bottom: 1px solid #f0f0f0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 1.3rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            text-decoration: none;
+            color: #1a1a1a;
+        }
+
+        .menu-icon {
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            left: -100%;
+            width: 85%;
+            height: 100vh;
+            background: #ffffff;
+            z-index: 2000;
+            padding: 2rem 1.5rem;
+            transition: 0.3s ease;
+            box-shadow: 2px 0 20px rgba(0,0,0,0.1);
+            overflow-y: auto;
+        }
+
+        .mobile-menu.active {
+            left: 0;
+        }
+
+        .close-menu {
+            text-align: right;
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+            cursor: pointer;
+        }
+
+        .mobile-menu-links {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .mobile-menu-links a {
+            text-decoration: none;
+            color: #1a1a1a;
+            font-size: 1.2rem;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-bottom: 1px solid #f0f0f0;
+            padding-bottom: 0.8rem;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1500;
+            display: none;
+        }
+
+        .overlay.active {
+            display: block;
+        }
+
+        .desktop-nav {
+            display: none;
+        }
+
+        .page-header {
+            padding: 2rem 1.5rem 1rem;
+            text-align: center;
+        }
+
+        .page-header h1 {
+            font-size: 2.2rem;
+            font-weight: 300;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Project Grid */
+        .projects-grid {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: #f9f9f9;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .project-image {
+            width: 100%;
+            height: 250px;
+            background-size: cover;
+            background-position: center;
+            transition: 0.3s;
+        }
+
+        .project-info {
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .project-info h2 {
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-info p {
+            color: #b89b7b;
+            font-style: italic;
+        }
+
+        /* Modal for Project Gallery */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.95);
+            z-index: 3000;
+            overflow-y: auto;
+        }
+
+        .modal.active {
+            display: block;
+        }
+
+        .modal-content {
+            padding: 2rem 1.5rem;
+            color: white;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .modal-header h2 {
+            font-size: 1.8rem;
+            font-weight: 300;
+            color: white;
+        }
+
+        .close-modal {
+            font-size: 2rem;
+            cursor: pointer;
+            color: white;
+        }
+
+        .modal-gallery {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .modal-gallery img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .modal-prev, .modal-next {
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.2);
+            color: white;
+            padding: 1rem;
+            cursor: pointer;
+            font-size: 1.5rem;
+            border: none;
+            z-index: 3100;
+        }
+
+        .modal-prev {
+            left: 0;
+        }
+
+        .modal-next {
+            right: 0;
+        }
+
+        .modal-counter {
+            text-align: center;
+            color: #888;
+            margin-top: 1rem;
+        }
+
+        .footer {
+            background: #1a1a1a;
+            color: #ffffff;
+            padding: 2.5rem 1.5rem;
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .footer-logo {
+            font-size: 1.8rem;
+            font-weight: 300;
+            margin-bottom: 1rem;
+            color: #ffffff;
+        }
+
+        .footer-email {
+            font-size: 1.1rem;
+            color: #b89b7b;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid #b89b7b;
+            padding-bottom: 5px;
+            width: fit-content;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .footer-links a {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .footer-social {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .footer-social a {
+            color: #ffffff;
+            font-size: 1.3rem;
+        }
+
+        .footer-copyright {
+            font-size: 0.8rem;
+            color: #888;
+            margin-top: 2rem;
+        }
+
+        @media (min-width: 768px) {
+            .navbar {
+                padding: 1.5rem 3rem;
+            }
+            
+            .menu-icon {
+                display: none;
+            }
+            
+            .desktop-nav {
+                display: flex;
+                gap: 2rem;
+            }
+            
+            .desktop-nav a {
+                text-decoration: none;
+                color: #1a1a1a;
+                font-size: 0.9rem;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+            }
+            
+            .projects-grid {
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 3rem;
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 2rem;
+            }
+            
+            .project-image {
+                height: 350px;
+            }
+            
+            .modal-gallery {
+                max-width: 1000px;
+                margin: 0 auto;
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 1rem;
+            }
+            
+            .modal-gallery img {
+                height: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="index.html" class="logo">24TH AVENUE</a>
+        <div class="menu-icon" onclick="openMenu()"><i class="fas fa-bars"></i></div>
+        <div class="desktop-nav">
+            <a href="index.html">HOME</a>
+            <a href="studio.html">STUDIO</a>
+            <a href="founder.html">FOUNDER</a>
+            <a href="press.html">PRESS</a>
+            <a href="work.html">WORK</a>
+            <a href="contact.html">CONTACT</a>
+        </div>
+    </nav>
+
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="close-menu" onclick="closeMenu()"><i class="fas fa-times"></i></div>
+        <div class="mobile-menu-links">
+            <a href="index.html" onclick="closeMenu()">HOME</a>
+            <a href="studio.html" onclick="closeMenu()">STUDIO</a>
+            <a href="founder.html" onclick="closeMenu()">FOUNDER</a>
+            <a href="press.html" onclick="closeMenu()">PRESS</a>
+            <a href="work.html" onclick="closeMenu()">WORK</a>
+            <a href="contact.html" onclick="closeMenu()">CONTACT</a>
+        </div>
+    </div>
+    <div class="overlay" id="overlay" onclick="closeMenu()"></div>
+
+    <div class="page-header">
+        <h1>WORK</h1>
+        <p>featured projects</p>
+    </div>
+
+    <div class="projects-grid">
+        <!-- Malibu Residence -->
+        <div class="project-card" onclick="openProject('malibu')">
+            <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=800')"></div>
+            <div class="project-info">
+                <h2>Malibu Residence</h2>
+                <p>Interior Design</p>
+            </div>
+        </div>
+
+        <!-- Mushroom Lamp -->
+        <div class="project-card" onclick="openProject('lamp')">
+            <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1618219904412-915f8b8c3caa?w=800')"></div>
+            <div class="project-info">
+                <h2>Mushroom Lamp</h2>
+                <p>Product Design</p>
+            </div>
+        </div>
+
+        <!-- Hyperblue Collection -->
+        <div class="project-card" onclick="openProject('hyperblue')">
+            <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1600566752355-35792bedcfea?w=800')"></div>
+            <div class="project-info">
+                <h2>Hyperblue Collection</h2>
+                <p>Creative Direction</p>
+            </div>
+        </div>
+
+        <!-- LA Pop-up -->
+        <div class="project-card" onclick="openProject('popup')">
+            <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1583847268964-b28dc8aaec4a?w=800')"></div>
+            <div class="project-info">
+                <h2>LA Pop-up</h2>
+                <p>Experiential Design</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Project Modals -->
+    <div id="malibu-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Malibu Residence</h2>
+                <span class="close-modal" onclick="closeProject('malibu')"><i class="fas fa-times"></i></span>
+            </div>
+            <div class="modal-gallery">
+                <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=800" alt="Malibu 1">
+                <img src="https://images.unsplash.com/photo-1618219904412-915f8b8c3caa?w=800" alt="Malibu 2">
+                <img src="https://images.unsplash.com/photo-1600566752355-35792bedcfea?w=800" alt="Malibu 3">
+                <img src="https://images.unsplash.com/photo-1583847268964-b28dc8aaec4a?w=800" alt="Malibu 4">
+                <img src="https://images.unsplash.com/photo-1617806118233-18e1de247200?w=800" alt="Malibu 5">
+                <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb3?w=800" alt="Malibu 6">
+            </div>
+        </div>
+    </div>
+
+    <div id="lamp-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Mushroom Lamp</h2>
+                <span class="close-modal" onclick="closeProject('lamp')"><i class="fas fa-times"></i></span>
+            </div>
+            <div class="modal-gallery">
+                <img src="https://images.unsplash.com/photo-1618219904412-915f8b8c3caa?w=800" alt="Lamp 1">
+                <img src="https://images.unsplash.com/photo-1600566752355-35792bedcfea?w=800" alt="Lamp 2">
+                <img src="https://images.unsplash.com/photo-1583847268964-b28dc8aaec4a?w=800" alt="Lamp 3">
+                <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=800" alt="Lamp 4">
+            </div>
+        </div>
+    </div>
+
+    <div id="hyperblue-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Hyperblue Collection</h2>
+                <span class="close-modal" onclick="closeProject('hyperblue')"><i class="fas fa-times"></i></span>
+            </div>
+            <div class="modal-gallery">
+                <img src="https://images.unsplash.com/photo-1600566752355-35792bedcfea?w=800" alt="Hyperblue 1">
+                <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=800" alt="Hyperblue 2">
+                <img src="https://images.unsplash.com/photo-1618219904412-915f8b8c3caa?w=800" alt="Hyperblue 3">
+                <img src="https://images.unsplash.com/photo-1583847268964-b28dc8aaec4a?w=800" alt="Hyperblue 4">
+            </div>
+        </div>
+    </div>
+
+    <div id="popup-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>LA Pop-up</h2>
+                <span class="close-modal" onclick="closeProject('popup')"><i class="fas fa-times"></i></span>
+            </div>
+            <div class="modal-gallery">
+                <img src="https://images.unsplash.com/photo-1583847268964-b28dc8aaec4a?w=800" alt="Pop-up 1">
+                <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=800" alt="Pop-up 2">
+                <img src="https://images.unsplash.com/photo-1618219904412-915f8b8c3caa?w=800" alt="Pop-up 3">
+                <img src="https://images.unsplash.com/photo-1600566752355-35792bedcfea?w=800" alt="Pop-up 4">
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-logo">24TH AVENUE</div>
+        <a href="mailto:moyorpoise@gmail.com" class="footer-email">moyorpoise@gmail.com</a>
+        <p style="margin-bottom: 1rem;">Los Angeles, CA</p>
+        <div class="footer-links">
+            <a href="index.html">HOME</a>
+            <a href="studio.html">STUDIO</a>
+            <a href="founder.html">FOUNDER</a>
+            <a href="press.html">PRESS</a>
+            <a href="work.html">WORK</a>
+            <a href="contact.html">CONTACT</a>
+        </div>
+        <div class="footer-social">
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-pinterest"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+        <div class="footer-copyright">
+            © 2024 24TH AVENUE DESIGN STUDIO. ALL RIGHTS RESERVED.
+        </div>
+    </footer>
+
+    <script>
+        function openMenu() {
+            document.getElementById('mobileMenu').classList.add('active');
+            document.getElementById('overlay').classList.add('active');
+        }
+        
+        function closeMenu() {
+            document.getElementById('mobileMenu').classList.remove('active');
+            document.getElementById('overlay').classList.remove('active');
+        }
+        
+        function openProject(project) {
+            document.getElementById(project + '-modal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeProject(project) {
+            document.getElementById(project + '-modal').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+        
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                document.querySelectorAll('.modal').forEach(modal => {
+                    modal.classList.remove('active');
+                });
+                document.body.style.overflow = 'auto';
+            }
+        }
+    </script>
+</body>
+</html>
