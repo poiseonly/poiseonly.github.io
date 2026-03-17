@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>Our Process | 29th Avenue</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: #ffffff;
+            color: #1a1a1a;
+            line-height: 1.6;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 1.2rem;
+            background: #ffffff;
+            border-bottom: 1px solid #f0f0f0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 1.3rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            text-decoration: none;
+            color: #1a1a1a;
+        }
+
+        .menu-icon {
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            left: -100%;
+            width: 85%;
+            height: 100vh;
+            background: #ffffff;
+            z-index: 2000;
+            padding: 2rem 1.5rem;
+            transition: 0.3s ease;
+            box-shadow: 2px 0 20px rgba(0,0,0,0.1);
+            overflow-y: auto;
+        }
+
+        .mobile-menu.active {
+            left: 0;
+        }
+
+        .close-menu {
+            text-align: right;
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+            cursor: pointer;
+        }
+
+        .mobile-menu-links {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .mobile-menu-links a {
+            text-decoration: none;
+            color: #1a1a1a;
+            font-size: 1.2rem;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-bottom: 1px solid #f0f0f0;
+            padding-bottom: 0.8rem;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1500;
+            display: none;
+        }
+
+        .overlay.active {
+            display: block;
+        }
+
+        .desktop-nav {
+            display: none;
+        }
+
+        .page-header {
+            padding: 3rem 1.5rem 2rem;
+            text-align: center;
+            background: linear-gradient(rgba(0,0,0,0.02), rgba(0,0,0,0.02));
+        }
+
+        .page-header h1 {
+            font-size: 2.5rem;
+            font-weight: 300;
+            margin-bottom: 0.8rem;
+            letter-spacing: 2px;
+        }
+
+        .page-header p {
+            color: #b89b7b;
+            font-style: italic;
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Process Timeline */
+        .process-container {
+            padding: 2rem 1.5rem 4rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .process-step {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .process-step:last-child {
+            margin-bottom: 0;
+        }
+
+        .step-number {
+            font-size: 1rem;
+            color: #b89b7b;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 0.5rem;
+        }
+
+        .step-title {
+            font-size: 2rem;
+            font-weight: 300;
+            margin-bottom: 1rem;
+            color: #1a1a1a;
+            position: relative;
+            display: inline-block;
+        }
+
+        .step-title::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 60px;
+            height: 2px;
+            background: #b89b7b;
+        }
+
+        .step-content {
+            background: #f9f9f9;
+            padding: 2rem;
+            border-left: 4px solid #b89b7b;
+        }
+
+        .step-content p {
+            color: #4a4a4a;
+            margin-bottom: 1rem;
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+
+        .step-content p:last-child {
+            margin-bottom: 0;
+        }
+
+        .step-icon {
+            font-size: 2rem;
+            color: #b89b7b;
+            margin-bottom: 1rem;
+        }
+
+        /* Highlight boxes */
+        .highlight-box {
+            background: #ffffff;
+            border: 1px solid #e0e0e0;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.03);
+        }
+
+        .highlight-box p {
+            margin-bottom: 0;
+            font-style: italic;
+            color: #666;
+        }
+
+        .quote-box {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: #b89b7b;
+            text-align: center;
+            padding: 2rem;
+            background: #ffffff;
+            border: 1px solid #f0f0f0;
+            margin: 2rem 0;
+        }
+
+        .footer {
+            background: #1a1a1a;
+            color: #ffffff;
+            padding: 2.5rem 1.5rem;
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-size: 1.8rem;
+            font-weight: 300;
+            margin-bottom: 1rem;
+            color: #ffffff;
+        }
+
+        .footer-email {
+            font-size: 1.1rem;
+            color: #b89b7b;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid #b89b7b;
+            padding-bottom: 5px;
+            width: fit-content;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .footer-links a {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .footer-social {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .footer-social a {
+            color: #ffffff;
+            font-size: 1.3rem;
+        }
+
+        .footer-copyright {
+            font-size: 0.8rem;
+            color: #888;
+            margin-top: 2rem;
+        }
+
+        @media (min-width: 768px) {
+            .navbar {
+                padding: 1.5rem 3rem;
+            }
+            
+            .menu-icon {
+                display: none;
+            }
+            
+            .desktop-nav {
+                display: flex;
+                gap: 2rem;
+            }
+            
+            .desktop-nav a {
+                text-decoration: none;
+                color: #1a1a1a;
+                font-size: 0.9rem;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+            }
+            
+            .page-header h1 {
+                font-size: 3.5rem;
+            }
+            
+            .process-container {
+                padding: 4rem 3rem;
+            }
+            
+            .process-step {
+                flex-direction: row;
+                gap: 3rem;
+                align-items: flex-start;
+            }
+            
+            .step-left {
+                flex: 1;
+                text-align: right;
+            }
+            
+            .step-right {
+                flex: 2;
+            }
+            
+            .step-title::after {
+                left: 0;
+                right: auto;
+            }
+            
+            .step-content {
+                padding: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="index.html" class="logo">29TH AVENUE</a>
+        <div class="menu-icon" onclick="openMenu()"><i class="fas fa-bars"></i></div>
+        <div class="desktop-nav">
+            <a href="index.html">HOME</a>
+            <a href="studio.html">STUDIO</a>
+            <a href="founder.html">FOUNDER</a>
+            <a href="process.html">OUR PROCESS</a>
+            <a href="work.html">WORK</a>
+            <a href="contact.html">CONTACT</a>
+        </div>
+    </nav>
+
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="close-menu" onclick="closeMenu()"><i class="fas fa-times"></i></div>
+        <div class="mobile-menu-links">
+            <a href="index.html" onclick="closeMenu()">HOME</a>
+            <a href="studio.html" onclick="closeMenu()">STUDIO</a>
+            <a href="founder.html" onclick="closeMenu()">FOUNDER</a>
+            <a href="process.html" onclick="closeMenu()"> OUR PROCESS</a>
+            <a href="work.html" onclick="closeMenu()">WORK</a>
+            <a href="contact.html" onclick="closeMenu()">CONTACT</a>
+        </div>
+    </div>
+    <div class="overlay" id="overlay" onclick="closeMenu()"></div>
+
+    <div class="page-header">
+        <h1>OUR PROCESS</h1>
+        <p>from consultation to creation</p>
+    </div>
+
+    <div class="process-container">
+        <!-- Step 1: Consultation -->
+        <div class="process-step">
+            <div class="step-left">
+                <div class="step-number">Step 01</div>
+                <div class="step-title">Consultation</div>
+                <div class="step-icon"><i class="fas fa-calendar-check"></i></div>
+            </div>
+            <div class="step-right">
+                <div class="step-content">
+                    <p>Our process starts with you scheduling a consultation, where we come to your home and spend time with you. Timing depends on the scope of your space. This is the first important step. We will start with a tour of your space. We want to understand how you want to live in your space, as we believe spaces are personal.</p>
+                    <p>We listen to get an idea of what your design style is (if there is one) and explore possibilities of how to use your space.</p>
+                    <div class="highlight-box">
+                        <p><i class="fas fa-quote-left" style="color: #b89b7b; margin-right: 5px;"></i> Many clients give blank canvases, in which case there is nothing existing to work with. Some clients might have a treasured piece of art, for example, or furniture that they may want to keep and use in any room. It's always good to know every detail upfront.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 2: Site Analysis -->
+        <div class="process-step">
+            <div class="step-left">
+                <div class="step-number">Step 02</div>
+                <div class="step-title">Site Analysis</div>
+                <div class="step-icon"><i class="fas fa-chart-line"></i></div>
+            </div>
+            <div class="step-right">
+                <div class="step-content">
+                    <p>We have an entire image library broken up into different design styles. Looking through all these images allows us to do a style analysis with you. We need to figure out what look and feel you are drawn to, what you love in the images and what elements in them you like.</p>
+                    <p><strong>We invite you to be as honest as possible</strong> as this will help us build a whole combined profile of the type of design that would suit your taste.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 3: The Walk Through -->
+        <div class="process-step">
+            <div class="step-left">
+                <div class="step-number">Step 03</div>
+                <div class="step-title">The Walk Through</div>
+                <div class="step-icon"><i class="fas fa-walking"></i></div>
+            </div>
+            <div class="step-right">
+                <div class="step-content">
+                    <p>We will have a little walk through in the rooms of your home that you want us to work on. We will make a list of every item we will bring into the room. This is done together with you, of course, because we will be asking you what you want to use each room for.</p>
+                    <p>Making the wishlist of items helps us identify what sort of budget you will need to spend on products. That is pretty much what we cover in the walk through.</p>
+                    <div class="quote-box">
+                        <i class="fas fa-lightbulb" style="margin-right: 10px;"></i>
+                        You are absolutely free to pick our brain on anything and everything design during this time.
+                    </div>
+                    <p>We will also be suggesting things as they come to mind walking through each space. It might be removing a non-load bearing wall to open up the floor plan, or rearranging the furniture to maximise the flow — basically something we could do to improve the space. You name it.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 4: The After Planning -->
+        <div class="process-step">
+            <div class="step-left">
+                <div class="step-number">Step 04</div>
+                <div class="step-title">The After Planning</div>
+                <div class="step-icon"><i class="fas fa-clipboard-list"></i></div>
+            </div>
+            <div class="step-right">
+                <div class="step-content">
+                    <p>Once we leave your space, we will send an email. The email will contain everything we discussed during our visit consultation. It will also list the amount of money we estimate you will spend on the project products for your projects.</p>
+                    <p>The timelines on the projects helps determine what our design charge will be.</p>
+                    <div style="background: #e9e1d9; padding: 1.5rem; margin-top: 1.5rem;">
+                        <p style="margin-bottom: 0; color: #1a1a1a;"><strong>Next Steps:</strong> After planning, we'll present you with mood boards, material samples, and a detailed project timeline.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Final Note -->
+        <div style="text-align: center; margin-top: 4rem; padding: 2rem; background: #f9f9f9;">
+            <i class="fas fa-heart" style="color: #b89b7b; font-size: 2rem; margin-bottom: 1rem;"></i>
+            <h3 style="font-weight: 300; font-size: 1.5rem;">Ready to start your journey?</h3>
+            <p style="margin: 1rem 0 2rem; color: #666;">Every space tells a story. Let us help you tell yours.</p>
+            <a href="contact.html" style="display: inline-block; padding: 1rem 3rem; background: #b89b7b; color: white; text-decoration: none; text-transform: uppercase; letter-spacing: 2px;">Begin Your Consultation</a>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-logo">29TH AVENUE</div>
+        <a href="mailto:moyorpoise@gmail.com" class="footer-email">moyorpoise@gmail.com</a>
+        <p style="margin-bottom: 1rem;">Lagos, Nigeria</p>
+        <div class="footer-links">
+            <a href="index.html">HOME</a>
+            <a href="studio.html">STUDIO</a>
+            <a href="founder.html">FOUNDER</a>
+            <a href="process.html">OUR PROCESS</a>
+            <a href="work.html">WORK</a>
+            <a href="contact.html">CONTACT</a>
+        </div>
+        <div class="footer-social">
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-pinterest"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+        <div class="footer-copyright">
+            © 2026 29TH AVENUE DESIGN STUDIO. ALL RIGHTS RESERVED.
+        </div>
+    </footer>
+
+    <script>
+        function openMenu() {
+            document.getElementById('mobileMenu').classList.add('active');
+            document.getElementById('overlay').classList.add('active');
+        }
+        
+        function closeMenu() {
+            document.getElementById('mobileMenu').classList.remove('active');
+            document.getElementById('overlay').classList.remove('active');
+        }
+    </script>
+</body>
+</html>
