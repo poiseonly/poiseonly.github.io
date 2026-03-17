@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>The Studio | 24th Avenue</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: #ffffff;
+            color: #1a1a1a;
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 1.2rem;
+            background: #ffffff;
+            border-bottom: 1px solid #f0f0f0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 1.3rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            text-decoration: none;
+            color: #1a1a1a;
+        }
+
+        .menu-icon {
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            left: -100%;
+            width: 85%;
+            height: 100vh;
+            background: #ffffff;
+            z-index: 2000;
+            padding: 2rem 1.5rem;
+            transition: 0.3s ease;
+            box-shadow: 2px 0 20px rgba(0,0,0,0.1);
+            overflow-y: auto;
+        }
+
+        .mobile-menu.active {
+            left: 0;
+        }
+
+        .close-menu {
+            text-align: right;
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+            cursor: pointer;
+        }
+
+        .mobile-menu-links {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .mobile-menu-links a {
+            text-decoration: none;
+            color: #1a1a1a;
+            font-size: 1.2rem;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-bottom: 1px solid #f0f0f0;
+            padding-bottom: 0.8rem;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1500;
+            display: none;
+        }
+
+        .overlay.active {
+            display: block;
+        }
+
+        .desktop-nav {
+            display: none;
+        }
+
+        /* Page Header */
+        .page-header {
+            padding: 2rem 1.5rem 1rem;
+            text-align: center;
+        }
+
+        .page-header h1 {
+            font-size: 2.2rem;
+            font-weight: 300;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-header p {
+            color: #b89b7b;
+            font-style: italic;
+        }
+
+        /* Studio Content */
+        .studio-content {
+            padding: 1.5rem;
+        }
+
+        .studio-image {
+            width: 100%;
+            height: 300px;
+            background: url('https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=800') center/cover;
+            margin-bottom: 2rem;
+        }
+
+        .studio-text p {
+            margin-bottom: 1.5rem;
+            color: #4a4a4a;
+        }
+
+        /* Image Slideshow */
+        .slideshow-container {
+            position: relative;
+            margin: 2rem 0;
+        }
+
+        .slide {
+            display: none;
+        }
+
+        .slide.active {
+            display: block;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .prev, .next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.8);
+            color: #1a1a1a;
+            padding: 1rem;
+            cursor: pointer;
+            font-size: 1.2rem;
+            border: none;
+        }
+
+        .prev {
+            left: 0;
+        }
+
+        .next {
+            right: 0;
+        }
+
+        /* Footer */
+        .footer {
+            background: #1a1a1a;
+            color: #ffffff;
+            padding: 2.5rem 1.5rem;
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .footer-logo {
+            font-size: 1.8rem;
+            font-weight: 300;
+            margin-bottom: 1rem;
+            color: #ffffff;
+        }
+
+        .footer-email {
+            font-size: 1.1rem;
+            color: #b89b7b;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid #b89b7b;
+            padding-bottom: 5px;
+            width: fit-content;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .footer-links a {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .footer-social {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .footer-social a {
+            color: #ffffff;
+            font-size: 1.3rem;
+        }
+
+        .footer-copyright {
+            font-size: 0.8rem;
+            color: #888;
+            margin-top: 2rem;
+        }
+
+        @media (min-width: 768px) {
+            .navbar {
+                padding: 1.5rem 3rem;
+            }
+            
+            .menu-icon {
+                display: none;
+            }
+            
+            .mobile-menu, .overlay {
+                display: none;
+            }
+            
+            .desktop-nav {
+                display: flex;
+                gap: 2rem;
+            }
+            
+            .desktop-nav a {
+                text-decoration: none;
+                color: #1a1a1a;
+                font-size: 0.9rem;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+            }
+            
+            .studio-content {
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 3rem;
+            }
+            
+            .studio-image {
+                height: 500px;
+            }
+            
+            .slide img {
+                height: 400px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="index.html" class="logo">24TH AVENUE</a>
+        <div class="menu-icon" onclick="openMenu()"><i class="fas fa-bars"></i></div>
+        <div class="desktop-nav">
+            <a href="index.html">HOME</a>
+            <a href="studio.html">STUDIO</a>
+            <a href="founder.html">FOUNDER</a>
+            <a href="press.html">PRESS</a>
+            <a href="work.html">WORK</a>
+            <a href="contact.html">CONTACT</a>
+        </div>
+    </nav>
+
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="close-menu" onclick="closeMenu()"><i class="fas fa-times"></i></div>
+        <div class="mobile-menu-links">
+            <a href="index.html" onclick="closeMenu()">HOME</a>
+            <a href="studio.html" onclick="closeMenu()">STUDIO</a>
+            <a href="founder.html" onclick="closeMenu()">FOUNDER</a>
+            <a href="press.html" onclick="closeMenu()">PRESS</a>
+            <a href="work.html" onclick="closeMenu()">WORK</a>
+            <a href="contact.html" onclick="closeMenu()">CONTACT</a>
+        </div>
+    </div>
+    <div class="overlay" id="overlay" onclick="closeMenu()"></div>
+
+    <div class="page-header">
+        <h1>THE STUDIO</h1>
+        <p>where magic happens</p>
+    </div>
+
+    <div class="studio-content">
+        <div class="studio-image"></div>
+        <div class="studio-text">
+            <p>24th Avenue is a multi-disciplinary design studio based in Los Angeles, CA that focuses on interior design and everyday objects through storytelling and re-imagination. We are committed to showing people that there are infinite ways to design spaces that feel like home.</p>
+            
+            <p>Every space you encounter should be an experience. Here at 24th Avenue, we dare to push the boundaries of creativity and challenge the rules. With empathy at the forefront of our design process, our interdisciplinary team works diligently to create monumental spaces that are reflective of what our clients envision.</p>
+            
+            <p>We're here to create all the feels. A feeling of comfort and a feeling of security with our content and a feeling of safety. Regardless of the type of space or object, we are designing for it as well.</p>
+        </div>
+
+        <!-- Slideshow -->
+        <h2 style="margin: 2rem 0 1rem; font-weight: 300;">Studio Spaces</h2>
+        <div class="slideshow-container">
+            <div class="slide active">
+                <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=800" alt="Studio 1">
+            </div>
+            <div class="slide">
+                <img src="https://images.unsplash.com/photo-1618219904412-915f8b8c3caa?w=800" alt="Studio 2">
+            </div>
+            <div class="slide">
+                <img src="https://images.unsplash.com/photo-1600566752355-35792bedcfea?w=800" alt="Studio 3">
+            </div>
+            <div class="slide">
+                <img src="https://images.unsplash.com/photo-1583847268964-b28dc8aaec4a?w=800" alt="Studio 4">
+            </div>
+            
+            <button class="prev" onclick="changeSlide(-1)"><i class="fas fa-chevron-left"></i></button>
+            <button class="next" onclick="changeSlide(1)"><i class="fas fa-chevron-right"></i></button>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-logo">24TH AVENUE</div>
+        <a href="mailto:moyorpoise@gmail.com" class="footer-email">moyorpoise@gmail.com</a>
+        <p style="margin-bottom: 1rem;">Los Angeles, CA</p>
+        <div class="footer-links">
+            <a href="index.html">HOME</a>
+            <a href="studio.html">STUDIO</a>
+            <a href="founder.html">FOUNDER</a>
+            <a href="press.html">PRESS</a>
+            <a href="work.html">WORK</a>
+            <a href="contact.html">CONTACT</a>
+        </div>
+        <div class="footer-social">
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-pinterest"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+        <div class="footer-copyright">
+            © 2024 24TH AVENUE DESIGN STUDIO. ALL RIGHTS RESERVED.
+        </div>
+    </footer>
+
+    <script>
+        function openMenu() {
+            document.getElementById('mobileMenu').classList.add('active');
+            document.getElementById('overlay').classList.add('active');
+        }
+        
+        function closeMenu() {
+            document.getElementById('mobileMenu').classList.remove('active');
+            document.getElementById('overlay').classList.remove('active');
+        }
+        
+        let slideIndex = 0;
+        
+        function changeSlide(n) {
+            const slides = document.querySelectorAll('.slide');
+            slides[slideIndex].classList.remove('active');
+            
+            slideIndex = slideIndex + n;
+            if (slideIndex < 0) slideIndex = slides.length - 1;
+            if (slideIndex >= slides.length) slideIndex = 0;
+            
+            slides[slideIndex].classList.add('active');
+        }
+    </script>
+</body>
+</html>
