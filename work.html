@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>Work | 29th Avenue</title>
+    <title>Portfolio | 29thavenuedesigns</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         * {
@@ -122,12 +122,20 @@
             display: flex;
             flex-direction: column;
             gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
         }
 
         .project-card {
             background: #f9f9f9;
             overflow: hidden;
             cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
         }
 
         .project-image {
@@ -162,7 +170,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.95);
+            background: rgba(0,0,0,0.98);
             z-index: 3000;
             overflow-y: auto;
         }
@@ -174,6 +182,9 @@
         .modal-content {
             padding: 2rem 1.5rem;
             color: white;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
 
         .modal-header {
@@ -181,6 +192,11 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 2rem;
+            position: sticky;
+            top: 0;
+            background: rgba(0,0,0,0.95);
+            padding: 1rem 0;
+            z-index: 10;
         }
 
         .modal-header h2 {
@@ -190,48 +206,85 @@
         }
 
         .close-modal {
-            font-size: 2rem;
+            font-size: 2.5rem;
             cursor: pointer;
             color: white;
+            transition: 0.3s;
+        }
+
+        .close-modal:hover {
+            color: #b89b7b;
         }
 
         .modal-gallery {
             display: flex;
             flex-direction: column;
-            gap: 1rem;
+            gap: 2rem;
+            align-items: center;
+            justify-content: center;
+            flex: 1;
         }
 
         .modal-gallery img {
             width: 100%;
-            height: 250px;
-            object-fit: cover;
-        }
-
-        .modal-prev, .modal-next {
-            position: fixed;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(255,255,255,0.2);
-            color: white;
-            padding: 1rem;
+            max-width: 1000px;
+            height: auto;
+            max-height: 80vh;
+            object-fit: contain;
             cursor: pointer;
-            font-size: 1.5rem;
-            border: none;
-            z-index: 3100;
+            border-radius: 4px;
+            transition: transform 0.3s ease;
+            margin: 0 auto;
         }
 
-        .modal-prev {
-            left: 0;
+        .modal-gallery img:hover {
+            transform: scale(1.02);
         }
 
+        .modal-controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            margin: 2rem 0;
+            position: sticky;
+            bottom: 2rem;
+            z-index: 10;
+        }
+
+        .modal-prev,
         .modal-next {
-            right: 0;
+            background: rgba(255,255,255,0.15);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.3);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            font-size: 1.8rem;
+            cursor: pointer;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-prev:hover,
+        .modal-next:hover {
+            background: #b89b7b;
+            border-color: #b89b7b;
+            transform: scale(1.1);
         }
 
         .modal-counter {
+            color: #fff;
+            font-size: 1.1rem;
             text-align: center;
-            color: #888;
             margin-top: 1rem;
+            padding: 0.5rem 1rem;
+            background: rgba(0,0,0,0.5);
+            border-radius: 30px;
+            display: inline-block;
         }
 
         .footer {
@@ -319,42 +372,38 @@
             }
             
             .projects-grid {
-                max-width: 1200px;
-                margin: 0 auto;
                 padding: 3rem;
                 display: grid;
-                grid-template-columns: repeat(2, 1fr);
+                grid-template-columns: repeat(3, 1fr);
                 gap: 2rem;
             }
             
             .project-image {
-                height: 350px;
-            }
-            
-            .modal-gallery {
-                max-width: 1000px;
-                margin: 0 auto;
-                display: grid;
-                grid-template-columns: repeat(3, 1fr);
-                gap: 1rem;
+                height: 300px;
             }
             
             .modal-gallery img {
-                height: 200px;
+                max-width: 900px;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .projects-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 <body>
     <nav class="navbar">
-        <a href="index.html" class="logo">29TH AVENUE</a>
+        <a href="index.html" class="logo">29thavenuedesigns</a>
         <div class="menu-icon" onclick="openMenu()"><i class="fas fa-bars"></i></div>
         <div class="desktop-nav">
             <a href="index.html">HOME</a>
             <a href="studio.html">STUDIO</a>
             <a href="founder.html">FOUNDER</a>
             <a href="process.html">OUR PROCESS</a>
-            <a href="work.html">WORK</a>
+            <a href="work.html">PORTFOLIO</a>
             <a href="contact.html">CONTACT</a>
         </div>
     </nav>
@@ -366,120 +415,205 @@
             <a href="studio.html" onclick="closeMenu()">STUDIO</a>
             <a href="founder.html" onclick="closeMenu()">FOUNDER</a>
             <a href="process.html" onclick="closeMenu()">OUR PROCESS</a>
-            <a href="work.html" onclick="closeMenu()">WORK</a>
+            <a href="work.html" onclick="closeMenu()">PORTFOLIO</a>
             <a href="contact.html" onclick="closeMenu()">CONTACT</a>
         </div>
     </div>
     <div class="overlay" id="overlay" onclick="closeMenu()"></div>
 
     <div class="page-header">
-        <h1>WORK</h1>
+        <h1>PORTFOLIO</h1>
         <p>featured projects</p>
     </div>
 
     <div class="projects-grid">
-        <!-- Malibu Residence -->
-        <div class="project-card" onclick="openProject('malibu')">
-            <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=800')"></div>
+        <!-- Project 1: Midnight Atelier -->
+        <div class="project-card" onclick="openProject('atelier')">
+            <div class="project-image" style="background-image: url('https://poiseonly.github.io/')"></div>
             <div class="project-info">
-                <h2>Lagos Residence</h2>
+                <h2>Midnight Atelier</h2>
                 <p>Interior Design</p>
             </div>
         </div>
 
-        <!-- Mushroom Lamp -->
-        <div class="project-card" onclick="openProject('lamp')">
-            <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1618219904412-915f8b8c3caa?w=800')"></div>
+        <!-- Project 2: Fabrics by Uche -->
+        <div class="project-card" onclick="openProject('fabrics')">
+            <div class="project-image" style="background-image: url('https://poiseonly.github.io/')"></div>
             <div class="project-info">
-                <h2>Mushroom Lamp</h2>
-                <p>Product Design</p>
+                <h2>Fabrics by Uche</h2>
+                <p>Interior Design</p>
             </div>
         </div>
 
-        <!-- Hyperblue Collection -->
-        <div class="project-card" onclick="openProject('hyperblue')">
-            <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1600566752355-35792bedcfea?w=800')"></div>
+        <!-- Project 3: Outterspace -->
+        <div class="project-card" onclick="openProject('outterspace')">
+            <div class="project-image" style="background-image: url('https://poiseonly.github.io/')"></div>
             <div class="project-info">
-                <h2>Hyperblue Collection</h2>
-                <p>Creative Direction</p>
+                <h2>Outterspace</h2>
+                <p>Creative Direction & Design</p>
             </div>
         </div>
 
-        <!-- LA Pop-up -->
-        <div class="project-card" onclick="openProject('popup')">
-            <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1583847268964-b28dc8aaec4a?w=800')"></div>
+        <!-- Project 4: Project Monada -->
+        <div class="project-card" onclick="openProject('monada')">
+            <div class="project-image" style="background-image: url('https://poiseonly.github.io/')"></div>
             <div class="project-info">
-                <h2>Ikeja Pop-up</h2>
+                <h2>Project Monada</h2>
                 <p>Experiential Design</p>
+            </div>
+        </div>
+
+        <!-- Project 5: Ikoyi Residence -->
+        <div class="project-card" onclick="openProject('ikoyi')">
+            <div class="project-image" style="background-image: url('https://poiseonly.github.io/')"></div>
+            <div class="project-info">
+                <h2>Ikoyi Residence</h2>
+                <p>Interior Design</p>
+            </div>
+        </div>
+
+        <!-- Project 6: Lagos Penthouse -->
+        <div class="project-card" onclick="openProject('penthouse')">
+            <div class="project-image" style="background-image: url('https://poiseonly.github.io/')"></div>
+            <div class="project-info">
+                <h2>Lagos Penthouse</h2>
+                <p>Interior Design</p>
             </div>
         </div>
     </div>
 
     <!-- Project Modals -->
-    <div id="malibu-modal" class="modal">
+    <div id="atelier-modal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
-                <h2>Lagos Residence</h2>
-                <span class="close-modal" onclick="closeProject('malibu')"><i class="fas fa-times"></i></span>
+                <h2>Midnight Atelier</h2>
+                <span class="close-modal" onclick="closeProject('atelier')"><i class="fas fa-times"></i></span>
             </div>
-            <div class="modal-gallery">
-                <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=800" alt="Malibu 1">
-                <img src="https://images.unsplash.com/photo-1618219904412-915f8b8c3caa?w=800" alt="Malibu 2">
-                <img src="https://images.unsplash.com/photo-1600566752355-35792bedcfea?w=800" alt="Malibu 3">
-                <img src="https://images.unsplash.com/photo-1583847268964-b28dc8aaec4a?w=800" alt="Malibu 4">
-                <img src="https://images.unsplash.com/photo-1617806118233-18e1de247200?w=800" alt="Malibu 5">
-                <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb3?w=800" alt="Malibu 6">
+            <div class="modal-gallery" id="atelier-gallery">
+                <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=800" alt="Midnight Atelier 1" onclick="openFullscreen(this)">
+                <img src="https://images.unsplash.com/photo-1618219904412-915f8b8c3caa?w=800" alt="Midnight Atelier 2" onclick="openFullscreen(this)">
+                <img src="https://images.unsplash.com/photo-1600566752355-35792bedcfea?w=800" alt="Midnight Atelier 3" onclick="openFullscreen(this)">
+                <img src="https://images.unsplash.com/photo-1583847268964-b28dc8aaec4a?w=800" alt="Midnight Atelier 4" onclick="openFullscreen(this)">
+                <img src="https://images.unsplash.com/photo-1617806118233-18e1de247200?w=800" alt="Midnight Atelier 5" onclick="openFullscreen(this)">
+                <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb3?w=800" alt="Midnight Atelier 6" onclick="openFullscreen(this)">
+            </div>
+            <div class="modal-controls">
+                <button class="modal-prev" onclick="navigateGallery('atelier', -1)"><i class="fas fa-chevron-left"></i></button>
+                <span class="modal-counter" id="atelier-counter">1 / 6</span>
+                <button class="modal-next" onclick="navigateGallery('atelier', 1)"><i class="fas fa-chevron-right"></i></button>
             </div>
         </div>
     </div>
 
-    <div id="lamp-modal" class="modal">
+    <div id="fabrics-modal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
-                <h2>Mushroom Lamp</h2>
-                <span class="close-modal" onclick="closeProject('lamp')"><i class="fas fa-times"></i></span>
+                <h2>Fabrics by Uche</h2>
+                <span class="close-modal" onclick="closeProject('fabrics')"><i class="fas fa-times"></i></span>
             </div>
-            <div class="modal-gallery">
-                <img src="https://images.unsplash.com/photo-1618219904412-915f8b8c3caa?w=800" alt="Lamp 1">
-                <img src="https://images.unsplash.com/photo-1600566752355-35792bedcfea?w=800" alt="Lamp 2">
-                <img src="https://images.unsplash.com/photo-1583847268964-b28dc8aaec4a?w=800" alt="Lamp 3">
-                <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=800" alt="Lamp 4">
+            <div class="modal-gallery" id="fabrics-gallery">
+                <img src="https://images.unsplash.com/photo-1618219904412-915f8b8c3caa?w=800" alt="Fabrics by Uche 1" onclick="openFullscreen(this)">
+                <img src="https://images.unsplash.com/photo-1600566752355-35792bedcfea?w=800" alt="Fabrics by Uche 2" onclick="openFullscreen(this)">
+                <img src="https://images.unsplash.com/photo-1583847268964-b28dc8aaec4a?w=800" alt="Fabrics by Uche 3" onclick="openFullscreen(this)">
+                <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=800" alt="Fabrics by Uche 4" onclick="openFullscreen(this)">
+                <img src="https://images.unsplash.com/photo-1617806118233-18e1de247200?w=800" alt="Fabrics by Uche 5" onclick="openFullscreen(this)">
+            </div>
+            <div class="modal-controls">
+                <button class="modal-prev" onclick="navigateGallery('fabrics', -1)"><i class="fas fa-chevron-left"></i></button>
+                <span class="modal-counter" id="fabrics-counter">1 / 5</span>
+                <button class="modal-next" onclick="navigateGallery('fabrics', 1)"><i class="fas fa-chevron-right"></i></button>
             </div>
         </div>
     </div>
 
-    <div id="hyperblue-modal" class="modal">
+    <div id="outterspace-modal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
-                <h2>Hyperblue Collection</h2>
-                <span class="close-modal" onclick="closeProject('hyperblue')"><i class="fas fa-times"></i></span>
+                <h2>Outterspace</h2>
+                <span class="close-modal" onclick="closeProject('outterspace')"><i class="fas fa-times"></i></span>
             </div>
-            <div class="modal-gallery">
-                <img src="https://images.unsplash.com/photo-1600566752355-35792bedcfea?w=800" alt="Hyperblue 1">
-                <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=800" alt="Hyperblue 2">
-                <img src="https://images.unsplash.com/photo-1618219904412-915f8b8c3caa?w=800" alt="Hyperblue 3">
-                <img src="https://images.unsplash.com/photo-1583847268964-b28dc8aaec4a?w=800" alt="Hyperblue 4">
+            <div class="modal-gallery" id="outterspace-gallery">
+                <img src="https://images.unsplash.com/photo-1600566752355-35792bedcfea?w=800" alt="Outterspace 1" onclick="openFullscreen(this)">
+                <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=800" alt="Outterspace 2" onclick="openFullscreen(this)">
+                <img src="https://images.unsplash.com/photo-1618219904412-915f8b8c3caa?w=800" alt="Outterspace 3" onclick="openFullscreen(this)">
+                <img src="https://images.unsplash.com/photo-1583847268964-b28dc8aaec4a?w=800" alt="Outterspace 4" onclick="openFullscreen(this)">
+                <img src="https://images.unsplash.com/photo-1617806118233-18e1de247200?w=800" alt="Outterspace 5" onclick="openFullscreen(this)">
+            </div>
+            <div class="modal-controls">
+                <button class="modal-prev" onclick="navigateGallery('outterspace', -1)"><i class="fas fa-chevron-left"></i></button>
+                <span class="modal-counter" id="outterspace-counter">1 / 5</span>
+                <button class="modal-next" onclick="navigateGallery('outterspace', 1)"><i class="fas fa-chevron-right"></i></button>
             </div>
         </div>
     </div>
 
-    <div id="popup-modal" class="modal">
+    <div id="monada-modal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
-                <h2>Ikeja Pop-up</h2>
-                <span class="close-modal" onclick="closeProject('popup')"><i class="fas fa-times"></i></span>
+                <h2>Project Monada</h2>
+                <span class="close-modal" onclick="closeProject('monada')"><i class="fas fa-times"></i></span>
             </div>
-            <div class="modal-gallery">
-                <img src="https://images.unsplash.com/photo-1583847268964-b28dc8aaec4a?w=800" alt="Pop-up 1">
-                <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=800" alt="Pop-up 2">
-                <img src="https://images.unsplash.com/photo-1618219904412-915f8b8c3caa?w=800" alt="Pop-up 3">
-                <img src="https://images.unsplash.com/photo-1600566752355-35792bedcfea?w=800" alt="Pop-up 4">
+            <div class="modal-gallery" id="monada-gallery">
+                <img src="https://images.unsplash.com/photo-1583847268964-b28dc8aaec4a?w=800" alt="Project Monada 1" onclick="openFullscreen(this)">
+                <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=800" alt="Project Monada 2" onclick="openFullscreen(this)">
+                <img src="https://images.unsplash.com/photo-1618219904412-915f8b8c3caa?w=800" alt="Project Monada 3" onclick="openFullscreen(this)">
+                <img src="https://images.unsplash.com/photo-1600566752355-35792bedcfea?w=800" alt="Project Monada 4" onclick="openFullscreen(this)">
+                <img src="https://images.unsplash.com/photo-1617806118233-18e1de247200?w=800" alt="Project Monada 5" onclick="openFullscreen(this)">
+            </div>
+            <div class="modal-controls">
+                <button class="modal-prev" onclick="navigateGallery('monada', -1)"><i class="fas fa-chevron-left"></i></button>
+                <span class="modal-counter" id="monada-counter">1 / 5</span>
+                <button class="modal-next" onclick="navigateGallery('monada', 1)"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <div id="ikoyi-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Ikoyi Residence</h2>
+                <span class="close-modal" onclick="closeProject('ikoyi')"><i class="fas fa-times"></i></span>
+            </div>
+            <div class="modal-gallery" id="ikoyi-gallery">
+                <img src="https://images.unsplash.com/photo-1617806118233-18e1de247200?w=800" alt="Ikoyi Residence 1" onclick="openFullscreen(this)">
+                <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb3?w=800" alt="Ikoyi Residence 2" onclick="openFullscreen(this)">
+                <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=800" alt="Ikoyi Residence 3" onclick="openFullscreen(this)">
+                <img src="https://images.unsplash.com/photo-1618219904412-915f8b8c3caa?w=800" alt="Ikoyi Residence 4" onclick="openFullscreen(this)">
+                <img src="https://images.unsplash.com/photo-1600566752355-35792bedcfea?w=800" alt="Ikoyi Residence 5" onclick="openFullscreen(this)">
+                <img src="https://images.unsplash.com/photo-1583847268964-b28dc8aaec4a?w=800" alt="Ikoyi Residence 6" onclick="openFullscreen(this)">
+            </div>
+            <div class="modal-controls">
+                <button class="modal-prev" onclick="navigateGallery('ikoyi', -1)"><i class="fas fa-chevron-left"></i></button>
+                <span class="modal-counter" id="ikoyi-counter">1 / 6</span>
+                <button class="modal-next" onclick="navigateGallery('ikoyi', 1)"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <div id="penthouse-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Lagos Penthouse</h2>
+                <span class="close-modal" onclick="closeProject('penthouse')"><i class="fas fa-times"></i></span>
+            </div>
+            <div class="modal-gallery" id="penthouse-gallery">
+                <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb3?w=800" alt="Lagos Penthouse 1" onclick="openFullscreen(this)">
+                <img src="https://images.unsplash.com/photo-1617806118233-18e1de247200?w=800" alt="Lagos Penthouse 2" onclick="openFullscreen(this)">
+                <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=800" alt="Lagos Penthouse 3" onclick="openFullscreen(this)">
+                <img src="https://images.unsplash.com/photo-1618219904412-915f8b8c3caa?w=800" alt="Lagos Penthouse 4" onclick="openFullscreen(this)">
+                <img src="https://images.unsplash.com/photo-1600566752355-35792bedcfea?w=800" alt="Lagos Penthouse 5" onclick="openFullscreen(this)">
+                <img src="https://images.unsplash.com/photo-1583847268964-b28dc8aaec4a?w=800" alt="Lagos Penthouse 6" onclick="openFullscreen(this)">
+            </div>
+            <div class="modal-controls">
+                <button class="modal-prev" onclick="navigateGallery('penthouse', -1)"><i class="fas fa-chevron-left"></i></button>
+                <span class="modal-counter" id="penthouse-counter">1 / 6</span>
+                <button class="modal-next" onclick="navigateGallery('penthouse', 1)"><i class="fas fa-chevron-right"></i></button>
             </div>
         </div>
     </div>
 
     <footer class="footer">
-        <div class="footer-logo">29TH AVENUE</div>
+        <div class="footer-logo">29thavenuedesigns</div>
         <a href="mailto:moyorpoise@gmail.com" class="footer-email">moyorpoise@gmail.com</a>
         <p style="margin-bottom: 1rem;">Lagos, Nigeria</p>
         <div class="footer-links">
@@ -487,7 +621,7 @@
             <a href="studio.html">STUDIO</a>
             <a href="founder.html">FOUNDER</a>
             <a href="process.html">OUR PROCESS</a>
-            <a href="work.html">WORK</a>
+            <a href="work.html">PORTFOLIO</a>
             <a href="contact.html">CONTACT</a>
         </div>
         <div class="footer-social">
@@ -496,11 +630,14 @@
             <a href="#"><i class="fab fa-linkedin-in"></i></a>
         </div>
         <div class="footer-copyright">
-            © 2026 29TH AVENUE DESIGN STUDIO. ALL RIGHTS RESERVED.
+            ©️ 2026 29thavenuedesigns STUDIO. ALL RIGHTS RESERVED.
         </div>
     </footer>
 
     <script>
+        // Store current gallery index for each project
+        let galleryIndices = {};
+
         function openMenu() {
             document.getElementById('mobileMenu').classList.add('active');
             document.getElementById('overlay').classList.add('active');
@@ -511,14 +648,91 @@
             document.getElementById('overlay').classList.remove('active');
         }
         
-        function openProject(project) {
-            document.getElementById(project + '-modal').classList.add('active');
-            document.body.style.overflow = 'hidden';
+        function openProject(projectId) {
+            // Close any open modals first
+            document.querySelectorAll('.modal').forEach(modal => {
+                modal.classList.remove('active');
+            });
+            
+            // Open the selected modal
+            const modal = document.getElementById(projectId + '-modal');
+            if (modal) {
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+                
+                // Reset gallery index
+                galleryIndices[projectId] = 0;
+                updateGalleryCounter(projectId);
+                
+                // Show first image
+                showGalleryImage(projectId, 0);
+            }
         }
         
-        function closeProject(project) {
-            document.getElementById(project + '-modal').classList.remove('active');
-            document.body.style.overflow = 'auto';
+        function closeProject(projectId) {
+            const modal = document.getElementById(projectId + '-modal');
+            if (modal) {
+                modal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        }
+        
+        function navigateGallery(projectId, direction) {
+            const gallery = document.getElementById(projectId + '-gallery');
+            const images = gallery.getElementsByTagName('img');
+            
+            if (!galleryIndices[projectId]) {
+                galleryIndices[projectId] = 0;
+            }
+            
+            galleryIndices[projectId] += direction;
+            
+            if (galleryIndices[projectId] < 0) {
+                galleryIndices[projectId] = images.length - 1;
+            } else if (galleryIndices[projectId] >= images.length) {
+                galleryIndices[projectId] = 0;
+            }
+            
+            showGalleryImage(projectId, galleryIndices[projectId]);
+        }
+        
+        function showGalleryImage(projectId, index) {
+            const gallery = document.getElementById(projectId + '-gallery');
+            const images = gallery.getElementsByTagName('img');
+            
+            // Hide all images
+            for (let img of images) {
+                img.style.display = 'none';
+            }
+            
+            // Show selected image
+            if (images[index]) {
+                images[index].style.display = 'block';
+                images[index].style.margin = '0 auto';
+            }
+            
+            updateGalleryCounter(projectId);
+        }
+        
+        function updateGalleryCounter(projectId) {
+            const gallery = document.getElementById(projectId + '-gallery');
+            const images = gallery.getElementsByTagName('img');
+            const counter = document.getElementById(projectId + '-counter');
+            
+            if (counter && images.length > 0) {
+                const currentIndex = galleryIndices[projectId] || 0;
+                counter.textContent = (currentIndex + 1) + ' / ' + images.length;
+            }
+        }
+        
+        function openFullscreen(img) {
+            if (img.requestFullscreen) {
+                img.requestFullscreen();
+            } else if (img.webkitRequestFullscreen) {
+                img.webkitRequestFullscreen();
+            } else if (img.msRequestFullscreen) {
+                img.msRequestFullscreen();
+            }
         }
         
         // Close modal when clicking outside
@@ -530,6 +744,22 @@
                 document.body.style.overflow = 'auto';
             }
         }
+        
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            const activeModal = document.querySelector('.modal.active');
+            if (!activeModal) return;
+            
+            const modalId = activeModal.id.replace('-modal', '');
+            
+            if (e.key === 'ArrowRight') {
+                navigateGallery(modalId, 1);
+            } else if (e.key === 'ArrowLeft') {
+                navigateGallery(modalId, -1);
+            } else if (e.key === 'Escape') {
+                closeProject(modalId);
+            }
+        });
     </script>
 </body>
 </html>
