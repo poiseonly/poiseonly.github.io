@@ -122,21 +122,9 @@
         display: block;
     }
 
-    /* Hero Section - UNCHANGED */
-    .hero {
-        padding: 2rem 1.5rem 1.5rem;
-        text-align: center;
-    }
+    /* Hero Section REMOVED COMPLETELY */
 
-    .hero h1 {
-        font-size: 2.2rem;
-        font-weight: 300;
-        margin-bottom: 0.5rem;
-        letter-spacing: 1px;
-        word-break: break-word;
-    }
-
-    /* NEW: Fading Gallery Section */
+    /* Fading Gallery Section - Now starts right after nav */
     .gallery-section {
         width: 100%;
         padding: 0;
@@ -147,7 +135,8 @@
     .slideshow-container {
         position: relative;
         width: 100%;
-        height: 400px; /* Fixed height for consistency */
+        height: calc(100vh - 60px); /* Full viewport height minus nav */
+        min-height: 400px;
         overflow: hidden;
     }
 
@@ -158,7 +147,7 @@
         width: 100%;
         height: 100%;
         opacity: 0;
-        transition: opacity 1.5s ease-in-out;
+        transition: opacity 2s ease-in-out; /* Smoother 2-second fade */
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
@@ -169,7 +158,7 @@
         z-index: 1;
     }
 
-    /* Slide images - using your existing portfolio images plus some extras */
+    /* Slide images */
     .slide-1 { background-image: url('https://poiseonly.github.io/images/ABA03F76-E5F0-4C0B-9D76-8D5719B46F5D.CR2'); }
     .slide-2 { background-image: url('https://poiseonly.github.io/images/IMG_3326.PNG'); }
     .slide-3 { background-image: url('https://poiseonly.github.io/images/IMG_3279.JPG.jpeg'); }
@@ -178,51 +167,16 @@
     .slide-6 { background-image: url('https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=800'); }
     .slide-7 { background-image: url('https://images.unsplash.com/photo-1618219904412-915f8b8c3caa?w=800'); }
 
-    /* Optional overlay to make text more readable if needed */
-    .slide-overlay {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0,0,0,0.1);
-        z-index: 2;
-        pointer-events: none;
-    }
+    /* Subtle overlay removed for cleaner look */
 
-    /* Dots indicator */
-    .dots-container {
-        position: relative;
-        text-align: center;
-        padding: 1rem 0;
-        background: transparent;
-        z-index: 3;
-        margin-top: -2rem;
-    }
-
-    .dot {
-        height: 8px;
-        width: 8px;
-        margin: 0 4px;
-        background-color: #bbb;
-        border-radius: 50%;
-        display: inline-block;
-        transition: background-color 0.3s ease;
-        cursor: pointer;
-    }
-
-    .dot.active {
-        background-color: #b89b7b;
-        transform: scale(1.2);
-    }
-
-    /* Footer - COMPLETELY UNCHANGED */
+    /* Footer - Now touching the image directly */
     .footer {
         background: #1a1a1a;
         color: #ffffff;
         padding: 2rem 1.5rem;
         text-align: center;
-        margin-top: 2rem;
+        margin-top: 0; /* Remove margin so it touches the image */
+        width: 100%;
     }
 
     .footer-logo {
@@ -279,7 +233,7 @@
         line-height: 1.4;
     }
 
-    /* Desktop Styles - UNCHANGED except for slideshow height */
+    /* Desktop Styles */
     @media (min-width: 768px) {
         .navbar {
             padding: 1.5rem 3rem;
@@ -314,23 +268,10 @@
             white-space: nowrap;
         }
         
-        .hero {
-            padding: 3rem 1.5rem 2rem;
-        }
-        
-        .hero h1 {
-            font-size: 4rem;
-        }
-        
-        /* Larger slideshow for desktop */
+        /* Full viewport height slideshow on desktop */
         .slideshow-container {
-            height: 600px;
-        }
-        
-        .dot {
-            height: 10px;
-            width: 10px;
-            margin: 0 6px;
+            height: calc(100vh - 80px); /* Adjust for taller nav on desktop */
+            min-height: 600px;
         }
         
         .footer-logo {
@@ -361,7 +302,7 @@
         }
         
         .slideshow-container {
-            height: 300px; /* Slightly smaller on mobile */
+            height: calc(100vh - 60px); /* Full height minus mobile nav */
         }
     }
     </style>
@@ -395,12 +336,9 @@
     </div>
     <div class="overlay" id="overlay" onclick="closeMenu()"></div>
 
-    <!-- Hero Section - UNCHANGED -->
-    <section class="hero">
-        <h1>29thavenuedesigns</h1>
-    </section>
+    <!-- HERO SECTION COMPLETELY REMOVED - Images start right after nav -->
 
-    <!-- NEW: Auto-fading Gallery Section (replaces all middle sections) -->
+    <!-- Pure Fading Gallery - No dots, no text, just images -->
     <section class="gallery-section">
         <div class="slideshow-container" id="slideshow">
             <div class="slide slide-1 active"></div>
@@ -410,22 +348,10 @@
             <div class="slide slide-5"></div>
             <div class="slide slide-6"></div>
             <div class="slide slide-7"></div>
-            <div class="slide-overlay"></div>
-        </div>
-        
-        <!-- Navigation dots -->
-        <div class="dots-container" id="dots">
-            <span class="dot active" onclick="currentSlide(0)"></span>
-            <span class="dot" onclick="currentSlide(1)"></span>
-            <span class="dot" onclick="currentSlide(2)"></span>
-            <span class="dot" onclick="currentSlide(3)"></span>
-            <span class="dot" onclick="currentSlide(4)"></span>
-            <span class="dot" onclick="currentSlide(5)"></span>
-            <span class="dot" onclick="currentSlide(6)"></span>
         </div>
     </section>
 
-    <!-- Footer - COMPLETELY UNCHANGED -->
+    <!-- Footer - Directly touching the images with no space -->
     <footer class="footer">
         <div class="footer-logo">29thavenuedesigns</div>
         <a href="mailto:moyorpoise@gmail.com" class="footer-email">moyorpoise@gmail.com</a>
@@ -459,10 +385,9 @@
             document.getElementById('overlay').classList.remove('active');
         }
 
-        // Slideshow functionality
+        // Clean, infinite slideshow with smooth transitions
         let slideIndex = 0;
         const slides = document.getElementsByClassName('slide');
-        const dots = document.getElementsByClassName('dot');
         let slideInterval;
 
         function showSlide(n) {
@@ -471,17 +396,8 @@
                 slides[i].classList.remove('active');
             }
             
-            // Remove active class from all dots
-            for (let i = 0; i < dots.length; i++) {
-                dots[i].classList.remove('active');
-            }
-            
-            // Show the selected slide and activate corresponding dot
+            // Show the selected slide
             slides[n].classList.add('active');
-            if (dots[n]) {
-                dots[n].classList.add('active');
-            }
-            
             slideIndex = n;
         }
 
@@ -490,25 +406,20 @@
             showSlide(slideIndex);
         }
 
-        function currentSlide(n) {
-            showSlide(n);
-            // Reset the auto-slide timer when manually changing
-            clearInterval(slideInterval);
-            slideInterval = setInterval(nextSlide, 4000); // Change image every 4 seconds
-        }
-
-        // Start the slideshow
+        // Start the infinite slideshow
         showSlide(0);
-        slideInterval = setInterval(nextSlide, 4000); // Change image every 4 seconds
+        
+        // Change image every 5 seconds for a more relaxed viewing experience
+        slideInterval = setInterval(nextSlide, 5000);
 
-        // Pause slideshow when mouse enters (optional)
+        // Optional: pause on hover (remove if you want it to always run)
         const slideshow = document.getElementById('slideshow');
         slideshow.addEventListener('mouseenter', () => {
             clearInterval(slideInterval);
         });
 
         slideshow.addEventListener('mouseleave', () => {
-            slideInterval = setInterval(nextSlide, 4000);
+            slideInterval = setInterval(nextSlide, 5000);
         });
     </script>
 </body>
