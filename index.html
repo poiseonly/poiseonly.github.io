@@ -48,20 +48,96 @@
         flex-shrink: 0;
     }
 
-    /* Desktop Navigation */
+    /* Desktop Navigation with Dropdown */
     .desktop-nav {
         display: flex;
         gap: 2rem;
         align-items: center;
+        position: relative;
     }
 
-    .desktop-nav a {
+    .desktop-nav > a {
         text-decoration: none;
         color: #1a1a1a;
         font-size: 0.9rem;
         text-transform: uppercase;
         letter-spacing: 1px;
-        white-space: nowrap;
+        padding: 0.5rem 0;
+        position: relative;
+    }
+
+    /* Dropdown Container */
+    .dropdown {
+        position: relative;
+        display: inline-block;
+    }
+
+    .dropdown-toggle {
+        text-decoration: none;
+        color: #1a1a1a;
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        padding: 0.5rem 0;
+        cursor: pointer;
+        background: transparent;
+        border: none;
+        font-family: inherit;
+    }
+
+    .dropdown-toggle i {
+        margin-left: 5px;
+        font-size: 0.8rem;
+        transition: transform 0.3s ease;
+    }
+
+    .dropdown:hover .dropdown-toggle i {
+        transform: rotate(180deg);
+    }
+
+    /* Dropdown Menu */
+    .dropdown-menu {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background: #ffffff;
+        min-width: 200px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        border: 1px solid #f0f0f0;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-10px);
+        transition: all 0.3s ease;
+        z-index: 1000;
+        padding: 0.5rem 0;
+    }
+
+    .dropdown:hover .dropdown-menu {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+
+    .dropdown-menu a {
+        display: block;
+        padding: 0.8rem 1.5rem;
+        text-decoration: none;
+        color: #1a1a1a;
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        transition: all 0.2s ease;
+        border-bottom: 1px solid #f0f0f0;
+    }
+
+    .dropdown-menu a:last-child {
+        border-bottom: none;
+    }
+
+    .dropdown-menu a:hover {
+        background: #f9f9f9;
+        color: #b89b7b;
+        padding-left: 2rem;
     }
 
     /* Mobile Menu */
@@ -122,9 +198,7 @@
         display: block;
     }
 
-    /* Hero Section REMOVED COMPLETELY */
-
-    /* Fading Gallery Section - Now starts right after nav */
+    /* Fading Gallery Section */
     .gallery-section {
         width: 100%;
         padding: 0;
@@ -135,7 +209,7 @@
     .slideshow-container {
         position: relative;
         width: 100%;
-        height: calc(100vh - 60px); /* Full viewport height minus nav */
+        height: calc(100vh - 60px);
         min-height: 400px;
         overflow: hidden;
     }
@@ -147,7 +221,7 @@
         width: 100%;
         height: 100%;
         opacity: 0;
-        transition: opacity 2s ease-in-out; /* Smoother 2-second fade */
+        transition: opacity 2s ease-in-out;
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
@@ -161,21 +235,19 @@
     /* Slide images */
     .slide-1 { background-image: url('https://poiseonly.github.io/images/IMG_9366.JPG.jpeg'); }
     .slide-2 { background-image: url('https://poiseonly.github.io/images/ABA03F76-E5F0-4C0B-9D76-8D5719B46F5D.CR2'); }
-     .slide-3 { background-image: url('https://poiseonly.github.io/images/IMG_9463.JPG.jpeg'); }
+    .slide-3 { background-image: url('https://poiseonly.github.io/images/IMG_9463.JPG.jpeg'); }
     .slide-4 { background-image: url('https://poiseonly.github.io/images/IMG_3290.JPG.jpeg'); }
     .slide-5 { background-image: url('https://poiseonly.github.io/images/IMG_3275.JPG.jpeg'); }
     .slide-6 { background-image: url('https://poiseonly.github.io/images/IMG_3250.JPG.jpeg'); }
     .slide-7 { background-image: url('https://poiseonly.github.io/images/poise1.jpeg'); }
 
-    /* Subtle overlay removed for cleaner look */
-
-    /* Footer - Now touching the image directly */
+    /* Footer */
     .footer {
         background: #1a1a1a;
         color: #ffffff;
         padding: 2rem 1.5rem;
         text-align: center;
-        margin-top: 0; /* Remove margin so it touches the image */
+        margin-top: 0;
         width: 100%;
     }
 
@@ -258,19 +330,14 @@
             align-items: center;
         }
         
-        .desktop-nav a {
-            display: inline-block;
-            text-decoration: none;
-            color: #1a1a1a;
+        .desktop-nav a,
+        .dropdown-toggle {
             font-size: 0.9rem;
-            text-transform: uppercase;
             letter-spacing: 1px;
-            white-space: nowrap;
         }
         
-        /* Full viewport height slideshow on desktop */
         .slideshow-container {
-            height: calc(100vh - 80px); /* Adjust for taller nav on desktop */
+            height: calc(100vh - 80px);
             min-height: 600px;
         }
         
@@ -302,31 +369,38 @@
         }
         
         .slideshow-container {
-            height: calc(100vh - 60px); /* Full height minus mobile nav */
+            height: calc(100vh - 60px);
         }
     }
     </style>
 </head>
 <body>
-    <!-- Navigation - UNCHANGED -->
+    <!-- Navigation with Dropdown -->
     <nav class="navbar">
         <div class="logo">29avenuedesigns</div>
         <div class="menu-icon" onclick="openMenu()"><i class="fas fa-bars"></i></div>
         <div class="desktop-nav">
             <a href="index.html">HOME</a>
-            <a href="studio.html">STUDIO</a>
+            <div class="dropdown">
+                <button class="dropdown-toggle">STUDIO <i class="fas fa-chevron-down"></i></button>
+                <div class="dropdown-menu">
+                    <a href="studio.html">STUDIO</a>
+                    <a href="products.html">PRODUCT</a>
+                </div>
+            </div>
             <a href="process.html">OUR PROCESS</a>
             <a href="work.html">PORTFOLIO</a>
             <a href="contact.html">CONTACT</a>
         </div>
     </nav>
 
-    <!-- Mobile Menu - UNCHANGED -->
+    <!-- Mobile Menu - Updated with PRODUCT -->
     <div class="mobile-menu" id="mobileMenu">
         <div class="close-menu" onclick="closeMenu()"><i class="fas fa-times"></i></div>
         <div class="mobile-menu-links">
             <a href="index.html" onclick="closeMenu()">HOME</a>
             <a href="studio.html" onclick="closeMenu()">STUDIO</a>
+            <a href="products.html" onclick="closeMenu()">PRODUCT</a>
             <a href="process.html" onclick="closeMenu()">OUR PROCESS</a>
             <a href="work.html" onclick="closeMenu()">PORTFOLIO</a>
             <a href="contact.html" onclick="closeMenu()">CONTACT</a>
@@ -334,9 +408,7 @@
     </div>
     <div class="overlay" id="overlay" onclick="closeMenu()"></div>
 
-    <!-- HERO SECTION COMPLETELY REMOVED - Images start right after nav -->
-
-    <!-- Pure Fading Gallery - No dots, no text, just images -->
+    <!-- Fading Gallery -->
     <section class="gallery-section">
         <div class="slideshow-container" id="slideshow">
             <div class="slide slide-1 active"></div>
@@ -349,7 +421,7 @@
         </div>
     </section>
 
-    <!-- Footer - Directly touching the images with no space -->
+    <!-- Footer - Updated with PRODUCT link -->
     <footer class="footer">
         <div class="footer-logo">29avenuedesigns</div>
         <a href="mailto:moyorpoise@gmail.com" class="footer-email">moyorpoise@gmail.com</a>
@@ -357,6 +429,7 @@
         <div class="footer-links">
             <a href="index.html">HOME</a>
             <a href="studio.html">STUDIO</a>
+            <a href="products.html">PRODUCT</a>
             <a href="process.html">OUR PROCESS</a>
             <a href="work.html">PORTFOLIO</a>
             <a href="contact.html">CONTACT</a>
@@ -382,18 +455,15 @@
             document.getElementById('overlay').classList.remove('active');
         }
 
-        // Clean, infinite slideshow with smooth transitions
+        // Slideshow functionality
         let slideIndex = 0;
         const slides = document.getElementsByClassName('slide');
         let slideInterval;
 
         function showSlide(n) {
-            // Hide all slides
             for (let i = 0; i < slides.length; i++) {
                 slides[i].classList.remove('active');
             }
-            
-            // Show the selected slide
             slides[n].classList.add('active');
             slideIndex = n;
         }
@@ -403,13 +473,10 @@
             showSlide(slideIndex);
         }
 
-        // Start the infinite slideshow
+        // Start slideshow
         showSlide(0);
-        
-        // Change image every 5 seconds for a more relaxed viewing experience
         slideInterval = setInterval(nextSlide, 5000);
 
-        // Optional: pause on hover (remove if you want it to always run)
         const slideshow = document.getElementById('slideshow');
         slideshow.addEventListener('mouseenter', () => {
             clearInterval(slideInterval);
