@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>Contact | 29th Avenue</title>
+    <title>Contact | 29avenuedesigns</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         * {
@@ -116,9 +116,14 @@
             margin-bottom: 0.5rem;
         }
 
+        .page-header p {
+            color: #b89b7b;
+            font-style: italic;
+        }
+
         .contact-container {
             padding: 1.5rem;
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
         }
 
@@ -141,94 +146,260 @@
         .contact-details {
             background: #f9f9f9;
             padding: 2rem;
-            margin-bottom: 2rem;
+            margin-bottom: 3rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            text-align: center;
         }
 
         .contact-details p {
-            margin-bottom: 0.8rem;
+            margin-bottom: 0.5rem;
         }
 
         .contact-details i {
             color: #b89b7b;
             width: 25px;
+            margin-right: 0.5rem;
         }
 
-        .contact-form {
+        /* Questionnaire Section */
+        .questionnaire-section {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .questionnaire-intro {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: #f9f9f9;
+        }
+
+        .questionnaire-intro h3 {
+            font-size: 2rem;
+            font-weight: 300;
+            margin-bottom: 1.5rem;
+            color: #1a1a1a;
+        }
+
+        .questionnaire-intro p {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .questionnaire-intro .start-btn {
+            display: inline-block;
+            padding: 1.2rem 4rem;
+            background: #b89b7b;
+            color: white;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 1.1rem;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 2rem;
+            border-radius: 0;
+        }
+
+        .questionnaire-intro .start-btn:hover {
+            background: #8b7a66;
+            transform: translateY(-2px);
+        }
+
+        .questionnaire-container {
             background: #ffffff;
             border: 1px solid #f0f0f0;
-            padding: 2rem;
+            padding: 2.5rem 2rem;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+            display: none;
         }
 
-        .form-group {
+        .questionnaire-container.active {
+            display: block;
+        }
+
+        .questionnaire-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .questionnaire-header h3 {
+            font-size: 1.8rem;
+            font-weight: 300;
+            margin-bottom: 1rem;
+            color: #1a1a1a;
+        }
+
+        .questionnaire-header p {
+            color: #666;
+            font-size: 1rem;
             margin-bottom: 1.5rem;
         }
 
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 500;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: #666;
+        .progress-bar {
+            width: 100%;
+            height: 4px;
+            background: #f0f0f0;
+            margin: 1.5rem 0;
         }
 
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
+        .progress-fill {
+            height: 4px;
+            background: #b89b7b;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .progress-text {
+            text-align: right;
+            font-size: 0.9rem;
+            color: #b89b7b;
+            margin-bottom: 2rem;
+        }
+
+        .question {
+            display: none;
+        }
+
+        .question.active {
+            display: block;
+        }
+
+        .question h4 {
+            font-size: 1.3rem;
+            font-weight: 400;
+            margin-bottom: 1rem;
+            color: #1a1a1a;
+        }
+
+        .question p {
+            color: #666;
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+            font-style: italic;
+        }
+
+        .options {
+            margin: 2rem 0;
+        }
+
+        .option-item {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .option-item input[type="radio"],
+        .option-item input[type="checkbox"] {
+            margin-right: 1rem;
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+
+        .option-item label {
+            font-size: 1.05rem;
+            color: #4a4a4a;
+            cursor: pointer;
+        }
+
+        .textarea-option {
+            margin-top: 1.5rem;
+        }
+
+        .textarea-option textarea {
             width: 100%;
-            padding: 0.8rem;
+            padding: 1rem;
             border: 1px solid #e0e0e0;
             font-size: 1rem;
-            transition: 0.2s;
+            resize: vertical;
         }
 
-        .form-group input:focus,
-        .form-group select:focus,
-        .form-group textarea:focus {
+        .textarea-option textarea:focus {
             outline: none;
             border-color: #b89b7b;
         }
 
-        .checkbox-group {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 0.8rem;
-        }
-
-        .checkbox-item {
+        .questionnaire-nav {
             display: flex;
-            align-items: center;
-            gap: 0.5rem;
+            justify-content: space-between;
+            margin-top: 3rem;
         }
 
-        .checkbox-item input[type="checkbox"] {
-            width: auto;
+        .nav-btn {
+            padding: 0.8rem 2rem;
+            background: transparent;
+            border: 1px solid #b89b7b;
+            color: #b89b7b;
+            cursor: pointer;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: 0.3s;
         }
 
-        .btn {
+        .nav-btn:hover {
+            background: #b89b7b;
+            color: white;
+        }
+
+        .nav-btn.submit-btn {
             background: #b89b7b;
             color: white;
             border: none;
-            padding: 1rem 2rem;
-            font-size: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            cursor: pointer;
-            transition: 0.3s;
-            width: 100%;
-            font-weight: 400;
         }
 
-        .btn:hover {
+        .nav-btn.submit-btn:hover {
             background: #8b7a66;
         }
 
-        .form-footer {
+        .nav-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        .thank-you-message {
             text-align: center;
-            margin-top: 2rem;
-            color: #888;
+            padding: 4rem 2rem;
+            display: none;
+            background: #f9f9f9;
+        }
+
+        .thank-you-message.active {
+            display: block;
+        }
+
+        .thank-you-message i {
+            font-size: 4rem;
+            color: #b89b7b;
+            margin-bottom: 2rem;
+        }
+
+        .thank-you-message h3 {
+            font-size: 2rem;
+            font-weight: 300;
+            margin-bottom: 1rem;
+        }
+
+        .thank-you-message p {
+            color: #666;
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        .thank-you-message .reset-btn {
+            padding: 1rem 3rem;
+            background: transparent;
+            border: 1px solid #b89b7b;
+            color: #b89b7b;
+            cursor: pointer;
             font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .footer {
@@ -319,22 +490,41 @@
                 padding: 3rem;
             }
             
-            .checkbox-group {
+            .contact-details {
                 grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .questionnaire-nav {
+                flex-direction: row;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .questionnaire-nav {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .nav-btn {
+                width: 100%;
+                text-align: center;
+            }
+            
+            .contact-details {
+                grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 <body>
     <nav class="navbar">
-        <a href="index.html" class="logo">29TH AVENUE</a>
+        <a href="index.html" class="logo">29avenuedesigns</a>
         <div class="menu-icon" onclick="openMenu()"><i class="fas fa-bars"></i></div>
         <div class="desktop-nav">
             <a href="index.html">HOME</a>
             <a href="studio.html">STUDIO</a>
-            <a href="founder.html">FOUNDER</a>
             <a href="process.html">OUR PROCESS</a>
-            <a href="work.html">WORK</a>
+            <a href="work.html">PORTFOLIO</a>
             <a href="contact.html">CONTACT</a>
         </div>
     </nav>
@@ -344,9 +534,8 @@
         <div class="mobile-menu-links">
             <a href="index.html" onclick="closeMenu()">HOME</a>
             <a href="studio.html" onclick="closeMenu()">STUDIO</a>
-            <a href="founder.html" onclick="closeMenu()">FOUNDER</a>
             <a href="process.html" onclick="closeMenu()">OUR PROCESS</a>
-            <a href="work.html" onclick="closeMenu()">WORK</a>
+            <a href="work.html" onclick="closeMenu()">PORTFOLIO</a>
             <a href="contact.html" onclick="closeMenu()">CONTACT</a>
         </div>
     </div>
@@ -360,7 +549,7 @@
     <div class="contact-container">
         <div class="contact-info">
             <h2>Let's Create Together</h2>
-            <p>Whether you'd like to partner with our studio or founder, let's work together to increase your brand's awareness while building trust with your consumer.</p>
+            <p>Whether you'd like to partner with our studio or start your design journey, we're here to bring your vision to life.</p>
         </div>
 
         <div class="contact-details">
@@ -371,81 +560,363 @@
             <p><i class="fab fa-pinterest"></i> 29thavenue</p>
         </div>
 
-        <div class="contact-form">
-            <form action="https://formsubmit.co/moyorpoise@gmail.com" method="POST">
-                <input type="hidden" name="_subject" value="New 29th Avenue Website Inquiry">
-                <input type="hidden" name="_captcha" value="false">
-                <input type="hidden" name="_next" value="https://poiseonly.github.io/thank-you.html">
-                <input type="hidden" name="_template" value="table">
+        <!-- Questionnaire Section (replaces the old form) -->
+        <div class="questionnaire-section">
+            <div class="questionnaire-intro" id="questionnaireIntro">
+                <h3>Ready to begin your design journey?</h3>
+                <p>Take our design questionnaire and let us understand your vision.</p>
+                <p style="font-size: 1.1rem; color: #b89b7b; margin: 2rem 0;">"Let's get started! Who are we designing for?"</p>
+                <button class="start-btn" onclick="startQuestionnaire()">BEGIN QUESTIONNAIRE</button>
+            </div>
 
-                <div class="form-group">
-                    <label>Name *</label>
-                    <input type="text" name="Name" placeholder="Enter your name" required>
+            <div class="questionnaire-container" id="questionnaireContainer">
+                <div class="questionnaire-header">
+                    <h3>Design Questionnaire</h3>
+                    <p>Tell us a little about yourself and your vision — this helps us create something truly personal for you.</p>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                    <div class="progress-text" id="progressText">1 / 13</div>
                 </div>
 
-                <div class="form-group">
-                    <label>Email *</label>
-                    <input type="email" name="Email" placeholder="Email address" required>
-                </div>
+                <!-- Questions Container -->
+                <div id="questionsContainer">
+                    <!-- Question 1 -->
+                    <div class="question active" id="q1">
+                        <h4>What type of project are you looking to start?</h4>
+                        <p>Select the option that best fits your needs.</p>
+                        <div class="options">
+                            <div class="option-item">
+                                <input type="radio" name="q1" value="Residential — My Home" id="q1_1">
+                                <label for="q1_1">Residential — My Home</label>
+                            </div>
+                            <div class="option-item">
+                                <input type="radio" name="q1" value="Commercial — Office / Retail / Other" id="q1_2">
+                                <label for="q1_2">Commercial — Office / Retail / Other</label>
+                            </div>
+                            <div class="option-item">
+                                <input type="radio" name="q1" value="Both Residential & Commercial" id="q1_3">
+                                <label for="q1_3">Both Residential & Commercial</label>
+                            </div>
+                            <div class="option-item">
+                                <input type="radio" name="q1" value="Not sure yet — I'd love some guidance" id="q1_4">
+                                <label for="q1_4">Not sure yet — I'd love some guidance</label>
+                            </div>
+                        </div>
+                    </div>
 
-                <div class="form-group">
-                    <label>Phone</label>
-                    <input type="tel" name="Phone" placeholder="Phone number">
-                </div>
+                    <!-- Question 2 -->
+                    <div class="question" id="q2">
+                        <h4>Which space(s) are you hoping to transform?</h4>
+                        <p>You may select more than one.</p>
+                        <div class="options">
+                            <div class="option-item">
+                                <input type="checkbox" name="q2" value="A single room" id="q2_1">
+                                <label for="q2_1">A single room</label>
+                            </div>
+                            <div class="option-item">
+                                <input type="checkbox" name="q2" value="Multiple rooms" id="q2_2">
+                                <label for="q2_2">Multiple rooms</label>
+                            </div>
+                            <div class="option-item">
+                                <input type="checkbox" name="q2" value="Full home / full office" id="q2_3">
+                                <label for="q2_3">Full home / full office</label>
+                            </div>
+                            <div class="option-item">
+                                <input type="checkbox" name="q2" value="Outdoor / exterior space" id="q2_4">
+                                <label for="q2_4">Outdoor / exterior space</label>
+                            </div>
+                        </div>
+                        <div class="textarea-option">
+                            <textarea placeholder="Anything else you'd like to add about the space?" rows="3"></textarea>
+                        </div>
+                    </div>
 
-                <div class="form-group">
-                    <label>Subject</label>
-                    <input type="text" name="Subject" placeholder="Subject line">
-                </div>
+                    <!-- Question 3 -->
+                    <div class="question" id="q3">
+                        <h4>Which style feels most like you?</h4>
+                        <p>Don't worry if you're between styles — just pick what resonates most.</p>
+                        <div class="options">
+                            <div class="option-item">
+                                <input type="radio" name="q3" value="Modern & Minimal — Clean lines, open space" id="q3_1">
+                                <label for="q3_1">Modern & Minimal — Clean lines, open space</label>
+                            </div>
+                            <div class="option-item">
+                                <input type="radio" name="q3" value="Classic & Traditional — Timeless, elegant" id="q3_2">
+                                <label for="q3_2">Classic & Traditional — Timeless, elegant</label>
+                            </div>
+                            <div class="option-item">
+                                <input type="radio" name="q3" value="Bohemian & Eclectic — Layered, free-spirited" id="q3_3">
+                                <label for="q3_3">Bohemian & Eclectic — Layered, free-spirited</label>
+                            </div>
+                            <div class="option-item">
+                                <input type="radio" name="q3" value="Industrial — Raw, textured, bold" id="q3_4">
+                                <label for="q3_4">Industrial — Raw, textured, bold</label>
+                            </div>
+                            <div class="option-item">
+                                <input type="radio" name="q3" value="Coastal & Airy — Light, breezy, natural" id="q3_5">
+                                <label for="q3_5">Coastal & Airy — Light, breezy, natural</label>
+                            </div>
+                            <div class="option-item">
+                                <input type="radio" name="q3" value="Luxury & Refined — Rich, curated, statement" id="q3_6">
+                                <label for="q3_6">Luxury & Refined — Rich, curated, statement</label>
+                            </div>
+                            <div class="option-item">
+                                <input type="radio" name="q3" value="I'm not sure — I need help finding my style" id="q3_7">
+                                <label for="q3_7">I'm not sure — I need help finding my style</label>
+                            </div>
+                        </div>
+                    </div>
 
-                <div class="form-group">
-                    <label>Interested In</label>
-                    <div class="checkbox-group">
-                        <div class="checkbox-item">
-                            <input type="checkbox" name="Interest[]" value="Interior Design"> Interior Design
+                    <!-- Question 4 -->
+                    <div class="question" id="q4">
+                        <h4>How would you describe where you are with your vision?</h4>
+                        <div class="options">
+                            <div class="option-item">
+                                <input type="radio" name="q4" value="I have a very clear idea of what I want" id="q4_1">
+                                <label for="q4_1">I have a very clear idea of what I want</label>
+                            </div>
+                            <div class="option-item">
+                                <input type="radio" name="q4" value="I have some ideas but need help refining them" id="q4_2">
+                                <label for="q4_2">I have some ideas but need help refining them</label>
+                            </div>
+                            <div class="option-item">
+                                <input type="radio" name="q4" value="I'm starting from scratch and open to full creative direction" id="q4_3">
+                                <label for="q4_3">I'm starting from scratch and open to full creative direction</label>
+                            </div>
                         </div>
-                        <div class="checkbox-item">
-                            <input type="checkbox" name="Interest[]" value="Creative Direction"> Creative Direction
+                    </div>
+
+                    <!-- Question 5 -->
+                    <div class="question" id="q5">
+                        <h4>Do you have any inspiration images or a mood board?</h4>
+                        <p>Pinterest boards, saved photos, magazine clips — anything counts!</p>
+                        <div class="options">
+                            <div class="option-item">
+                                <input type="radio" name="q5" value="Yes — I'll share them during our consultation" id="q5_1">
+                                <label for="q5_1">Yes — I'll share them during our consultation</label>
+                            </div>
+                            <div class="option-item">
+                                <input type="radio" name="q5" value="No board, but I can describe what I love" id="q5_2">
+                                <label for="q5_2">No board, but I can describe what I love</label>
+                            </div>
+                            <div class="option-item">
+                                <input type="radio" name="q5" value="No — I need help discovering my style altogether" id="q5_3">
+                                <label for="q5_3">No — I need help discovering my style altogether</label>
+                            </div>
                         </div>
-                        <div class="checkbox-item">
-                            <input type="checkbox" name="Interest[]" value="Brand Partnerships"> Brand Partnerships
+                    </div>
+
+                    <!-- Question 6 -->
+                    <div class="question" id="q6">
+                        <h4>Any colors, materials, or finishes you love, or want to avoid?</h4>
+                        <p>Be as specific or as vague as you'd like. Every detail helps.</p>
+                        <div class="textarea-option">
+                            <textarea placeholder="e.g. I love warm earthy tones and natural wood. I'd like to avoid cold greys and anything too stark white..." rows="4"></textarea>
                         </div>
-                        <div class="checkbox-item">
-                            <input type="checkbox" name="Interest[]" value="Speaking Engagement"> Speaking Engagement
+                    </div>
+
+                    <!-- Question 7 -->
+                    <div class="question" id="q7">
+                        <h4>If structural changes were recommended to achieve the best result, would you be open to exploring that?</h4>
+                        <div class="options">
+                            <div class="option-item">
+                                <input type="radio" name="q7" value="Yes, absolutely — whatever it takes" id="q7_1">
+                                <label for="q7_1">Yes, absolutely — whatever it takes</label>
+                            </div>
+                            <div class="option-item">
+                                <input type="radio" name="q7" value="Maybe — it depends on the scope and cost" id="q7_2">
+                                <label for="q7_2">Maybe — it depends on the scope and cost</label>
+                            </div>
+                            <div class="option-item">
+                                <input type="radio" name="q7" value="No — I'd prefer to work within the existing structure" id="q7_3">
+                                <label for="q7_3">No — I'd prefer to work within the existing structure</label>
+                            </div>
                         </div>
-                        <div class="checkbox-item">
-                            <input type="checkbox" name="Interest[]" value="Product Design"> Product Design
+                    </div>
+
+                    <!-- Question 8 -->
+                    <div class="question" id="q8">
+                        <h4>Who will be living or working in this space?</h4>
+                        <p>Select all that apply.</p>
+                        <div class="options">
+                            <div class="option-item">
+                                <input type="checkbox" name="q8" value="Just me" id="q8_1">
+                                <label for="q8_1">Just me</label>
+                            </div>
+                            <div class="option-item">
+                                <input type="checkbox" name="q8" value="Couple" id="q8_2">
+                                <label for="q8_2">Couple</label>
+                            </div>
+                            <div class="option-item">
+                                <input type="checkbox" name="q8" value="Family with young kids" id="q8_3">
+                                <label for="q8_3">Family with young kids</label>
+                            </div>
+                            <div class="option-item">
+                                <input type="checkbox" name="q8" value="Family with teenagers" id="q8_4">
+                                <label for="q8_4">Family with teenagers</label>
+                            </div>
+                            <div class="option-item">
+                                <input type="checkbox" name="q8" value="Pets are involved 😊" id="q8_5">
+                                <label for="q8_5">Pets are involved 😊</label>
+                            </div>
                         </div>
-                        <div class="checkbox-item">
-                            <input type="checkbox" name="Interest[]" value="General Inquiry"> General Inquiry
+                    </div>
+
+                    <!-- Question 9 -->
+                    <div class="question" id="q9">
+                        <h4>How are you thinking about furnishings for this project?</h4>
+                        <div class="options">
+                            <div class="option-item">
+                                <input type="radio" name="q9" value="All new furniture and decor — fresh start" id="q9_1">
+                                <label for="q9_1">All new furniture and decor — fresh start</label>
+                            </div>
+                            <div class="option-item">
+                                <input type="radio" name="q9" value="Mostly new, with a few existing pieces I love" id="q9_2">
+                                <label for="q9_2">Mostly new, with a few existing pieces I love</label>
+                            </div>
+                            <div class="option-item">
+                                <input type="radio" name="q9" value="A healthy mix of new and existing pieces" id="q9_3">
+                                <label for="q9_3">A healthy mix of new and existing pieces</label>
+                            </div>
+                            <div class="option-item">
+                                <input type="radio" name="q9" value="Mostly keeping what I have — just refreshing the space" id="q9_4">
+                                <label for="q9_4">Mostly keeping what I have — just refreshing the space</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Question 10 -->
+                    <div class="question" id="q10">
+                        <h4>Do you have a timeframe in mind for completion?</h4>
+                        <div class="options">
+                            <div class="option-item">
+                                <input type="radio" name="q10" value="As soon as possible" id="q10_1">
+                                <label for="q10_1">As soon as possible</label>
+                            </div>
+                            <div class="option-item">
+                                <input type="radio" name="q10" value="Within 1–3 months" id="q10_2">
+                                <label for="q10_2">Within 1–3 months</label>
+                            </div>
+                            <div class="option-item">
+                                <input type="radio" name="q10" value="Within 3–6 months" id="q10_3">
+                                <label for="q10_3">Within 3–6 months</label>
+                            </div>
+                            <div class="option-item">
+                                <input type="radio" name="q10" value="6 months or more" id="q10_4">
+                                <label for="q10_4">6 months or more</label>
+                            </div>
+                            <div class="option-item">
+                                <input type="radio" name="q10" value="I'm flexible — no specific rush" id="q10_5">
+                                <label for="q10_5">I'm flexible — no specific rush</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Question 11 -->
+                    <div class="question" id="q11">
+                        <h4>Have you worked with an interior designer before?</h4>
+                        <div class="options">
+                            <div class="option-item">
+                                <input type="radio" name="q11" value="Yes — and it was a great experience" id="q11_1">
+                                <label for="q11_1">Yes — and it was a great experience</label>
+                            </div>
+                            <div class="option-item">
+                                <input type="radio" name="q11" value="Yes — but I wasn't fully satisfied" id="q11_2">
+                                <label for="q11_2">Yes — but I wasn't fully satisfied</label>
+                            </div>
+                            <div class="option-item">
+                                <input type="radio" name="q11" value="No — this is my first time" id="q11_3">
+                                <label for="q11_3">No — this is my first time</label>
+                            </div>
+                            <div class="option-item">
+                                <input type="radio" name="q11" value="No — but I've done a lot of my own research" id="q11_4">
+                                <label for="q11_4">No — but I've done a lot of my own research</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Question 12 -->
+                    <div class="question" id="q12">
+                        <h4>How did you hear about us?</h4>
+                        <div class="options">
+                            <div class="option-item">
+                                <input type="radio" name="q12" value="Instagram / Social Media" id="q12_1">
+                                <label for="q12_1">Instagram / Social Media</label>
+                            </div>
+                            <div class="option-item">
+                                <input type="radio" name="q12" value="Google Search" id="q12_2">
+                                <label for="q12_2">Google Search</label>
+                            </div>
+                            <div class="option-item">
+                                <input type="radio" name="q12" value="Referral from a friend or family member" id="q12_3">
+                                <label for="q12_3">Referral from a friend or family member</label>
+                            </div>
+                            <div class="option-item">
+                                <input type="radio" name="q12" value="A previous client recommended you" id="q12_4">
+                                <label for="q12_4">A previous client recommended you</label>
+                            </div>
+                            <div class="option-item">
+                                <input type="radio" name="q12" value="Other" id="q12_5">
+                                <label for="q12_5">Other</label>
+                            </div>
+                        </div>
+                        <div class="textarea-option">
+                            <textarea placeholder="Tell us more if you'd like..." rows="2"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Question 13 -->
+                    <div class="question" id="q13">
+                        <h4>What's the best way for us to follow up with you?</h4>
+                        <p>We'll reach out within 24 hours of receiving your submission.</p>
+                        <div class="options">
+                            <div class="option-item">
+                                <input type="checkbox" name="q13" value="Email" id="q13_1">
+                                <label for="q13_1">Email</label>
+                            </div>
+                            <div class="option-item">
+                                <input type="checkbox" name="q13" value="Phone Call" id="q13_2">
+                                <label for="q13_2">Phone Call</label>
+                            </div>
+                            <div class="option-item">
+                                <input type="checkbox" name="q13" value="Video Call" id="q13_3">
+                                <label for="q13_3">Video Call</label>
+                            </div>
+                            <div class="option-item">
+                                <input type="checkbox" name="q13" value="WhatsApp / Text" id="q13_4">
+                                <label for="q13_4">WhatsApp / Text</label>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <label>Message *</label>
-                    <textarea name="Message" placeholder="Tell us about your project..." rows="5" required></textarea>
+                <!-- Navigation Buttons -->
+                <div class="questionnaire-nav">
+                    <button class="nav-btn" id="prevBtn" onclick="prevQuestion()" disabled>← BACK</button>
+                    <button class="nav-btn" id="nextBtn" onclick="nextQuestion()">CONTINUE →</button>
                 </div>
+            </div>
 
-                <button type="submit" class="btn">Send Message</button>
-                
-                <div class="form-footer">
-                    <p>We'll respond within 24-48 hours</p>
-                </div>
-            </form>
+            <!-- Thank You Message -->
+            <div class="thank-you-message" id="thankYouMessage">
+                <i class="fas fa-check-circle"></i>
+                <h3>Thank You!</h3>
+                <p>Your questionnaire has been submitted. We'll be in touch within 24 hours.</p>
+                <button class="reset-btn" onclick="resetQuestionnaire()">START OVER</button>
+            </div>
         </div>
     </div>
 
     <footer class="footer">
-        <div class="footer-logo">29TH AVENUE</div>
+        <div class="footer-logo">29avenuedesigns</div>
         <a href="mailto:moyorpoise@gmail.com" class="footer-email">moyorpoise@gmail.com</a>
         <p style="margin-bottom: 1rem;">Lagos, Nigeria</p>
         <div class="footer-links">
             <a href="index.html">HOME</a>
             <a href="studio.html">STUDIO</a>
-            <a href="founder.html">FOUNDER</a>
             <a href="process.html">OUR PROCESS</a>
-            <a href="work.html">WORK</a>
+            <a href="work.html">PORTFOLIO</a>
             <a href="contact.html">CONTACT</a>
         </div>
         <div class="footer-social">
@@ -454,7 +925,7 @@
             <a href="#"><i class="fab fa-linkedin-in"></i></a>
         </div>
         <div class="footer-copyright">
-            © 2026 29TH AVENUE DESIGN STUDIO. ALL RIGHTS RESERVED.
+            ©️ 2026 29avenuedesigns STUDIO. ALL RIGHTS RESERVED.
         </div>
     </footer>
 
@@ -468,6 +939,200 @@
             document.getElementById('mobileMenu').classList.remove('active');
             document.getElementById('overlay').classList.remove('active');
         }
+
+        // Questionnaire variables
+        let currentQuestion = 1;
+        const totalQuestions = 13;
+
+        function startQuestionnaire() {
+            document.getElementById('questionnaireIntro').style.display = 'none';
+            document.getElementById('questionnaireContainer').classList.add('active');
+            updateProgress();
+        }
+
+        function nextQuestion() {
+            if (currentQuestion < totalQuestions) {
+                document.getElementById('q' + currentQuestion).classList.remove('active');
+                currentQuestion++;
+                document.getElementById('q' + currentQuestion).classList.add('active');
+                updateProgress();
+            } else if (currentQuestion === totalQuestions) {
+                submitQuestionnaire();
+            }
+        }
+
+        function prevQuestion() {
+            if (currentQuestion > 1) {
+                document.getElementById('q' + currentQuestion).classList.remove('active');
+                currentQuestion--;
+                document.getElementById('q' + currentQuestion).classList.add('active');
+                updateProgress();
+            }
+        }
+
+        function updateProgress() {
+            const progress = (currentQuestion / totalQuestions) * 100;
+            document.getElementById('progressFill').style.width = progress + '%';
+            document.getElementById('progressText').textContent = currentQuestion + ' / ' + totalQuestions;
+
+            document.getElementById('prevBtn').disabled = currentQuestion === 1;
+            
+            const nextBtn = document.getElementById('nextBtn');
+            if (currentQuestion === totalQuestions) {
+                nextBtn.textContent = 'SUBMIT →';
+            } else {
+                nextBtn.textContent = 'CONTINUE →';
+            }
+        }
+
+        function submitQuestionnaire() {
+            let answers = {};
+            
+            // Question 1
+            const q1 = document.querySelector('input[name="q1"]:checked');
+            if (q1) answers["1. Project Type"] = q1.value;
+            
+            // Question 2
+            const q2 = document.querySelectorAll('input[name="q2"]:checked');
+            if (q2.length > 0) {
+                let values = [];
+                q2.forEach(cb => values.push(cb.value));
+                answers["2. Spaces"] = values.join(', ');
+            }
+            const q2Text = document.querySelector('#q2 textarea');
+            if (q2Text && q2Text.value.trim()) answers["2. Space Notes"] = q2Text.value;
+            
+            // Question 3
+            const q3 = document.querySelector('input[name="q3"]:checked');
+            if (q3) answers["3. Style"] = q3.value;
+            
+            // Question 4
+            const q4 = document.querySelector('input[name="q4"]:checked');
+            if (q4) answers["4. Vision Clarity"] = q4.value;
+            
+            // Question 5
+            const q5 = document.querySelector('input[name="q5"]:checked');
+            if (q5) answers["5. Inspiration"] = q5.value;
+            
+            // Question 6
+            const q6Text = document.querySelector('#q6 textarea');
+            if (q6Text && q6Text.value.trim()) answers["6. Colors & Materials"] = q6Text.value;
+            
+            // Question 7
+            const q7 = document.querySelector('input[name="q7"]:checked');
+            if (q7) answers["7. Structural Changes"] = q7.value;
+            
+            // Question 8
+            const q8 = document.querySelectorAll('input[name="q8"]:checked');
+            if (q8.length > 0) {
+                let values = [];
+                q8.forEach(cb => values.push(cb.value));
+                answers["8. Occupants"] = values.join(', ');
+            }
+            
+            // Question 9
+            const q9 = document.querySelector('input[name="q9"]:checked');
+            if (q9) answers["9. Furnishings"] = q9.value;
+            
+            // Question 10
+            const q10 = document.querySelector('input[name="q10"]:checked');
+            if (q10) answers["10. Timeline"] = q10.value;
+            
+            // Question 11
+            const q11 = document.querySelector('input[name="q11"]:checked');
+            if (q11) answers["11. Previous Experience"] = q11.value;
+            
+            // Question 12
+            const q12 = document.querySelector('input[name="q12"]:checked');
+            if (q12) answers["12. How Heard"] = q12.value;
+            const q12Text = document.querySelector('#q12 textarea');
+            if (q12Text && q12Text.value.trim()) answers["12. More Info"] = q12Text.value;
+            
+            // Question 13
+            const q13 = document.querySelectorAll('input[name="q13"]:checked');
+            if (q13.length > 0) {
+                let values = [];
+                q13.forEach(cb => values.push(cb.value));
+                answers["13. Contact Method"] = values.join(', ');
+            }
+            
+            // Format message
+            let message = "NEW DESIGN QUESTIONNAIRE SUBMISSION\n";
+            message += "====================================\n\n";
+            
+            for (let [key, value] of Object.entries(answers)) {
+                message += `${key}:\n${value}\n\n`;
+            }
+            
+            // Send email
+            fetch('https://formsubmit.co/ajax/moyorpoise@gmail.com', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({
+                    _subject: "New Design Questionnaire Submission",
+                    name: "Questionnaire Response",
+                    message: message,
+                    _template: 'table'
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('questionnaireContainer').classList.remove('active');
+                document.getElementById('thankYouMessage').classList.add('active');
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                document.getElementById('questionnaireContainer').classList.remove('active');
+                document.getElementById('thankYouMessage').classList.add('active');
+            });
+        }
+
+        function resetQuestionnaire() {
+            document.getElementById('q' + currentQuestion).classList.remove('active');
+            currentQuestion = 1;
+            document.getElementById('q1').classList.add('active');
+            
+            const inputs = document.querySelectorAll('input[type="radio"], input[type="checkbox"], textarea');
+            inputs.forEach(input => {
+                if (input.type === 'radio' || input.type === 'checkbox') {
+                    input.checked = false;
+                } else {
+                    input.value = '';
+                }
+            });
+            
+            document.getElementById('thankYouMessage').classList.remove('active');
+            document.getElementById('questionnaireIntro').style.display = 'block';
+            updateProgress();
+        }
+
+        // Validation
+        document.addEventListener('change', function() {
+            const currentQ = document.getElementById('q' + currentQuestion);
+            const radios = currentQ.querySelectorAll('input[type="radio"]:checked');
+            const checkboxes = currentQ.querySelectorAll('input[type="checkbox"]:checked');
+            const textareas = currentQ.querySelectorAll('textarea');
+            
+            let isValid = false;
+            
+            if (radios.length > 0) {
+                isValid = true;
+            } else if (checkboxes.length > 0) {
+                isValid = true;
+            } else {
+                for (let textarea of textareas) {
+                    if (textarea.value.trim() !== '') {
+                        isValid = true;
+                        break;
+                    }
+                }
+            }
+            
+            document.getElementById('nextBtn').disabled = !isValid;
+        });
     </script>
 </body>
 </html>
