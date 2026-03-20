@@ -116,6 +116,106 @@
             margin-bottom: 0.5rem;
         }
 
+        .page-header p {
+            color: #b89b7b;
+            font-style: italic;
+        }
+
+        /* Founder Feature Section */
+        .founder-feature {
+            max-width: 1200px;
+            margin: 3rem auto 4rem;
+            padding: 0 1.5rem;
+        }
+
+        .founder-card {
+            background: #f9f9f9;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            padding: 2.5rem;
+            border-left: 4px solid #b89b7b;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+
+        .founder-image {
+            width: 100%;
+            height: 350px;
+            background: url('https://poiseonly.github.io/images/founder-image.jpg') center/cover;
+            background-color: #e0e0e0; /* fallback color */
+        }
+
+        .founder-details h2 {
+            font-size: 2.2rem;
+            font-weight: 300;
+            margin-bottom: 0.3rem;
+            color: #1a1a1a;
+        }
+
+        .founder-title {
+            color: #b89b7b;
+            font-style: italic;
+            margin-bottom: 1.8rem;
+            font-size: 1.2rem;
+            border-bottom: 1px solid #e0e0e0;
+            padding-bottom: 1rem;
+        }
+
+        .founder-bio p {
+            margin-bottom: 1.5rem;
+            color: #4a4a4a;
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+
+        .founder-quote {
+            font-size: 1.2rem;
+            line-height: 1.7;
+            font-style: italic;
+            margin: 2rem 0 0;
+            color: #1a1a1a;
+            background: #ffffff;
+            padding: 1.8rem;
+            border-left: 3px solid #b89b7b;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.03);
+        }
+
+        .founder-quote i {
+            color: #b89b7b;
+            margin-right: 0.5rem;
+            font-size: 1.5rem;
+            opacity: 0.5;
+        }
+
+        /* Section Divider */
+        .section-divider {
+            text-align: center;
+            margin: 2rem 0 3rem;
+            position: relative;
+        }
+
+        .section-divider::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: #e0e0e0;
+            z-index: 0;
+        }
+
+        .section-divider span {
+            background: #ffffff;
+            padding: 0 2rem;
+            color: #b89b7b;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            position: relative;
+            z-index: 1;
+        }
+
         /* Project Grid */
         .projects-grid {
             padding: 1.5rem;
@@ -123,7 +223,7 @@
             flex-direction: column;
             gap: 2rem;
             max-width: 1400px;
-            margin: 0 auto;
+            margin: 0 auto 3rem;
         }
 
         .project-card {
@@ -371,6 +471,17 @@
                 letter-spacing: 1px;
             }
             
+            .founder-card {
+                grid-template-columns: 1fr 2fr;
+                gap: 3rem;
+                align-items: center;
+                padding: 3rem;
+            }
+            
+            .founder-image {
+                height: 450px;
+            }
+            
             .projects-grid {
                 padding: 3rem;
                 display: grid;
@@ -391,6 +502,14 @@
             .projects-grid {
                 grid-template-columns: 1fr;
             }
+            
+            .founder-card {
+                padding: 1.5rem;
+            }
+            
+            .founder-image {
+                height: 280px;
+            }
         }
     </style>
 </head>
@@ -401,7 +520,6 @@
         <div class="desktop-nav">
             <a href="index.html">HOME</a>
             <a href="studio.html">STUDIO</a>
-            <a href="founder.html">FOUNDER</a>
             <a href="process.html">OUR PROCESS</a>
             <a href="work.html">PORTFOLIO</a>
             <a href="contact.html">CONTACT</a>
@@ -413,7 +531,6 @@
         <div class="mobile-menu-links">
             <a href="index.html" onclick="closeMenu()">HOME</a>
             <a href="studio.html" onclick="closeMenu()">STUDIO</a>
-            <a href="founder.html" onclick="closeMenu()">FOUNDER</a>
             <a href="process.html" onclick="closeMenu()">OUR PROCESS</a>
             <a href="work.html" onclick="closeMenu()">PORTFOLIO</a>
             <a href="contact.html" onclick="closeMenu()">CONTACT</a>
@@ -424,6 +541,30 @@
     <div class="page-header">
         <h1>PORTFOLIO</h1>
         <p>featured projects</p>
+    </div>
+
+    <!-- FOUNDER FEATURE SECTION - Now properly displayed -->
+    <div class="founder-feature">
+        <div class="founder-card">
+            <div class="founder-image"></div>
+            <div class="founder-details">
+                <h2>Adedamola Samuel</h2>
+                <div class="founder-title">Founder & Principal Designer</div>
+                <div class="founder-bio">
+                    <p>Adedamola Samuel is the founder of 29thavenuedesigns. A graduate of Materials Engineering, Adedamola has always been fascinated by the way materials speak — how combining the right textures, finishes, and elements can transform something ordinary into something that resonates deeply and lingers long after you've left the room.</p>
+                    
+                    <p>That fascination became a foundation. With a trained eye for detail and a natural instinct for storytelling, Adedamola approaches every space as a visual narrative, one where every element is intentional, every layer carries meaning, and every room tells a story worth experiencing. Based in Lagos, Nigeria, he brings a distinctly grounded and considered perspective to interior design, shaped by culture, curiosity, and a deep appreciation for the world around him.</p>
+                </div>
+                <div class="founder-quote">
+                    <i class="fas fa-quote-left"></i> He believes that intentional design is one of the most powerful ways we can honour the spaces we live in and that belief sits at the heart of everything 29thavenuedesigns creates.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Elegant divider between Founder and Projects -->
+    <div class="section-divider">
+        <span>SELECTED WORKS</span>
     </div>
 
     <div class="projects-grid">
@@ -447,7 +588,7 @@
 
         <!-- Project 3: Outterspace -->
         <div class="project-card" onclick="openProject('outterspace')">
-            <div class="project-image" style="background-image: url('https://poiseonly.github.io/')"></div>
+            <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1600566752355-35792bedcfea?w=800')"></div>
             <div class="project-info">
                 <h2>Outterspace</h2>
                 <p>Creative Direction & Design</p>
@@ -456,7 +597,7 @@
 
         <!-- Project 4: Project Monada -->
         <div class="project-card" onclick="openProject('monada')">
-            <div class="project-image" style="background-image: url('https://poiseonly.github.io/')"></div>
+            <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1583847268964-b28dc8aaec4a?w=800')"></div>
             <div class="project-info">
                 <h2>Project Monada</h2>
                 <p>Experiential Design</p>
@@ -465,7 +606,7 @@
 
         <!-- Project 5: Ikoyi Residence -->
         <div class="project-card" onclick="openProject('ikoyi')">
-            <div class="project-image" style="background-image: url('https://poiseonly.github.io/')"></div>
+            <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1617806118233-18e1de247200?w=800')"></div>
             <div class="project-info">
                 <h2>Ikoyi Residence</h2>
                 <p>Interior Design</p>
@@ -474,7 +615,7 @@
 
         <!-- Project 6: Lagos Penthouse -->
         <div class="project-card" onclick="openProject('penthouse')">
-            <div class="project-image" style="background-image: url('https://poiseonly.github.io/')"></div>
+            <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1600210492486-724fe5c67fb3?w=800')"></div>
             <div class="project-info">
                 <h2>Lagos Penthouse</h2>
                 <p>Interior Design</p>
@@ -482,7 +623,7 @@
         </div>
     </div>
 
-    <!-- Project Modals -->
+    <!-- Project Modals (unchanged but counters fixed) -->
     <div id="atelier-modal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
@@ -501,7 +642,7 @@
             </div>
             <div class="modal-controls">
                 <button class="modal-prev" onclick="navigateGallery('atelier', -1)"><i class="fas fa-chevron-left"></i></button>
-                <span class="modal-counter" id="atelier-counter">1 / 6</span>
+                <span class="modal-counter" id="atelier-counter">1 / 8</span>
                 <button class="modal-next" onclick="navigateGallery('atelier', 1)"><i class="fas fa-chevron-right"></i></button>
             </div>
         </div>
@@ -525,7 +666,7 @@
             </div>
             <div class="modal-controls">
                 <button class="modal-prev" onclick="navigateGallery('fabrics', -1)"><i class="fas fa-chevron-left"></i></button>
-                <span class="modal-counter" id="fabrics-counter">1 / 5</span>
+                <span class="modal-counter" id="fabrics-counter">1 / 8</span>
                 <button class="modal-next" onclick="navigateGallery('fabrics', 1)"><i class="fas fa-chevron-right"></i></button>
             </div>
         </div>
@@ -624,7 +765,6 @@
         <div class="footer-links">
             <a href="index.html">HOME</a>
             <a href="studio.html">STUDIO</a>
-            <a href="founder.html">FOUNDER</a>
             <a href="process.html">OUR PROCESS</a>
             <a href="work.html">PORTFOLIO</a>
             <a href="contact.html">CONTACT</a>
