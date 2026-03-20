@@ -1134,13 +1134,70 @@
             }
         }
 
-        function submitQuestionnaire() {
-            document.getElementById('questionnaireContainer').classList.remove('active');
-            document.getElementById('thankYouMessage').classList.add('active');
-            
-            // Here you would typically send the data to your email
-            // For now, we'll just show the thank you message
+     function submitQuestionnaire() {
+    // Collect all answers
+    let answers = {};
+    
+    // Collect radio button answers
+    for (let i = 1; i <= 13; i++) {
+        const radioName = 'q' + i;
+        const radioSelected = document.querySelector(`input[name="${radioName}"]:checked`);
+        if (radioSelected) {
+            answers[`Question ${i}`] = radioSelected.value;
         }
+        
+        // Collect checkboxes for multiple-choice questions (2, 8, 13)
+        if (i === 2 || i === 8 || i === 13) {
+            const checkboxes = document.querySelectorAll(`input[name="q${i}"]:checked`);
+            if (checkboxes.length > 0) {
+                let checkboxValues = [];
+                checkboxes.forEach(cb => {
+                    checkboxValues.push(cb.value);
+                });
+                answers[`Question ${i}`] = checkboxValues.join(', ');
+            }
+        }
+        
+        // Collect textarea answers
+        const textarea = document.querySelector(`#q${i} textarea`);
+        if (textarea && textarea.value.trim() !== '') {
+            answers[`Question ${i} Notes`] = textarea.value;
+        }
+    }
+    
+    // Format answers for email
+    let emailBody = "New Questionnaire Submission\n\n";
+    emailBody += "==========================\n\n";
+    
+    for (let [key, value] of Object.entries(answers)) {
+        emailBody += `${key}: ${value}\n\n`;
+    }
+    
+    // Send via FormSubmit.co
+    fetch('https://formsubmit.co/ajax/moyorpoise@gmail.com', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+            _subject: "New Design Questionnaire Submission",
+            message: emailBody,
+            _template: 'table'
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Success:', data);
+        // Show thank you message
+        document.getElementById('questionnaireContainer').classList.remove('active');
+        document.getElementById('thankYouMessage').classList.add('active');
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('There was an error submitting. Please try again.');
+    });
+}
 
         function resetQuestionnaire() {
             // Reset to question 1
