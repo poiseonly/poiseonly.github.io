@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>Products | 29avenuedesigns</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: #ffffff;
+            color: #1a1a1a;
+            line-height: 1.6;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 1.2rem;
+            background: #ffffff;
+            border-bottom: 1px solid #f0f0f0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 1.3rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            text-decoration: none;
+            color: #1a1a1a;
+        }
+
+        .menu-icon {
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            left: -100%;
+            width: 85%;
+            height: 100vh;
+            background: #ffffff;
+            z-index: 2000;
+            padding: 2rem 1.5rem;
+            transition: 0.3s ease;
+            box-shadow: 2px 0 20px rgba(0,0,0,0.1);
+            overflow-y: auto;
+        }
+
+        .mobile-menu.active {
+            left: 0;
+        }
+
+        .close-menu {
+            text-align: right;
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+            cursor: pointer;
+        }
+
+        .mobile-menu-links {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .mobile-menu-links a {
+            text-decoration: none;
+            color: #1a1a1a;
+            font-size: 1.2rem;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-bottom: 1px solid #f0f0f0;
+            padding-bottom: 0.8rem;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1500;
+            display: none;
+        }
+
+        .overlay.active {
+            display: block;
+        }
+
+        .desktop-nav {
+            display: none;
+        }
+
+        /* Desktop Navigation with Dropdown */
+        .desktop-nav {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+            position: relative;
+        }
+
+        .desktop-nav > a {
+            text-decoration: none;
+            color: #1a1a1a;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 0.5rem 0;
+            position: relative;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-toggle {
+            text-decoration: none;
+            color: #1a1a1a;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 0.5rem 0;
+            cursor: pointer;
+            background: transparent;
+            border: none;
+            font-family: inherit;
+        }
+
+        .dropdown-toggle i {
+            margin-left: 5px;
+            font-size: 0.8rem;
+            transition: transform 0.3s ease;
+        }
+
+        .dropdown:hover .dropdown-toggle i {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: #ffffff;
+            min-width: 200px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border: 1px solid #f0f0f0;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            padding: 0.5rem 0;
+        }
+
+        .dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-menu a {
+            display: block;
+            padding: 0.8rem 1.5rem;
+            text-decoration: none;
+            color: #1a1a1a;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.2s ease;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .dropdown-menu a:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-menu a:hover {
+            background: #f9f9f9;
+            color: #b89b7b;
+            padding-left: 2rem;
+        }
+
+        .page-header {
+            padding: 2rem 1.5rem 1rem;
+            text-align: center;
+        }
+
+        .page-header h1 {
+            font-size: 2.2rem;
+            font-weight: 300;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-header p {
+            color: #b89b7b;
+            font-style: italic;
+            margin-bottom: 2rem;
+        }
+
+        /* Products Grid */
+        .products-container {
+            padding: 1.5rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .product-card {
+            background: #ffffff;
+            border: 1px solid #f0f0f0;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 250px;
+            background-size: cover;
+            background-position: center;
+            transition: 0.3s;
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-title {
+            font-size: 1.3rem;
+            font-weight: 400;
+            margin-bottom: 0.5rem;
+            color: #1a1a1a;
+        }
+
+        .product-category {
+            color: #b89b7b;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.8rem;
+        }
+
+        .product-description {
+            color: #666;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .product-price {
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: #1a1a1a;
+            margin-bottom: 1rem;
+        }
+
+        .product-price span {
+            font-size: 0.9rem;
+            color: #888;
+            font-weight: 300;
+            margin-left: 0.5rem;
+        }
+
+        .inquiry-btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background: transparent;
+            border: 1px solid #b89b7b;
+            color: #b89b7b;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.8rem;
+            transition: 0.3s;
+            cursor: pointer;
+            width: 100%;
+            text-align: center;
+        }
+
+        .inquiry-btn:hover {
+            background: #b89b7b;
+            color: white;
+        }
+
+        /* Categories Filter */
+        .categories-filter {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .category-btn {
+            padding: 0.5rem 1.5rem;
+            background: transparent;
+            border: 1px solid #e0e0e0;
+            color: #666;
+            cursor: pointer;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: 0.3s;
+        }
+
+        .category-btn:hover,
+        .category-btn.active {
+            background: #b89b7b;
+            border-color: #b89b7b;
+            color: white;
+        }
+
+        .footer {
+            background: #1a1a1a;
+            color: #ffffff;
+            padding: 2.5rem 1.5rem;
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .footer-logo {
+            font-size: 1.8rem;
+            font-weight: 300;
+            margin-bottom: 1rem;
+            color: #ffffff;
+        }
+
+        .footer-email {
+            font-size: 1.1rem;
+            color: #b89b7b;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid #b89b7b;
+            padding-bottom: 5px;
+            width: fit-content;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .footer-links a {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .footer-social {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .footer-social a {
+            color: #ffffff;
+            font-size: 1.3rem;
+        }
+
+        .footer-copyright {
+            font-size: 0.8rem;
+            color: #888;
+            margin-top: 2rem;
+        }
+
+        @media (min-width: 768px) {
+            .navbar {
+                padding: 1.5rem 3rem;
+            }
+            
+            .menu-icon {
+                display: none;
+            }
+            
+            .mobile-menu, .overlay {
+                display: none;
+            }
+            
+            .desktop-nav {
+                display: flex;
+                gap: 2rem;
+            }
+            
+            .products-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 2rem;
+            }
+            
+            .product-image {
+                height: 300px;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .desktop-nav {
+                display: none;
+            }
+            
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="index.html" class="logo">29avenuedesigns</a>
+        <div class="menu-icon" onclick="openMenu()"><i class="fas fa-bars"></i></div>
+        <div class="desktop-nav">
+            <a href="index.html">HOME</a>
+            <div class="dropdown">
+                <button class="dropdown-toggle">STUDIO <i class="fas fa-chevron-down"></i></button>
+                <div class="dropdown-menu">
+                    <a href="studio.html">STUDIO</a>
+                    <a href="products.html" class="active">PRODUCT</a>
+                </div>
+            </div>
+            <a href="process.html">OUR PROCESS</a>
+            <a href="work.html">PORTFOLIO</a>
+            <a href="contact.html">CONTACT</a>
+        </div>
+    </nav>
+
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="close-menu" onclick="closeMenu()"><i class="fas fa-times"></i></div>
+        <div class="mobile-menu-links">
+            <a href="index.html" onclick="closeMenu()">HOME</a>
+            <a href="studio.html" onclick="closeMenu()">STUDIO</a>
+            <a href="products.html" onclick="closeMenu()">PRODUCT</a>
+            <a href="process.html" onclick="closeMenu()">OUR PROCESS</a>
+            <a href="work.html" onclick="closeMenu()">PORTFOLIO</a>
+            <a href="contact.html" onclick="closeMenu()">CONTACT</a>
+        </div>
+    </div>
+    <div class="overlay" id="overlay" onclick="closeMenu()"></div>
+
+    <div class="page-header">
+        <h1>PRODUCTS</h1>
+        <p>curated objects for intentional living</p>
+    </div>
+
+    <div class="products-container">
+        <!-- Category Filter -->
+        <div class="categories-filter">
+            <button class="category-btn active" onclick="filterProducts('all')">ALL</button>
+            <button class="category-btn" onclick="filterProducts('lighting')">LIGHTING</button>
+            <button class="category-btn" onclick="filterProducts('furniture')">FURNITURE</button>
+            <button class="category-btn" onclick="filterProducts('textiles')">TEXTILES</button>
+            <button class="category-btn" onclick="filterProducts('objects')">OBJECTS</button>
+        </div>
+
+        <!-- Products Grid -->
+        <div class="products-grid" id="productsGrid">
+            <!-- Product 1 - Lighting -->
+            <div class="product-card" data-category="lighting">
+                <div class="product-image" style="background-image: url('https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?w=800')"></div>
+                <div class="product-info">
+                    <h3 class="product-title">Arc Floor Lamp</h3>
+                    <p class="product-category">Lighting</p>
+                    <p class="product-description">Brushed brass finish with marble base. Adjustable arc for perfect positioning.</p>
+                    <p class="product-price">₦285,000 <span>+ shipping</span></p>
+                    <button class="inquiry-btn" onclick="inquireAboutProduct('Arc Floor Lamp')">INQUIRE</button>
+                </div>
+            </div>
+
+            <!-- Product 2 - Furniture -->
+            <div class="product-card" data-category="furniture">
+                <div class="product-image" style="background-image: url('https://images.unsplash.com/photo-1540575861501-9673c02b6c3b?w=800')"></div>
+                <div class="product-info">
+                    <h3 class="product-title">Boucle Armchair</h3>
+                    <p class="product-category">Furniture</p>
+                    <p class="product-description">Plush boucle upholstery on solid oak frame. Deep seating for ultimate comfort.</p>
+                    <p class="product-price">₦420,000 <span>+ shipping</span></p>
+                    <button class="inquiry-btn" onclick="inquireAboutProduct('Boucle Armchair')">INQUIRE</button>
+                </div>
+            </div>
+
+            <!-- Product 3 - Lighting -->
+            <div class="product-card" data-category="lighting">
+                <div class="product-image" style="background-image: url('https://images.unsplash.com/photo-1540932239986-30128078f3c5?w=800')"></div>
+                <div class="product-info">
+                    <h3 class="product-title">Glass Pendant Trio</h3>
+                    <p class="product-category">Lighting</p>
+                    <p class="product-description">Hand-blown glass pendants in amber, smoke, and clear. Adjustable drop length.</p>
+                    <p class="product-price">₦350,000 <span>set of 3</span></p>
+                    <button class="inquiry-btn" onclick="inquireAboutProduct('Glass Pendant Trio')">INQUIRE</button>
+                </div>
+            </div>
+
+            <!-- Product 4 - Textiles -->
+            <div class="product-card" data-category="textiles">
+                <div class="product-image" style="background-image: url('https://images.unsplash.com/photo-1584103936595-7f6930d8edb3?w=800')"></div>
+                <div class="product-info">
+                    <h3 class="product-title">Wool Blend Throw</h3>
+                    <p class="product-category">Textiles</p>
+                    <p class="product-description">Handwoven in Nigeria. Available in terracotta, indigo, and natural.</p>
+                    <p class="product-price">₦85,000</p>
+                    <button class="inquiry-btn" onclick="inquireAboutProduct('Wool Blend Throw')">INQUIRE</button>
+                </div>
+            </div>
+
+            <!-- Product 5 - Objects -->
+            <div class="product-card" data-category="objects">
+                <div class="product-image" style="background-image: url('https://images.unsplash.com/photo-1578500494198-246f612d3b3d?w=800')"></div>
+                <div class="product-info">
+                    <h3 class="product-title">Ceramic Vase Set</h3>
+                    <p class="product-category">Objects</p>
+                    <p class="product-description">Set of 3 hand-thrown ceramic vases. Glazed in matte black and natural clay.</p>
+                    <p class="product-price">₦120,000 <span>set of 3</span></p>
+                    <button class="inquiry-btn" onclick="inquireAboutProduct('Ceramic Vase Set')">INQUIRE</button>
+                </div>
+            </div>
+
+            <!-- Product 6 - Furniture -->
+            <div class="product-card" data-category="furniture">
+                <div class="product-image" style="background-image: url('https://images.unsplash.com/photo-1532378145720-9c6e07d1f431?w=800')"></div>
+                <div class="product-info">
+                    <h3 class="product-title">Oak Coffee Table</h3>
+                    <p class="product-category">Furniture</p>
+                    <p class="product-description">Solid oak with live edge detail. Custom sizes available upon request.</p>
+                    <p class="product-price">₦550,000</p>
+                    <button class="inquiry-btn" onclick="inquireAboutProduct('Oak Coffee Table')">INQUIRE</button>
+                </div>
+            </div>
+
+            <!-- Product 7 - Lighting -->
+            <div class="product-card" data-category="lighting">
+                <div class="product-image" style="background-image: url('https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=800')"></div>
+                <div class="product-info">
+                    <h3 class="product-title">Brass Table Lamp</h3>
+                    <p class="product-category">Lighting</p>
+                    <p class="product-description">Solid brass base with linen shade. Dimmer switch included.</p>
+                    <p class="product-price">₦195,000</p>
+                    <button class="inquiry-btn" onclick="inquireAboutProduct('Brass Table Lamp')">INQUIRE</button>
+                </div>
+            </div>
+
+            <!-- Product 8 - Textiles -->
+            <div class="product-card" data-category="textiles">
+                <div class="product-image" style="background-image: url('https://images.unsplash.com/photo-1600166898405-da9535204843?w=800')"></div>
+                <div class="product-info">
+                    <h3 class="product-title">Linen Cushion Covers</h3>
+                    <p class="product-category">Textiles</p>
+                    <p class="product-description">European flax linen. Set of 2 in various earth tones.</p>
+                    <p class="product-price">₦45,000 <span>set of 2</span></p>
+                    <button class="inquiry-btn" onclick="inquireAboutProduct('Linen Cushion Covers')">INQUIRE</button>
+                </div>
+            </div>
+
+            <!-- Product 9 - Objects -->
+            <div class="product-card" data-category="objects">
+                <div class="product-image" style="background-image: url('https://images.unsplash.com/photo-1618219904412-915f8b8c3caa?w=800')"></div>
+                <div class="product-info">
+                    <h3 class="product-title">Mushroom Lamp</h3>
+                    <p class="product-category">Objects</p>
+                    <p class="product-description">Sculptural ceramic lamp. Soft ambient glow with touch dimmer.</p>
+                    <p class="product-price">₦165,000</p>
+                    <button class="inquiry-btn" onclick="inquireAboutProduct('Mushroom Lamp')">INQUIRE</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-logo">29avenuedesigns</div>
+        <a href="mailto:moyorpoise@gmail.com" class="footer-email">moyorpoise@gmail.com</a>
+        <p style="margin-bottom: 1rem;">Lagos, Nigeria</p>
+        <div class="footer-links">
+            <a href="index.html">HOME</a>
+            <a href="studio.html">STUDIO</a>
+            <a href="products.html">PRODUCT</a>
+            <a href="process.html">OUR PROCESS</a>
+            <a href="work.html">PORTFOLIO</a>
+            <a href="contact.html">CONTACT</a>
+        </div>
+        <div class="footer-social">
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-pinterest"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+        <div class="footer-copyright">
+            ©️ 2026 29avenuedesigns STUDIO. ALL RIGHTS RESERVED.
+        </div>
+    </footer>
+
+    <script>
+        function openMenu() {
+            document.getElementById('mobileMenu').classList.add('active');
+            document.getElementById('overlay').classList.add('active');
+        }
+        
+        function closeMenu() {
+            document.getElementById('mobileMenu').classList.remove('active');
+            document.getElementById('overlay').classList.remove('active');
+        }
+
+        // Product Filter Function
+        function filterProducts(category) {
+            const products = document.querySelectorAll('.product-card');
+            const buttons = document.querySelectorAll('.category-btn');
+            
+            // Update active button
+            buttons.forEach(btn => {
+                if (btn.textContent.trim().toLowerCase() === category || 
+                    (category === 'all' && btn.textContent.trim() === 'ALL')) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+            
+            // Filter products
+            products.forEach(product => {
+                if (category === 'all' || product.dataset.category === category) {
+                    product.style.display = 'block';
+                } else {
+                    product.style.display = 'none';
+                }
+            });
+        }
+
+        // Product Inquiry Function
+        function inquireAboutProduct(productName) {
+            // Encode the product name for the URL
+            const encodedProduct = encodeURIComponent(productName);
+            
+            // Redirect to contact page with product in subject
+            window.location.href = `contact.html?subject=I%27m%20interested%20in%20the%20${encodedProduct}`;
+        }
+
+        // Check for product parameter in URL on contact page
+        (function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const subject = urlParams.get('subject');
+            if (subject && window.location.pathname.includes('contact.html')) {
+                // If on contact page, pre-fill the subject
+                setTimeout(() => {
+                    const subjectField = document.querySelector('input[name="Subject"]');
+                    if (subjectField) {
+                        subjectField.value = subject;
+                    }
+                }, 500);
+            }
+        })();
+    </script>
+</body>
+</html>
