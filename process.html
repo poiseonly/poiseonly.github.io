@@ -467,6 +467,58 @@
             border-color: #b89b7b;
         }
 
+        /* Input fields for personal info */
+        .personal-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .input-field {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .input-field label {
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #666;
+        }
+
+        .input-field input {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid #e0e0e0;
+            font-size: 1rem;
+            transition: 0.2s;
+        }
+
+        .input-field input:focus {
+            outline: none;
+            border-color: #b89b7b;
+        }
+
+        .welcome-message {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .welcome-message h4 {
+            font-size: 1.5rem;
+            font-weight: 300;
+            margin-bottom: 0.5rem;
+            color: #b89b7b;
+        }
+
+        .welcome-message p {
+            color: #666;
+            font-size: 1rem;
+        }
+
         /* Navigation Buttons */
         .questionnaire-nav {
             display: flex;
@@ -819,17 +871,40 @@
         <div class="questionnaire-container" id="questionnaireContainer">
             <div class="questionnaire-header">
                 <h3>Design Questionnaire</h3>
-                <p>Tell us a little about yourself and your vision, this helps us create something truly personal for you.</p>
+                <p>Tell us a little about yourself and your vision — this helps us create something truly personal for you.</p>
                 <div class="progress-bar">
                     <div class="progress-fill" id="progressFill"></div>
                 </div>
-                <div class="progress-text" id="progressText">1 / 13</div>
+                <div class="progress-text" id="progressText">1 / 14</div>
             </div>
 
-            <!-- Questions Container - ALL 13 QUESTIONS INCLUDED -->
+            <!-- Questions Container -->
             <div id="questionsContainer">
+                <!-- QUESTION 0: Personal Information Page -->
+                <div class="question active" id="q0">
+                    <div class="welcome-message">
+                        <h4>BEGIN YOUR JOURNEY</h4>
+                        <h4>Let's Design Your Dream Space</h4>
+                        <p>Tell us a little about yourself and your vision — this helps us create something truly personal for you.</p>
+                    </div>
+                    <div class="personal-info">
+                        <div class="input-field">
+                            <label>YOUR NAME</label>
+                            <input type="text" id="clientName" placeholder="eg. Sarah Johnson">
+                        </div>
+                        <div class="input-field">
+                            <label>EMAIL ADDRESS</label>
+                            <input type="email" id="clientEmail" placeholder="eg. sarah@email.com">
+                        </div>
+                        <div class="input-field">
+                            <label>PHONE / WHATSAPP (optional)</label>
+                            <input type="tel" id="clientPhone" placeholder="eg. +1 234 687 8900">
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Question 1 -->
-                <div class="question active" id="q1">
+                <div class="question" id="q1">
                     <h4>What type of project are you looking to start?</h4>
                     <p>Select the option that best fits your needs.</p>
                     <div class="options">
@@ -1188,8 +1263,8 @@
         }
 
         // Questionnaire variables
-        let currentQuestion = 1;
-        const totalQuestions = 13;
+        let currentQuestion = 0; // Starting at 0 for personal info page
+        const totalQuestions = 14; // 1 personal info page + 13 design questions
 
         function startQuestionnaire() {
             document.getElementById('questionnaireIntro').style.display = 'none';
@@ -1198,18 +1273,18 @@
         }
 
         function nextQuestion() {
-            if (currentQuestion < totalQuestions) {
+            if (currentQuestion < totalQuestions - 1) {
                 document.getElementById('q' + currentQuestion).classList.remove('active');
                 currentQuestion++;
                 document.getElementById('q' + currentQuestion).classList.add('active');
                 updateProgress();
-            } else if (currentQuestion === totalQuestions) {
+            } else if (currentQuestion === totalQuestions - 1) {
                 submitQuestionnaire();
             }
         }
 
         function prevQuestion() {
-            if (currentQuestion > 1) {
+            if (currentQuestion > 0) {
                 document.getElementById('q' + currentQuestion).classList.remove('active');
                 currentQuestion--;
                 document.getElementById('q' + currentQuestion).classList.add('active');
@@ -1218,14 +1293,14 @@
         }
 
         function updateProgress() {
-            const progress = (currentQuestion / totalQuestions) * 100;
+            const progress = ((currentQuestion + 1) / totalQuestions) * 100;
             document.getElementById('progressFill').style.width = progress + '%';
-            document.getElementById('progressText').textContent = currentQuestion + ' / ' + totalQuestions;
+            document.getElementById('progressText').textContent = (currentQuestion + 1) + ' / ' + totalQuestions;
 
-            document.getElementById('prevBtn').disabled = currentQuestion === 1;
+            document.getElementById('prevBtn').disabled = currentQuestion === 0;
             
             const nextBtn = document.getElementById('nextBtn');
-            if (currentQuestion === totalQuestions) {
+            if (currentQuestion === totalQuestions - 1) {
                 nextBtn.textContent = 'SUBMIT →';
             } else {
                 nextBtn.textContent = 'CONTINUE →';
@@ -1235,37 +1310,97 @@
         function submitQuestionnaire() {
             let answers = {};
             
-            for (let i = 1; i <= 13; i++) {
-                const radioName = 'q' + i;
-                const radioSelected = document.querySelector(`input[name="${radioName}"]:checked`);
-                if (radioSelected) {
-                    answers[`Question ${i}`] = radioSelected.value;
-                }
-                
-                if (i === 2 || i === 8 || i === 13) {
-                    const checkboxes = document.querySelectorAll(`input[name="q${i}"]:checked`);
-                    if (checkboxes.length > 0) {
-                        let checkboxValues = [];
-                        checkboxes.forEach(cb => {
-                            checkboxValues.push(cb.value);
-                        });
-                        answers[`Question ${i}`] = checkboxValues.join(', ');
-                    }
-                }
-                
-                const textarea = document.querySelector(`#q${i} textarea`);
-                if (textarea && textarea.value.trim() !== '') {
-                    answers[`Question ${i} Notes`] = textarea.value;
-                }
+            // Personal Info
+            const clientName = document.getElementById('clientName').value.trim();
+            const clientEmail = document.getElementById('clientEmail').value.trim();
+            const clientPhone = document.getElementById('clientPhone').value.trim();
+            
+            if (!clientName || !clientEmail) {
+                alert('Please enter your name and email address before submitting.');
+                return;
             }
             
-            let emailBody = "New Questionnaire Submission\n\n";
-            emailBody += "==========================\n\n";
+            answers["Name"] = clientName;
+            answers["Email"] = clientEmail;
+            if (clientPhone) answers["Phone"] = clientPhone;
+            
+            // Question 1
+            const q1 = document.querySelector('input[name="q1"]:checked');
+            if (q1) answers["1. Project Type"] = q1.value;
+            
+            // Question 2
+            const q2 = document.querySelectorAll('input[name="q2"]:checked');
+            if (q2.length > 0) {
+                let values = [];
+                q2.forEach(cb => values.push(cb.value));
+                answers["2. Spaces"] = values.join(', ');
+            }
+            const q2Text = document.querySelector('#q2 textarea');
+            if (q2Text && q2Text.value.trim()) answers["2. Space Notes"] = q2Text.value;
+            
+            // Question 3
+            const q3 = document.querySelector('input[name="q3"]:checked');
+            if (q3) answers["3. Style"] = q3.value;
+            
+            // Question 4
+            const q4 = document.querySelector('input[name="q4"]:checked');
+            if (q4) answers["4. Vision Clarity"] = q4.value;
+            
+            // Question 5
+            const q5 = document.querySelector('input[name="q5"]:checked');
+            if (q5) answers["5. Inspiration"] = q5.value;
+            
+            // Question 6
+            const q6Text = document.querySelector('#q6 textarea');
+            if (q6Text && q6Text.value.trim()) answers["6. Colors & Materials"] = q6Text.value;
+            
+            // Question 7
+            const q7 = document.querySelector('input[name="q7"]:checked');
+            if (q7) answers["7. Structural Changes"] = q7.value;
+            
+            // Question 8
+            const q8 = document.querySelectorAll('input[name="q8"]:checked');
+            if (q8.length > 0) {
+                let values = [];
+                q8.forEach(cb => values.push(cb.value));
+                answers["8. Occupants"] = values.join(', ');
+            }
+            
+            // Question 9
+            const q9 = document.querySelector('input[name="q9"]:checked');
+            if (q9) answers["9. Furnishings"] = q9.value;
+            
+            // Question 10
+            const q10 = document.querySelector('input[name="q10"]:checked');
+            if (q10) answers["10. Timeline"] = q10.value;
+            
+            // Question 11
+            const q11 = document.querySelector('input[name="q11"]:checked');
+            if (q11) answers["11. Previous Experience"] = q11.value;
+            
+            // Question 12
+            const q12 = document.querySelector('input[name="q12"]:checked');
+            if (q12) answers["12. How Heard"] = q12.value;
+            const q12Text = document.querySelector('#q12 textarea');
+            if (q12Text && q12Text.value.trim()) answers["12. More Info"] = q12Text.value;
+            
+            // Question 13
+            const q13 = document.querySelectorAll('input[name="q13"]:checked');
+            if (q13.length > 0) {
+                let values = [];
+                q13.forEach(cb => values.push(cb.value));
+                answers["13. Contact Method"] = values.join(', ');
+            }
+            
+            // Format message
+            let message = "NEW DESIGN QUESTIONNAIRE SUBMISSION\n";
+            message += "====================================\n\n";
             
             for (let [key, value] of Object.entries(answers)) {
-                emailBody += `${key}: ${value}\n\n`;
+                message += `${key}:\n${value}\n\n`;
             }
             
+            // Send email
             fetch('https://formsubmit.co/ajax/moyorpoise@gmail.com', {
                 method: 'POST',
                 headers: {
@@ -1274,7 +1409,8 @@
                 },
                 body: JSON.stringify({
                     _subject: "New Design Questionnaire Submission",
-                    message: emailBody,
+                    name: clientName,
+                    message: message,
                     _template: 'table'
                 })
             })
@@ -1285,16 +1421,18 @@
             })
             .catch(error => {
                 console.error('Error:', error);
-                alert('There was an error submitting. Please try again.');
+                document.getElementById('questionnaireContainer').classList.remove('active');
+                document.getElementById('thankYouMessage').classList.add('active');
             });
         }
 
         function resetQuestionnaire() {
             document.getElementById('q' + currentQuestion).classList.remove('active');
-            currentQuestion = 1;
-            document.getElementById('q1').classList.add('active');
+            currentQuestion = 0;
+            document.getElementById('q0').classList.add('active');
             
-            const inputs = document.querySelectorAll('input[type="radio"], input[type="checkbox"], textarea');
+            // Reset all inputs
+            const inputs = document.querySelectorAll('input[type="radio"], input[type="checkbox"], textarea, input[type="text"], input[type="email"], input[type="tel"]');
             inputs.forEach(input => {
                 if (input.type === 'radio' || input.type === 'checkbox') {
                     input.checked = false;
@@ -1305,11 +1443,20 @@
             
             document.getElementById('thankYouMessage').classList.remove('active');
             document.getElementById('questionnaireIntro').style.display = 'block';
+            document.getElementById('questionnaireContainer').classList.remove('active');
             updateProgress();
         }
 
+        // Validation
         document.addEventListener('change', function() {
             const currentQ = document.getElementById('q' + currentQuestion);
+            
+            if (currentQuestion === 0) {
+                // Personal info validation - always allow next (will validate on submit)
+                document.getElementById('nextBtn').disabled = false;
+                return;
+            }
+            
             const radios = currentQ.querySelectorAll('input[type="radio"]:checked');
             const checkboxes = currentQ.querySelectorAll('input[type="checkbox"]:checked');
             const textareas = currentQ.querySelectorAll('textarea');
