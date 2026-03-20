@@ -140,44 +140,19 @@
             color: #4a4a4a;
         }
 
-        /* Image Slideshow */
-        .slideshow-container {
+        /* Video Section - Replaces slideshow */
+        .video-container {
             position: relative;
+            width: 100%;
             margin: 2rem 0;
+            overflow: hidden;
         }
 
-        .slide {
-            display: none;
-        }
-
-        .slide.active {
-            display: block;
-        }
-
-        .slide img {
+        .studio-video {
             width: 100%;
             height: 250px;
             object-fit: cover;
-        }
-
-        .prev, .next {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(255,255,255,0.8);
-            color: #1a1a1a;
-            padding: 1rem;
-            cursor: pointer;
-            font-size: 1.2rem;
-            border: none;
-        }
-
-        .prev {
-            left: 0;
-        }
-
-        .next {
-            right: 0;
+            display: block;
         }
 
         /* Footer */
@@ -279,7 +254,7 @@
                 height: 500px;
             }
             
-            .slide img {
+            .studio-video {
                 height: 400px;
             }
         }
@@ -320,32 +295,19 @@
     <div class="studio-content">
         <div class="studio-image"></div>
         <div class="studio-text">
-            <p>29avenuedesigns is a full-spectrum interior design studio based in Lagos, Nigeria, rooted in the belief that a well-designed space doesn’t just look good, it feels like something. It feels like you.</p>
+            <p>29avenuedesigns is a full-spectrum interior design studio based in Lagos, Nigeria, rooted in the belief that a well-designed space doesn't just look good, it feels like something. It feels like you.</p>
             
             <p>We design with intention. Every material chosen, every corner considered, every detail deliberate. Because the spaces you live and work in shape how you feel every single day, and that is not something we take lightly.</p>
             
-            <p>At 29avenuedesigns, we go beyond aesthetics. We take time to understand who you are, how you move through a space, and what you need to truly feel at home in it. We listen first. Then we create. And what we create is an experience that is entirely, specifically yours.
-No two spaces are the same. Neither are the people in them.</p>
+            <p>At 29avenuedesigns, we go beyond aesthetics. We take time to understand who you are, how you move through a space, and what you need to truly feel at home in it. We listen first. Then we create. And what we create is an experience that is entirely, specifically yours. No two spaces are the same. Neither are the people in them.</p>
         </div>
 
-        <!-- Slideshow -->
-        <h2 style="margin: 2rem 0 1rem; font-weight: 300;">Studio Spaces</h2>
-        <div class="slideshow-container">
-            <div class="slide active">
-                <img src="https://poiseonly.github.io/images/ABA03F76-E5F0-4C0B-9D76-8D5719B46F5D.CR2" alt="Studio 1">
-            </div>
-            <div class="slide">
-                <img src="https://poiseonly.github.io/images/IMG_9366.JPG.jpeg" alt="Studio 2">
-            </div>
-            <div class="slide">
-                <img src="https://poiseonly.github.io/images/IMG_3275.JPG.jpeg" alt="Studio 3">
-            </div>
-            <div class="slide">
-                <img src="https://poiseonly.github.io/images/poise1.jpeg" alt="Studio 4">
-            </div>
-            
-            <button class="prev" onclick="changeSlide(-1)"><i class="fas fa-chevron-left"></i></button>
-            <button class="next" onclick="changeSlide(1)"><i class="fas fa-chevron-right"></i></button>
+        <!-- Video Section - Looping video instead of slideshow -->
+        <div class="video-container">
+            <video class="studio-video" autoplay muted loop playsinline>
+                <source src="https://poiseonly.github.io/videos/studio-background.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
         </div>
     </div>
 
@@ -358,7 +320,7 @@ No two spaces are the same. Neither are the people in them.</p>
             <a href="studio.html">STUDIO</a>
             <a href="founder.html">FOUNDER</a>
             <a href="process.html">OUR PROCESS</a>
-            <a href="work.html">POORTFOLIO</a>
+            <a href="work.html">PORTFOLIO</a>
             <a href="contact.html">CONTACT</a>
         </div>
         <div class="footer-social">
@@ -367,7 +329,7 @@ No two spaces are the same. Neither are the people in them.</p>
             <a href="#"><i class="fab fa-linkedin-in"></i></a>
         </div>
         <div class="footer-copyright">
-            © 2026 29avenuedesigns STUDIO. ALL RIGHTS RESERVED.
+            ©️ 2026 29avenuedesigns STUDIO. ALL RIGHTS RESERVED.
         </div>
     </footer>
 
@@ -380,19 +342,6 @@ No two spaces are the same. Neither are the people in them.</p>
         function closeMenu() {
             document.getElementById('mobileMenu').classList.remove('active');
             document.getElementById('overlay').classList.remove('active');
-        }
-        
-        let slideIndex = 0;
-        
-        function changeSlide(n) {
-            const slides = document.querySelectorAll('.slide');
-            slides[slideIndex].classList.remove('active');
-            
-            slideIndex = slideIndex + n;
-            if (slideIndex < 0) slideIndex = slides.length - 1;
-            if (slideIndex >= slides.length) slideIndex = 0;
-            
-            slides[slideIndex].classList.add('active');
         }
     </script>
 </body>
