@@ -298,14 +298,13 @@
             z-index: 1;
         }
 
-        /* NEW CREATIVE PROJECTS SECTION - FIXED SPACING */
+        /* NEW CREATIVE PROJECTS SECTION */
         .projects-container {
             max-width: 1400px;
             margin: 0 auto 5rem;
             padding: 0 1.5rem;
         }
 
-        /* Masonry-style grid with consistent gaps */
         .creative-grid {
             display: grid;
             grid-template-columns: repeat(1, 1fr);
@@ -383,7 +382,6 @@
             transform: translateY(0);
         }
 
-        /* Tablet layout - with proper spacing */
         @media (min-width: 768px) {
             .creative-grid {
                 grid-template-columns: repeat(2, 1fr);
@@ -429,54 +427,30 @@
             }
         }
 
-        /* Desktop layout - with consistent spacing between ALL items */
         @media (min-width: 1024px) {
             .creative-grid {
                 grid-template-columns: repeat(3, 1fr);
                 gap: 2rem;
             }
             
-            /* Reset all transforms to avoid overlapping */
             .creative-item {
                 transform: translateY(0) !important;
                 margin-bottom: 0;
             }
             
-            /* Different heights for visual interest, but with proper spacing */
             .creative-item .creative-image {
                 height: 450px;
             }
             
-            /* Make some items taller for visual interest */
-            .creative-item:nth-child(1) .creative-image {
-                height: 500px;
-            }
-            
-            .creative-item:nth-child(2) .creative-image {
-                height: 420px;
-                margin-top: 30px;
-            }
-            
-            .creative-item:nth-child(3) .creative-image {
-                height: 480px;
-            }
-            
-            .creative-item:nth-child(4) .creative-image {
-                height: 380px;
-                margin-top: 40px;
-            }
-            
-            .creative-item:nth-child(5) .creative-image {
-                height: 520px;
-            }
-            
-            .creative-item:nth-child(6) .creative-image {
-                height: 440px;
-                margin-top: 20px;
-            }
+            .creative-item:nth-child(1) .creative-image { height: 500px; }
+            .creative-item:nth-child(2) .creative-image { height: 420px; margin-top: 30px; }
+            .creative-item:nth-child(3) .creative-image { height: 480px; }
+            .creative-item:nth-child(4) .creative-image { height: 380px; margin-top: 40px; }
+            .creative-item:nth-child(5) .creative-image { height: 520px; }
+            .creative-item:nth-child(6) .creative-image { height: 440px; margin-top: 20px; }
         }
 
-        /* Modal for Project Gallery - ENHANCED */
+        /* MODERNIZED MODAL - CINEMATIC EXPERIENCE */
         .modal {
             display: none;
             position: fixed;
@@ -484,123 +458,266 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.98);
+            background: rgba(0, 0, 0, 0.95);
             z-index: 3000;
-            overflow-y: auto;
+            backdrop-filter: blur(20px);
+            opacity: 0;
+            transition: opacity 0.4s ease;
         }
 
         .modal.active {
-            display: block;
+            display: flex;
+            opacity: 1;
         }
 
         .modal-content {
-            padding: 2rem 1.5rem;
-            color: white;
-            min-height: 100vh;
+            position: relative;
+            width: 100%;
+            height: 100%;
             display: flex;
             flex-direction: column;
-        }
-
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
-            margin-bottom: 2rem;
-            position: sticky;
-            top: 0;
-            background: rgba(0,0,0,0.95);
-            padding: 1rem 0;
-            z-index: 10;
+            padding: 2rem;
         }
 
-        .modal-header h2 {
-            font-size: 2rem;
-            font-weight: 300;
-            color: white;
-            letter-spacing: 2px;
-        }
-
+        /* Close Button - Minimal & Elegant */
         .close-modal {
-            font-size: 2.5rem;
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
             cursor: pointer;
+            z-index: 3100;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .close-modal i {
+            font-size: 1.5rem;
             color: white;
-            transition: 0.3s;
+            transition: transform 0.3s ease;
         }
 
         .close-modal:hover {
-            color: #b89b7b;
+            background: rgba(255, 255, 255, 0.2);
             transform: rotate(90deg);
+            border-color: #b89b7b;
         }
 
-        .modal-gallery {
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-            align-items: center;
-            justify-content: center;
-            flex: 1;
+        .close-modal:hover i {
+            color: #b89b7b;
         }
 
-        .modal-gallery img {
+        /* Project Title in Modal */
+        .modal-project-title {
+            position: fixed;
+            bottom: 2rem;
+            left: 2rem;
+            z-index: 3100;
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 300;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            border-left: 3px solid #b89b7b;
+        }
+
+        .modal-project-title span {
+            color: #b89b7b;
+            font-size: 0.8rem;
+            margin-right: 0.5rem;
+        }
+
+        /* Main Image Container */
+        .image-container {
+            position: relative;
             width: 100%;
-            max-width: 1000px;
+            max-width: 1200px;
             height: auto;
             max-height: 80vh;
-            object-fit: contain;
-            cursor: pointer;
-            border-radius: 8px;
-            transition: transform 0.3s ease;
-            margin: 0 auto;
-        }
-
-        .modal-gallery img:hover {
-            transform: scale(1.02);
-        }
-
-        .modal-controls {
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 2rem;
-            margin: 2rem 0;
-            position: sticky;
-            bottom: 2rem;
-            z-index: 10;
+            overflow: hidden;
+            border-radius: 0;
         }
 
-        .modal-prev,
-        .modal-next {
-            background: rgba(255,255,255,0.15);
+        .main-image {
+            width: auto;
+            max-width: 100%;
+            max-height: 80vh;
+            object-fit: contain;
+            transition: transform 0.3s ease;
+            cursor: zoom-in;
+        }
+
+        /* Navigation Arrows - Sleek & Modern */
+        .nav-arrow {
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 3100;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .nav-arrow:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-50%) scale(1.1);
+            border-color: #b89b7b;
+        }
+
+        .nav-arrow i {
+            font-size: 1.5rem;
             color: white;
-            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        .prev-arrow {
+            left: 2rem;
+        }
+
+        .next-arrow {
+            right: 2rem;
+        }
+
+        /* Thumbnail Strip - Modern Gallery Preview */
+        .thumbnail-strip {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            display: flex;
+            gap: 0.8rem;
+            z-index: 3100;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            padding: 0.8rem;
+            border-radius: 60px;
+            max-width: 50%;
+            overflow-x: auto;
+            scrollbar-width: thin;
+        }
+
+        .thumbnail-strip::-webkit-scrollbar {
+            height: 3px;
+        }
+
+        .thumbnail-strip::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+
+        .thumbnail-strip::-webkit-scrollbar-thumb {
+            background: #b89b7b;
+            border-radius: 10px;
+        }
+
+        .thumbnail {
             width: 60px;
             height: 60px;
-            border-radius: 50%;
-            font-size: 1.8rem;
+            object-fit: cover;
             cursor: pointer;
-            transition: 0.3s;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            opacity: 0.6;
+            border: 2px solid transparent;
+        }
+
+        .thumbnail.active {
+            opacity: 1;
+            border-color: #b89b7b;
+            transform: scale(1.05);
+        }
+
+        .thumbnail:hover {
+            opacity: 1;
+            transform: scale(1.05);
+        }
+
+        /* Counter Badge */
+        .counter-badge {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            z-index: 3100;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            padding: 0.6rem 1.2rem;
+            border-radius: 50px;
+            color: white;
+            font-size: 0.9rem;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        .counter-badge span {
+            color: #b89b7b;
+            font-weight: 500;
+        }
+
+        /* Fullscreen Image View */
+        .fullscreen-view {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.98);
+            z-index: 3200;
+            justify-content: center;
+            align-items: center;
+            cursor: zoom-out;
+        }
+
+        .fullscreen-view.active {
+            display: flex;
+        }
+
+        .fullscreen-image {
+            max-width: 95%;
+            max-height: 95%;
+            object-fit: contain;
+        }
+
+        .close-fullscreen {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
             display: flex;
             align-items: center;
             justify-content: center;
-            backdrop-filter: blur(5px);
+            cursor: pointer;
+            transition: 0.3s;
         }
 
-        .modal-prev:hover,
-        .modal-next:hover {
-            background: #b89b7b;
-            border-color: #b89b7b;
-            transform: scale(1.1);
-        }
-
-        .modal-counter {
-            color: #fff;
-            font-size: 1.1rem;
-            text-align: center;
-            margin-top: 1rem;
-            padding: 0.5rem 1rem;
-            background: rgba(0,0,0,0.5);
-            border-radius: 30px;
-            display: inline-block;
+        .close-fullscreen i {
+            font-size: 1.5rem;
+            color: white;
         }
 
         .footer {
@@ -700,10 +817,6 @@
             .founder-image {
                 height: 450px;
             }
-            
-            .modal-gallery img {
-                max-width: 900px;
-            }
         }
 
         @media (max-width: 767px) {
@@ -725,6 +838,40 @@
             
             .creative-item:nth-child(even) {
                 transform: translateY(10px);
+            }
+            
+            .thumbnail-strip {
+                display: none;
+            }
+            
+            .modal-project-title {
+                bottom: 1rem;
+                left: 1rem;
+                font-size: 0.9rem;
+                padding: 0.5rem 1rem;
+            }
+            
+            .counter-badge {
+                top: 1rem;
+                left: 1rem;
+                font-size: 0.8rem;
+            }
+            
+            .nav-arrow {
+                width: 40px;
+                height: 40px;
+            }
+            
+            .nav-arrow i {
+                font-size: 1rem;
+            }
+            
+            .prev-arrow {
+                left: 0.5rem;
+            }
+            
+            .next-arrow {
+                right: 0.5rem;
             }
         }
     </style>
@@ -766,7 +913,7 @@
         <p>featured projects</p>
     </div>
 
-    <!-- FOUNDER FEATURE SECTION - UNCHANGED -->
+    <!-- FOUNDER FEATURE SECTION -->
     <div class="founder-feature">
         <div class="founder-card">
             <div class="founder-image"></div>
@@ -785,15 +932,12 @@
         </div>
     </div>
 
-    <!-- Elegant divider between Founder and Projects -->
     <div class="section-divider">
         <span>SELECTED WORKS</span>
     </div>
 
-    <!-- NEW CREATIVE PROJECTS SECTION - FIXED SPACING -->
     <div class="projects-container">
         <div class="creative-grid">
-            <!-- Project 1: Midnight Atelier -->
             <div class="creative-item" onclick="openProject('atelier')">
                 <div class="creative-image" style="background-image: url('https://poiseonly.github.io/images/ABA03F76-E5F0-4C0B-9D76-8D5719B46F5D.CR2')"></div>
                 <div class="creative-overlay">
@@ -802,7 +946,6 @@
                 </div>
             </div>
 
-            <!-- Project 2: Fabrics by Uche -->
             <div class="creative-item" onclick="openProject('fabrics')">
                 <div class="creative-image" style="background-image: url('https://poiseonly.github.io/images/IMG_3326.PNG')"></div>
                 <div class="creative-overlay">
@@ -811,7 +954,6 @@
                 </div>
             </div>
 
-            <!-- Project 3: Outterspace -->
             <div class="creative-item" onclick="openProject('outterspace')">
                 <div class="creative-image" style="background-image: url('https://poiseonly.github.io/images/IMG_3275.JPG.jpeg')"></div>
                 <div class="creative-overlay">
@@ -820,7 +962,6 @@
                 </div>
             </div>
 
-            <!-- Project 4: Project Monada -->
             <div class="creative-item" onclick="openProject('monada')">
                 <div class="creative-image" style="background-image: url('https://poiseonly.github.io/images/IMG_3256.JPG.jpeg')"></div>
                 <div class="creative-overlay">
@@ -829,7 +970,6 @@
                 </div>
             </div>
 
-            <!-- Project 5: Earls -->
             <div class="creative-item" onclick="openProject('Earls')">
                 <div class="creative-image" style="background-image: url('https://poiseonly.github.io/images/IMG_9366.JPG.jpeg')"></div>
                 <div class="creative-overlay">
@@ -838,7 +978,6 @@
                 </div>
             </div>
 
-            <!-- Project 6: Sanctuary -->
             <div class="creative-item" onclick="openProject('Sanctuary')">
                 <div class="creative-image" style="background-image: url('https://poiseonly.github.io/images/IMG_3290.JPG.jpeg')"></div>
                 <div class="creative-overlay">
@@ -849,138 +988,39 @@
         </div>
     </div>
 
-    <!-- Project Modals (all remain exactly the same) -->
-    <div id="atelier-modal" class="modal">
+    <!-- MODERN MODAL STRUCTURE -->
+    <div id="projectModal" class="modal">
+        <div class="close-modal" onclick="closeModal()">
+            <i class="fas fa-times"></i>
+        </div>
+        <div class="counter-badge">
+            <span id="currentCounter">1</span> / <span id="totalCounter">0</span>
+        </div>
+        <div class="modal-project-title" id="modalTitle">
+            <span>PROJECT</span> <span id="projectName"></span>
+        </div>
+        <div class="nav-arrow prev-arrow" onclick="prevImage()">
+            <i class="fas fa-chevron-left"></i>
+        </div>
+        <div class="nav-arrow next-arrow" onclick="nextImage()">
+            <i class="fas fa-chevron-right"></i>
+        </div>
+        
         <div class="modal-content">
-            <div class="modal-header">
-                <h2>Midnight Atelier</h2>
-                <span class="close-modal" onclick="closeProject('atelier')"><i class="fas fa-times"></i></span>
-            </div>
-            <div class="modal-gallery" id="atelier-gallery">
-                <img src="https://poiseonly.github.io/images/ABA03F76-E5F0-4C0B-9D76-8D5719B46F5D.CR2" alt="Midnight Atelier 1" onclick="openFullscreen(this)">
-                <img src="https://poiseonly.github.io/images/663368F7-C67B-4A9B-B7A6-9CEE4135727D.CR2" alt="Midnight Atelier 2" onclick="openFullscreen(this)">
-                <img src="https://poiseonly.github.io/images/00AA9908-79C2-47EE-A4C3-0B20DC0B2F49.CR2" alt="Midnight Atelier 3" onclick="openFullscreen(this)">
-                <img src="https://poiseonly.github.io/images/7A407029-B08D-42F1-85D3-1C374D6A650F.CR2" alt="Midnight Atelier 4" onclick="openFullscreen(this)">
-                <img src="https://poiseonly.github.io/images/46BBC0CA-0AD4-4825-B95B-7CAF364D81D5.CR2" alt="Midnight Atelier 5" onclick="openFullscreen(this)">
-                <img src="https://poiseonly.github.io/images/33F679D6-28F0-4F74-8BFA-F862782E4710.CR2" alt="Midnight Atelier 6" onclick="openFullscreen(this)">
-                <img src="https://poiseonly.github.io/images/2C826A09-1F93-4521-891F-2AAF544B2A07.CR2" alt="Midnight Atelier 7" onclick="openFullscreen(this)">
-                <img src="https://poiseonly.github.io/images/6E0EF981-59C9-4E28-BD63-F1261BD94DF2.CR2" alt="Midnight Atelier 8" onclick="openFullscreen(this)">
-            </div>
-            <div class="modal-controls">
-                <button class="modal-prev" onclick="navigateGallery('atelier', -1)"><i class="fas fa-chevron-left"></i></button>
-                <span class="modal-counter" id="atelier-counter">1 / 8</span>
-                <button class="modal-next" onclick="navigateGallery('atelier', 1)"><i class="fas fa-chevron-right"></i></button>
+            <div class="image-container" id="imageContainer">
+                <img id="mainImage" class="main-image" src="" alt="" onclick="openFullscreen()">
             </div>
         </div>
+        
+        <div class="thumbnail-strip" id="thumbnailStrip"></div>
     </div>
 
-    <div id="fabrics-modal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>Fabrics by Uche</h2>
-                <span class="close-modal" onclick="closeProject('fabrics')"><i class="fas fa-times"></i></span>
-            </div>
-            <div class="modal-gallery" id="fabrics-gallery">
-                <img src="https://poiseonly.github.io/images/IMG_3326.PNG" alt="Fabrics by Uche 1" onclick="openFullscreen(this)">
-                <img src="https://poiseonly.github.io/images/IMG_3325.PNG" alt="Fabrics by Uche 2" onclick="openFullscreen(this)">
-                <img src="https://poiseonly.github.io/images/IMG_3323.PNG" alt="Fabrics by Uche 3" onclick="openFullscreen(this)">
-                <img src="https://poiseonly.github.io/images/IMG_3322.PNG" alt="Fabrics by Uche 4" onclick="openFullscreen(this)">
-                <img src="https://poiseonly.github.io/images/IMG_3319.PNG" alt="Fabrics by Uche 5" onclick="openFullscreen(this)">
-                <img src="https://poiseonly.github.io/images/IMG_3318.PNG" alt="Fabrics by Uche 6" onclick="openFullscreen(this)">
-                <img src="https://poiseonly.github.io/images/IMG_3317.PNG" alt="Fabrics by Uche 7" onclick="openFullscreen(this)">
-                <img src="https://poiseonly.github.io/images/IMG_3315.PNG" alt="Fabrics by Uche 8" onclick="openFullscreen(this)">
-            </div>
-            <div class="modal-controls">
-                <button class="modal-prev" onclick="navigateGallery('fabrics', -1)"><i class="fas fa-chevron-left"></i></button>
-                <span class="modal-counter" id="fabrics-counter">1 / 8</span>
-                <button class="modal-next" onclick="navigateGallery('fabrics', 1)"><i class="fas fa-chevron-right"></i></button>
-            </div>
+    <!-- Fullscreen View -->
+    <div id="fullscreenView" class="fullscreen-view" onclick="closeFullscreen()">
+        <div class="close-fullscreen">
+            <i class="fas fa-times"></i>
         </div>
-    </div>
-
-    <div id="outterspace-modal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>Outterspace</h2>
-                <span class="close-modal" onclick="closeProject('outterspace')"><i class="fas fa-times"></i></span>
-            </div>
-            <div class="modal-gallery" id="outterspace-gallery">
-                <img src="https://poiseonly.github.io/images/IMG_3275.JPG.jpeg" alt="Outterspace 1" onclick="openFullscreen(this)">
-                <img src="https://poiseonly.github.io/images/IMG_3271.JPG.jpeg" alt="Outterspace 2" onclick="openFullscreen(this)">
-                <img src="https://poiseonly.github.io/images/IMG_3272.JPG.jpeg" alt="Outterspace 3" onclick="openFullscreen(this)">
-                <img src="https://poiseonly.github.io/images/IMG_3278.JPG.jpeg" alt="Outterspace 4" onclick="openFullscreen(this)">
-                <img src="https://poiseonly.github.io/images/IMG_3279.JPG.jpeg" alt="Outterspace 5" onclick="openFullscreen(this)">
-            </div>
-            <div class="modal-controls">
-                <button class="modal-prev" onclick="navigateGallery('outterspace', -1)"><i class="fas fa-chevron-left"></i></button>
-                <span class="modal-counter" id="outterspace-counter">1 / 5</span>
-                <button class="modal-next" onclick="navigateGallery('outterspace', 1)"><i class="fas fa-chevron-right"></i></button>
-            </div>
-        </div>
-    </div>
-
-    <div id="monada-modal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>Project Monada</h2>
-                <span class="close-modal" onclick="closeProject('monada')"><i class="fas fa-times"></i></span>
-            </div>
-            <div class="modal-gallery" id="monada-gallery">
-                <img src="https://poiseonly.github.io/images/IMG_3256.JPG.jpeg" alt="Project Monada 1" onclick="openFullscreen(this)">
-                <img src="https://poiseonly.github.io/images/IMG_3250.JPG.jpeg" alt="Project Monada 2" onclick="openFullscreen(this)">
-                <img src="https://poiseonly.github.io/images/IMG_3259.JPG.jpeg" alt="Project Monada 3" onclick="openFullscreen(this)">
-                <img src="https://poiseonly.github.io/images/IMG_3265.JPG.jpeg" alt="Project Monada 4" onclick="openFullscreen(this)">
-            </div>
-            <div class="modal-controls">
-                <button class="modal-prev" onclick="navigateGallery('monada', -1)"><i class="fas fa-chevron-left"></i></button>
-                <span class="modal-counter" id="monada-counter">1 / 4</span>
-                <button class="modal-next" onclick="navigateGallery('monada', 1)"><i class="fas fa-chevron-right"></i></button>
-            </div>
-        </div>
-    </div>
-
-    <div id="Earls-modal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>Earls</h2>
-                <span class="close-modal" onclick="closeProject('Earls')"><i class="fas fa-times"></i></span>
-            </div>
-            <div class="modal-gallery" id="Earls-gallery">
-                <img src="https://poiseonly.github.io/images/IMG_9366.JPG.jpeg" alt="Earls 1" onclick="openFullscreen(this)">
-                <img src="https://poiseonly.github.io/images/IMG_9367.JPG.jpeg" alt="Earls 2" onclick="openFullscreen(this)">
-                <img src="https://poiseonly.github.io/images/IMG_9397.JPG.jpeg" alt="Earls 3" onclick="openFullscreen(this)">
-                <img src="https://poiseonly.github.io/images/IMG_9401.JPG.jpeg" alt="Earls 4" onclick="openFullscreen(this)">
-                <img src="https://poiseonly.github.io/images/IMG_9463.JPG.jpeg" alt="Earls 5" onclick="openFullscreen(this)">
-                <img src="https://poiseonly.github.io/images/IMG_9483.JPG.jpeg" alt="Earls 6" onclick="openFullscreen(this)">
-                <img src="https://poiseonly.github.io/images/IMG_9515.JPG.jpeg" alt="Earls 7" onclick="openFullscreen(this)">
-                <img src="https://poiseonly.github.io/images/IMG_9533.JPG.jpeg" alt="Earls 8" onclick="openFullscreen(this)">
-            </div>
-            <div class="modal-controls">
-                <button class="modal-prev" onclick="navigateGallery('Earls', -1)"><i class="fas fa-chevron-left"></i></button>
-                <span class="modal-counter" id="Earls-counter">1 / 8</span>
-                <button class="modal-next" onclick="navigateGallery('Earls', 1)"><i class="fas fa-chevron-right"></i></button>
-            </div>
-        </div>
-    </div>
-
-    <div id="Sanctuary-modal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>Sanctuary</h2>
-                <span class="close-modal" onclick="closeProject('Sanctuary')"><i class="fas fa-times"></i></span>
-            </div>
-            <div class="modal-gallery" id="Sanctuary-gallery">
-                <img src="https://poiseonly.github.io/images/IMG_3290.JPG.jpeg" alt="Sanctuary 1" onclick="openFullscreen(this)">
-                <img src="https://poiseonly.github.io/images/IMG_3289.JPG.jpeg" alt="Sanctuary 2" onclick="openFullscreen(this)">
-                <img src="https://poiseonly.github.io/images/IMG_3287.JPG.jpeg" alt="Sanctuary 3" onclick="openFullscreen(this)">
-                <img src="https://poiseonly.github.io/images/IMG_3292.JPG.jpeg" alt="Sanctuary 4" onclick="openFullscreen(this)">
-            </div>
-            <div class="modal-controls">
-                <button class="modal-prev" onclick="navigateGallery('Sanctuary', -1)"><i class="fas fa-chevron-left"></i></button>
-                <span class="modal-counter" id="Sanctuary-counter">1 / 4</span>
-                <button class="modal-next" onclick="navigateGallery('Sanctuary', 1)"><i class="fas fa-chevron-right"></i></button>
-            </div>
-        </div>
+        <img id="fullscreenImage" class="fullscreen-image" src="">
     </div>
 
     <footer class="footer">
@@ -1006,9 +1046,11 @@
     </footer>
 
     <script>
-        // Store current gallery index for each project
-        let galleryIndices = {};
-
+        // Store gallery data
+        let projectData = {};
+        let currentProjectId = '';
+        let currentImageIndex = 0;
+        
         function openMenu() {
             document.getElementById('mobileMenu').classList.add('active');
             document.getElementById('overlay').classList.add('active');
@@ -1019,118 +1061,200 @@
             document.getElementById('overlay').classList.remove('active');
         }
         
+        // Initialize all project data
+        function initProjects() {
+            projectData = {
+                atelier: {
+                    title: 'Midnight Atelier',
+                    images: [
+                        'https://poiseonly.github.io/images/ABA03F76-E5F0-4C0B-9D76-8D5719B46F5D.CR2',
+                        'https://poiseonly.github.io/images/663368F7-C67B-4A9B-B7A6-9CEE4135727D.CR2',
+                        'https://poiseonly.github.io/images/00AA9908-79C2-47EE-A4C3-0B20DC0B2F49.CR2',
+                        'https://poiseonly.github.io/images/7A407029-B08D-42F1-85D3-1C374D6A650F.CR2',
+                        'https://poiseonly.github.io/images/46BBC0CA-0AD4-4825-B95B-7CAF364D81D5.CR2',
+                        'https://poiseonly.github.io/images/33F679D6-28F0-4F74-8BFA-F862782E4710.CR2',
+                        'https://poiseonly.github.io/images/2C826A09-1F93-4521-891F-2AAF544B2A07.CR2',
+                        'https://poiseonly.github.io/images/6E0EF981-59C9-4E28-BD63-F1261BD94DF2.CR2'
+                    ]
+                },
+                fabrics: {
+                    title: 'Fabrics by Uche',
+                    images: [
+                        'https://poiseonly.github.io/images/IMG_3326.PNG',
+                        'https://poiseonly.github.io/images/IMG_3325.PNG',
+                        'https://poiseonly.github.io/images/IMG_3323.PNG',
+                        'https://poiseonly.github.io/images/IMG_3322.PNG',
+                        'https://poiseonly.github.io/images/IMG_3319.PNG',
+                        'https://poiseonly.github.io/images/IMG_3318.PNG',
+                        'https://poiseonly.github.io/images/IMG_3317.PNG',
+                        'https://poiseonly.github.io/images/IMG_3315.PNG'
+                    ]
+                },
+                outterspace: {
+                    title: 'Outterspace',
+                    images: [
+                        'https://poiseonly.github.io/images/IMG_3275.JPG.jpeg',
+                        'https://poiseonly.github.io/images/IMG_3271.JPG.jpeg',
+                        'https://poiseonly.github.io/images/IMG_3272.JPG.jpeg',
+                        'https://poiseonly.github.io/images/IMG_3278.JPG.jpeg',
+                        'https://poiseonly.github.io/images/IMG_3279.JPG.jpeg'
+                    ]
+                },
+                monada: {
+                    title: 'Project Monada',
+                    images: [
+                        'https://poiseonly.github.io/images/IMG_3256.JPG.jpeg',
+                        'https://poiseonly.github.io/images/IMG_3250.JPG.jpeg',
+                        'https://poiseonly.github.io/images/IMG_3259.JPG.jpeg',
+                        'https://poiseonly.github.io/images/IMG_3265.JPG.jpeg'
+                    ]
+                },
+                Earls: {
+                    title: 'Earls',
+                    images: [
+                        'https://poiseonly.github.io/images/IMG_9366.JPG.jpeg',
+                        'https://poiseonly.github.io/images/IMG_9367.JPG.jpeg',
+                        'https://poiseonly.github.io/images/IMG_9397.JPG.jpeg',
+                        'https://poiseonly.github.io/images/IMG_9401.JPG.jpeg',
+                        'https://poiseonly.github.io/images/IMG_9463.JPG.jpeg',
+                        'https://poiseonly.github.io/images/IMG_9483.JPG.jpeg',
+                        'https://poiseonly.github.io/images/IMG_9515.JPG.jpeg',
+                        'https://poiseonly.github.io/images/IMG_9533.JPG.jpeg'
+                    ]
+                },
+                Sanctuary: {
+                    title: 'Sanctuary',
+                    images: [
+                        'https://poiseonly.github.io/images/IMG_3290.JPG.jpeg',
+                        'https://poiseonly.github.io/images/IMG_3289.JPG.jpeg',
+                        'https://poiseonly.github.io/images/IMG_3287.JPG.jpeg',
+                        'https://poiseonly.github.io/images/IMG_3292.JPG.jpeg'
+                    ]
+                }
+            };
+        }
+        
         function openProject(projectId) {
-            // Close any open modals first
-            document.querySelectorAll('.modal').forEach(modal => {
-                modal.classList.remove('active');
+            initProjects();
+            currentProjectId = projectId;
+            currentImageIndex = 0;
+            
+            const project = projectData[projectId];
+            if (!project) return;
+            
+            document.getElementById('projectName').textContent = project.title;
+            document.getElementById('totalCounter').textContent = project.images.length;
+            
+            updateMainImage();
+            generateThumbnails();
+            
+            const modal = document.getElementById('projectModal');
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function updateMainImage() {
+            const project = projectData[currentProjectId];
+            if (!project) return;
+            
+            const mainImage = document.getElementById('mainImage');
+            mainImage.src = project.images[currentImageIndex];
+            mainImage.alt = project.title + ' ' + (currentImageIndex + 1);
+            
+            document.getElementById('currentCounter').textContent = currentImageIndex + 1;
+            
+            // Update active thumbnail
+            const thumbnails = document.querySelectorAll('.thumbnail');
+            thumbnails.forEach((thumb, index) => {
+                if (index === currentImageIndex) {
+                    thumb.classList.add('active');
+                } else {
+                    thumb.classList.remove('active');
+                }
             });
-            
-            // Open the selected modal
-            const modal = document.getElementById(projectId + '-modal');
-            if (modal) {
-                modal.classList.add('active');
-                document.body.style.overflow = 'hidden';
-                
-                // Reset gallery index
-                galleryIndices[projectId] = 0;
-                updateGalleryCounter(projectId);
-                
-                // Show first image
-                showGalleryImage(projectId, 0);
-            }
         }
         
-        function closeProject(projectId) {
-            const modal = document.getElementById(projectId + '-modal');
-            if (modal) {
-                modal.classList.remove('active');
-                document.body.style.overflow = 'auto';
-            }
+        function generateThumbnails() {
+            const project = projectData[currentProjectId];
+            if (!project) return;
+            
+            const strip = document.getElementById('thumbnailStrip');
+            strip.innerHTML = '';
+            
+            project.images.forEach((imgUrl, index) => {
+                const thumb = document.createElement('img');
+                thumb.src = imgUrl;
+                thumb.className = 'thumbnail';
+                if (index === currentImageIndex) thumb.classList.add('active');
+                thumb.onclick = () => {
+                    currentImageIndex = index;
+                    updateMainImage();
+                };
+                strip.appendChild(thumb);
+            });
         }
         
-        function navigateGallery(projectId, direction) {
-            const gallery = document.getElementById(projectId + '-gallery');
-            const images = gallery.getElementsByTagName('img');
+        function nextImage() {
+            const project = projectData[currentProjectId];
+            if (!project) return;
             
-            if (!galleryIndices[projectId]) {
-                galleryIndices[projectId] = 0;
-            }
-            
-            galleryIndices[projectId] += direction;
-            
-            if (galleryIndices[projectId] < 0) {
-                galleryIndices[projectId] = images.length - 1;
-            } else if (galleryIndices[projectId] >= images.length) {
-                galleryIndices[projectId] = 0;
-            }
-            
-            showGalleryImage(projectId, galleryIndices[projectId]);
+            currentImageIndex = (currentImageIndex + 1) % project.images.length;
+            updateMainImage();
         }
         
-        function showGalleryImage(projectId, index) {
-            const gallery = document.getElementById(projectId + '-gallery');
-            const images = gallery.getElementsByTagName('img');
+        function prevImage() {
+            const project = projectData[currentProjectId];
+            if (!project) return;
             
-            // Hide all images
-            for (let img of images) {
-                img.style.display = 'none';
-            }
-            
-            // Show selected image
-            if (images[index]) {
-                images[index].style.display = 'block';
-                images[index].style.margin = '0 auto';
-            }
-            
-            updateGalleryCounter(projectId);
+            currentImageIndex = (currentImageIndex - 1 + project.images.length) % project.images.length;
+            updateMainImage();
         }
         
-        function updateGalleryCounter(projectId) {
-            const gallery = document.getElementById(projectId + '-gallery');
-            const images = gallery.getElementsByTagName('img');
-            const counter = document.getElementById(projectId + '-counter');
+        function closeModal() {
+            const modal = document.getElementById('projectModal');
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+        
+        function openFullscreen() {
+            const mainImage = document.getElementById('mainImage');
+            const fullscreenView = document.getElementById('fullscreenView');
+            const fullscreenImage = document.getElementById('fullscreenImage');
             
-            if (counter && images.length > 0) {
-                const currentIndex = galleryIndices[projectId] || 0;
-                counter.textContent = (currentIndex + 1) + ' / ' + images.length;
-            }
+            fullscreenImage.src = mainImage.src;
+            fullscreenView.classList.add('active');
+            document.body.style.overflow = 'hidden';
         }
         
-        function openFullscreen(img) {
-            if (img.requestFullscreen) {
-                img.requestFullscreen();
-            } else if (img.webkitRequestFullscreen) {
-                img.webkitRequestFullscreen();
-            } else if (img.msRequestFullscreen) {
-                img.msRequestFullscreen();
-            }
-        }
-        
-        // Close modal when clicking outside
-        window.onclick = function(event) {
-            if (event.target.classList.contains('modal')) {
-                document.querySelectorAll('.modal').forEach(modal => {
-                    modal.classList.remove('active');
-                });
-                document.body.style.overflow = 'auto';
-            }
+        function closeFullscreen() {
+            const fullscreenView = document.getElementById('fullscreenView');
+            fullscreenView.classList.remove('active');
+            document.body.style.overflow = '';
         }
         
         // Keyboard navigation
         document.addEventListener('keydown', function(e) {
-            const activeModal = document.querySelector('.modal.active');
-            if (!activeModal) return;
-            
-            const modalId = activeModal.id.replace('-modal', '');
+            const modal = document.getElementById('projectModal');
+            if (!modal.classList.contains('active')) return;
             
             if (e.key === 'ArrowRight') {
-                navigateGallery(modalId, 1);
+                nextImage();
             } else if (e.key === 'ArrowLeft') {
-                navigateGallery(modalId, -1);
+                prevImage();
             } else if (e.key === 'Escape') {
-                closeProject(modalId);
+                closeModal();
             }
         });
+        
+        // Close modal on background click
+        document.getElementById('projectModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+        
+        // Initialize on page load
+        initProjects();
     </script>
 </body>
 </html>
