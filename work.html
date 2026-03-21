@@ -298,14 +298,14 @@
             z-index: 1;
         }
 
-        /* NEW CREATIVE PROJECTS SECTION */
+        /* NEW CREATIVE PROJECTS SECTION - FIXED SPACING */
         .projects-container {
             max-width: 1400px;
             margin: 0 auto 5rem;
             padding: 0 1.5rem;
         }
 
-        /* Masonry-style grid */
+        /* Masonry-style grid with consistent gaps */
         .creative-grid {
             display: grid;
             grid-template-columns: repeat(1, 1fr);
@@ -317,6 +317,7 @@
             overflow: hidden;
             cursor: pointer;
             transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            margin-bottom: 0;
         }
 
         .creative-item:nth-child(odd) {
@@ -382,11 +383,11 @@
             transform: translateY(0);
         }
 
-        /* Alternative layout for desktop */
+        /* Tablet layout - with proper spacing */
         @media (min-width: 768px) {
             .creative-grid {
                 grid-template-columns: repeat(2, 1fr);
-                gap: 2.5rem;
+                gap: 2rem;
             }
             
             .creative-item:nth-child(1) {
@@ -395,16 +396,17 @@
             
             .creative-item:nth-child(2) {
                 grid-column: span 1;
-                transform: translateY(40px);
+                transform: translateY(30px);
             }
             
             .creative-item:nth-child(3) {
                 grid-column: span 1;
+                transform: translateY(0);
             }
             
             .creative-item:nth-child(4) {
                 grid-column: span 1;
-                transform: translateY(40px);
+                transform: translateY(30px);
             }
             
             .creative-item:nth-child(5) {
@@ -419,6 +421,7 @@
             .creative-item:nth-child(6) {
                 grid-column: span 2;
                 transform: translateY(0);
+                margin-top: 0;
             }
             
             .creative-item:nth-child(6) .creative-image {
@@ -426,48 +429,50 @@
             }
         }
 
+        /* Desktop layout - with consistent spacing between ALL items */
         @media (min-width: 1024px) {
             .creative-grid {
                 grid-template-columns: repeat(3, 1fr);
                 gap: 2rem;
             }
             
-            .creative-item:nth-child(1) {
-                grid-column: span 1;
-                transform: translateY(0);
+            /* Reset all transforms to avoid overlapping */
+            .creative-item {
+                transform: translateY(0) !important;
+                margin-bottom: 0;
             }
             
-            .creative-item:nth-child(2) {
-                grid-column: span 1;
-                transform: translateY(30px);
+            /* Different heights for visual interest, but with proper spacing */
+            .creative-item .creative-image {
+                height: 450px;
             }
             
-            .creative-item:nth-child(3) {
-                grid-column: span 1;
-                transform: translateY(60px);
+            /* Make some items taller for visual interest */
+            .creative-item:nth-child(1) .creative-image {
+                height: 500px;
             }
             
-            .creative-item:nth-child(4) {
-                grid-column: span 2;
-                transform: translateY(0);
+            .creative-item:nth-child(2) .creative-image {
+                height: 420px;
+                margin-top: 30px;
+            }
+            
+            .creative-item:nth-child(3) .creative-image {
+                height: 480px;
             }
             
             .creative-item:nth-child(4) .creative-image {
-                height: 500px;
+                height: 380px;
+                margin-top: 40px;
             }
             
-            .creative-item:nth-child(5) {
-                grid-column: span 1;
-                transform: translateY(30px);
-            }
-            
-            .creative-item:nth-child(6) {
-                grid-column: span 2;
-                transform: translateY(0);
+            .creative-item:nth-child(5) .creative-image {
+                height: 520px;
             }
             
             .creative-item:nth-child(6) .creative-image {
-                height: 500px;
+                height: 440px;
+                margin-top: 20px;
             }
         }
 
@@ -717,6 +722,10 @@
             .creative-image {
                 height: 350px;
             }
+            
+            .creative-item:nth-child(even) {
+                transform: translateY(10px);
+            }
         }
     </style>
 </head>
@@ -781,7 +790,7 @@
         <span>SELECTED WORKS</span>
     </div>
 
-    <!-- NEW CREATIVE PROJECTS SECTION -->
+    <!-- NEW CREATIVE PROJECTS SECTION - FIXED SPACING -->
     <div class="projects-container">
         <div class="creative-grid">
             <!-- Project 1: Midnight Atelier -->
