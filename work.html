@@ -954,7 +954,7 @@
             </div>
 
             <div class="creative-item" onclick="openProject('fabrics')">
-                <div class="creative-image" style="background-image: url('https://poiseonly.github.io/images/IMG_3326.PNG')"></div>
+                <div class="creative-image" style="background-image: url('https://poiseonly.github.io/images/IMG_3326.jpg')"></div>
                 <div class="creative-overlay">
                     <h3 class="creative-title">Fabrics by Uche</h3>
                     <p class="creative-category">Interior Design</p>
@@ -1015,7 +1015,7 @@
         
         <div class="modal-content">
             <div class="image-container" id="imageContainer">
-                <img id="mainImage" class="main-image" src="" alt="" onclick="openFullscreen()">
+                <img id="mainImage" class="main-image" src="" alt="" loading="eager" decoding="async" onclick="openFullscreen()">
             </div>
         </div>
         
@@ -1080,14 +1080,14 @@
                 fabrics: {
                     title: 'Fabrics by Uche',
                     images: [
-                        'https://poiseonly.github.io/images/IMG_3326.PNG',
-                        'https://poiseonly.github.io/images/IMG_3325.PNG',
-                        'https://poiseonly.github.io/images/IMG_3323.PNG',
-                        'https://poiseonly.github.io/images/IMG_3322.PNG',
-                        'https://poiseonly.github.io/images/IMG_3319.PNG',
-                        'https://poiseonly.github.io/images/IMG_3318.PNG',
-                        'https://poiseonly.github.io/images/IMG_3317.PNG',
-                        'https://poiseonly.github.io/images/IMG_3315.PNG'
+                        'https://poiseonly.github.io/images/IMG_3326.jpg',
+                        'https://poiseonly.github.io/images/IMG_3325.jpg',
+                        'https://poiseonly.github.io/images/IMG_3323.jpg',
+                        'https://poiseonly.github.io/images/IMG_3322.jpg',
+                        'https://poiseonly.github.io/images/IMG_3319.jpg',
+                        'https://poiseonly.github.io/images/IMG_3318.jpg',
+                        'https://poiseonly.github.io/images/IMG_3317.jpg',
+                        'https://poiseonly.github.io/images/IMG_3315.jpg'
                     ]
                 },
                 outterspace: {
@@ -1184,6 +1184,8 @@
             project.images.forEach((imgUrl, index) => {
                 const thumb = document.createElement('img');
                 thumb.src = imgUrl;
+                thumb.loading = 'lazy';
+                thumb.decoding = 'async';
                 thumb.className = 'thumbnail';
                 if (index === currentImageIndex) thumb.classList.add('active');
                 thumb.onclick = () => {
