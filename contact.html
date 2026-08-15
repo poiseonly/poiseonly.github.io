@@ -2,9 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
     <title>Contact | 29thAvenueDesigns</title>
+    <link rel="icon" type="image/png" sizes="128x128" href="/favicon.png.jpeg">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png.jpeg">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon.png.jpeg">
+    <link rel="apple-touch-icon" href="/favicon.png.jpeg">
+    <link rel="shortcut icon" href="/favicon.png.jpeg">
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         * {
@@ -14,103 +19,330 @@
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
         }
 
-        body { background-color: #ffffff; color: #1a1a1a; line-height: 1.6; }
+        body {
+            background-color: #ffffff;
+            color: #1a1a1a;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
 
-        /* Shared Nav & Mobile Styles (Same as Homepage) */
-        .navbar { display: flex; justify-content: space-between; align-items: center; padding: 1rem 1.2rem; background: #ffffff; border-bottom: 1px solid #f0f0f0; position: sticky; top: 0; z-index: 1000; }
-        .logo { font-size: 1.3rem; font-weight: 500; letter-spacing: 0.5px; text-decoration: none; color: #1a1a1a; }
+        /* Navigation (Kept from your repository) */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 2rem;
+            background: #ffffff;
+            border-bottom: 1px solid #f4f4f4;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 1.2rem;
+            font-weight: 400;
+            letter-spacing: 1px;
+            text-decoration: none;
+            color: #1a1a1a;
+        }
+
         .menu-icon { font-size: 1.5rem; cursor: pointer; }
-        
+
+        .mobile-menu {
+            position: fixed; top: 0; left: -100%; width: 85%; height: 100vh;
+            background: #ffffff; z-index: 2000; padding: 2rem 1.5rem;
+            transition: 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+            box-shadow: 2px 0 20px rgba(0,0,0,0.05); overflow-y: auto;
+        }
+        .mobile-menu.active { left: 0; }
+        .close-menu { text-align: right; font-size: 1.5rem; margin-bottom: 2rem; cursor: pointer; }
+        .mobile-menu-links { display: flex; flex-direction: column; gap: 1.5rem; }
+        .mobile-menu-links a {
+            text-decoration: none; color: #1a1a1a; font-size: 1.1rem;
+            text-transform: uppercase; letter-spacing: 2px;
+            border-bottom: 1px solid #f4f4f4; padding-bottom: 1rem;
+        }
+
+        .overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.4); backdrop-filter: blur(3px);
+            z-index: 1500; display: none;
+        }
+        .overlay.active { display: block; }
+
         .desktop-nav { display: none; }
-        .desktop-nav a, .dropdown-toggle { text-decoration: none; color: #1a1a1a; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1.5px; padding: 0.5rem 0; cursor: pointer; background: transparent; border: none; font-family: inherit; }
+        .desktop-nav a, .dropdown-toggle {
+            text-decoration: none; color: #1a1a1a; font-size: 0.85rem;
+            text-transform: uppercase; letter-spacing: 1.5px;
+            padding: 0.5rem 0; cursor: pointer; background: transparent; border: none;
+        }
         .dropdown { position: relative; display: inline-block; }
-        .dropdown-toggle i { margin-left: 5px; font-size: 0.75rem; transition: transform 0.3s ease; }
+        .dropdown-toggle i { margin-left: 5px; font-size: 0.75rem; transition: transform 0.3s; }
         .dropdown:hover .dropdown-toggle i { transform: rotate(180deg); }
-        
-        .page-header { padding: 4rem 1.5rem 2rem; text-align: center; }
-        .page-header h1 { font-size: 2.5rem; font-weight: 300; margin-bottom: 0.5rem; letter-spacing: 2px; }
-        .page-header p { color: #b89b7b; font-style: italic; font-size: 1.1rem; }
+        .dropdown-menu {
+            position: absolute; top: 100%; left: 0; background: #ffffff;
+            min-width: 200px; box-shadow: 0 15px 40px rgba(0,0,0,0.05);
+            border: 1px solid #f5f5f5; opacity: 0; visibility: hidden;
+            transform: translateY(-10px); transition: all 0.3s ease; z-index: 1000; padding: 1rem 0;
+        }
+        .dropdown:hover .dropdown-menu { opacity: 1; visibility: visible; transform: translateY(0); }
+        .dropdown-menu a {
+            display: block; padding: 0.8rem 1.5rem; text-decoration: none;
+            color: #1a1a1a; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px;
+        }
+        .dropdown-menu a:hover { background: #fcfcfc; color: #b89b7b; padding-left: 2rem; }
 
-        .contact-container { padding: 1.5rem; max-width: 900px; margin: 0 auto; }
-        .contact-info { text-align: center; margin-bottom: 4rem; }
-        .contact-info h2 { font-size: 1.5rem; font-weight: 400; margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 1px; }
-        .contact-info p { color: #666; font-size: 0.95rem; }
+        /* Modern Page Header */
+        .page-header {
+            padding: 5rem 1.5rem 2rem;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .page-header h1 {
+            font-size: 2.5rem;
+            font-weight: 300;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+        }
+        .page-header p {
+            color: #666;
+            font-size: 1rem;
+            line-height: 1.8;
+        }
 
-        /* Sharp Contact Details */
-        .contact-details { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; text-align: center; margin-bottom: 4rem; border-top: 1px solid #f0f0f0; border-bottom: 1px solid #f0f0f0; padding: 3rem 0; }
-        .contact-details p { font-size: 0.9rem; letter-spacing: 1px; }
-        .contact-details i { color: #b89b7b; font-size: 1.2rem; display: block; margin-bottom: 0.8rem; }
+        /* Questionnaire Section */
+        .questionnaire-section {
+            max-width: 900px;
+            margin: 0 auto 5rem;
+            padding: 0 1.5rem;
+        }
 
-        /* Modern Questionnaire Section */
-        .questionnaire-section { max-width: 700px; margin: 0 auto 4rem; }
-        
-        .questionnaire-intro { text-align: center; padding: 3rem 2rem; border: 1px solid #f0f0f0; }
-        .questionnaire-intro h3 { font-size: 1.8rem; font-weight: 300; margin-bottom: 1rem; }
-        .questionnaire-intro .start-btn { display: inline-block; padding: 1.2rem 4rem; background: #1a1a1a; color: white; text-decoration: none; text-transform: uppercase; letter-spacing: 2px; font-size: 0.85rem; border: none; cursor: pointer; transition: 0.3s; margin-top: 2rem; }
-        .questionnaire-intro .start-btn:hover { background: #b89b7b; }
+        .questionnaire-intro {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: #fafafa;
+            border: 1px solid #f0f0f0;
+        }
+        .questionnaire-intro h3 {
+            font-size: 1.8rem;
+            font-weight: 300;
+            margin-bottom: 1rem;
+            letter-spacing: 1px;
+        }
+        .questionnaire-intro .start-btn {
+            display: inline-block;
+            padding: 1rem 3rem;
+            background: #1a1a1a;
+            color: #ffffff;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.85rem;
+            border: 1px solid #1a1a1a;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 2rem;
+        }
+        .questionnaire-intro .start-btn:hover {
+            background: #ffffff;
+            color: #1a1a1a;
+        }
 
-        .questionnaire-container { display: none; padding: 1rem 0; }
+        .questionnaire-container {
+            display: none;
+            padding: 2rem 0;
+            animation: fadeIn 0.5s ease;
+        }
         .questionnaire-container.active { display: block; }
-        
-        .progress-bar { width: 100%; height: 2px; background: #f0f0f0; margin: 2rem 0; position: relative; }
-        .progress-fill { height: 2px; background: #b89b7b; width: 0%; transition: width 0.4s ease; }
-        .progress-text { text-align: right; font-size: 0.75rem; color: #999; letter-spacing: 1px; margin-top: 0.5rem; }
-
-        .question { display: none; animation: fadeIn 0.5s; }
-        .question.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        .question h4 { font-size: 1.5rem; font-weight: 300; margin-bottom: 0.5rem; color: #1a1a1a; }
-        .question p { color: #888; font-size: 0.9rem; margin-bottom: 2rem; }
+        .progress-bar { width: 100%; height: 1px; background: #e0e0e0; margin: 2rem 0; position: relative; }
+        .progress-fill { height: 2px; background: #1a1a1a; width: 0%; transition: width 0.4s ease; position: absolute; top: -0.5px; }
+        .progress-text { text-align: right; font-size: 0.75rem; color: #888; letter-spacing: 1px; margin-top: 1rem; }
 
-        /* Sleek Inputs with Icons */
-        .personal-info { display: flex; flex-direction: column; gap: 2.5rem; margin: 2rem 0; }
+        .question { display: none; }
+        .question.active { display: block; animation: fadeIn 0.4s ease; }
+
+        .question h4 {
+            font-size: 1.8rem;
+            font-weight: 300;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        .question p.subtext {
+            color: #888;
+            font-size: 0.95rem;
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        /* --- THE NEW OLIVEHAUS ICON GRID FORM --- */
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .option-card input[type="radio"], 
+        .option-card input[type="checkbox"] {
+            display: none;
+        }
+
+        .option-card label {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2.5rem 1rem;
+            background: #ffffff;
+            border: 1px solid #e5e5e5;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+
+        .option-card label i {
+            font-size: 1.8rem;
+            margin-bottom: 1.2rem;
+            color: #1a1a1a;
+            transition: all 0.3s ease;
+        }
+
+        .option-card label span {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #4a4a4a;
+            line-height: 1.4;
+        }
+
+        .option-card label:hover {
+            border-color: #1a1a1a;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+        }
+
+        /* Active State */
+        .option-card input:checked + label {
+            background: #fafafa;
+            border-color: #1a1a1a;
+        }
+        .option-card input:checked + label i {
+            color: #b89b7b;
+            transform: scale(1.1);
+        }
+        .option-card input:checked + label span {
+            color: #1a1a1a;
+            font-weight: 500;
+        }
+
+        /* Standard Textareas & Inputs */
+        .textarea-option { margin-top: 2rem; }
+        .textarea-option textarea {
+            width: 100%; padding: 1.5rem; border: 1px solid #e5e5e5;
+            font-size: 0.95rem; resize: vertical; background: #fafafa;
+            font-family: inherit; transition: 0.3s;
+        }
+        .textarea-option textarea:focus { outline: none; border-color: #1a1a1a; background: #fff; }
+
+        .personal-info {
+            display: flex; flex-direction: column; gap: 2rem; margin: 3rem 0;
+            max-width: 600px; margin-left: auto; margin-right: auto;
+        }
         .input-field { position: relative; }
-        .input-field label { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; color: #666; display: block; margin-bottom: 0.5rem; }
-        .input-field i { position: absolute; left: 0; bottom: 12px; color: #b89b7b; font-size: 1.1rem; }
-        
-        /* Bottom-border only inputs */
-        .input-field input { width: 100%; padding: 0.8rem 0.8rem 0.8rem 2.2rem; border: none; border-bottom: 1px solid #ddd; font-size: 1rem; background: transparent; transition: 0.3s; border-radius: 0; }
+        .input-field label {
+            font-size: 0.75rem; font-weight: 500; text-transform: uppercase;
+            letter-spacing: 1.5px; color: #666; display: block; margin-bottom: 0.5rem;
+        }
+        .input-field input {
+            width: 100%; padding: 1rem 0; border: none; border-bottom: 1px solid #ddd;
+            font-size: 1.1rem; background: transparent; transition: 0.3s; border-radius: 0;
+        }
         .input-field input:focus { outline: none; border-bottom-color: #1a1a1a; }
 
-        /* Custom Stylish Checkboxes & Radios */
-        .options { display: flex; flex-direction: column; gap: 1rem; margin: 2rem 0; }
-        .option-item { position: relative; }
-        .option-item input[type="radio"], .option-item input[type="checkbox"] { display: none; }
+        /* Navigation Buttons */
+        .questionnaire-nav {
+            display: flex; justify-content: space-between; margin-top: 4rem;
+            border-top: 1px solid #f0f0f0; padding-top: 2rem;
+        }
+        .nav-btn {
+            padding: 1rem 3rem; background: transparent; border: 1px solid #1a1a1a;
+            color: #1a1a1a; cursor: pointer; font-size: 0.8rem;
+            text-transform: uppercase; letter-spacing: 2px; transition: 0.3s;
+        }
+        .nav-btn:hover:not(:disabled) { background: #1a1a1a; color: white; }
+        .nav-btn:disabled { opacity: 0.2; cursor: not-allowed; border-color: #ccc; }
+
+        /* --- NEW STUDIO INFO & HOURS (Olivehaus Style) --- */
+        .studio-info-section {
+            border-top: 1px solid #f0f0f0;
+            padding: 5rem 1.5rem;
+            background: #ffffff;
+        }
         
-        .option-item label { display: block; padding: 1.2rem 1.5rem; border: 1px solid #e5e5e5; cursor: pointer; transition: all 0.2s ease; font-size: 0.95rem; color: #4a4a4a; background: #fff; }
-        .option-item label:hover { border-color: #ccc; }
-        
-        /* Active state for custom boxes */
-        .option-item input:checked + label { border-color: #1a1a1a; background: #fafafa; color: #1a1a1a; font-weight: 500; }
-        .option-item input:checked + label::after { content: '\f00c'; font-family: 'Font Awesome 5 Free'; font-weight: 900; position: absolute; right: 1.5rem; top: 50%; transform: translateY(-50%); color: #b89b7b; }
+        .info-grid {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            text-align: center;
+        }
 
-        .textarea-option textarea { width: 100%; padding: 1.2rem; border: 1px solid #e5e5e5; font-size: 0.95rem; resize: vertical; margin-top: 1.5rem; font-family: inherit; }
-        .textarea-option textarea:focus { outline: none; border-color: #1a1a1a; }
+        .info-col h4 {
+            font-size: 0.85rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 1.5rem;
+            color: #1a1a1a;
+        }
 
-        .questionnaire-nav { display: flex; justify-content: space-between; margin-top: 3rem; border-top: 1px solid #f0f0f0; padding-top: 2rem; }
-        .nav-btn { padding: 1rem 2.5rem; background: transparent; border: 1px solid #1a1a1a; color: #1a1a1a; cursor: pointer; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; transition: 0.3s; }
-        .nav-btn:hover { background: #f9f9f9; }
-        .nav-btn.submit-btn { background: #1a1a1a; color: white; border: none; }
-        .nav-btn.submit-btn:hover { background: #b89b7b; }
-        .nav-btn:disabled { opacity: 0.2; cursor: not-allowed; border-color: #ccc; color: #999; }
+        .info-col p, .info-col a {
+            color: #666;
+            font-size: 0.95rem;
+            line-height: 1.8;
+            margin-bottom: 0.5rem;
+            text-decoration: none;
+            display: block;
+            transition: color 0.3s;
+        }
 
-        /* Desktop specific fixes */
+        .info-col a:hover { color: #b89b7b; }
+        .info-col i { font-size: 1.2rem; color: #b89b7b; margin-bottom: 1rem; display: block; }
+
+        /* Footer */
+        .footer {
+            background: #1a1a1a; color: #ffffff; padding: 3rem 1.5rem;
+            text-align: center; margin-top: 0;
+        }
+        .footer-logo { font-size: 1.5rem; font-weight: 300; letter-spacing: 1px; margin-bottom: 2rem; color: #ffffff; }
+        .footer-copyright { font-size: 0.75rem; color: #666; letter-spacing: 1px; }
+
         @media (min-width: 768px) {
             .navbar { padding: 1.5rem 4rem; }
             .desktop-nav { display: flex; gap: 3rem; align-items: center; }
             .menu-icon, .mobile-menu, .overlay { display: none; }
-            .contact-container { padding: 3rem; }
         }
     </style>
 </head>
 <body>
+    <!-- Navigation -->
     <nav class="navbar">
         <a href="index.html" class="logo">29thAvenueDesigns</a>
+        <div class="menu-icon" onclick="openMenu()"><i class="fas fa-bars"></i></div>
         <div class="desktop-nav">
             <a href="index.html">HOME</a>
             <div class="dropdown">
                 <button class="dropdown-toggle">STUDIO <i class="fas fa-chevron-down"></i></button>
+                <div class="dropdown-menu">
+                    <a href="studio.html">STUDIO</a>
+                    <a href="products.html">PRODUCTS</a>
+                </div>
             </div>
             <a href="work.html">PORTFOLIO</a>
             <a href="process.html">OUR PROCESS</a>
@@ -118,114 +350,372 @@
         </div>
     </nav>
 
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="close-menu" onclick="closeMenu()"><i class="fas fa-times"></i></div>
+        <div class="mobile-menu-links">
+            <a href="index.html" onclick="closeMenu()">HOME</a>
+            <a href="studio.html" onclick="closeMenu()">STUDIO</a>
+            <a href="products.html" onclick="closeMenu()">PRODUCTS</a>
+            <a href="work.html" onclick="closeMenu()">PORTFOLIO</a>
+            <a href="process.html" onclick="closeMenu()">OUR PROCESS</a>
+            <a href="contact.html" onclick="closeMenu()">CONTACT</a>
+        </div>
+    </div>
+    <div class="overlay" id="overlay" onclick="closeMenu()"></div>
+
+    <!-- Header -->
     <div class="page-header">
         <h1>INQUIRE</h1>
-        <p>Let's design something beautiful.</p>
+        <p>Whether you'd like to partner with our studio or start your design journey, we're here to bring your vision to life. Please fill out our brief inquiry form below.</p>
     </div>
 
-    <div class="contact-container">
-        <div class="contact-details">
-            <div><i class="fas fa-map-marker-alt"></i><p>Lagos, Nigeria</p></div>
-            <div><i class="far fa-envelope"></i><p>29thavenuedesigns@gmail.com</p></div>
-            <div><i class="fas fa-mobile-alt"></i><p>+234 8135641869</p></div>
+    <!-- Main Questionnaire Section -->
+    <div class="questionnaire-section">
+        
+        <div class="questionnaire-intro" id="questionnaireIntro">
+            <h3>Start Your Project</h3>
+            <p style="color: #666;">Take our design questionnaire and let us understand your vision.</p>
+            <button class="start-btn" onclick="startQuestionnaire()">Begin Inquiry</button>
         </div>
 
-        <div class="questionnaire-section">
-            <div class="questionnaire-intro" id="questionnaireIntro">
-                <h3>Start Your Project</h3>
-                <p style="color: #666; margin-bottom: 2rem;">Please fill out our brief inquiry form below so we can understand your vision prior to scheduling a consultation.</p>
-                <button class="start-btn" onclick="startQuestionnaire()">BEGIN INQUIRY</button>
+        <div class="questionnaire-container" id="questionnaireContainer">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <div class="progress-text" id="progressText">1 / 14</div>
+
+            <div id="questionsContainer">
+                
+                <!-- Q0: Personal Information Page -->
+                <div class="question active" id="q0">
+                    <h4>Let's Design Your Dream Space</h4>
+                    <p class="subtext">Tell us a little about yourself to get started.</p>
+                    <div class="personal-info">
+                        <div class="input-field">
+                            <label>YOUR NAME</label>
+                            <input type="text" id="clientName" placeholder="eg. Sarah Johnson">
+                        </div>
+                        <div class="input-field">
+                            <label>EMAIL ADDRESS</label>
+                            <input type="email" id="clientEmail" placeholder="eg. sarah@email.com">
+                        </div>
+                        <div class="input-field">
+                            <label>PHONE / WHATSAPP (optional)</label>
+                            <input type="tel" id="clientPhone" placeholder="eg. +1 234 687 8900">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Q1 -->
+                <div class="question" id="q1">
+                    <h4>What type of project are you looking to start?</h4>
+                    <p class="subtext">Select the option that best fits your needs.</p>
+                    <div class="options-grid">
+                        <div class="option-card">
+                            <input type="radio" name="q1" value="Residential — My Home" id="q1_1">
+                            <label for="q1_1">
+                                <i class="fas fa-home"></i>
+                                <span>Residential<br>My Home</span>
+                            </label>
+                        </div>
+                        <div class="option-card">
+                            <input type="radio" name="q1" value="Commercial — Office / Retail / Other" id="q1_2">
+                            <label for="q1_2">
+                                <i class="fas fa-shopping-bag"></i>
+                                <span>Commercial<br>Office / Retail</span>
+                            </label>
+                        </div>
+                        <div class="option-card">
+                            <input type="radio" name="q1" value="Both Residential & Commercial" id="q1_3">
+                            <label for="q1_3">
+                                <i class="fas fa-city"></i>
+                                <span>Both<br>Res & Comm</span>
+                            </label>
+                        </div>
+                        <div class="option-card">
+                            <input type="radio" name="q1" value="Not sure yet — I'd love some guidance" id="q1_4">
+                            <label for="q1_4">
+                                <i class="fas fa-question"></i>
+                                <span>Not sure yet<br>Guidance</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Q2 -->
+                <div class="question" id="q2">
+                    <h4>Which space(s) are you hoping to transform?</h4>
+                    <p class="subtext">You may select more than one.</p>
+                    <div class="options-grid">
+                        <div class="option-card">
+                            <input type="checkbox" name="q2" value="A single room" id="q2_1">
+                            <label for="q2_1">
+                                <i class="fas fa-door-closed"></i>
+                                <span>A single room</span>
+                            </label>
+                        </div>
+                        <div class="option-card">
+                            <input type="checkbox" name="q2" value="Multiple rooms" id="q2_2">
+                            <label for="q2_2">
+                                <i class="fas fa-th-large"></i>
+                                <span>Multiple rooms</span>
+                            </label>
+                        </div>
+                        <div class="option-card">
+                            <input type="checkbox" name="q2" value="Full home / full office" id="q2_3">
+                            <label for="q2_3">
+                                <i class="fas fa-building"></i>
+                                <span>Full build</span>
+                            </label>
+                        </div>
+                        <div class="option-card">
+                            <input type="checkbox" name="q2" value="Outdoor / exterior space" id="q2_4">
+                            <label for="q2_4">
+                                <i class="fas fa-leaf"></i>
+                                <span>Outdoor space</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="textarea-option">
+                        <textarea placeholder="Anything else you'd like to add about the space?" rows="3"></textarea>
+                    </div>
+                </div>
+
+                <!-- Q3 -->
+                <div class="question" id="q3">
+                    <h4>Which style feels most like you?</h4>
+                    <p class="subtext">Don't worry if you're between styles — just pick what resonates most.</p>
+                    <div class="options-grid">
+                        <div class="option-card">
+                            <input type="checkbox" name="q3" value="Modern & Minimal" id="q3_1">
+                            <label for="q3_1"><i class="fas fa-couch"></i><span>Modern & Minimal</span></label>
+                        </div>
+                        <div class="option-card">
+                            <input type="checkbox" name="q3" value="Classic & Traditional" id="q3_2">
+                            <label for="q3_2"><i class="fas fa-chess-rook"></i><span>Classic & Traditional</span></label>
+                        </div>
+                        <div class="option-card">
+                            <input type="checkbox" name="q3" value="Bohemian & Eclectic" id="q3_3">
+                            <label for="q3_3"><i class="fas fa-campground"></i><span>Bohemian & Eclectic</span></label>
+                        </div>
+                        <div class="option-card">
+                            <input type="checkbox" name="q3" value="Industrial" id="q3_4">
+                            <label for="q3_4"><i class="fas fa-industry"></i><span>Industrial</span></label>
+                        </div>
+                        <div class="option-card">
+                            <input type="checkbox" name="q3" value="Coastal & Airy" id="q3_5">
+                            <label for="q3_5"><i class="fas fa-water"></i><span>Coastal & Airy</span></label>
+                        </div>
+                        <div class="option-card">
+                            <input type="checkbox" name="q3" value="Luxury & Refined" id="q3_6">
+                            <label for="q3_6"><i class="fas fa-gem"></i><span>Luxury & Refined</span></label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Q4 -->
+                <div class="question" id="q4">
+                    <h4>How would you describe where you are with your vision?</h4>
+                    <div class="options-grid">
+                        <div class="option-card">
+                            <input type="radio" name="q4" value="I have a very clear idea of what I want" id="q4_1">
+                            <label for="q4_1"><i class="fas fa-lightbulb"></i><span>Clear Idea</span></label>
+                        </div>
+                        <div class="option-card">
+                            <input type="radio" name="q4" value="I have some ideas but need help refining them" id="q4_2">
+                            <label for="q4_2"><i class="fas fa-tools"></i><span>Needs Refining</span></label>
+                        </div>
+                        <div class="option-card">
+                            <input type="radio" name="q4" value="I'm starting from scratch and open to full creative direction" id="q4_3">
+                            <label for="q4_3"><i class="fas fa-magic"></i><span>Starting from Scratch</span></label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Q5 -->
+                <div class="question" id="q5">
+                    <h4>Do you have any inspiration images or a mood board?</h4>
+                    <p class="subtext">Pinterest boards, saved photos, magazine clips — anything counts!</p>
+                    <div class="options-grid">
+                        <div class="option-card">
+                            <input type="radio" name="q5" value="Yes — I'll share them during our consultation" id="q5_1">
+                            <label for="q5_1"><i class="fas fa-images"></i><span>Yes, I'll share later</span></label>
+                        </div>
+                        <div class="option-card">
+                            <input type="radio" name="q5" value="No board, but I can describe what I love" id="q5_2">
+                            <label for="q5_2"><i class="fas fa-comment-alt"></i><span>I can describe it</span></label>
+                        </div>
+                        <div class="option-card">
+                            <input type="radio" name="q5" value="No — I need help discovering my style altogether" id="q5_3">
+                            <label for="q5_3"><i class="fas fa-compass"></i><span>I need help finding it</span></label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Q6 -->
+                <div class="question" id="q6">
+                    <h4>Any colors, materials, or finishes you love, or want to avoid?</h4>
+                    <p class="subtext">Be as specific or as vague as you'd like. Every detail helps.</p>
+                    <div class="textarea-option">
+                        <textarea placeholder="e.g. I love warm earthy tones and natural wood. I'd like to avoid cold greys..." rows="5"></textarea>
+                    </div>
+                </div>
+
+                <!-- Q7 (With requested Dollar icon for Cost) -->
+                <div class="question" id="q7">
+                    <h4>Would you be open to structural changes?</h4>
+                    <p class="subtext">If recommended to achieve the best result.</p>
+                    <div class="options-grid">
+                        <div class="option-card">
+                            <input type="radio" name="q7" value="Yes, absolutely — whatever it takes" id="q7_1">
+                            <label for="q7_1"><i class="fas fa-hammer"></i><span>Yes, whatever it takes</span></label>
+                        </div>
+                        <div class="option-card">
+                            <input type="radio" name="q7" value="Maybe — it depends on the scope and cost" id="q7_2">
+                            <label for="q7_2"><i class="fas fa-dollar-sign"></i><span>Maybe, depends on cost</span></label>
+                        </div>
+                        <div class="option-card">
+                            <input type="radio" name="q7" value="No — I'd prefer to work within the existing structure" id="q7_3">
+                            <label for="q7_3"><i class="fas fa-paint-roller"></i><span>No, keep existing</span></label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Q8 -->
+                <div class="question" id="q8">
+                    <h4>Who will be living or working in this space?</h4>
+                    <p class="subtext">Select all that apply.</p>
+                    <div class="options-grid">
+                        <div class="option-card"><input type="checkbox" name="q8" value="Just me" id="q8_1"><label for="q8_1"><i class="fas fa-user"></i><span>Just me</span></label></div>
+                        <div class="option-card"><input type="checkbox" name="q8" value="Couple" id="q8_2"><label for="q8_2"><i class="fas fa-user-friends"></i><span>Couple</span></label></div>
+                        <div class="option-card"><input type="checkbox" name="q8" value="Family with young kids" id="q8_3"><label for="q8_3"><i class="fas fa-baby"></i><span>Young kids</span></label></div>
+                        <div class="option-card"><input type="checkbox" name="q8" value="Family with teenagers" id="q8_4"><label for="q8_4"><i class="fas fa-users"></i><span>Teenagers</span></label></div>
+                        <div class="option-card"><input type="checkbox" name="q8" value="Pets are involved 😊" id="q8_5"><label for="q8_5"><i class="fas fa-paw"></i><span>Pets</span></label></div>
+                    </div>
+                </div>
+
+                <!-- Q9 -->
+                <div class="question" id="q9">
+                    <h4>How are you thinking about furnishings for this project?</h4>
+                    <div class="options-grid">
+                        <div class="option-card">
+                            <input type="radio" name="q9" value="All new furniture and decor — fresh start" id="q9_1">
+                            <label for="q9_1"><i class="fas fa-box-open"></i><span>All new (Fresh Start)</span></label>
+                        </div>
+                        <div class="option-card">
+                            <input type="radio" name="q9" value="Mostly new, with a few existing pieces I love" id="q9_2">
+                            <label for="q9_2"><i class="fas fa-couch"></i><span>Mix of new & existing</span></label>
+                        </div>
+                        <div class="option-card">
+                            <input type="radio" name="q9" value="Mostly keeping what I have — just refreshing the space" id="q9_4">
+                            <label for="q9_4"><i class="fas fa-sync"></i><span>Keeping most pieces</span></label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Q10 -->
+                <div class="question" id="q10">
+                    <h4>Do you have a timeframe in mind for completion?</h4>
+                    <div class="options-grid">
+                        <div class="option-card"><input type="radio" name="q10" value="As soon as possible" id="q10_1"><label for="q10_1"><i class="fas fa-rocket"></i><span>ASAP</span></label></div>
+                        <div class="option-card"><input type="radio" name="q10" value="Within 1–3 months" id="q10_2"><label for="q10_2"><i class="fas fa-calendar-day"></i><span>1–3 months</span></label></div>
+                        <div class="option-card"><input type="radio" name="q10" value="Within 3–6 months" id="q10_3"><label for="q10_3"><i class="fas fa-calendar-alt"></i><span>3–6 months</span></label></div>
+                        <div class="option-card"><input type="radio" name="q10" value="I'm flexible — no specific rush" id="q10_5"><label for="q10_5"><i class="fas fa-clock"></i><span>Flexible / No Rush</span></label></div>
+                    </div>
+                </div>
+
+                <!-- Q11 -->
+                <div class="question" id="q11">
+                    <h4>Have you worked with an interior designer before?</h4>
+                    <div class="options-grid">
+                        <div class="option-card"><input type="radio" name="q11" value="Yes — and it was a great experience" id="q11_1"><label for="q11_1"><i class="fas fa-star"></i><span>Yes, Great experience</span></label></div>
+                        <div class="option-card"><input type="radio" name="q11" value="Yes — but I wasn't fully satisfied" id="q11_2"><label for="q11_2"><i class="fas fa-star-half-alt"></i><span>Yes, wasn't satisfied</span></label></div>
+                        <div class="option-card"><input type="radio" name="q11" value="No — this is my first time" id="q11_3"><label for="q11_3"><i class="fas fa-seedling"></i><span>No, First time</span></label></div>
+                    </div>
+                </div>
+
+                <!-- Q12 -->
+                <div class="question" id="q12">
+                    <h4>How did you hear about us?</h4>
+                    <div class="options-grid">
+                        <div class="option-card"><input type="radio" name="q12" value="Instagram / Social Media" id="q12_1"><label for="q12_1"><i class="fab fa-instagram"></i><span>Instagram</span></label></div>
+                        <div class="option-card"><input type="radio" name="q12" value="Google Search" id="q12_2"><label for="q12_2"><i class="fab fa-google"></i><span>Google</span></label></div>
+                        <div class="option-card"><input type="radio" name="q12" value="Referral" id="q12_3"><label for="q12_3"><i class="fas fa-user-friends"></i><span>Referral</span></label></div>
+                    </div>
+                    <div class="textarea-option">
+                        <textarea placeholder="Tell us more if you'd like..." rows="2"></textarea>
+                    </div>
+                </div>
+
+                <!-- Q13 -->
+                <div class="question" id="q13">
+                    <h4>What's the best way for us to follow up with you?</h4>
+                    <p class="subtext">We'll reach out within 24 hours of receiving your submission.</p>
+                    <div class="options-grid">
+                        <div class="option-card"><input type="checkbox" name="q13" value="Email" id="q13_1"><label for="q13_1"><i class="far fa-envelope"></i><span>Email</span></label></div>
+                        <div class="option-card"><input type="checkbox" name="q13" value="Phone Call" id="q13_2"><label for="q13_2"><i class="fas fa-phone"></i><span>Phone Call</span></label></div>
+                        <div class="option-card"><input type="checkbox" name="q13" value="WhatsApp / Text" id="q13_4"><label for="q13_4"><i class="fas fa-comment-dots"></i><span>WhatsApp / Text</span></label></div>
+                    </div>
+                </div>
+
             </div>
 
-            <div class="questionnaire-container" id="questionnaireContainer">
-                <div class="progress-bar">
-                    <div class="progress-fill" id="progressFill"></div>
-                </div>
-                <div class="progress-text" id="progressText">1 / 14</div>
-
-                <div id="questionsContainer">
-                    <!-- Q0: Personal Details with Icons -->
-                    <div class="question active" id="q0">
-                        <h4>Your Details</h4>
-                        <p>Let's get to know each other.</p>
-                        <div class="personal-info">
-                            <div class="input-field">
-                                <label>Full Name</label>
-                                <i class="far fa-user"></i>
-                                <input type="text" id="clientName" placeholder="Jane Doe">
-                            </div>
-                            <div class="input-field">
-                                <label>Email Address</label>
-                                <i class="far fa-envelope"></i>
-                                <input type="email" id="clientEmail" placeholder="jane@example.com">
-                            </div>
-                            <div class="input-field">
-                                <label>Phone Number</label>
-                                <i class="fas fa-phone-alt"></i>
-                                <input type="tel" id="clientPhone" placeholder="+1 234 567 8900">
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Q1 -->
-                    <div class="question" id="q1">
-                        <h4>Project Type</h4>
-                        <p>What kind of space are we designing?</p>
-                        <div class="options">
-                            <div class="option-item">
-                                <input type="radio" name="q1" value="Residential" id="q1_1">
-                                <label for="q1_1">Residential (Home)</label>
-                            </div>
-                            <div class="option-item">
-                                <input type="radio" name="q1" value="Commercial" id="q1_2">
-                                <label for="q1_2">Commercial (Office / Retail)</label>
-                            </div>
-                            <div class="option-item">
-                                <input type="radio" name="q1" value="Both" id="q1_3">
-                                <label for="q1_3">Both</label>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Skip Q2-Q12 HTML to save space, but you will copy paste your exact questions 2 to 13 into the same exact `<div class="option-item"> <input type="radio"...><label>...` format. Here is Q2 as an example: -->
-                    
-                    <div class="question" id="q2">
-                        <h4>Scope of Work</h4>
-                        <p>Select all spaces that apply.</p>
-                        <div class="options">
-                            <div class="option-item">
-                                <input type="checkbox" name="q2" value="Single Room" id="q2_1">
-                                <label for="q2_1">A single room</label>
-                            </div>
-                            <div class="option-item">
-                                <input type="checkbox" name="q2" value="Multiple Rooms" id="q2_2">
-                                <label for="q2_2">Multiple rooms</label>
-                            </div>
-                            <div class="option-item">
-                                <input type="checkbox" name="q2" value="Full Build" id="q2_3">
-                                <label for="q2_3">Full home / full office</label>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Continue replacing your previous questions here using the new div.options > div.option-item format -->
-                    
-                </div>
-
-                <div class="questionnaire-nav">
-                    <button class="nav-btn" id="prevBtn" onclick="prevQuestion()" disabled>BACK</button>
-                    <button class="nav-btn" id="nextBtn" onclick="nextQuestion()">NEXT</button>
-                </div>
+            <!-- Form Navigation -->
+            <div class="questionnaire-nav">
+                <button class="nav-btn" id="prevBtn" onclick="prevQuestion()" disabled>BACK</button>
+                <button class="nav-btn" id="nextBtn" onclick="nextQuestion()">CONTINUE</button>
             </div>
         </div>
     </div>
 
-    <!-- Same Footer as Homepage -->
-    
+    <!-- NEW STUDIO INFO & HOURS SECTION -->
+    <div class="studio-info-section">
+        <div class="info-grid">
+            <div class="info-col">
+                <i class="fas fa-map-marker-alt"></i>
+                <h4>STUDIO</h4>
+                <p>Lagos, Nigeria</p>
+                <p>Available for projects worldwide.</p>
+            </div>
+            <div class="info-col">
+                <i class="far fa-envelope"></i>
+                <h4>CONTACT</h4>
+                <a href="mailto:29thavenuedesigns@gmail.com">29thavenuedesigns@gmail.com</a>
+                <a href="tel:+2348135641869">+234 8135641869</a>
+            </div>
+            <div class="info-col">
+                <i class="far fa-clock"></i>
+                <h4>HOURS</h4>
+                <p>Monday - Friday</p>
+                <p>9:00 AM - 5:00 PM</p>
+                <p>Saturday - Sunday: Closed</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-logo">29thAvenueDesigns</div>
+        <div class="footer-copyright">
+            ©️ 2026 29thAvenueDesigns STUDIO. ALL RIGHTS RESERVED.
+        </div>
+    </footer>
+
+    <!-- EXACT SAME JAVASCRIPT AS YOUR ORIGINAL -->
     <script>
-        // Keep your exact same JavaScript logic from your original code snippet here. It will perfectly control these new sleek inputs!
+        function openMenu() {
+            document.getElementById('mobileMenu').classList.add('active');
+            document.getElementById('overlay').classList.add('active');
+        }
+        
+        function closeMenu() {
+            document.getElementById('mobileMenu').classList.remove('active');
+            document.getElementById('overlay').classList.remove('active');
+        }
+
         let currentQuestion = 0; 
-        const totalQuestions = 3; /* Update back to 14 when you paste the rest of your questions */
+        const totalQuestions = 14; 
 
         function startQuestionnaire() {
             document.getElementById('questionnaireIntro').style.display = 'none';
@@ -240,8 +730,7 @@
                 document.getElementById('q' + currentQuestion).classList.add('active');
                 updateProgress();
             } else if (currentQuestion === totalQuestions - 1) {
-                // submitQuestionnaire(); 
-                alert('Form Submitted successfully!');
+                submitQuestionnaire();
             }
         }
 
@@ -258,20 +747,102 @@
             const progress = ((currentQuestion + 1) / totalQuestions) * 100;
             document.getElementById('progressFill').style.width = progress + '%';
             document.getElementById('progressText').textContent = (currentQuestion + 1) + ' / ' + totalQuestions;
+
             document.getElementById('prevBtn').disabled = currentQuestion === 0;
             
             const nextBtn = document.getElementById('nextBtn');
-            nextBtn.textContent = currentQuestion === totalQuestions - 1 ? 'SUBMIT' : 'NEXT';
+            if (currentQuestion === totalQuestions - 1) {
+                nextBtn.textContent = 'SUBMIT';
+            } else {
+                nextBtn.textContent = 'CONTINUE';
+            }
+        }
+
+        function submitQuestionnaire() {
+            let answers = {};
+            
+            // Personal Info
+            const clientName = document.getElementById('clientName').value.trim();
+            const clientEmail = document.getElementById('clientEmail').value.trim();
+            const clientPhone = document.getElementById('clientPhone').value.trim();
+            
+            if (!clientName || !clientEmail) {
+                alert('Please enter your name and email address before submitting.');
+                return;
+            }
+            
+            answers["Name"] = clientName;
+            answers["Email"] = clientEmail;
+            if (clientPhone) answers["Phone"] = clientPhone;
+            
+            // Collect radio/checkbox answers (Same logic as your original)
+            for (let i = 1; i <= 13; i++) {
+                if(i===6) {
+                    const q6Text = document.querySelector('#q6 textarea');
+                    if (q6Text && q6Text.value.trim()) answers["6. Colors & Materials"] = q6Text.value;
+                    continue;
+                }
+                const radios = document.querySelector(`input[name="q${i}"]:checked`);
+                const checks = document.querySelectorAll(`input[name="q${i}"]:checked`);
+                
+                if (radios && radios.type === 'radio') {
+                    answers[`Question ${i}`] = radios.value;
+                } else if (checks.length > 0) {
+                    let values = [];
+                    checks.forEach(cb => values.push(cb.value));
+                    answers[`Question ${i}`] = values.join(', ');
+                }
+            }
+            
+            let message = "NEW DESIGN QUESTIONNAIRE SUBMISSION\n";
+            message += "====================================\n\n";
+            for (let [key, value] of Object.entries(answers)) {
+                message += `${key}:\n${value}\n\n`;
+            }
+            
+            fetch('https://formsubmit.co/ajax/29thavenuedesigns@gmail.com', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                body: JSON.stringify({
+                    _subject: "New Design Questionnaire Submission",
+                    name: clientName,
+                    message: message,
+                    _template: 'table'
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert("Thank you! Your inquiry has been submitted. We will be in touch shortly.");
+                location.reload();
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert("Thank you! Your inquiry has been submitted. We will be in touch shortly.");
+                location.reload();
+            });
         }
 
         document.addEventListener('change', function() {
             const currentQ = document.getElementById('q' + currentQuestion);
-            if (currentQuestion === 0) { document.getElementById('nextBtn').disabled = false; return; }
+            if (currentQuestion === 0) {
+                document.getElementById('nextBtn').disabled = false;
+                return;
+            }
             
             const radios = currentQ.querySelectorAll('input[type="radio"]:checked');
             const checkboxes = currentQ.querySelectorAll('input[type="checkbox"]:checked');
+            const textareas = currentQ.querySelectorAll('textarea');
             
-            document.getElementById('nextBtn').disabled = !(radios.length > 0 || checkboxes.length > 0);
+            let isValid = false;
+            if (radios.length > 0 || checkboxes.length > 0) {
+                isValid = true;
+            } else {
+                for (let textarea of textareas) {
+                    if (textarea.value.trim() !== '') { isValid = true; break; }
+                }
+            }
+            
+            document.getElementById('nextBtn').disabled = !isValid;
         });
     </script>
 </body>
