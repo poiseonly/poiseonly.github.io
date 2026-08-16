@@ -5,345 +5,373 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
     <title>29thAvenueDesigns | Studio</title>
     <link rel="icon" type="image/png" sizes="128x128" href="/favicon.png.jpeg">
-    <!-- Rest of your meta/links remain the same -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png.jpeg">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon.png.jpeg">
+    <link rel="apple-touch-icon" href="/favicon.png.jpeg">
+    <link rel="shortcut icon" href="/favicon.png.jpeg">
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-    }
-
-    body {
-        background-color: #ffffff;
-        color: #1a1a1a;
-        line-height: 1.5;
-    }
-
-    /* Mobile First Navigation */
-    .navbar {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 1rem 1.2rem;
-        background: #ffffff;
-        border-bottom: 1px solid #f0f0f0;
-        position: sticky;
-        top: 0;
-        z-index: 1000;
-    }
-
-    .logo {
-        font-size: 1.1rem;
-        font-weight: 500;
-        letter-spacing: 0.3px;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        max-width: 180px;
-    }
-
-    .menu-icon {
-        font-size: 1.5rem;
-        cursor: pointer;
-        flex-shrink: 0;
-    }
-
-    /* Desktop Navigation */
-    .desktop-nav {
-        display: flex;
-        gap: 2rem;
-        align-items: center;
-        position: relative;
-    }
-
-    .desktop-nav > a, .dropdown-toggle {
-        text-decoration: none;
-        color: #1a1a1a;
-        font-size: 0.85rem; /* Made slightly smaller for a sharper look */
-        text-transform: uppercase;
-        letter-spacing: 1.5px; /* Increased letter spacing */
-        padding: 0.5rem 0;
-        position: relative;
-        background: transparent;
-        border: none;
-        font-family: inherit;
-        cursor: pointer;
-    }
-
-    .dropdown-toggle i {
-        margin-left: 5px;
-        font-size: 0.75rem;
-        transition: transform 0.3s ease;
-    }
-
-    .dropdown {
-        position: relative;
-        display: inline-block;
-    }
-
-    .dropdown:hover .dropdown-toggle i {
-        transform: rotate(180deg);
-    }
-
-    .dropdown-menu {
-        position: absolute;
-        top: 100%;
-        left: 0;
-        background: #ffffff;
-        min-width: 200px;
-        box-shadow: 0 15px 40px rgba(0,0,0,0.05); /* Softer, modern shadow */
-        border: 1px solid #f5f5f5;
-        opacity: 0;
-        visibility: hidden;
-        transform: translateY(-10px);
-        transition: all 0.3s ease;
-        z-index: 1000;
-        padding: 1rem 0;
-    }
-
-    .dropdown:hover .dropdown-menu {
-        opacity: 1;
-        visibility: visible;
-        transform: translateY(0);
-    }
-
-    .dropdown-menu a {
-        display: block;
-        padding: 0.8rem 1.5rem;
-        text-decoration: none;
-        color: #1a1a1a;
-        font-size: 0.85rem;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        transition: all 0.2s ease;
-    }
-
-    .dropdown-menu a:hover {
-        background: #fcfcfc;
-        color: #b89b7b;
-        padding-left: 2rem;
-    }
-
-    /* Mobile Menu */
-    .mobile-menu {
-        position: fixed;
-        top: 0;
-        left: -100%;
-        width: 85%;
-        height: 100vh;
-        background: #ffffff;
-        z-index: 2000;
-        padding: 2rem 1.5rem;
-        transition: 0.4s cubic-bezier(0.77, 0, 0.175, 1);
-        overflow-y: auto;
-    }
-
-    .mobile-menu.active {
-        left: 0;
-    }
-
-    .close-menu {
-        text-align: right;
-        font-size: 1.5rem;
-        margin-bottom: 3rem;
-        cursor: pointer;
-        color: #1a1a1a;
-    }
-
-    .mobile-menu-links {
-        display: flex;
-        flex-direction: column;
-        gap: 1.5rem;
-    }
-
-    .mobile-menu-links a {
-        text-decoration: none;
-        color: #1a1a1a;
-        font-size: 1.1rem;
-        font-weight: 300;
-        text-transform: uppercase;
-        letter-spacing: 2px;
-        border-bottom: 1px solid #f5f5f5;
-        padding-bottom: 1rem;
-    }
-
-    .overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0,0,0,0.4);
-        backdrop-filter: blur(3px); /* Modern blur effect */
-        z-index: 1500;
-        display: none;
-    }
-
-    .overlay.active {
-        display: block;
-    }
-
-    /* Fading Gallery Section */
-    .gallery-section {
-        width: 100%;
-        padding: 0;
-        margin: 0;
-        position: relative; /* Added for absolute positioning of CTA */
-        overflow: hidden;
-    }
-
-    .slideshow-container {
-        position: relative;
-        width: 100%;
-        height: calc(100vh - 60px);
-        min-height: 400px;
-        overflow: hidden;
-    }
-
-    .slide {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        opacity: 0;
-        transition: opacity 2s ease-in-out;
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-    }
-
-    .slide::after {
-        content: '';
-        position: absolute;
-        top: 0; left: 0; width: 100%; height: 100%;
-        background: rgba(0,0,0,0.15); /* Slight dark overlay to make button pop */
-        z-index: 1;
-    }
-
-    .slide.active {
-        opacity: 1;
-        z-index: 0;
-    }
-
-    /* Slide images */
-    .slide-1 { background-image: url('https://res.cloudinary.com/de9pinegl/image/upload/v1782830677/IMG_9366.JPG_mjmjec.jpg'); }
-    .slide-2 { background-image: url('https://res.cloudinary.com/de9pinegl/image/upload/v1782830728/ABA03F76-E5F0-4C0B-9D76-8D5719B46F5D_nhrax4.jpg'); }
-    .slide-3 { background-image: url('https://res.cloudinary.com/de9pinegl/image/upload/v1782830680/IMG_9463.JPG_ncbcmj.jpg'); }
-    .slide-4 { background-image: url('https://res.cloudinary.com/de9pinegl/image/upload/v1786923313/IMG_3290.JPG_jmcftt.jpg'); }
-    .slide-5 { background-image: url('https://res.cloudinary.com/de9pinegl/image/upload/v1782830755/IMG_3275.JPG_kv4ofv.jpg'); }
-    .slide-6 { background-image: url('https://res.cloudinary.com/de9pinegl/image/upload/v1782830637/poise13_wh3rh4.jpg'); }
-    .slide-7 { background-image: url('https://res.cloudinary.com/de9pinegl/image/upload/v1782830655/poise4_nkmoxy.heic'); }
-
-    /* --- SHARP "HIRE US NOW" BUTTON --- */
-    .hero-cta {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        z-index: 10;
-        text-align: center;
-    }
-
-    .hire-us-btn {
-        display: inline-block;
-        padding: 1.2rem 3.5rem;
-        border: 1px solid #ffffff;
-        color: #ffffff;
-        text-decoration: none;
-        text-transform: uppercase;
-        letter-spacing: 3px;
-        font-size: 0.9rem;
-        background: rgba(0, 0, 0, 0.2);
-        backdrop-filter: blur(4px);
-        transition: all 0.4s ease;
-    }
-
-    .hire-us-btn:hover {
-        background: #ffffff;
-        color: #1a1a1a;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-    }
-
-    /* Footer */
-    .footer {
-        background: #1a1a1a;
-        color: #ffffff;
-        padding: 3rem 1.5rem;
-        text-align: center;
-        margin-top: 0;
-        width: 100%;
-    }
-
-    .footer-logo {
-        font-size: 1.5rem;
-        font-weight: 300;
-        letter-spacing: 1px;
-        margin-bottom: 0.8rem;
-        color: #ffffff;
-    }
-
-    .footer-email {
-        font-size: 0.95rem;
-        color: #b89b7b;
-        text-decoration: none;
-        display: inline-block;
-        margin-bottom: 1.5rem;
-        padding-bottom: 3px;
-        transition: color 0.3s;
-    }
-    
-    .footer-email:hover {
-        color: #ffffff;
-    }
-
-    .footer-social {
-        display: flex;
-        justify-content: center;
-        gap: 1.5rem;
-        margin: 1.5rem 0;
-    }
-
-    .footer-social a {
-        color: #ffffff;
-        font-size: 1.1rem;
-        transition: color 0.3s;
-    }
-    
-    .footer-social a:hover {
-        color: #b89b7b;
-    }
-
-    .footer-copyright {
-        font-size: 0.75rem;
-        color: #666;
-        margin-top: 2rem;
-        letter-spacing: 1px;
-    }
-
-    /* Desktop Styles */
-    @media (min-width: 768px) {
-        .navbar {
-            padding: 1.5rem 4rem;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
         }
-        .logo { font-size: 1.3rem; max-width: none; }
-        .menu-icon { display: none; }
-        .mobile-menu, .overlay { display: none; }
-        .desktop-nav { display: flex !important; gap: 3rem; }
-        .slideshow-container { height: calc(100vh - 80px); min-height: 600px; }
-        .footer-logo { font-size: 1.8rem; }
-        .footer-email { font-size: 1rem; }
-    }
+
+        body {
+            background-color: #ffffff;
+            color: #1a1a1a;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Navigation - matching contact page */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 2rem;
+            background: #ffffff;
+            border-bottom: 1px solid #f4f4f4;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.05);
+            gap: 2rem;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            font-size: 1.5rem;
+            text-decoration: none;
+            color: #1a1a1a;
+            transition: all 0.3s;
+            position: relative;
+            white-space: nowrap;
+        }
+        .logo::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #b89b7b;
+            transition: width 0.3s;
+        }
+        .logo:hover::after {
+            width: 100%;
+        }
+        .logo:hover {
+            color: #b89b7b;
+        }
+
+        .menu-icon { 
+            font-size: 1.5rem; 
+            cursor: pointer; 
+        }
+
+        .mobile-menu {
+            position: fixed; 
+            top: 0; 
+            left: -100%; 
+            width: 85%; 
+            height: 100vh;
+            background: #ffffff; 
+            z-index: 2000; 
+            padding: 2rem 1.5rem;
+            transition: 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+            box-shadow: 2px 0 20px rgba(0,0,0,0.05); 
+            overflow-y: auto;
+        }
+        .mobile-menu.active { left: 0; }
+        .close-menu { 
+            text-align: right; 
+            font-size: 1.5rem; 
+            margin-bottom: 2rem; 
+            cursor: pointer; 
+        }
+        .mobile-menu-links { 
+            display: flex; 
+            flex-direction: column; 
+            gap: 1.5rem; 
+        }
+        .mobile-menu-links a {
+            text-decoration: none; 
+            color: #1a1a1a; 
+            font-size: 1.1rem;
+            text-transform: uppercase; 
+            letter-spacing: 2px; 
+            font-weight: 600;
+            border-bottom: 1px solid #f4f4f4; 
+            padding-bottom: 1rem;
+        }
+
+        .overlay {
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%;
+            background: rgba(0,0,0,0.4); 
+            backdrop-filter: blur(3px);
+            z-index: 1500; 
+            display: none;
+        }
+        .overlay.active { display: block; }
+
+        .desktop-nav { display: none; }
+        .desktop-nav a, .dropdown-toggle {
+            text-decoration: none; 
+            color: #1a1a1a; 
+            font-size: 0.85rem;
+            text-transform: uppercase; 
+            letter-spacing: 1.5px; 
+            font-weight: 600;
+            padding: 0.5rem 0; 
+            cursor: pointer; 
+            background: transparent; 
+            border: none;
+            transition: all 0.3s;
+            position: relative;
+            white-space: nowrap;
+        }
+        .desktop-nav a::after, .dropdown-toggle::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #b89b7b;
+            transition: width 0.3s;
+        }
+        .desktop-nav a:hover::after, .dropdown-toggle:hover::after {
+            width: 100%;
+        }
+        .desktop-nav a:hover, .dropdown-toggle:hover {
+            color: #b89b7b;
+        }
+        .dropdown { position: relative; display: inline-block; }
+        .dropdown-toggle i { margin-left: 5px; font-size: 0.75rem; transition: transform 0.3s; }
+        .dropdown:hover .dropdown-toggle i { transform: rotate(180deg); }
+        .dropdown-menu {
+            position: absolute; 
+            top: 100%; 
+            left: 0; 
+            background: #ffffff;
+            min-width: 200px; 
+            box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+            border: 1px solid #f5f5f5; 
+            opacity: 0; 
+            visibility: hidden;
+            transform: translateY(-10px); 
+            transition: all 0.3s ease; 
+            z-index: 1000; 
+            padding: 1rem 0;
+            border-radius: 8px;
+        }
+        .dropdown:hover .dropdown-menu { 
+            opacity: 1; 
+            visibility: visible; 
+            transform: translateY(0); 
+        }
+        .dropdown-menu a {
+            display: block; 
+            padding: 0.8rem 1.5rem; 
+            text-decoration: none;
+            color: #1a1a1a; 
+            font-size: 0.85rem; 
+            text-transform: uppercase; 
+            letter-spacing: 1px; 
+            font-weight: 500;
+        }
+        .dropdown-menu a:hover { 
+            background: #fcfcfc; 
+            color: #b89b7b; 
+            padding-left: 2rem; 
+        }
+
+        /* Gallery Section */
+        .gallery-section {
+            width: 100%;
+            padding: 0;
+            margin: 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .slideshow-container {
+            position: relative;
+            width: 100%;
+            height: calc(100vh - 60px);
+            min-height: 500px;
+            overflow: hidden;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 2s ease-in-out;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .slide::after {
+            content: '';
+            position: absolute;
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0,0,0,0.4) 0%, rgba(20,20,20,0.2) 100%);
+            z-index: 1;
+        }
+
+        .slide.active {
+            opacity: 1;
+            z-index: 0;
+        }
+
+        .slide-1 { background-image: url('https://res.cloudinary.com/de9pinegl/image/upload/v1782830677/IMG_9366.JPG_mjmjec.jpg'); }
+        .slide-2 { background-image: url('https://res.cloudinary.com/de9pinegl/image/upload/v1782830728/ABA03F76-E5F0-4C0B-9D76-8D5719B46F5D_nhrax4.jpg'); }
+        .slide-3 { background-image: url('https://res.cloudinary.com/de9pinegl/image/upload/v1782830680/IMG_9463.JPG_ncbcmj.jpg'); }
+        .slide-4 { background-image: url('https://res.cloudinary.com/de9pinegl/image/upload/v1786923313/IMG_3290.JPG_jmcftt.jpg'); }
+        .slide-5 { background-image: url('https://res.cloudinary.com/de9pinegl/image/upload/v1782830755/IMG_3275.JPG_kv4ofv.jpg'); }
+        .slide-6 { background-image: url('https://res.cloudinary.com/de9pinegl/image/upload/v1782830637/poise13_wh3rh4.jpg'); }
+        .slide-7 { background-image: url('https://res.cloudinary.com/de9pinegl/image/upload/v1782830655/poise4_nkmoxy.heic'); }
+
+        /* CTA Button - matching contact page style */
+        .hero-cta {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10;
+            text-align: center;
+        }
+
+        .hire-us-btn {
+            display: inline-block;
+            padding: 1.2rem 3.5rem;
+            border: 2px solid #ffffff;
+            color: #ffffff;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2.5px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            border-radius: 50px;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .hire-us-btn:hover {
+            background: #ffffff;
+            color: #1a1a1a;
+            transform: translateY(-3px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        /* Footer - matching contact page */
+        .footer {
+            background: #1a1a1a; 
+            color: #ffffff; 
+            padding: 3rem 1.5rem;
+            text-align: center; 
+            margin-top: 0;
+        }
+        .footer-logo { 
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem; 
+            font-weight: 700; 
+            letter-spacing: 1px; 
+            margin-bottom: 0.8rem; 
+            color: #ffffff; 
+        }
+        .footer-email {
+            font-size: 0.95rem; 
+            color: #b89b7b; 
+            text-decoration: none;
+            display: inline-block; 
+            margin-bottom: 1.5rem; 
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        .footer-email:hover { color: #ffffff; }
+        .footer-social {
+            display: flex; 
+            justify-content: center; 
+            gap: 1.5rem; 
+            margin: 1.5rem 0;
+        }
+        .footer-social a {
+            color: #ffffff; 
+            font-size: 1.1rem; 
+            transition: color 0.3s;
+        }
+        .footer-social a:hover { color: #b89b7b; }
+        .footer-copyright { 
+            font-size: 0.75rem; 
+            color: #888; 
+            margin-top: 2rem; 
+            letter-spacing: 1px; 
+            font-weight: 500;
+        }
+
+        @media (min-width: 768px) {
+            .navbar { 
+                padding: 1.2rem 3rem; 
+            }
+            .desktop-nav { 
+                display: flex; 
+                gap: 2rem; 
+                align-items: center; 
+            }
+            .menu-icon, .mobile-menu, .overlay { display: none; }
+            .slideshow-container { 
+                height: calc(100vh - 80px); 
+                min-height: 600px; 
+            }
+            .footer-logo { font-size: 1.8rem; }
+        }
+
+        @media (min-width: 1024px) {
+            .navbar { 
+                padding: 1.2rem 4rem; 
+            }
+            .desktop-nav { 
+                gap: 2.5rem; 
+            }
+        }
+
+        @media (max-width: 767px) {
+            .hire-us-btn {
+                padding: 1rem 2.5rem;
+                font-size: 0.8rem;
+                letter-spacing: 2px;
+            }
+        }
     </style>
 </head>
 <body>
     <nav class="navbar">
-        <div class="logo">29thAvenueDesigns</div>
+        <a href="index.html" class="logo">29thAvenueDesigns</a>
         <div class="menu-icon" onclick="openMenu()"><i class="fas fa-bars"></i></div>
         <div class="desktop-nav">
-            <a href="/">HOME</a>
             <div class="dropdown">
                 <button class="dropdown-toggle">STUDIO <i class="fas fa-chevron-down"></i></button>
                 <div class="dropdown-menu">
@@ -352,20 +380,24 @@
                 </div>
             </div>
             <a href="work.html">PORTFOLIO</a>
-            <a href="process.html">OUR PROCESS</a>
-            <a href="contact.html">CONTACT</a>
+            <div class="dropdown">
+                <button class="dropdown-toggle">CONTACT <i class="fas fa-chevron-down"></i></button>
+                <div class="dropdown-menu">
+                    <a href="contact.html">CONTACT</a>
+                    <a href="collab.html">COLLAB</a>
+                </div>
+            </div>
         </div>
     </nav>
 
     <div class="mobile-menu" id="mobileMenu">
         <div class="close-menu" onclick="closeMenu()"><i class="fas fa-times"></i></div>
         <div class="mobile-menu-links">
-            <a href="/" onclick="closeMenu()">HOME</a>
             <a href="studio.html" onclick="closeMenu()">STUDIO</a>
             <a href="products.html" onclick="closeMenu()">PRODUCTS</a>
             <a href="work.html" onclick="closeMenu()">PORTFOLIO</a>
-            <a href="process.html" onclick="closeMenu()">OUR PROCESS</a>
             <a href="contact.html" onclick="closeMenu()">CONTACT</a>
+            <a href="collab.html" onclick="closeMenu()">COLLAB</a>
         </div>
     </div>
     <div class="overlay" id="overlay" onclick="closeMenu()"></div>
@@ -380,7 +412,6 @@
             <div class="slide slide-6"></div>
             <div class="slide slide-7"></div>
         </div>
-        <!-- NEW BUTTON CTA -->
         <div class="hero-cta">
             <a href="contact.html" class="hire-us-btn">HIRE US NOW</a>
         </div>
@@ -389,7 +420,7 @@
     <footer class="footer">
         <div class="footer-logo">29thAvenueDesigns</div>
         <a href="mailto:29thavenuedesigns@gmail.com" class="footer-email">29thavenuedesigns@gmail.com</a>
-        <p style="font-size: 0.85rem; letter-spacing: 1px; color: #aaa;">LAGOS, NIGERIA</p>
+        <p style="font-size: 0.85rem; letter-spacing: 1px; color: #aaa; font-weight: 500;">LAGOS, NIGERIA</p>
     
         <div class="footer-social">
             <a href="https://www.instagram.com/29thavenuedesigns/" target="_blank"><i class="fab fa-instagram"></i></a>
