@@ -179,7 +179,7 @@
             text-align: center;
         }
 
-        /* --- THE NEW OLIVEHAUS ICON GRID FORM --- */
+        /* --- THE OLIVEHAUS ICON GRID FORM --- */
         .options-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -277,7 +277,7 @@
         .nav-btn:hover:not(:disabled) { background: #1a1a1a; color: white; }
         .nav-btn:disabled { opacity: 0.2; cursor: not-allowed; border-color: #ccc; }
 
-        /* --- NEW STUDIO INFO & HOURS (Olivehaus Style) --- */
+        /* --- STUDIO INFO & HOURS --- */
         .studio-info-section {
             border-top: 1px solid #f0f0f0;
             padding: 5rem 1.5rem;
@@ -383,7 +383,7 @@
             <div class="progress-bar">
                 <div class="progress-fill" id="progressFill"></div>
             </div>
-            <div class="progress-text" id="progressText">1 / 14</div>
+            <div class="progress-text" id="progressText">1 / 12</div>
 
             <div id="questionsContainer">
                 
@@ -514,7 +514,7 @@
                     </div>
                 </div>
 
-                <!-- Q4 -->
+                <!-- Q4 (with INDIFFERENT added) -->
                 <div class="question" id="q4">
                     <h4>How would you describe where you are with your vision?</h4>
                     <div class="options-grid">
@@ -529,6 +529,10 @@
                         <div class="option-card">
                             <input type="radio" name="q4" value="I'm starting from scratch and open to full creative direction" id="q4_3">
                             <label for="q4_3"><i class="fas fa-magic"></i><span>Starting from Scratch</span></label>
+                        </div>
+                        <div class="option-card">
+                            <input type="radio" name="q4" value="Indifferent" id="q4_4">
+                            <label for="q4_4"><i class="fas fa-meh"></i><span>Indifferent</span></label>
                         </div>
                     </div>
                 </div>
@@ -562,100 +566,61 @@
                     </div>
                 </div>
 
-                <!-- Q7 (With requested Dollar icon for Cost) -->
+                <!-- Q7 was removed, Q8 becomes new Q7 (actual question id q7) -->
                 <div class="question" id="q7">
-                    <h4>Would you be open to structural changes?</h4>
-                    <p class="subtext">If recommended to achieve the best result.</p>
-                    <div class="options-grid">
-                        <div class="option-card">
-                            <input type="radio" name="q7" value="Yes, absolutely — whatever it takes" id="q7_1">
-                            <label for="q7_1"><i class="fas fa-hammer"></i><span>Yes, whatever it takes</span></label>
-                        </div>
-                        <div class="option-card">
-                            <input type="radio" name="q7" value="Maybe — it depends on the scope and cost" id="q7_2">
-                            <label for="q7_2"><i class="fas fa-dollar-sign"></i><span>Maybe, depends on cost</span></label>
-                        </div>
-                        <div class="option-card">
-                            <input type="radio" name="q7" value="No — I'd prefer to work within the existing structure" id="q7_3">
-                            <label for="q7_3"><i class="fas fa-paint-roller"></i><span>No, keep existing</span></label>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Q8 -->
-                <div class="question" id="q8">
                     <h4>Who will be living or working in this space?</h4>
                     <p class="subtext">Select all that apply.</p>
                     <div class="options-grid">
-                        <div class="option-card"><input type="checkbox" name="q8" value="Just me" id="q8_1"><label for="q8_1"><i class="fas fa-user"></i><span>Just me</span></label></div>
-                        <div class="option-card"><input type="checkbox" name="q8" value="Couple" id="q8_2"><label for="q8_2"><i class="fas fa-user-friends"></i><span>Couple</span></label></div>
-                        <div class="option-card"><input type="checkbox" name="q8" value="Family with young kids" id="q8_3"><label for="q8_3"><i class="fas fa-baby"></i><span>Young kids</span></label></div>
-                        <div class="option-card"><input type="checkbox" name="q8" value="Family with teenagers" id="q8_4"><label for="q8_4"><i class="fas fa-users"></i><span>Teenagers</span></label></div>
-                        <div class="option-card"><input type="checkbox" name="q8" value="Pets are involved 😊" id="q8_5"><label for="q8_5"><i class="fas fa-paw"></i><span>Pets</span></label></div>
+                        <div class="option-card"><input type="checkbox" name="q7" value="Just me" id="q7_1"><label for="q7_1"><i class="fas fa-user"></i><span>Just me</span></label></div>
+                        <div class="option-card"><input type="checkbox" name="q7" value="Couple" id="q7_2"><label for="q7_2"><i class="fas fa-user-friends"></i><span>Couple</span></label></div>
+                        <div class="option-card"><input type="checkbox" name="q7" value="Family with young kids" id="q7_3"><label for="q7_3"><i class="fas fa-baby"></i><span>Young kids</span></label></div>
+                        <div class="option-card"><input type="checkbox" name="q7" value="Family with teenagers" id="q7_4"><label for="q7_4"><i class="fas fa-users"></i><span>Teenagers</span></label></div>
+                        <div class="option-card"><input type="checkbox" name="q7" value="Pets are involved 😊" id="q7_5"><label for="q7_5"><i class="fas fa-paw"></i><span>Pets</span></label></div>
                     </div>
                 </div>
 
-                <!-- Q9 -->
-                <div class="question" id="q9">
-                    <h4>How are you thinking about furnishings for this project?</h4>
-                    <div class="options-grid">
-                        <div class="option-card">
-                            <input type="radio" name="q9" value="All new furniture and decor — fresh start" id="q9_1">
-                            <label for="q9_1"><i class="fas fa-box-open"></i><span>All new (Fresh Start)</span></label>
-                        </div>
-                        <div class="option-card">
-                            <input type="radio" name="q9" value="Mostly new, with a few existing pieces I love" id="q9_2">
-                            <label for="q9_2"><i class="fas fa-couch"></i><span>Mix of new & existing</span></label>
-                        </div>
-                        <div class="option-card">
-                            <input type="radio" name="q9" value="Mostly keeping what I have — just refreshing the space" id="q9_4">
-                            <label for="q9_4"><i class="fas fa-sync"></i><span>Keeping most pieces</span></label>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Q10 -->
-                <div class="question" id="q10">
+                <!-- Q9 was removed, Q10 becomes new Q8 (actual question id q8) -->
+                <div class="question" id="q8">
                     <h4>Do you have a timeframe in mind for completion?</h4>
                     <div class="options-grid">
-                        <div class="option-card"><input type="radio" name="q10" value="As soon as possible" id="q10_1"><label for="q10_1"><i class="fas fa-rocket"></i><span>ASAP</span></label></div>
-                        <div class="option-card"><input type="radio" name="q10" value="Within 1–3 months" id="q10_2"><label for="q10_2"><i class="fas fa-calendar-day"></i><span>1–3 months</span></label></div>
-                        <div class="option-card"><input type="radio" name="q10" value="Within 3–6 months" id="q10_3"><label for="q10_3"><i class="fas fa-calendar-alt"></i><span>3–6 months</span></label></div>
-                        <div class="option-card"><input type="radio" name="q10" value="I'm flexible — no specific rush" id="q10_5"><label for="q10_5"><i class="fas fa-clock"></i><span>Flexible / No Rush</span></label></div>
+                        <div class="option-card"><input type="radio" name="q8" value="As soon as possible" id="q8_1"><label for="q8_1"><i class="fas fa-rocket"></i><span>ASAP</span></label></div>
+                        <div class="option-card"><input type="radio" name="q8" value="Within 1–3 months" id="q8_2"><label for="q8_2"><i class="fas fa-calendar-day"></i><span>1–3 months</span></label></div>
+                        <div class="option-card"><input type="radio" name="q8" value="Within 3–6 months" id="q8_3"><label for="q8_3"><i class="fas fa-calendar-alt"></i><span>3–6 months</span></label></div>
+                        <div class="option-card"><input type="radio" name="q8" value="I'm flexible — no specific rush" id="q8_5"><label for="q8_5"><i class="fas fa-clock"></i><span>Flexible / No Rush</span></label></div>
                     </div>
                 </div>
 
-                <!-- Q11 -->
-                <div class="question" id="q11">
+                <!-- Q11 becomes new Q9 (actual question id q9) -->
+                <div class="question" id="q9">
                     <h4>Have you worked with an interior designer before?</h4>
                     <div class="options-grid">
-                        <div class="option-card"><input type="radio" name="q11" value="Yes — and it was a great experience" id="q11_1"><label for="q11_1"><i class="fas fa-star"></i><span>Yes, Great experience</span></label></div>
-                        <div class="option-card"><input type="radio" name="q11" value="Yes — but I wasn't fully satisfied" id="q11_2"><label for="q11_2"><i class="fas fa-star-half-alt"></i><span>Yes, wasn't satisfied</span></label></div>
-                        <div class="option-card"><input type="radio" name="q11" value="No — this is my first time" id="q11_3"><label for="q11_3"><i class="fas fa-seedling"></i><span>No, First time</span></label></div>
+                        <div class="option-card"><input type="radio" name="q9" value="Yes — and it was a great experience" id="q9_1"><label for="q9_1"><i class="fas fa-star"></i><span>Yes, Great experience</span></label></div>
+                        <div class="option-card"><input type="radio" name="q9" value="Yes — but I wasn't fully satisfied" id="q9_2"><label for="q9_2"><i class="fas fa-star-half-alt"></i><span>Yes, wasn't satisfied</span></label></div>
+                        <div class="option-card"><input type="radio" name="q9" value="No — this is my first time" id="q9_3"><label for="q9_3"><i class="fas fa-seedling"></i><span>No, First time</span></label></div>
                     </div>
                 </div>
 
-                <!-- Q12 -->
-                <div class="question" id="q12">
+                <!-- Q12 becomes new Q10 (actual question id q10) -->
+                <div class="question" id="q10">
                     <h4>How did you hear about us?</h4>
                     <div class="options-grid">
-                        <div class="option-card"><input type="radio" name="q12" value="Instagram / Social Media" id="q12_1"><label for="q12_1"><i class="fab fa-instagram"></i><span>Instagram</span></label></div>
-                        <div class="option-card"><input type="radio" name="q12" value="Google Search" id="q12_2"><label for="q12_2"><i class="fab fa-google"></i><span>Google</span></label></div>
-                        <div class="option-card"><input type="radio" name="q12" value="Referral" id="q12_3"><label for="q12_3"><i class="fas fa-user-friends"></i><span>Referral</span></label></div>
+                        <div class="option-card"><input type="radio" name="q10" value="Instagram / Social Media" id="q10_1"><label for="q10_1"><i class="fab fa-instagram"></i><span>Instagram</span></label></div>
+                        <div class="option-card"><input type="radio" name="q10" value="Google Search" id="q10_2"><label for="q10_2"><i class="fab fa-google"></i><span>Google</span></label></div>
+                        <div class="option-card"><input type="radio" name="q10" value="Referral" id="q10_3"><label for="q10_3"><i class="fas fa-user-friends"></i><span>Referral</span></label></div>
                     </div>
                     <div class="textarea-option">
                         <textarea placeholder="Tell us more if you'd like..." rows="2"></textarea>
                     </div>
                 </div>
 
-                <!-- Q13 -->
-                <div class="question" id="q13">
+                <!-- Q13 becomes new Q11 (actual question id q11) -->
+                <div class="question" id="q11">
                     <h4>What's the best way for us to follow up with you?</h4>
                     <p class="subtext">We'll reach out within 24 hours of receiving your submission.</p>
                     <div class="options-grid">
-                        <div class="option-card"><input type="checkbox" name="q13" value="Email" id="q13_1"><label for="q13_1"><i class="far fa-envelope"></i><span>Email</span></label></div>
-                        <div class="option-card"><input type="checkbox" name="q13" value="Phone Call" id="q13_2"><label for="q13_2"><i class="fas fa-phone"></i><span>Phone Call</span></label></div>
-                        <div class="option-card"><input type="checkbox" name="q13" value="WhatsApp / Text" id="q13_4"><label for="q13_4"><i class="fas fa-comment-dots"></i><span>WhatsApp / Text</span></label></div>
+                        <div class="option-card"><input type="checkbox" name="q11" value="Email" id="q11_1"><label for="q11_1"><i class="far fa-envelope"></i><span>Email</span></label></div>
+                        <div class="option-card"><input type="checkbox" name="q11" value="Phone Call" id="q11_2"><label for="q11_2"><i class="fas fa-phone"></i><span>Phone Call</span></label></div>
+                        <div class="option-card"><input type="checkbox" name="q11" value="WhatsApp / Text" id="q11_4"><label for="q11_4"><i class="fas fa-comment-dots"></i><span>WhatsApp / Text</span></label></div>
                     </div>
                 </div>
 
@@ -669,7 +634,7 @@
         </div>
     </div>
 
-    <!-- NEW STUDIO INFO & HOURS SECTION -->
+    <!-- STUDIO INFO & HOURS SECTION -->
     <div class="studio-info-section">
         <div class="info-grid">
             <div class="info-col">
@@ -702,7 +667,7 @@
         </div>
     </footer>
 
-    <!-- EXACT SAME JAVASCRIPT AS YOUR ORIGINAL -->
+    <!-- Javascript logic updated for 12 questions -->
     <script>
         function openMenu() {
             document.getElementById('mobileMenu').classList.add('active');
@@ -715,7 +680,8 @@
         }
 
         let currentQuestion = 0; 
-        const totalQuestions = 14; 
+        // Updated total: 0..11 = 12 questions (Q0 personal + Q1..Q11)
+        const totalQuestions = 12; 
 
         function startQuestionnaire() {
             document.getElementById('questionnaireIntro').style.display = 'none';
@@ -775,13 +741,18 @@
             answers["Email"] = clientEmail;
             if (clientPhone) answers["Phone"] = clientPhone;
             
-            // Collect radio/checkbox answers (Same logic as your original)
-            for (let i = 1; i <= 13; i++) {
-                if(i===6) {
+            // Collect answers for questions 1 to 11 (renamed IDs)
+            for (let i = 1; i <= 11; i++) {
+                // Question 6 (colors) originally was id q6, now still q6? Wait: we renumbered but kept original q6 id for colors. Actually colors question remains id="q6" in HTML. 
+                // But we shifted other questions: q7 (who lives), q8 (timeframe), q9 (worked before), q10 (hear about), q11 (follow up)
+                // Also question 3 (styles) and question 6 (colors) preserve their original ids.
+                // We need to handle textarea for q6 separately.
+                if (i === 6) {
                     const q6Text = document.querySelector('#q6 textarea');
                     if (q6Text && q6Text.value.trim()) answers["6. Colors & Materials"] = q6Text.value;
                     continue;
                 }
+                
                 const radios = document.querySelector(`input[name="q${i}"]:checked`);
                 const checks = document.querySelectorAll(`input[name="q${i}"]:checked`);
                 
