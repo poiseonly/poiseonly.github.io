@@ -11,12 +11,15 @@
     <link rel="shortcut icon" href="/favicon.png.jpeg">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
         }
 
         body {
@@ -26,7 +29,93 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        /* Navigation (Kept from your repository) */
+        /* Enhanced typography */
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+        .page-header h1 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 900;
+            letter-spacing: 2px;
+        }
+        .page-header p {
+            font-weight: 500;
+            color: #555;
+            letter-spacing: 0.3px;
+        }
+        .questionnaire-intro h3 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 900;
+            letter-spacing: 2px;
+            font-size: 2.2rem;
+            text-transform: uppercase;
+        }
+        .questionnaire-intro .start-btn {
+            font-weight: 700;
+            letter-spacing: 2.5px;
+            font-size: 0.9rem;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            box-shadow: 0 10px 35px rgba(0,0,0,0.2);
+            border: none;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .questionnaire-intro .start-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: 0.5s;
+            z-index: -1;
+        }
+        .questionnaire-intro .start-btn:hover::before {
+            left: 100%;
+        }
+        .questionnaire-intro .start-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            background: linear-gradient(135deg, #2d2d2d 0%, #1a1a1a 100%);
+            color: #fff;
+        }
+        .question h4 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        .question p.subtext {
+            font-weight: 500;
+        }
+        .option-card label span {
+            font-weight: 600;
+            letter-spacing: 1.2px;
+        }
+        .input-field label {
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+        .info-col h4 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 800;
+            letter-spacing: 2.5px;
+            font-size: 1rem;
+        }
+        .info-col p, .info-col a {
+            font-weight: 500;
+            letter-spacing: 0.3px;
+        }
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+        }
+
+        /* Navigation */
         .navbar {
             display: flex;
             justify-content: space-between;
@@ -37,14 +126,7 @@
             position: sticky;
             top: 0;
             z-index: 1000;
-        }
-
-        .logo {
-            font-size: 1.2rem;
-            font-weight: 400;
-            letter-spacing: 1px;
-            text-decoration: none;
-            color: #1a1a1a;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.05);
         }
 
         .menu-icon { font-size: 1.5rem; cursor: pointer; }
@@ -60,7 +142,7 @@
         .mobile-menu-links { display: flex; flex-direction: column; gap: 1.5rem; }
         .mobile-menu-links a {
             text-decoration: none; color: #1a1a1a; font-size: 1.1rem;
-            text-transform: uppercase; letter-spacing: 2px;
+            text-transform: uppercase; letter-spacing: 2px; font-weight: 600;
             border-bottom: 1px solid #f4f4f4; padding-bottom: 1rem;
         }
 
@@ -74,7 +156,7 @@
         .desktop-nav { display: none; }
         .desktop-nav a, .dropdown-toggle {
             text-decoration: none; color: #1a1a1a; font-size: 0.85rem;
-            text-transform: uppercase; letter-spacing: 1.5px;
+            text-transform: uppercase; letter-spacing: 1.5px; font-weight: 600;
             padding: 0.5rem 0; cursor: pointer; background: transparent; border: none;
         }
         .dropdown { position: relative; display: inline-block; }
@@ -82,35 +164,125 @@
         .dropdown:hover .dropdown-toggle i { transform: rotate(180deg); }
         .dropdown-menu {
             position: absolute; top: 100%; left: 0; background: #ffffff;
-            min-width: 200px; box-shadow: 0 15px 40px rgba(0,0,0,0.05);
+            min-width: 200px; box-shadow: 0 15px 40px rgba(0,0,0,0.08);
             border: 1px solid #f5f5f5; opacity: 0; visibility: hidden;
             transform: translateY(-10px); transition: all 0.3s ease; z-index: 1000; padding: 1rem 0;
+            border-radius: 8px;
         }
         .dropdown:hover .dropdown-menu { opacity: 1; visibility: visible; transform: translateY(0); }
         .dropdown-menu a {
             display: block; padding: 0.8rem 1.5rem; text-decoration: none;
-            color: #1a1a1a; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px;
+            color: #1a1a1a; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; font-weight: 500;
         }
         .dropdown-menu a:hover { background: #fcfcfc; color: #b89b7b; padding-left: 2rem; }
 
-        /* Modern Page Header */
-        .page-header {
-            padding: 5rem 1.5rem 2rem;
+        /* Background image section */
+        .hero-inquire-section {
+            position: relative;
+            background-image: url('https://res.cloudinary.com/de9pinegl/image/upload/v1786910451/IMG_5351_s1coc5.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            padding: 6rem 1.5rem;
             text-align: center;
+            color: #ffffff;
+        }
+        .hero-inquire-section::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(135deg, rgba(0,0,0,0.7) 0%, rgba(20,20,20,0.5) 100%);
+            z-index: 1;
+        }
+        .hero-inquire-content {
+            position: relative;
+            z-index: 2;
             max-width: 800px;
             margin: 0 auto;
         }
-        .page-header h1 {
-            font-size: 2.5rem;
-            font-weight: 300;
+        .hero-inquire-content h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 900;
             letter-spacing: 3px;
             text-transform: uppercase;
             margin-bottom: 1.5rem;
+            text-shadow: 0 4px 15px rgba(0,0,0,0.3);
         }
-        .page-header p {
-            color: #666;
-            font-size: 1rem;
+        .hero-inquire-content p {
+            font-size: 1.2rem;
+            font-weight: 500;
             line-height: 1.8;
+            color: #f0f0f0;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+
+        /* Studio info cards inside hero */
+        .studio-info-cards-container {
+            position: relative;
+            z-index: 2;
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            padding: 3rem 1.5rem;
+        }
+        .info-card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: 16px;
+            padding: 2.5rem 1.5rem;
+            text-align: center;
+            color: #ffffff;
+            transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            cursor: default;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+        .info-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            background: rgba(255, 255, 255, 0.25);
+            border-color: rgba(255, 255, 255, 0.5);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+        }
+        .info-card i {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: #ffffff;
+            text-shadow: 0 0 20px rgba(255,255,255,0.5);
+            transition: all 0.5s;
+        }
+        .info-card:hover i {
+            transform: scale(1.2) rotate(5deg);
+            color: #ffd700;
+        }
+        .info-card h4 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 800;
+            letter-spacing: 2px;
+            font-size: 1.1rem;
+            margin-bottom: 1.2rem;
+            text-transform: uppercase;
+            color: #ffffff;
+        }
+        .info-card p, .info-card a {
+            color: #f0f0f0;
+            font-size: 0.95rem;
+            font-weight: 500;
+            line-height: 1.7;
+            text-decoration: none;
+            display: block;
+            transition: color 0.3s;
+        }
+        .info-card a:hover {
+            color: #ffd700;
+        }
+
+        /* Page header below hero (hidden for inquire section) */
+        .page-header {
+            display: none;
         }
 
         /* Questionnaire Section */
@@ -123,32 +295,43 @@
         .questionnaire-intro {
             text-align: center;
             padding: 4rem 2rem;
-            background: #fafafa;
-            border: 1px solid #f0f0f0;
+            background: linear-gradient(135deg, #fafafa 0%, #ffffff 100%);
+            border: 1px solid #e8e8e8;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.05);
+            margin-top: -2rem;
+            position: relative;
         }
         .questionnaire-intro h3 {
-            font-size: 1.8rem;
-            font-weight: 300;
+            font-size: 2.2rem;
+            font-weight: 900;
             margin-bottom: 1rem;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
+            background: linear-gradient(135deg, #1a1a1a, #4a4a4a);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .questionnaire-intro p {
+            color: #555;
+            font-weight: 500;
         }
         .questionnaire-intro .start-btn {
             display: inline-block;
-            padding: 1rem 3rem;
-            background: #1a1a1a;
+            padding: 1.2rem 3.5rem;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
             color: #ffffff;
             text-decoration: none;
             text-transform: uppercase;
-            letter-spacing: 2px;
-            font-size: 0.85rem;
-            border: 1px solid #1a1a1a;
+            letter-spacing: 2.5px;
+            font-size: 0.9rem;
+            border: none;
             cursor: pointer;
-            transition: all 0.3s;
+            border-radius: 50px;
+            transition: all 0.4s;
             margin-top: 2rem;
-        }
-        .questionnaire-intro .start-btn:hover {
-            background: #ffffff;
-            color: #1a1a1a;
+            font-weight: 700;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
         }
 
         .questionnaire-container {
@@ -160,26 +343,26 @@
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
         .progress-bar { width: 100%; height: 1px; background: #e0e0e0; margin: 2rem 0; position: relative; }
-        .progress-fill { height: 2px; background: #1a1a1a; width: 0%; transition: width 0.4s ease; position: absolute; top: -0.5px; }
-        .progress-text { text-align: right; font-size: 0.75rem; color: #888; letter-spacing: 1px; margin-top: 1rem; }
+        .progress-fill { height: 3px; background: linear-gradient(90deg, #1a1a1a, #b89b7b); width: 0%; transition: width 0.4s ease; position: absolute; top: -1px; }
+        .progress-text { text-align: right; font-size: 0.8rem; color: #888; letter-spacing: 1px; font-weight: 600; margin-top: 1rem; }
 
         .question { display: none; }
         .question.active { display: block; animation: fadeIn 0.4s ease; }
 
         .question h4 {
-            font-size: 1.8rem;
-            font-weight: 300;
+            font-size: 2rem;
+            font-weight: 700;
             margin-bottom: 1rem;
             text-align: center;
         }
         .question p.subtext {
-            color: #888;
-            font-size: 0.95rem;
+            color: #666;
+            font-size: 1rem;
             margin-bottom: 3rem;
             text-align: center;
+            font-weight: 500;
         }
 
-        /* --- THE OLIVEHAUS ICON GRID FORM --- */
         .options-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -200,9 +383,10 @@
             text-align: center;
             padding: 2.5rem 1rem;
             background: #ffffff;
-            border: 1px solid #e5e5e5;
+            border: 2px solid #e5e5e5;
+            border-radius: 12px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             height: 100%;
         }
 
@@ -210,44 +394,46 @@
             font-size: 1.8rem;
             margin-bottom: 1.2rem;
             color: #1a1a1a;
-            transition: all 0.3s ease;
+            transition: all 0.4s;
         }
 
         .option-card label span {
             font-size: 0.8rem;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 1.2px;
             color: #4a4a4a;
             line-height: 1.4;
+            font-weight: 600;
         }
 
         .option-card label:hover {
-            border-color: #1a1a1a;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+            border-color: #b89b7b;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+            transform: translateY(-5px);
         }
 
-        /* Active State */
         .option-card input:checked + label {
             background: #fafafa;
             border-color: #1a1a1a;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
         }
         .option-card input:checked + label i {
             color: #b89b7b;
-            transform: scale(1.1);
+            transform: scale(1.2);
         }
         .option-card input:checked + label span {
             color: #1a1a1a;
-            font-weight: 500;
+            font-weight: 700;
         }
 
-        /* Standard Textareas & Inputs */
         .textarea-option { margin-top: 2rem; }
         .textarea-option textarea {
-            width: 100%; padding: 1.5rem; border: 1px solid #e5e5e5;
+            width: 100%; padding: 1.5rem; border: 2px solid #e5e5e5;
             font-size: 0.95rem; resize: vertical; background: #fafafa;
-            font-family: inherit; transition: 0.3s;
+            font-family: inherit; transition: 0.3s; border-radius: 10px;
+            font-weight: 500;
         }
-        .textarea-option textarea:focus { outline: none; border-color: #1a1a1a; background: #fff; }
+        .textarea-option textarea:focus { outline: none; border-color: #1a1a1a; background: #fff; box-shadow: 0 5px 20px rgba(0,0,0,0.05); }
 
         .personal-info {
             display: flex; flex-direction: column; gap: 2rem; margin: 3rem 0;
@@ -255,78 +441,52 @@
         }
         .input-field { position: relative; }
         .input-field label {
-            font-size: 0.75rem; font-weight: 500; text-transform: uppercase;
-            letter-spacing: 1.5px; color: #666; display: block; margin-bottom: 0.5rem;
+            font-size: 0.75rem; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 2px; color: #666; display: block; margin-bottom: 0.5rem;
         }
         .input-field input {
-            width: 100%; padding: 1rem 0; border: none; border-bottom: 1px solid #ddd;
+            width: 100%; padding: 1rem 0; border: none; border-bottom: 2px solid #ddd;
             font-size: 1.1rem; background: transparent; transition: 0.3s; border-radius: 0;
+            font-weight: 500;
         }
-        .input-field input:focus { outline: none; border-bottom-color: #1a1a1a; }
+        .input-field input:focus { outline: none; border-bottom-color: #b89b7b; }
 
-        /* Navigation Buttons */
         .questionnaire-nav {
             display: flex; justify-content: space-between; margin-top: 4rem;
             border-top: 1px solid #f0f0f0; padding-top: 2rem;
         }
         .nav-btn {
-            padding: 1rem 3rem; background: transparent; border: 1px solid #1a1a1a;
+            padding: 1rem 3rem; background: transparent; border: 2px solid #1a1a1a;
             color: #1a1a1a; cursor: pointer; font-size: 0.8rem;
-            text-transform: uppercase; letter-spacing: 2px; transition: 0.3s;
+            text-transform: uppercase; letter-spacing: 2px; transition: all 0.3s;
+            font-weight: 700; border-radius: 50px;
         }
-        .nav-btn:hover:not(:disabled) { background: #1a1a1a; color: white; }
+        .nav-btn:hover:not(:disabled) { background: #1a1a1a; color: white; transform: translateY(-2px); box-shadow: 0 10px 25px rgba(0,0,0,0.15); }
         .nav-btn:disabled { opacity: 0.2; cursor: not-allowed; border-color: #ccc; }
-
-        /* --- STUDIO INFO & HOURS --- */
-        .studio-info-section {
-            border-top: 1px solid #f0f0f0;
-            padding: 5rem 1.5rem;
-            background: #ffffff;
-        }
-        
-        .info-grid {
-            max-width: 1000px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 3rem;
-            text-align: center;
-        }
-
-        .info-col h4 {
-            font-size: 0.85rem;
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 1.5rem;
-            color: #1a1a1a;
-        }
-
-        .info-col p, .info-col a {
-            color: #666;
-            font-size: 0.95rem;
-            line-height: 1.8;
-            margin-bottom: 0.5rem;
-            text-decoration: none;
-            display: block;
-            transition: color 0.3s;
-        }
-
-        .info-col a:hover { color: #b89b7b; }
-        .info-col i { font-size: 1.2rem; color: #b89b7b; margin-bottom: 1rem; display: block; }
 
         /* Footer */
         .footer {
             background: #1a1a1a; color: #ffffff; padding: 3rem 1.5rem;
             text-align: center; margin-top: 0;
         }
-        .footer-logo { font-size: 1.5rem; font-weight: 300; letter-spacing: 1px; margin-bottom: 2rem; color: #ffffff; }
-        .footer-copyright { font-size: 0.75rem; color: #666; letter-spacing: 1px; }
+        .footer-logo { font-size: 1.5rem; font-weight: 700; letter-spacing: 1px; margin-bottom: 2rem; color: #ffffff; }
+        .footer-copyright { font-size: 0.75rem; color: #888; letter-spacing: 1px; font-weight: 500; }
 
         @media (min-width: 768px) {
             .navbar { padding: 1.5rem 4rem; }
             .desktop-nav { display: flex; gap: 3rem; align-items: center; }
             .menu-icon, .mobile-menu, .overlay { display: none; }
+            .hero-inquire-content h1 { font-size: 4rem; }
+            .hero-inquire-section { padding: 8rem 2rem; }
+        }
+
+        @media (max-width: 767px) {
+            .hero-inquire-content h1 { font-size: 2.5rem; }
+            .hero-inquire-section { padding: 4rem 1rem; }
+            .info-card { padding: 2rem 1rem; }
+            .questionnaire-intro { padding: 2rem 1rem; }
+            .questionnaire-intro h3 { font-size: 1.5rem; }
+            .question h4 { font-size: 1.5rem; }
         }
     </style>
 </head>
@@ -364,10 +524,35 @@
     </div>
     <div class="overlay" id="overlay" onclick="closeMenu()"></div>
 
-    <!-- Header -->
-    <div class="page-header">
-        <h1>INQUIRE</h1>
-        <p>Whether you'd like to partner with our studio or start your design journey, we're here to bring your vision to life. Please fill out our brief inquiry form below.</p>
+    <!-- HERO INQUIRE SECTION WITH BACKGROUND IMAGE -->
+    <div class="hero-inquire-section">
+        <div class="hero-inquire-content">
+            <h1>INQUIRE</h1>
+            <p>Whether you'd like to partner with our studio or start your design journey, we're here to bring your vision to life. Please fill out our brief inquiry form below.</p>
+        </div>
+        
+        <!-- Studio Info Cards inside hero section -->
+        <div class="studio-info-cards-container">
+            <div class="info-card">
+                <i class="fas fa-map-marker-alt"></i>
+                <h4>STUDIO</h4>
+                <p>Lagos, Nigeria</p>
+                <p>Available for projects worldwide.</p>
+            </div>
+            <div class="info-card">
+                <i class="far fa-envelope"></i>
+                <h4>CONTACT</h4>
+                <a href="mailto:29thavenuedesigns@gmail.com">29thavenuedesigns@gmail.com</a>
+                <a href="tel:+2348135641869">+234 8135641869</a>
+            </div>
+            <div class="info-card">
+                <i class="far fa-clock"></i>
+                <h4>HOURS</h4>
+                <p>Monday - Friday</p>
+                <p>9:00 AM - 5:00 PM</p>
+                <p>Saturday - Sunday: Closed</p>
+            </div>
+        </div>
     </div>
 
     <!-- Main Questionnaire Section -->
@@ -375,7 +560,7 @@
         
         <div class="questionnaire-intro" id="questionnaireIntro">
             <h3>Start Your Project</h3>
-            <p style="color: #666;">Take our design questionnaire and let us understand your vision.</p>
+            <p>Take our design questionnaire and let us understand your vision.</p>
             <button class="start-btn" onclick="startQuestionnaire()">Begin Inquiry</button>
         </div>
 
@@ -482,7 +667,7 @@
                     </div>
                 </div>
 
-                <!-- Q3 -->
+                <!-- Q3 with INDIFFERENT added -->
                 <div class="question" id="q3">
                     <h4>Which style feels most like you?</h4>
                     <p class="subtext">Don't worry if you're between styles — just pick what resonates most.</p>
@@ -511,14 +696,14 @@
                             <input type="checkbox" name="q3" value="Luxury & Refined" id="q3_6">
                             <label for="q3_6"><i class="fas fa-gem"></i><span>Luxury & Refined</span></label>
                         </div>
-                         <div class="option-card">
-                            <input type="radio" name="q4" value="Indifferent" id="q3_7">
+                        <div class="option-card">
+                            <input type="checkbox" name="q3" value="Indifferent" id="q3_7">
                             <label for="q3_7"><i class="fas fa-meh"></i><span>Indifferent</span></label>
                         </div>
                     </div>
                 </div>
 
-                <!-- Q4 (with INDIFFERENT added) -->
+                <!-- Q4 -->
                 <div class="question" id="q4">
                     <h4>How would you describe where you are with your vision?</h4>
                     <div class="options-grid">
@@ -534,7 +719,6 @@
                             <input type="radio" name="q4" value="I'm starting from scratch and open to full creative direction" id="q4_3">
                             <label for="q4_3"><i class="fas fa-magic"></i><span>Starting from Scratch</span></label>
                         </div>
-                       
                     </div>
                 </div>
 
@@ -567,7 +751,7 @@
                     </div>
                 </div>
 
-                <!-- Q7 was removed, Q8 becomes new Q7 (actual question id q7) -->
+                <!-- Q7 -->
                 <div class="question" id="q7">
                     <h4>Who will be living or working in this space?</h4>
                     <p class="subtext">Select all that apply.</p>
@@ -580,7 +764,7 @@
                     </div>
                 </div>
 
-                <!-- Q9 was removed, Q10 becomes new Q8 (actual question id q8) -->
+                <!-- Q8 -->
                 <div class="question" id="q8">
                     <h4>Do you have a timeframe in mind for completion?</h4>
                     <div class="options-grid">
@@ -591,7 +775,7 @@
                     </div>
                 </div>
 
-                <!-- Q11 becomes new Q9 (actual question id q9) -->
+                <!-- Q9 -->
                 <div class="question" id="q9">
                     <h4>Have you worked with an interior designer before?</h4>
                     <div class="options-grid">
@@ -601,7 +785,7 @@
                     </div>
                 </div>
 
-                <!-- Q12 becomes new Q10 (actual question id q10) -->
+                <!-- Q10 -->
                 <div class="question" id="q10">
                     <h4>How did you hear about us?</h4>
                     <div class="options-grid">
@@ -614,7 +798,7 @@
                     </div>
                 </div>
 
-                <!-- Q13 becomes new Q11 (actual question id q11) -->
+                <!-- Q11 -->
                 <div class="question" id="q11">
                     <h4>What's the best way for us to follow up with you?</h4>
                     <p class="subtext">We'll reach out within 24 hours of receiving your submission.</p>
@@ -635,31 +819,6 @@
         </div>
     </div>
 
-    <!-- STUDIO INFO & HOURS SECTION -->
-    <div class="studio-info-section">
-        <div class="info-grid">
-            <div class="info-col">
-                <i class="fas fa-map-marker-alt"></i>
-                <h4>STUDIO</h4>
-                <p>Lagos, Nigeria</p>
-                <p>Available for projects worldwide.</p>
-            </div>
-            <div class="info-col">
-                <i class="far fa-envelope"></i>
-                <h4>CONTACT</h4>
-                <a href="mailto:29thavenuedesigns@gmail.com">29thavenuedesigns@gmail.com</a>
-                <a href="tel:+2348135641869">+234 8135641869</a>
-            </div>
-            <div class="info-col">
-                <i class="far fa-clock"></i>
-                <h4>HOURS</h4>
-                <p>Monday - Friday</p>
-                <p>9:00 AM - 5:00 PM</p>
-                <p>Saturday - Sunday: Closed</p>
-            </div>
-        </div>
-    </div>
-
     <!-- Footer -->
     <footer class="footer">
         <div class="footer-logo">29thAvenueDesigns</div>
@@ -668,7 +827,6 @@
         </div>
     </footer>
 
-    <!-- Javascript logic updated for 12 questions -->
     <script>
         function openMenu() {
             document.getElementById('mobileMenu').classList.add('active');
@@ -681,7 +839,6 @@
         }
 
         let currentQuestion = 0; 
-        // Updated total: 0..11 = 12 questions (Q0 personal + Q1..Q11)
         const totalQuestions = 12; 
 
         function startQuestionnaire() {
@@ -728,7 +885,6 @@
         function submitQuestionnaire() {
             let answers = {};
             
-            // Personal Info
             const clientName = document.getElementById('clientName').value.trim();
             const clientEmail = document.getElementById('clientEmail').value.trim();
             const clientPhone = document.getElementById('clientPhone').value.trim();
@@ -742,12 +898,7 @@
             answers["Email"] = clientEmail;
             if (clientPhone) answers["Phone"] = clientPhone;
             
-            // Collect answers for questions 1 to 11 (renamed IDs)
             for (let i = 1; i <= 11; i++) {
-                // Question 6 (colors) originally was id q6, now still q6? Wait: we renumbered but kept original q6 id for colors. Actually colors question remains id="q6" in HTML. 
-                // But we shifted other questions: q7 (who lives), q8 (timeframe), q9 (worked before), q10 (hear about), q11 (follow up)
-                // Also question 3 (styles) and question 6 (colors) preserve their original ids.
-                // We need to handle textarea for q6 separately.
                 if (i === 6) {
                     const q6Text = document.querySelector('#q6 textarea');
                     if (q6Text && q6Text.value.trim()) answers["6. Colors & Materials"] = q6Text.value;
