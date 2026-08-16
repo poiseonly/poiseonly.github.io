@@ -22,6 +22,13 @@
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
         }
 
+        html, body {
+            overflow-x: hidden;
+            width: 100%;
+            max-width: 100%;
+            position: relative;
+        }
+
         body {
             background-color: #ffffff;
             color: #1a1a1a;
@@ -250,16 +257,29 @@
         .slide-4 { background-image: url('https://res.cloudinary.com/de9pinegl/image/upload/v1786923313/IMG_3290.JPG_jmcftt.jpg'); }
         .slide-5 { background-image: url('https://res.cloudinary.com/de9pinegl/image/upload/v1782830755/IMG_3275.JPG_kv4ofv.jpg'); }
         .slide-6 { background-image: url('https://res.cloudinary.com/de9pinegl/image/upload/v1782830637/poise13_wh3rh4.jpg'); }
-        .slide-7 { background-image: url('https://res.cloudinary.com/de9pinegl/image/upload/v1782830733/2C826A09-1F93-4521-891F-2AAF544B2A07_fghgik.jpg'); }
+        .slide-7 { background-image: url('https://res.cloudinary.com/de9pinegl/image/upload/v1782830655/poise4_nkmoxy.heic'); }
 
-        /* CTA Button - matching contact page style */
-        .hero-cta {
+        /* Hero content - tagline and CTA */
+        .hero-content {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
             z-index: 10;
             text-align: center;
+            width: 90%;
+            max-width: 800px;
+        }
+
+        .hero-tagline {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: #ffffff;
+            margin-bottom: 2.5rem;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.4);
+            line-height: 1.3;
         }
 
         .hire-us-btn {
@@ -293,6 +313,7 @@
             padding: 3rem 1.5rem;
             text-align: center; 
             margin-top: 0;
+            width: 100%;
         }
         .footer-logo { 
             font-family: 'Playfair Display', serif;
@@ -347,6 +368,10 @@
                 min-height: 600px; 
             }
             .footer-logo { font-size: 1.8rem; }
+            .hero-tagline {
+                font-size: 3.5rem;
+                letter-spacing: 3px;
+            }
         }
 
         @media (min-width: 1024px) {
@@ -359,6 +384,11 @@
         }
 
         @media (max-width: 767px) {
+            .hero-tagline {
+                font-size: 1.8rem;
+                letter-spacing: 1.5px;
+                margin-bottom: 2rem;
+            }
             .hire-us-btn {
                 padding: 1rem 2.5rem;
                 font-size: 0.8rem;
@@ -412,7 +442,8 @@
             <div class="slide slide-6"></div>
             <div class="slide slide-7"></div>
         </div>
-        <div class="hero-cta">
+        <div class="hero-content">
+            <h2 class="hero-tagline">Every room tells a story, we write good ones</h2>
             <a href="contact.html" class="hire-us-btn">HIRE US NOW</a>
         </div>
     </section>
