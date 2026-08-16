@@ -259,18 +259,18 @@
             text-shadow: 0 2px 8px rgba(0,0,0,0.3);
         }
 
-        /* Studio info cards inside hero */
-        .studio-info-cards-container {
+        /* Contact buttons in hero */
+        .contact-buttons-container {
             position: relative;
             z-index: 2;
             max-width: 1100px;
             margin: 0 auto;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 2rem;
             padding: 3rem 1.5rem;
         }
-        .info-card {
+        .contact-card {
             background: rgba(255, 255, 255, 0.15);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
@@ -280,27 +280,29 @@
             text-align: center;
             color: #ffffff;
             transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            cursor: default;
+            cursor: pointer;
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            text-decoration: none;
+            display: block;
         }
-        .info-card:hover {
+        .contact-card:hover {
             transform: translateY(-15px) scale(1.02);
             background: rgba(255, 255, 255, 0.25);
             border-color: rgba(255, 255, 255, 0.5);
             box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
         }
-        .info-card i {
+        .contact-card i {
             font-size: 2.5rem;
             margin-bottom: 1.5rem;
             color: #ffffff;
             text-shadow: 0 0 20px rgba(255,255,255,0.5);
             transition: all 0.5s;
         }
-        .info-card:hover i {
+        .contact-card:hover i {
             transform: scale(1.2) rotate(5deg);
             color: #ffd700;
         }
-        .info-card h4 {
+        .contact-card h4 {
             font-family: 'Playfair Display', serif;
             font-weight: 800;
             letter-spacing: 2px;
@@ -309,17 +311,11 @@
             text-transform: uppercase;
             color: #ffffff;
         }
-        .info-card p, .info-card a {
+        .contact-card p {
             color: #f0f0f0;
             font-size: 0.95rem;
             font-weight: 500;
             line-height: 1.7;
-            text-decoration: none;
-            display: block;
-            transition: color 0.3s;
-        }
-        .info-card a:hover {
-            color: #ffd700;
         }
 
         /* Page header below hero (hidden for inquire section) */
@@ -506,14 +502,14 @@
         .nav-btn:hover:not(:disabled) { background: #1a1a1a; color: white; transform: translateY(-2px); box-shadow: 0 10px 25px rgba(0,0,0,0.15); }
         .nav-btn:disabled { opacity: 0.2; cursor: not-allowed; border-color: #ccc; }
 
-        /* Process Section */
+        /* Process Section - OliverHaus style */
         .process-section {
             background: linear-gradient(135deg, #f9f9f9 0%, #ffffff 100%);
             padding: 5rem 1.5rem;
             margin-top: 2rem;
         }
         .process-container {
-            max-width: 1000px;
+            max-width: 1200px;
             margin: 0 auto;
         }
         .process-header {
@@ -532,25 +528,39 @@
             color: #666;
             font-weight: 500;
         }
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
         .process-step {
             background: #ffffff;
             border: 1px solid #e8e8e8;
             border-radius: 12px;
-            padding: 2rem;
-            margin-bottom: 2rem;
+            padding: 2.5rem 2rem;
             transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             box-shadow: 0 5px 20px rgba(0,0,0,0.03);
+            position: relative;
+            overflow: hidden;
+        }
+        .process-step::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #b89b7b, #d4c4b0);
+            transform: scaleX(0);
+            transition: transform 0.4s;
+        }
+        .process-step:hover::before {
+            transform: scaleX(1);
         }
         .process-step:hover {
             transform: translateY(-5px);
             box-shadow: 0 15px 35px rgba(0,0,0,0.08);
             border-color: #b89b7b;
-        }
-        .step-header {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
         }
         .step-number {
             font-size: 0.8rem;
@@ -558,22 +568,19 @@
             color: #b89b7b;
             text-transform: uppercase;
             letter-spacing: 2px;
+            margin-bottom: 1rem;
         }
         .step-title {
             font-family: 'Playfair Display', serif;
             font-weight: 700;
             font-size: 1.5rem;
             color: #1a1a1a;
+            margin-bottom: 1.5rem;
         }
         .step-content {
             color: #4a4a4a;
             font-weight: 500;
             line-height: 1.8;
-        }
-        .step-icon {
-            font-size: 2rem;
-            color: #b89b7b;
-            margin-bottom: 1rem;
         }
 
         /* CTA Section with background image */
@@ -678,6 +685,9 @@
             .hero-inquire-content h1 { font-size: 4rem; }
             .hero-inquire-section { padding: 8rem 2rem; }
             .cta-content h2 { font-size: 3rem; }
+            .process-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
 
         @media (min-width: 1024px) {
@@ -692,12 +702,15 @@
         @media (max-width: 767px) {
             .hero-inquire-content h1 { font-size: 2.5rem; }
             .hero-inquire-section { padding: 4rem 1rem; }
-            .info-card { padding: 2rem 1rem; }
+            .contact-card { padding: 2rem 1rem; }
             .questionnaire-intro { padding: 2rem 1rem; }
             .questionnaire-intro h3 { font-size: 1.5rem; }
             .question h4 { font-size: 1.5rem; }
             .cta-content h2 { font-size: 2rem; }
             .cta-btn { padding: 1rem 2rem; font-size: 0.8rem; }
+            .process-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -735,34 +748,31 @@
     </div>
     <div class="overlay" id="overlay" onclick="closeMenu()"></div>
 
-    <!-- HERO INQUIRE SECTION WITH BACKGROUND IMAGE -->
+    <!-- HERO CONTACT SECTION WITH BACKGROUND IMAGE -->
     <div class="hero-inquire-section">
         <div class="hero-inquire-content">
-            <h1>INQUIRE</h1>
-            <p>Whether you'd like to partner with our studio or start your design journey, we're here to bring your vision to life. Please fill out our brief inquiry form below.</p>
+            <h1>Contact Us</h1>
+            <p style="font-size: 1.5rem; font-weight: 600; margin-bottom: 0.5rem;">Every room tells a story, we write good ones</p>
+            <p>Reach us via call, WhatsApp or email and we will attend to you swiftly</p>
         </div>
         
-        <!-- Studio Info Cards inside hero section -->
-        <div class="studio-info-cards-container">
-            <div class="info-card">
-                <i class="fas fa-map-marker-alt"></i>
-                <h4>STUDIO</h4>
-                <p>Lagos, Nigeria</p>
-                <p>Available for projects worldwide.</p>
-            </div>
-            <div class="info-card">
+        <!-- Contact buttons in hero -->
+        <div class="contact-buttons-container">
+            <a href="tel:+2348135641869" class="contact-card">
+                <i class="fas fa-phone"></i>
+                <h4>CALL US</h4>
+                <p>+234 813 564 1869</p>
+            </a>
+            <a href="https://wa.me/2348135641869" target="_blank" rel="noopener noreferrer" class="contact-card">
+                <i class="fab fa-whatsapp"></i>
+                <h4>WHATSAPP</h4>
+                <p>Chat with us instantly</p>
+            </a>
+            <a href="mailto:29thavenuedesigns@gmail.com" class="contact-card">
                 <i class="far fa-envelope"></i>
-                <h4>CONTACT</h4>
-                <a href="mailto:29thavenuedesigns@gmail.com">29thavenuedesigns@gmail.com</a>
-                <a href="tel:+2348135641869">+234 8135641869</a>
-            </div>
-            <div class="info-card">
-                <i class="far fa-clock"></i>
-                <h4>HOURS</h4>
-                <p>Monday - Friday</p>
-                <p>9:00 AM - 5:00 PM</p>
-                <p>Saturday - Sunday: Closed</p>
-            </div>
+                <h4>EMAIL</h4>
+                <p>29thavenuedesigns@gmail.com</p>
+            </a>
         </div>
     </div>
 
@@ -953,7 +963,7 @@
                     </div>
                 </div>
 
-                <!-- Q6: Structural Changes (restored) -->
+                <!-- Q6: Structural Changes -->
                 <div class="question" id="q6">
                     <h4>Would you be open to structural changes?</h4>
                     <p class="subtext">If recommended to achieve the best result.</p>
@@ -973,7 +983,7 @@
                     </div>
                 </div>
 
-                <!-- Q7: Occupants (restored) -->
+                <!-- Q7: Occupants -->
                 <div class="question" id="q7">
                     <h4>Who will be living or working in this space?</h4>
                     <p class="subtext">Select all that apply.</p>
@@ -986,7 +996,7 @@
                     </div>
                 </div>
 
-                <!-- Q8: Furnishings (restored) -->
+                <!-- Q8: Furnishings -->
                 <div class="question" id="q8">
                     <h4>How are you thinking about furnishings for this project?</h4>
                     <div class="options-grid">
@@ -1060,7 +1070,7 @@
         </div>
     </div>
 
-    <!-- Process Section -->
+    <!-- Process Section - OliverHaus style -->
     <div class="process-section">
         <div class="process-container">
             <div class="process-header">
@@ -1068,47 +1078,53 @@
                 <p>From consultation to creation</p>
             </div>
             
-            <div class="process-step">
-                <div class="step-header">
-                    <span class="step-number">STEP 01</span>
-                    <span class="step-title">The Consultation</span>
+            <div class="process-grid">
+                <div class="process-step">
+                    <div class="step-number">STEP 01</div>
+                    <div class="step-title">Your First Move</div>
+                    <div class="step-content">
+                        <p>However you reach us, WhatsApp, a call, or the form on this page. You'll hear from us fast. From the first message, you are treated like a project already in motion.</p>
+                    </div>
                 </div>
-                <div class="step-icon"><i class="fas fa-calendar-check"></i></div>
-                <div class="step-content">
-                    <p>Every project begins with a conversation. We come to you. Our process starts with an in-home consultation, where we spend dedicated time with you in your space. We start with a full tour of your space, listening carefully to how you want each room to feel and function.</p>
-                </div>
-            </div>
 
-            <div class="process-step">
-                <div class="step-header">
-                    <span class="step-number">STEP 02</span>
-                    <span class="step-title">Style Analysis</span>
+                <div class="process-step">
+                    <div class="step-number">STEP 02</div>
+                    <div class="step-title">Discovery Call</div>
+                    <div class="step-content">
+                        <p>We schedule a call at your convenience to understand your vision, requirements, and lifestyle needs.</p>
+                    </div>
                 </div>
-                <div class="step-icon"><i class="fas fa-chart-line"></i></div>
-                <div class="step-content">
-                    <p>We have an extensive image library, carefully curated and organised across a wide range of design styles. Together, we look through these images to conduct a style analysis, a process that helps us understand what draws you in, what you love, and what feels like home to you.</p>
-                </div>
-            </div>
 
-            <div class="process-step">
-                <div class="step-header">
-                    <span class="step-number">STEP 03</span>
-                    <span class="step-title">The Walk Through</span>
+                <div class="process-step">
+                    <div class="step-number">STEP 03</div>
+                    <div class="step-title">Site Assessment</div>
+                    <div class="step-content">
+                        <p>Our team schedule a planned visit to your space to evaluate its layout, structure and potential. We want to ensure every design decision is tailored to your design style and taste.</p>
+                    </div>
                 </div>
-                <div class="step-icon"><i class="fas fa-walking"></i></div>
-                <div class="step-content">
-                    <p>With a clear sense of your style and vision, we then move through each room you would like us to work on. Together, we build a detailed wishlist of every item the space will need; furniture, lighting, finishes, accessories, and more. This helps us identify the right budget to work with for each area.</p>
-                </div>
-            </div>
 
-            <div class="process-step">
-                <div class="step-header">
-                    <span class="step-number">STEP 04</span>
-                    <span class="step-title">The After Planning</span>
+                <div class="process-step">
+                    <div class="step-number">STEP 04</div>
+                    <div class="step-title">Design Development</div>
+                    <div class="step-content">
+                        <p>This is where the story gets written, spatial layouts, materials selection, bespoke pieces, 3D renders. Every choice, down to the smallest details is made to reflect who you are. Not a template.</p>
+                    </div>
                 </div>
-                <div class="step-icon"><i class="fas fa-clipboard-list"></i></div>
-                <div class="step-content">
-                    <p>Once we leave your space, you will receive a detailed follow-up email summarising everything we discussed during the consultation. From there, we establish a project timeline and it is the scope and timeline of your project that determines our design fee going forward.</p>
+
+                <div class="process-step">
+                    <div class="step-number">STEP 05</div>
+                    <div class="step-title">Execution and Oversight</div>
+                    <div class="step-content">
+                        <p>We run the site so you don't have to. Craftsmen, suppliers, timelines — coordinated end to end, with progress updates that keep you informed without needing to be there.</p>
+                    </div>
+                </div>
+
+                <div class="process-step">
+                    <div class="step-number">STEP 06</div>
+                    <div class="step-title">The Reveal</div>
+                    <div class="step-content">
+                        <p>A space that finally feels like yours — considered, crafted, ready to live in.</p>
+                    </div>
                 </div>
             </div>
         </div>
