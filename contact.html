@@ -39,6 +39,7 @@
             color: #1a1a1a;
             transition: all 0.3s;
             position: relative;
+            white-space: nowrap;
         }
         .logo::after {
             content: '';
@@ -141,13 +142,14 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1.5rem 2rem;
+            padding: 1.2rem 2rem;
             background: #ffffff;
             border-bottom: 1px solid #f4f4f4;
             position: sticky;
             top: 0;
             z-index: 1000;
             box-shadow: 0 2px 20px rgba(0,0,0,0.05);
+            gap: 2rem;
         }
 
         .menu-icon { font-size: 1.5rem; cursor: pointer; }
@@ -181,6 +183,7 @@
             padding: 0.5rem 0; cursor: pointer; background: transparent; border: none;
             transition: all 0.3s;
             position: relative;
+            white-space: nowrap;
         }
         .desktop-nav a::after, .dropdown-toggle::after {
             content: '';
@@ -663,12 +666,27 @@
         .footer-copyright { font-size: 0.75rem; color: #888; letter-spacing: 1px; font-weight: 500; }
 
         @media (min-width: 768px) {
-            .navbar { padding: 1.5rem 4rem; }
-            .desktop-nav { display: flex; gap: 3rem; align-items: center; }
+            .navbar { 
+                padding: 1.2rem 3rem; 
+            }
+            .desktop-nav { 
+                display: flex; 
+                gap: 2rem; 
+                align-items: center; 
+            }
             .menu-icon, .mobile-menu, .overlay { display: none; }
             .hero-inquire-content h1 { font-size: 4rem; }
             .hero-inquire-section { padding: 8rem 2rem; }
             .cta-content h2 { font-size: 3rem; }
+        }
+
+        @media (min-width: 1024px) {
+            .navbar { 
+                padding: 1.2rem 4rem; 
+            }
+            .desktop-nav { 
+                gap: 2.5rem; 
+            }
         }
 
         @media (max-width: 767px) {
@@ -761,7 +779,7 @@
             <div class="progress-bar">
                 <div class="progress-fill" id="progressFill"></div>
             </div>
-            <div class="progress-text" id="progressText">1 / 12</div>
+            <div class="progress-text" id="progressText">1 / 13</div>
 
             <div id="questionsContainer">
                 
@@ -935,7 +953,7 @@
                     </div>
                 </div>
 
-                <!-- Q6 removed as requested, now Q7 (Structural Changes) -->
+                <!-- Q6: Structural Changes (restored) -->
                 <div class="question" id="q6">
                     <h4>Would you be open to structural changes?</h4>
                     <p class="subtext">If recommended to achieve the best result.</p>
@@ -955,7 +973,7 @@
                     </div>
                 </div>
 
-                <!-- Q7 -->
+                <!-- Q7: Occupants (restored) -->
                 <div class="question" id="q7">
                     <h4>Who will be living or working in this space?</h4>
                     <p class="subtext">Select all that apply.</p>
@@ -968,7 +986,7 @@
                     </div>
                 </div>
 
-                <!-- Q8 removed, now Q9 (Furnishings) -->
+                <!-- Q8: Furnishings (restored) -->
                 <div class="question" id="q8">
                     <h4>How are you thinking about furnishings for this project?</h4>
                     <div class="options-grid">
@@ -987,7 +1005,7 @@
                     </div>
                 </div>
 
-                <!-- Q9 -->
+                <!-- Q9: Timeline -->
                 <div class="question" id="q9">
                     <h4>Do you have a timeframe in mind for completion?</h4>
                     <div class="options-grid">
@@ -998,7 +1016,7 @@
                     </div>
                 </div>
 
-                <!-- Q10 -->
+                <!-- Q10: Previous Designer Experience -->
                 <div class="question" id="q10">
                     <h4>Have you worked with an interior designer before?</h4>
                     <div class="options-grid">
@@ -1008,7 +1026,7 @@
                     </div>
                 </div>
 
-                <!-- Q11 -->
+                <!-- Q11: How did you hear about us -->
                 <div class="question" id="q11">
                     <h4>How did you hear about us?</h4>
                     <div class="options-grid">
@@ -1021,7 +1039,7 @@
                     </div>
                 </div>
 
-                <!-- Q12 -->
+                <!-- Q12: Contact Method -->
                 <div class="question" id="q12">
                     <h4>What's the best way for us to follow up with you?</h4>
                     <p class="subtext">We'll reach out within 24 hours of receiving your submission.</p>
