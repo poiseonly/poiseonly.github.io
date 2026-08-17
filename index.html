@@ -181,13 +181,27 @@
             background: #ffffff; color: #1a1a1a; transform: translateY(-3px); box-shadow: 0 20px 40px rgba(0,0,0,0.3);
         }
 
-        /* We Differ Section */
+        /* We Differ Section - with warm elegant color */
         .differ-section {
             padding: 5rem 1.5rem;
-            background: linear-gradient(135deg, #fafafa 0%, #ffffff 100%);
+            background: linear-gradient(135deg, #f5f0eb 0%, #e8e0d8 50%, #f5f0eb 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        .differ-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(184, 155, 123, 0.05) 0%, transparent 70%);
+            pointer-events: none;
         }
         .differ-container {
             max-width: 1200px; margin: 0 auto;
+            position: relative;
+            z-index: 1;
         }
         .differ-header {
             text-align: center; margin-bottom: 4rem;
@@ -203,10 +217,17 @@
             display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem;
         }
         .differ-card {
-            background: #ffffff; border: 1px solid #e8e8e8; border-radius: 12px;
-            padding: 2.5rem 2rem; transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            box-shadow: 0 5px 20px rgba(0,0,0,0.03); position: relative; overflow: hidden;
-            opacity: 0; transform: translateY(30px);
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(184, 155, 123, 0.3);
+            border-radius: 12px;
+            padding: 2.5rem 2rem;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(30px);
         }
         .differ-card.visible { opacity: 1; transform: translateY(0); }
         .differ-card::before {
@@ -215,7 +236,10 @@
         }
         .differ-card:hover::before { transform: scaleX(1); }
         .differ-card:hover {
-            transform: translateY(-8px); box-shadow: 0 15px 35px rgba(0,0,0,0.08); border-color: #b89b7b;
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            border-color: #b89b7b;
+            background: rgba(255, 255, 255, 0.95);
         }
         .differ-card i {
             font-size: 2.5rem; color: #b89b7b; margin-bottom: 1.5rem;
@@ -332,7 +356,7 @@
                 <div class="differ-card" id="differ1">
                     <i class="fas fa-pen-fancy"></i>
                     <h3>Bespoke Design</h3>
-                    <p>Every project is a unique creation, tailored to your story. No templates, no repeats — just designs that are unmistakably yours.</p>
+                    <p>Every project is a unique creation, tailored to your story. No templates, no repeats just designs that are unmistakably yours.</p>
                     <a href="contact.html" class="learn-more-btn">Learn More</a>
                 </div>
                 <div class="differ-card" id="differ2">
@@ -344,7 +368,7 @@
                 <div class="differ-card" id="differ3">
                     <i class="fas fa-handshake"></i>
                     <h3>End-to-End Service</h3>
-                    <p>From concept to completion, we manage every detail — design, procurement, and execution — so you can simply enjoy the journey.</p>
+                    <p>From concept to completion, we manage every detail, design, procurement, and execution so you can simply enjoy the journey.</p>
                     <a href="contact.html" class="learn-more-btn">Learn More</a>
                 </div>
                 <div class="differ-card" id="differ4">
