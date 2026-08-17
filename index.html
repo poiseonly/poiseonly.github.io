@@ -135,6 +135,9 @@
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             opacity: 0; transition: opacity 2s ease-in-out;
             background-size: cover; background-position: center; background-repeat: no-repeat;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
         }
         .slide::after {
             content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
@@ -335,7 +338,11 @@
             .differ-card h3 { font-size: 1.2rem; margin-bottom: 0.5rem; }
             .differ-card p { font-size: 0.85rem; line-height: 1.6; margin-bottom: 1rem; }
             .learn-more-btn { font-size: 0.7rem; padding: 0.6rem 1.5rem; letter-spacing: 1px; }
-            .slideshow-container { height: calc(100vh - 55px); min-height: 350px; }
+            .slideshow-container { 
+                height: 70vh; 
+                min-height: 350px; 
+                max-height: 500px;
+            }
         }
     </style>
 </head>
@@ -457,7 +464,12 @@
             showSlide(slideIndex);
         }
 
-        // Ensure first slide is visible immediately
+        // Force first slide visible on load
+        window.addEventListener('load', function() {
+            showSlide(0);
+        });
+
+        // Also ensure it's visible immediately
         showSlide(0);
         slideInterval = setInterval(nextSlide, 5000);
 
@@ -466,7 +478,6 @@
             const header = document.getElementById('differHeader');
             const cards = document.querySelectorAll('.differ-card');
             
-            // Header observer
             const headerObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
@@ -477,7 +488,6 @@
             
             headerObserver.observe(header);
             
-            // Cards observer with stagger
             const cardsObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
