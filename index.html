@@ -50,7 +50,6 @@
             box-shadow: 0 2px 20px rgba(0,0,0,0.05);
             gap: 2rem;
         }
-
         .logo {
             font-family: 'Playfair Display', serif;
             font-weight: 700;
@@ -72,15 +71,9 @@
             background: #b89b7b;
             transition: width 0.3s;
         }
-        .logo:hover::after {
-            width: 100%;
-        }
-        .logo:hover {
-            color: #b89b7b;
-        }
-
+        .logo:hover::after { width: 100%; }
+        .logo:hover { color: #b89b7b; }
         .menu-icon { font-size: 1.5rem; cursor: pointer; }
-
         .mobile-menu {
             position: fixed; top: 0; left: -100%; width: 85%; height: 100vh;
             background: #ffffff; z-index: 2000; padding: 2rem 1.5rem;
@@ -95,14 +88,12 @@
             text-transform: uppercase; letter-spacing: 2px; font-weight: 600;
             border-bottom: 1px solid #f4f4f4; padding-bottom: 1rem;
         }
-
         .overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.4); backdrop-filter: blur(3px);
             z-index: 1500; display: none;
         }
         .overlay.active { display: block; }
-
         .desktop-nav { display: none; }
         .desktop-nav a, .dropdown-toggle {
             text-decoration: none; color: #1a1a1a; font-size: 0.85rem;
@@ -159,7 +150,7 @@
         .slide-6 { background-image: url('https://res.cloudinary.com/de9pinegl/image/upload/v1782830637/poise13_wh3rh4.jpg'); }
         .slide-7 { background-image: url('https://res.cloudinary.com/de9pinegl/image/upload/v1782830733/2C826A09-1F93-4521-891F-2AAF544B2A07_fghgik.jpg'); }
 
-        /* Hero content */
+        /* Hero content with fade-in animation */
         .hero-content {
             position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
             z-index: 10; text-align: center; width: 90%; max-width: 800px;
@@ -167,7 +158,10 @@
         .hero-tagline {
             font-family: 'Playfair Display', serif; font-size: 2.5rem; font-weight: 500;
             letter-spacing: 1.5px; color: #ffffff; margin-bottom: 2.5rem;
-            text-shadow: 0 4px 20px rgba(0,0,0,0.3); line-height: 1.4; font-style: italic; opacity: 0.9;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.3); line-height: 1.4; font-style: italic;
+            opacity: 0;
+            transform: translateY(40px);
+            animation: fadeInUp 1s ease-out 0.5s forwards;
         }
         .hire-us-btn {
             display: inline-block; padding: 1.2rem 3.5rem;
@@ -176,9 +170,19 @@
             background: rgba(0, 0, 0, 0.3); backdrop-filter: blur(10px); border-radius: 50px;
             transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            opacity: 0;
+            transform: translateY(40px);
+            animation: fadeInUp 1s ease-out 1s forwards;
         }
         .hire-us-btn:hover {
             background: #ffffff; color: #1a1a1a; transform: translateY(-3px); box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         /* We Differ Section - with warm elegant color */
@@ -205,6 +209,13 @@
         }
         .differ-header {
             text-align: center; margin-bottom: 4rem;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+        .differ-header.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
         .differ-header h2 {
             font-family: 'Playfair Display', serif; font-weight: 900; font-size: 3rem;
@@ -222,14 +233,17 @@
             border: 1px solid rgba(184, 155, 123, 0.3);
             border-radius: 12px;
             padding: 2.5rem 2rem;
-            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             box-shadow: 0 5px 20px rgba(0,0,0,0.05);
             position: relative;
             overflow: hidden;
             opacity: 0;
-            transform: translateY(30px);
+            transform: translateY(50px);
         }
-        .differ-card.visible { opacity: 1; transform: translateY(0); }
+        .differ-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
         .differ-card::before {
             content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
             background: linear-gradient(90deg, #b89b7b, #d4c4b0); transform: scaleX(0); transition: transform 0.4s;
@@ -341,7 +355,7 @@
     <!-- We Differ Section -->
     <section class="differ-section">
         <div class="differ-container">
-            <div class="differ-header">
+            <div class="differ-header" id="differHeader">
                 <h2>WE DIFFER</h2>
                 <p>What sets us apart from the rest</p>
             </div>
@@ -415,24 +429,38 @@
         showSlide(0);
         slideInterval = setInterval(nextSlide, 5000);
 
-        // Animation for differ cards
-        function animateDifferCards() {
+        // Animation for differ header and cards
+        function animateDifferSection() {
+            const header = document.getElementById('differHeader');
             const cards = document.querySelectorAll('.differ-card');
-            const observer = new IntersectionObserver((entries) => {
+            
+            // Header observer
+            const headerObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('visible');
                     }
                 });
-            }, { threshold: 0.2 });
+            }, { threshold: 0.3 });
+            
+            headerObserver.observe(header);
+            
+            // Cards observer with stagger
+            const cardsObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.15 });
             
             cards.forEach((card, index) => {
-                card.style.transitionDelay = (index * 0.1) + 's';
-                observer.observe(card);
+                card.style.transitionDelay = (index * 0.15) + 's';
+                cardsObserver.observe(card);
             });
         }
 
-        animateDifferCards();
+        animateDifferSection();
     </script>
 </body>
 </html>
