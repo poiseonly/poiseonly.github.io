@@ -41,20 +41,20 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1.2rem 2rem;
+            padding: 1rem 1.5rem;
             background: #ffffff;
             border-bottom: 1px solid #f4f4f4;
             position: sticky;
             top: 0;
             z-index: 1000;
             box-shadow: 0 2px 20px rgba(0,0,0,0.05);
-            gap: 2rem;
+            gap: 1rem;
         }
         .logo {
             font-family: 'Playfair Display', serif;
             font-weight: 700;
             letter-spacing: 0.5px;
-            font-size: 1.5rem;
+            font-size: 1.2rem;
             text-decoration: none;
             color: #1a1a1a;
             transition: all 0.3s;
@@ -73,20 +73,20 @@
         }
         .logo:hover::after { width: 100%; }
         .logo:hover { color: #b89b7b; }
-        .menu-icon { font-size: 1.5rem; cursor: pointer; }
+        .menu-icon { font-size: 1.3rem; cursor: pointer; }
         .mobile-menu {
-            position: fixed; top: 0; left: -100%; width: 85%; height: 100vh;
-            background: #ffffff; z-index: 2000; padding: 2rem 1.5rem;
+            position: fixed; top: 0; left: -100%; width: 80%; height: 100vh;
+            background: #ffffff; z-index: 2000; padding: 1.5rem;
             transition: 0.4s cubic-bezier(0.77, 0, 0.175, 1);
             box-shadow: 2px 0 20px rgba(0,0,0,0.05); overflow-y: auto;
         }
         .mobile-menu.active { left: 0; }
-        .close-menu { text-align: right; font-size: 1.5rem; margin-bottom: 2rem; cursor: pointer; }
-        .mobile-menu-links { display: flex; flex-direction: column; gap: 1.5rem; }
+        .close-menu { text-align: right; font-size: 1.3rem; margin-bottom: 1.5rem; cursor: pointer; }
+        .mobile-menu-links { display: flex; flex-direction: column; gap: 1.2rem; }
         .mobile-menu-links a {
-            text-decoration: none; color: #1a1a1a; font-size: 1.1rem;
-            text-transform: uppercase; letter-spacing: 2px; font-weight: 600;
-            border-bottom: 1px solid #f4f4f4; padding-bottom: 1rem;
+            text-decoration: none; color: #1a1a1a; font-size: 0.95rem;
+            text-transform: uppercase; letter-spacing: 1.5px; font-weight: 600;
+            border-bottom: 1px solid #f4f4f4; padding-bottom: 0.8rem;
         }
         .overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
@@ -129,7 +129,7 @@
             width: 100%; padding: 0; margin: 0; position: relative; overflow: hidden;
         }
         .slideshow-container {
-            position: relative; width: 100%; height: calc(100vh - 60px); min-height: 500px; overflow: hidden;
+            position: relative; width: 100%; height: calc(100vh - 60px); min-height: 400px; overflow: hidden;
         }
         .slide {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
@@ -154,6 +154,7 @@
         .hero-content {
             position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
             z-index: 10; text-align: center; width: 90%; max-width: 800px;
+            padding: 0 1rem;
         }
         .hero-tagline {
             font-family: 'Playfair Display', serif; font-size: 2.5rem; font-weight: 500;
@@ -185,7 +186,7 @@
             }
         }
 
-        /* We Differ Section - with warm elegant color */
+        /* We Differ Section */
         .differ-section {
             padding: 5rem 1.5rem;
             background: linear-gradient(135deg, #f5f0eb 0%, #e8e0d8 50%, #f5f0eb 100%);
@@ -208,7 +209,7 @@
             z-index: 1;
         }
         .differ-header {
-            text-align: center; margin-bottom: 4rem;
+            text-align: center; margin-bottom: 3rem;
             opacity: 0;
             transform: translateY(30px);
             transition: all 0.8s ease-out;
@@ -218,11 +219,11 @@
             transform: translateY(0);
         }
         .differ-header h2 {
-            font-family: 'Playfair Display', serif; font-weight: 900; font-size: 3rem;
+            font-family: 'Playfair Display', serif; font-weight: 900; font-size: 2.5rem;
             letter-spacing: 3px; color: #1a1a1a; margin-bottom: 1rem;
         }
         .differ-header p {
-            color: #666; font-weight: 500; font-size: 1.1rem;
+            color: #666; font-weight: 500; font-size: 1rem;
         }
         .differ-grid {
             display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem;
@@ -232,7 +233,7 @@
             backdrop-filter: blur(10px);
             border: 1px solid rgba(184, 155, 123, 0.3);
             border-radius: 12px;
-            padding: 2.5rem 2rem;
+            padding: 2rem 1.5rem;
             transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             box-shadow: 0 5px 20px rgba(0,0,0,0.05);
             position: relative;
@@ -250,25 +251,26 @@
         }
         .differ-card:hover::before { transform: scaleX(1); }
         .differ-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
             border-color: #b89b7b;
             background: rgba(255, 255, 255, 0.95);
         }
         .differ-card i {
-            font-size: 2.5rem; color: #b89b7b; margin-bottom: 1.5rem;
+            font-size: 2rem; color: #b89b7b; margin-bottom: 1rem;
         }
         .differ-card h3 {
-            font-family: 'Playfair Display', serif; font-weight: 700; font-size: 1.5rem;
-            color: #1a1a1a; margin-bottom: 1rem;
+            font-family: 'Playfair Display', serif; font-weight: 700; font-size: 1.3rem;
+            color: #1a1a1a; margin-bottom: 0.8rem;
         }
         .differ-card p {
-            color: #4a4a4a; font-weight: 500; line-height: 1.7; margin-bottom: 1.5rem;
+            color: #4a4a4a; font-weight: 500; line-height: 1.7; margin-bottom: 1.2rem;
+            font-size: 0.9rem;
         }
         .learn-more-btn {
-            display: inline-block; padding: 0.8rem 2rem;
+            display: inline-block; padding: 0.7rem 1.8rem;
             border: 2px solid #1a1a1a; color: #1a1a1a; text-decoration: none;
-            text-transform: uppercase; letter-spacing: 1.5px; font-size: 0.8rem; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 1.5px; font-size: 0.75rem; font-weight: 700;
             border-radius: 50px; transition: all 0.3s;
         }
         .learn-more-btn:hover {
@@ -277,34 +279,63 @@
 
         /* Footer */
         .footer {
-            background: #1a1a1a; color: #ffffff; padding: 3rem 1.5rem;
+            background: #1a1a1a; color: #ffffff; padding: 2.5rem 1.5rem;
             text-align: center; margin-top: 0; width: 100%;
         }
-        .footer-logo { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; letter-spacing: 1px; margin-bottom: 0.8rem; color: #ffffff; }
-        .footer-location { font-size: 0.85rem; letter-spacing: 1px; color: #aaa; font-weight: 500; margin-bottom: 1.5rem; }
-        .footer-social { display: flex; justify-content: center; gap: 1.5rem; margin: 1.5rem 0; }
-        .footer-social a { color: #ffffff; font-size: 1.2rem; transition: color 0.3s; }
+        .footer-logo { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; letter-spacing: 1px; margin-bottom: 0.8rem; color: #ffffff; }
+        .footer-location { font-size: 0.8rem; letter-spacing: 1px; color: #aaa; font-weight: 500; margin-bottom: 1.5rem; }
+        .footer-social { display: flex; justify-content: center; gap: 1.5rem; margin: 1.2rem 0; }
+        .footer-social a { color: #ffffff; font-size: 1.1rem; transition: color 0.3s; }
         .footer-social a:hover { color: #b89b7b; }
-        .footer-copyright { font-size: 0.75rem; color: #888; margin-top: 2rem; letter-spacing: 1px; font-weight: 500; }
+        .footer-copyright { font-size: 0.7rem; color: #888; margin-top: 1.5rem; letter-spacing: 1px; font-weight: 500; }
 
+        /* Desktop Styles */
         @media (min-width: 768px) {
             .navbar { padding: 1.2rem 3rem; }
+            .logo { font-size: 1.5rem; }
+            .menu-icon { font-size: 1.5rem; }
             .desktop-nav { display: flex; gap: 2rem; align-items: center; }
             .menu-icon, .mobile-menu, .overlay { display: none; }
             .slideshow-container { height: calc(100vh - 80px); min-height: 600px; }
             .footer-logo { font-size: 1.8rem; }
             .hero-tagline { font-size: 3rem; letter-spacing: 2px; }
-            .differ-grid { grid-template-columns: repeat(2, 1fr); }
+            .differ-grid { grid-template-columns: repeat(2, 1fr); gap: 2rem; }
+            .differ-card { padding: 2.5rem 2rem; }
+            .differ-card i { font-size: 2.5rem; }
+            .differ-card h3 { font-size: 1.5rem; }
+            .differ-card p { font-size: 1rem; }
+            .learn-more-btn { font-size: 0.8rem; padding: 0.8rem 2rem; }
+            .differ-header h2 { font-size: 3rem; }
         }
+
         @media (min-width: 1024px) {
             .navbar { padding: 1.2rem 4rem; }
             .desktop-nav { gap: 2.5rem; }
         }
+
+        /* Mobile Specific Styles */
         @media (max-width: 767px) {
-            .hero-tagline { font-size: 1.6rem; letter-spacing: 1px; margin-bottom: 2rem; }
-            .hire-us-btn { padding: 1rem 2.5rem; font-size: 0.8rem; letter-spacing: 2px; }
-            .differ-header h2 { font-size: 2.5rem; }
-            .differ-grid { grid-template-columns: 1fr; }
+            .hero-tagline { 
+                font-size: 1.4rem; 
+                letter-spacing: 0.5px; 
+                margin-bottom: 1.5rem;
+                line-height: 1.5;
+            }
+            .hire-us-btn { 
+                padding: 0.8rem 2rem; 
+                font-size: 0.75rem; 
+                letter-spacing: 1.5px;
+                border-width: 1.5px;
+            }
+            .differ-header h2 { font-size: 2rem; letter-spacing: 2px; }
+            .differ-header p { font-size: 0.9rem; }
+            .differ-grid { grid-template-columns: 1fr; gap: 1.2rem; }
+            .differ-card { padding: 1.5rem 1.2rem; }
+            .differ-card i { font-size: 1.8rem; margin-bottom: 0.8rem; }
+            .differ-card h3 { font-size: 1.2rem; margin-bottom: 0.5rem; }
+            .differ-card p { font-size: 0.85rem; line-height: 1.6; margin-bottom: 1rem; }
+            .learn-more-btn { font-size: 0.7rem; padding: 0.6rem 1.5rem; letter-spacing: 1px; }
+            .slideshow-container { height: calc(100vh - 55px); min-height: 350px; }
         }
     </style>
 </head>
@@ -426,6 +457,7 @@
             showSlide(slideIndex);
         }
 
+        // Ensure first slide is visible immediately
         showSlide(0);
         slideInterval = setInterval(nextSlide, 5000);
 
@@ -452,10 +484,10 @@
                         entry.target.classList.add('visible');
                     }
                 });
-            }, { threshold: 0.15 });
+            }, { threshold: 0.1 });
             
             cards.forEach((card, index) => {
-                card.style.transitionDelay = (index * 0.15) + 's';
+                card.style.transitionDelay = (index * 0.1) + 's';
                 cardsObserver.observe(card);
             });
         }
