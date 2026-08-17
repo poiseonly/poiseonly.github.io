@@ -198,6 +198,73 @@
             font-size: 1.05rem;
         }
 
+        /* Founder Feature Section */
+        .founder-feature {
+            margin: 4rem 0;
+            padding: 3rem;
+            background: linear-gradient(135deg, #f5f0eb 0%, #e8e0d8 50%, #f5f0eb 100%);
+            border-radius: 16px;
+            border: 1px solid rgba(184, 155, 123, 0.3);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.05);
+        }
+
+        .founder-card {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .founder-image {
+            width: 100%;
+            height: 400px;
+            background: url('https://res.cloudinary.com/de9pinegl/image/upload/v1786927394/IMG_6033_gouin8.jpg') center/cover;
+            border-radius: 12px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+
+        .founder-details h2 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 2rem;
+            color: #1a1a1a;
+            margin-bottom: 0.5rem;
+        }
+
+        .founder-title {
+            color: #b89b7b;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .founder-bio p {
+            color: #4a4a4a;
+            font-weight: 500;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .founder-quote {
+            background: rgba(255, 255, 255, 0.7);
+            padding: 2rem;
+            border-left: 4px solid #b89b7b;
+            border-radius: 0 12px 12px 0;
+            font-style: italic;
+            color: #1a1a1a;
+            font-weight: 500;
+            line-height: 1.8;
+            margin-top: 2rem;
+        }
+
+        .founder-quote i {
+            color: #b89b7b;
+            margin-right: 10px;
+            font-size: 1.5rem;
+        }
+
         /* Video Section */
         .video-container {
             position: relative;
@@ -283,6 +350,16 @@
             .studio-video {
                 height: 250px;
             }
+            .founder-feature {
+                padding: 1.5rem;
+            }
+            .founder-card {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            .founder-image {
+                height: 300px;
+            }
         }
     </style>
 </head>
@@ -335,6 +412,25 @@
                 <p>We design with intention. Every material chosen, every corner considered, every detail deliberate. Because the spaces you live and work in shape how you feel every single day, and that is not something we take lightly.</p>
                 
                 <p>At 29thAvenueDesigns, we go beyond aesthetics. We take time to understand who you are, how you move through a space, and what you need to truly feel at home in it. We listen first. Then we create. And what we create is an experience that is entirely, specifically yours. No two spaces are the same. Neither are the people in them.</p>
+            </div>
+        </div>
+
+        <!-- Founder Feature Section -->
+        <div class="founder-feature">
+            <div class="founder-card">
+                <div class="founder-image"></div>
+                <div class="founder-details">
+                    <h2>Adedamola Samuel</h2>
+                    <div class="founder-title">Founder & Principal Designer</div>
+                    <div class="founder-bio">
+                        <p>Adedamola Samuel is the founder of 29thAvenueDesigns. A graduate of Materials Engineering, Adedamola has always been fascinated by the way materials speak, how combining the right textures, finishes, and elements can transform something ordinary into something that resonates deeply and lingers long after you've left the room.</p>
+                        
+                        <p>That fascination became a foundation. With a trained eye for detail and a natural instinct for storytelling, Adedamola approaches every space as a visual narrative, one where every element is intentional, every layer carries meaning, and every room tells a story worth experiencing. Based in Lagos, Nigeria, he brings a distinctly grounded and considered perspective to interior design, shaped by culture, curiosity, and a deep appreciation for the world around him.</p>
+                    </div>
+                    <div class="founder-quote">
+                        <i class="fas fa-quote-left"></i> He believes that intentional design is one of the most powerful ways we can honour the spaces we live in and that belief sits at the heart of everything 29thAvenueDesigns creates.
+                    </div>
+                </div>
             </div>
         </div>
 
