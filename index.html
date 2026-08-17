@@ -259,7 +259,7 @@
         .slide-6 { background-image: url('https://res.cloudinary.com/de9pinegl/image/upload/v1782830637/poise13_wh3rh4.jpg'); }
         .slide-7 { background-image: url('https://res.cloudinary.com/de9pinegl/image/upload/v1782830655/poise4_nkmoxy.heic'); }
 
-        /* Hero content - tagline and CTA */
+        /* Hero content - refined tagline and CTA */
         .hero-content {
             position: absolute;
             top: 50%;
@@ -274,36 +274,39 @@
         .hero-tagline {
             font-family: 'Playfair Display', serif;
             font-size: 2.5rem;
-            font-weight: 700;
-            letter-spacing: 2px;
+            font-weight: 500;
+            letter-spacing: 1.5px;
             color: #ffffff;
             margin-bottom: 2.5rem;
-            text-shadow: 0 4px 20px rgba(0,0,0,0.4);
-            line-height: 1.3;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            line-height: 1.4;
+            font-style: italic;
+            opacity: 0.9;
         }
 
         .hire-us-btn {
             display: inline-block;
             padding: 1.2rem 3.5rem;
-            border: 2px solid #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.6);
             color: #ffffff;
             text-decoration: none;
             text-transform: uppercase;
-            letter-spacing: 2.5px;
-            font-size: 0.9rem;
-            font-weight: 700;
-            background: rgba(0, 0, 0, 0.3);
+            letter-spacing: 3px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            background: rgba(0, 0, 0, 0.2);
             backdrop-filter: blur(10px);
-            border-radius: 50px;
             transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            border-radius: 0;
         }
 
         .hire-us-btn:hover {
-            background: #ffffff;
+            background: rgba(255, 255, 255, 0.9);
             color: #1a1a1a;
             transform: translateY(-3px);
             box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            border-color: #ffffff;
         }
 
         /* Footer - matching contact page */
@@ -323,16 +326,13 @@
             margin-bottom: 0.8rem; 
             color: #ffffff; 
         }
-        .footer-email {
-            font-size: 0.95rem; 
-            color: #b89b7b; 
-            text-decoration: none;
-            display: inline-block; 
-            margin-bottom: 1.5rem; 
+        .footer-location {
+            font-size: 0.85rem; 
+            letter-spacing: 1px; 
+            color: #aaa; 
             font-weight: 500;
-            transition: color 0.3s;
+            margin-bottom: 1.5rem;
         }
-        .footer-email:hover { color: #ffffff; }
         .footer-social {
             display: flex; 
             justify-content: center; 
@@ -341,7 +341,7 @@
         }
         .footer-social a {
             color: #ffffff; 
-            font-size: 1.1rem; 
+            font-size: 1.2rem; 
             transition: color 0.3s;
         }
         .footer-social a:hover { color: #b89b7b; }
@@ -369,8 +369,8 @@
             }
             .footer-logo { font-size: 1.8rem; }
             .hero-tagline {
-                font-size: 3.5rem;
-                letter-spacing: 3px;
+                font-size: 3rem;
+                letter-spacing: 2px;
             }
         }
 
@@ -385,8 +385,8 @@
 
         @media (max-width: 767px) {
             .hero-tagline {
-                font-size: 1.8rem;
-                letter-spacing: 1.5px;
+                font-size: 1.6rem;
+                letter-spacing: 1px;
                 margin-bottom: 2rem;
             }
             .hire-us-btn {
@@ -450,13 +450,10 @@
 
     <footer class="footer">
         <div class="footer-logo">29thAvenueDesigns</div>
-        <a href="mailto:29thavenuedesigns@gmail.com" class="footer-email">29thavenuedesigns@gmail.com</a>
-        <p style="font-size: 0.85rem; letter-spacing: 1px; color: #aaa; font-weight: 500;">LAGOS, NIGERIA</p>
+        <p class="footer-location">LAGOS, NIGERIA</p>
     
         <div class="footer-social">
-            <a href="https://www.instagram.com/29thavenuedesigns/" target="_blank"><i class="fab fa-instagram"></i></a>
-            <a href="#"><i class="fab fa-pinterest"></i></a>
-            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://www.instagram.com/29thavenuedesigns/" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
         </div>
         <div class="footer-copyright">
             ©️ 2026 29thAvenueDesigns STUDIO. ALL RIGHTS RESERVED.
