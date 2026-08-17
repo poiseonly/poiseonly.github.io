@@ -50,7 +50,6 @@
             box-shadow: 0 2px 20px rgba(0,0,0,0.05);
             gap: 2rem;
         }
-
         .logo {
             font-family: 'Playfair Display', serif;
             font-weight: 700;
@@ -74,9 +73,7 @@
         }
         .logo:hover::after { width: 100%; }
         .logo:hover { color: #b89b7b; }
-
         .menu-icon { font-size: 1.5rem; cursor: pointer; }
-
         .mobile-menu {
             position: fixed; top: 0; left: -100%; width: 85%; height: 100vh;
             background: #ffffff; z-index: 2000; padding: 2rem 1.5rem;
@@ -91,14 +88,12 @@
             text-transform: uppercase; letter-spacing: 2px; font-weight: 600;
             border-bottom: 1px solid #f4f4f4; padding-bottom: 1rem;
         }
-
         .overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.4); backdrop-filter: blur(3px);
             z-index: 1500; display: none;
         }
         .overlay.active { display: block; }
-
         .desktop-nav { display: none; }
         .desktop-nav a, .dropdown-toggle {
             text-decoration: none; color: #1a1a1a; font-size: 0.85rem;
@@ -152,270 +147,144 @@
             font-weight: 500;
         }
 
-        /* Projects Grid - OliverHaus Inspired */
-        .projects-section {
-            max-width: 1400px;
+        /* Projects Container - OliverHaus Style */
+        .projects-container {
+            max-width: 1200px;
             margin: 0 auto;
             padding: 3rem 1.5rem 5rem;
         }
 
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(1, 1fr);
-            gap: 1.5rem;
+        .project-block {
+            margin-bottom: 5rem;
         }
 
-        .project-card {
-            position: relative;
-            overflow: hidden;
-            cursor: pointer;
-            border-radius: 8px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
-            transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            opacity: 0;
-            transform: translateY(30px);
-        }
-
-        .project-card.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .project-card:hover {
-            box-shadow: 0 20px 45px rgba(0,0,0,0.12);
-        }
-
-        .project-image {
+        .project-preview {
             width: 100%;
-            height: 350px;
+            height: 70vh;
+            min-height: 500px;
             background-size: cover;
             background-position: center;
-            transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            border-radius: 12px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
-        .project-card:hover .project-image {
-            transform: scale(1.05);
+        .project-preview:hover {
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
         }
 
-        .project-overlay {
+        .project-preview::after {
+            content: '';
             position: absolute;
-            top: 0;
+            bottom: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0) 100%);
-            opacity: 0;
-            transition: opacity 0.5s ease;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            padding: 2rem;
+            right: 0;
+            height: 40%;
+            background: linear-gradient(to top, rgba(0,0,0,0.3) 0%, transparent 100%);
+            pointer-events: none;
         }
 
-        .project-card:hover .project-overlay {
-            opacity: 1;
+        .project-info {
+            padding: 2rem 0;
         }
 
-        .project-title {
+        .project-info h3 {
             font-family: 'Playfair Display', serif;
-            font-size: 1.8rem;
+            font-size: 2rem;
             font-weight: 700;
-            color: #ffffff;
-            margin-bottom: 0.3rem;
-            transform: translateY(20px);
-            transition: transform 0.5s ease 0.1s;
+            color: #1a1a1a;
+            margin-bottom: 0.5rem;
             letter-spacing: 1px;
         }
 
-        .project-category {
-            font-size: 0.8rem;
-            color: #b89b7b;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            transform: translateY(20px);
-            transition: transform 0.5s ease 0.2s;
-            font-weight: 600;
+        .project-info p {
+            color: #666;
+            font-weight: 500;
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
         }
 
-        .project-card:hover .project-title,
-        .project-card:hover .project-category {
+        .view-gallery-btn {
+            display: inline-block;
+            padding: 1rem 3rem;
+            border: 2px solid #1a1a1a;
+            color: #1a1a1a;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            border-radius: 50px;
+            transition: all 0.3s;
+            cursor: pointer;
+            background: transparent;
+        }
+
+        .view-gallery-btn:hover {
+            background: #1a1a1a;
+            color: #ffffff;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        /* Full Gallery */
+        .full-gallery {
+            display: none;
+            margin-top: 2rem;
+            animation: fadeInGallery 0.5s ease;
+        }
+
+        .full-gallery.active {
+            display: block;
+        }
+
+        @keyframes fadeInGallery {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .gallery-image {
+            width: 100%;
+            height: 80vh;
+            min-height: 500px;
+            background-size: cover;
+            background-position: center;
+            margin-bottom: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .gallery-image.visible {
+            opacity: 1;
             transform: translateY(0);
         }
 
-        /* Modal */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.95);
-            z-index: 3000;
-            opacity: 0;
-            transition: opacity 0.4s ease;
-        }
-        .modal.active {
-            display: flex;
-            opacity: 1;
-        }
-        .modal-content {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 2rem;
-        }
-        .close-modal {
-            position: fixed;
-            top: 2rem;
-            right: 2rem;
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            z-index: 3100;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-        .close-modal i { font-size: 1.5rem; color: white; transition: transform 0.3s ease; }
-        .close-modal:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: rotate(90deg);
-            border-color: #b89b7b;
-        }
-        .modal-project-title {
-            position: fixed;
-            bottom: 2rem;
-            left: 2rem;
-            z-index: 3100;
-            color: white;
-            font-size: 1.2rem;
-            font-weight: 300;
-            letter-spacing: 2px;
+        .close-gallery-btn {
+            display: inline-block;
+            padding: 0.8rem 2.5rem;
+            border: 2px solid #b89b7b;
+            color: #b89b7b;
+            text-decoration: none;
             text-transform: uppercase;
-            background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(10px);
-            padding: 0.8rem 1.5rem;
+            letter-spacing: 2px;
+            font-size: 0.8rem;
+            font-weight: 700;
             border-radius: 50px;
-            border-left: 3px solid #b89b7b;
-        }
-        .modal-project-title span { color: #b89b7b; font-size: 0.8rem; margin-right: 0.5rem; }
-        .image-container {
-            position: relative;
-            width: 100%;
-            max-width: 1200px;
-            height: auto;
-            max-height: 80vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-        }
-        .main-image {
-            width: auto;
-            max-width: 100%;
-            max-height: 80vh;
-            object-fit: contain;
-            cursor: zoom-in;
-            transition: transform 0.3s ease;
-        }
-        .nav-arrow {
-            position: fixed;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 56px;
-            height: 56px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            transition: all 0.3s;
             cursor: pointer;
-            transition: all 0.3s ease;
-            z-index: 3100;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: transparent;
+            margin-top: 2rem;
         }
-        .nav-arrow:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: translateY(-50%) scale(1.1);
-            border-color: #b89b7b;
-        }
-        .nav-arrow i { font-size: 1.5rem; color: white; }
-        .prev-arrow { left: 2rem; }
-        .next-arrow { right: 2rem; }
-        .thumbnail-strip {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            display: flex;
-            gap: 0.8rem;
-            z-index: 3100;
-            background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(10px);
-            padding: 0.8rem;
-            border-radius: 60px;
-            max-width: 50%;
-            overflow-x: auto;
-        }
-        .thumbnail {
-            width: 60px;
-            height: 60px;
-            object-fit: cover;
-            cursor: pointer;
-            border-radius: 12px;
-            transition: all 0.3s ease;
-            opacity: 0.6;
-            border: 2px solid transparent;
-        }
-        .thumbnail.active {
-            opacity: 1;
-            border-color: #b89b7b;
-            transform: scale(1.05);
-        }
-        .thumbnail:hover { opacity: 1; transform: scale(1.05); }
-        .counter-badge {
-            position: fixed;
-            top: 2rem;
-            left: 2rem;
-            z-index: 3100;
-            background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(10px);
-            padding: 0.6rem 1.2rem;
-            border-radius: 50px;
-            color: white;
-            font-size: 0.9rem;
-            font-weight: 300;
-            letter-spacing: 1px;
-        }
-        .counter-badge span { color: #b89b7b; font-weight: 500; }
-        .fullscreen-view {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.98);
-            z-index: 3200;
-            justify-content: center;
-            align-items: center;
-            cursor: zoom-out;
-        }
-        .fullscreen-view.active { display: flex; }
-        .fullscreen-image {
-            max-width: 95%;
-            max-height: 95%;
-            object-fit: contain;
+
+        .close-gallery-btn:hover {
+            background: #b89b7b;
+            color: #ffffff;
         }
 
         /* Footer */
@@ -463,38 +332,20 @@
             .desktop-nav { display: flex; gap: 2rem; align-items: center; }
             .menu-icon, .mobile-menu, .overlay { display: none; }
             .page-header h1 { font-size: 3.5rem; }
-            .projects-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 2rem;
-            }
-            .project-image { height: 400px; }
+            .project-preview { height: 75vh; }
+            .gallery-image { height: 85vh; }
         }
 
         @media (min-width: 1024px) {
             .navbar { padding: 1.2rem 4rem; }
             .desktop-nav { gap: 2.5rem; }
-            .projects-grid {
-                grid-template-columns: repeat(3, 1fr);
-                gap: 2rem;
-            }
-            .project-image { height: 450px; }
         }
 
         @media (max-width: 767px) {
             .page-header h1 { font-size: 2.5rem; }
-            .project-image { height: 300px; }
-            .thumbnail-strip { display: none; }
-            .modal-project-title {
-                bottom: 1rem;
-                left: 1rem;
-                font-size: 0.9rem;
-                padding: 0.5rem 1rem;
-            }
-            .counter-badge { top: 1rem; left: 1rem; font-size: 0.8rem; }
-            .nav-arrow { width: 40px; height: 40px; }
-            .nav-arrow i { font-size: 1rem; }
-            .prev-arrow { left: 0.5rem; }
-            .next-arrow { right: 0.5rem; }
+            .project-preview { height: 50vh; min-height: 300px; }
+            .gallery-image { height: 55vh; min-height: 300px; }
+            .project-info h3 { font-size: 1.5rem; }
         }
     </style>
 </head>
@@ -531,91 +382,119 @@
         <p>featured projects</p>
     </div>
 
-    <div class="projects-section">
-        <div class="projects-grid" id="projectsGrid">
-            <div class="project-card" onclick="openProject('atelier')">
-                <div class="project-image" style="background-image: url('https://res.cloudinary.com/de9pinegl/image/upload/v1786929713/ABA03F76-E5F0-4C0B-9D76-8D5719B46F5D_hwodse.jpg')"></div>
-                <div class="project-overlay">
-                    <h3 class="project-title">Midnight Atelier</h3>
-                    <p class="project-category">Interior Design</p>
-                </div>
+    <div class="projects-container">
+        <!-- Project 1: Midnight Atelier -->
+        <div class="project-block" id="project-atelier">
+            <div class="project-preview" style="background-image: url('https://res.cloudinary.com/de9pinegl/image/upload/v1786929713/ABA03F76-E5F0-4C0B-9D76-8D5719B46F5D_hwodse.jpg')"></div>
+            <div class="project-info">
+                <h3>Midnight Atelier</h3>
+                <p>Interior Design — A moody, sophisticated space where darkness meets luxury.</p>
+                <button class="view-gallery-btn" onclick="toggleGallery('atelier')">View Full Gallery</button>
             </div>
-
-            <div class="project-card" onclick="openProject('fabrics')">
-                <div class="project-image" style="background-image: url('https://res.cloudinary.com/de9pinegl/image/upload/v1782830825/IMG_3326_ydsg59.png')"></div>
-                <div class="project-overlay">
-                    <h3 class="project-title">Fabrics by Uche</h3>
-                    <p class="project-category">Interior Design</p>
-                </div>
-            </div>
-
-            <div class="project-card" onclick="openProject('outterspace')">
-                <div class="project-image" style="background-image: url('https://res.cloudinary.com/de9pinegl/image/upload/v1782830755/IMG_3275.JPG_kv4ofv.jpg')"></div>
-                <div class="project-overlay">
-                    <h3 class="project-title">Outterspace</h3>
-                    <p class="project-category">Creative Direction & Design</p>
-                </div>
-            </div>
-
-            <div class="project-card" onclick="openProject('monada')">
-                <div class="project-image" style="background-image: url('https://res.cloudinary.com/de9pinegl/image/upload/v1782830704/IMG_3256.JPG_rvifu0.jpg')"></div>
-                <div class="project-overlay">
-                    <h3 class="project-title">Project Monada</h3>
-                    <p class="project-category">Experiential Design</p>
-                </div>
-            </div>
-
-            <div class="project-card" onclick="openProject('Earls')">
-                <div class="project-image" style="background-image: url('https://res.cloudinary.com/de9pinegl/image/upload/v1782830319/IMG_9366.JPG_jyhmhr.jpg')"></div>
-                <div class="project-overlay">
-                    <h3 class="project-title">Earls</h3>
-                    <p class="project-category">Interior Design</p>
-                </div>
-            </div>
-
-            <div class="project-card" onclick="openProject('Sanctuary')">
-                <div class="project-image" style="background-image: url('https://res.cloudinary.com/de9pinegl/image/upload/v1782830805/IMG_3290.JPG_s3nm4s.jpg')"></div>
-                <div class="project-overlay">
-                    <h3 class="project-title">Sanctuary</h3>
-                    <p class="project-category">Interior Design</p>
-                </div>
+            <div class="full-gallery" id="gallery-atelier">
+                <div class="gallery-image" style="background-image: url('https://res.cloudinary.com/de9pinegl/image/upload/v1786929713/ABA03F76-E5F0-4C0B-9D76-8D5719B46F5D_hwodse.jpg')"></div>
+                <div class="gallery-image" style="background-image: url('https://res.cloudinary.com/de9pinegl/image/upload/v1786930132/663368F7-C67B-4A9B-B7A6-9CEE4135727D_uq4xkb.jpg')"></div>
+                <div class="gallery-image" style="background-image: url('https://res.cloudinary.com/de9pinegl/image/upload/v1786930190/00AA9908-79C2-47EE-A4C3-0B20DC0B2F49_b8htxm.jpg')"></div>
+                <div class="gallery-image" style="background-image: url('https://res.cloudinary.com/de9pinegl/image/upload/v1786930303/46BBC0CA-0AD4-4825-B95B-7CAF364D81D5_z46pnw.jpg')"></div>
+                <div class="gallery-image" style="background-image: url('https://res.cloudinary.com/de9pinegl/image/upload/v1786930351/33F679D6-28F0-4F74-8BFA-F862782E4710_fco9xf.jpg')"></div>
+                <div class="gallery-image" style="background-image: url('https://res.cloudinary.com/de9pinegl/image/upload/v1786930404/2C826A09-1F93-4521-891F-2AAF544B2A07_lxxyyn.jpg')"></div>
+                <button class="close-gallery-btn" onclick="toggleGallery('atelier')">Close Gallery</button>
             </div>
         </div>
-    </div>
 
-    <!-- Modal -->
-    <div id="projectModal" class="modal">
-        <div class="close-modal" onclick="closeModal()">
-            <i class="fas fa-times"></i>
-        </div>
-        <div class="counter-badge">
-            <span id="currentCounter">1</span> / <span id="totalCounter">0</span>
-        </div>
-        <div class="modal-project-title" id="modalTitle">
-            <span>PROJECT</span> <span id="projectName"></span>
-        </div>
-        <div class="nav-arrow prev-arrow" onclick="prevImage()">
-            <i class="fas fa-chevron-left"></i>
-        </div>
-        <div class="nav-arrow next-arrow" onclick="nextImage()">
-            <i class="fas fa-chevron-right"></i>
-        </div>
-        
-        <div class="modal-content">
-            <div class="image-container" id="imageContainer">
-                <img id="mainImage" class="main-image" src="" alt="" loading="eager" decoding="async" onclick="openFullscreen()">
+        <!-- Project 2: Fabrics by Uche -->
+        <div class="project-block" id="project-fabrics">
+            <div class="project-preview" style="background-image: url('https://res.cloudinary.com/de9pinegl/image/upload/v1782830825/IMG_3326_ydsg59.png')"></div>
+            <div class="project-info">
+                <h3>Fabrics by Uche</h3>
+                <p>Interior Design — A celebration of texture, color, and artisanal craftsmanship.</p>
+                <button class="view-gallery-btn" onclick="toggleGallery('fabrics')">View Full Gallery</button>
+            </div>
+            <div class="full-gallery" id="gallery-fabrics">
+                <div class="gallery-image" style="background-image: url('https://res.cloudinary.com/de9pinegl/image/upload/v1782830825/IMG_3326_ydsg59.png')"></div>
+                <div class="gallery-image" style="background-image: url('https://poiseonly.github.io/images/IMG_3325.jpg')"></div>
+                <div class="gallery-image" style="background-image: url('https://poiseonly.github.io/images/IMG_3323.jpg')"></div>
+                <div class="gallery-image" style="background-image: url('https://poiseonly.github.io/images/IMG_3322.jpg')"></div>
+                <div class="gallery-image" style="background-image: url('https://poiseonly.github.io/images/IMG_3319.jpg')"></div>
+                <div class="gallery-image" style="background-image: url('https://poiseonly.github.io/images/IMG_3318.jpg')"></div>
+                <div class="gallery-image" style="background-image: url('https://poiseonly.github.io/images/IMG_3317.jpg')"></div>
+                <div class="gallery-image" style="background-image: url('https://poiseonly.github.io/images/IMG_3315.jpg')"></div>
+                <button class="close-gallery-btn" onclick="toggleGallery('fabrics')">Close Gallery</button>
             </div>
         </div>
-        
-        <div class="thumbnail-strip" id="thumbnailStrip"></div>
-    </div>
 
-    <!-- Fullscreen View -->
-    <div id="fullscreenView" class="fullscreen-view" onclick="closeFullscreen()">
-        <div class="close-fullscreen">
-            <i class="fas fa-times"></i>
+        <!-- Project 3: Outterspace -->
+        <div class="project-block" id="project-outterspace">
+            <div class="project-preview" style="background-image: url('https://res.cloudinary.com/de9pinegl/image/upload/v1782830755/IMG_3275.JPG_kv4ofv.jpg')"></div>
+            <div class="project-info">
+                <h3>Outterspace</h3>
+                <p>Creative Direction & Design — Where imagination meets reality in bold new ways.</p>
+                <button class="view-gallery-btn" onclick="toggleGallery('outterspace')">View Full Gallery</button>
+            </div>
+            <div class="full-gallery" id="gallery-outterspace">
+                <div class="gallery-image" style="background-image: url('https://res.cloudinary.com/de9pinegl/image/upload/v1782830755/IMG_3275.JPG_kv4ofv.jpg')"></div>
+                <div class="gallery-image" style="background-image: url('https://poiseonly.github.io/images/IMG_3271.JPG.jpeg')"></div>
+                <div class="gallery-image" style="background-image: url('https://poiseonly.github.io/images/IMG_3272.JPG.jpeg')"></div>
+                <div class="gallery-image" style="background-image: url('https://poiseonly.github.io/images/IMG_3278.JPG.jpeg')"></div>
+                <div class="gallery-image" style="background-image: url('https://poiseonly.github.io/images/IMG_3279.JPG.jpeg')"></div>
+                <button class="close-gallery-btn" onclick="toggleGallery('outterspace')">Close Gallery</button>
+            </div>
         </div>
-        <img id="fullscreenImage" class="fullscreen-image" src="">
+
+        <!-- Project 4: Project Monada -->
+        <div class="project-block" id="project-monada">
+            <div class="project-preview" style="background-image: url('https://res.cloudinary.com/de9pinegl/image/upload/v1782830704/IMG_3256.JPG_rvifu0.jpg')"></div>
+            <div class="project-info">
+                <h3>Project Monada</h3>
+                <p>Experiential Design — Immersive spaces that engage all the senses.</p>
+                <button class="view-gallery-btn" onclick="toggleGallery('monada')">View Full Gallery</button>
+            </div>
+            <div class="full-gallery" id="gallery-monada">
+                <div class="gallery-image" style="background-image: url('https://res.cloudinary.com/de9pinegl/image/upload/v1782830704/IMG_3256.JPG_rvifu0.jpg')"></div>
+                <div class="gallery-image" style="background-image: url('https://poiseonly.github.io/images/IMG_3250.JPG.jpeg')"></div>
+                <div class="gallery-image" style="background-image: url('https://poiseonly.github.io/images/IMG_3259.JPG.jpeg')"></div>
+                <div class="gallery-image" style="background-image: url('https://poiseonly.github.io/images/IMG_3265.JPG.jpeg')"></div>
+                <button class="close-gallery-btn" onclick="toggleGallery('monada')">Close Gallery</button>
+            </div>
+        </div>
+
+        <!-- Project 5: Earls -->
+        <div class="project-block" id="project-earls">
+            <div class="project-preview" style="background-image: url('https://res.cloudinary.com/de9pinegl/image/upload/v1782830319/IMG_9366.JPG_jyhmhr.jpg')"></div>
+            <div class="project-info">
+                <h3>Earls</h3>
+                <p>Interior Design — Classic elegance reimagined for contemporary living.</p>
+                <button class="view-gallery-btn" onclick="toggleGallery('earls')">View Full Gallery</button>
+            </div>
+            <div class="full-gallery" id="gallery-earls">
+                <div class="gallery-image" style="background-image: url('https://res.cloudinary.com/de9pinegl/image/upload/v1782830319/IMG_9366.JPG_jyhmhr.jpg')"></div>
+                <div class="gallery-image" style="background-image: url('https://poiseonly.github.io/images/IMG_9367.JPG.jpeg')"></div>
+                <div class="gallery-image" style="background-image: url('https://poiseonly.github.io/images/IMG_9397.JPG.jpeg')"></div>
+                <div class="gallery-image" style="background-image: url('https://poiseonly.github.io/images/poise10.JPEG')"></div>
+                <div class="gallery-image" style="background-image: url('https://poiseonly.github.io/images/IMG_9463.JPG.jpeg')"></div>
+                <div class="gallery-image" style="background-image: url('https://poiseonly.github.io/images/poise13.JPEG')"></div>
+                <div class="gallery-image" style="background-image: url('https://poiseonly.github.io/images/poise12.JPEG')"></div>
+                <div class="gallery-image" style="background-image: url('https://poiseonly.github.io/images/IMG_9533.JPG.jpeg')"></div>
+                <button class="close-gallery-btn" onclick="toggleGallery('earls')">Close Gallery</button>
+            </div>
+        </div>
+
+        <!-- Project 6: Sanctuary -->
+        <div class="project-block" id="project-sanctuary">
+            <div class="project-preview" style="background-image: url('https://res.cloudinary.com/de9pinegl/image/upload/v1782830805/IMG_3290.JPG_s3nm4s.jpg')"></div>
+            <div class="project-info">
+                <h3>Sanctuary</h3>
+                <p>Interior Design — A peaceful retreat designed for rest and restoration.</p>
+                <button class="view-gallery-btn" onclick="toggleGallery('sanctuary')">View Full Gallery</button>
+            </div>
+            <div class="full-gallery" id="gallery-sanctuary">
+                <div class="gallery-image" style="background-image: url('https://res.cloudinary.com/de9pinegl/image/upload/v1782830805/IMG_3290.JPG_s3nm4s.jpg')"></div>
+                <div class="gallery-image" style="background-image: url('https://poiseonly.github.io/images/IMG_3289.JPG.jpeg')"></div>
+                <div class="gallery-image" style="background-image: url('https://poiseonly.github.io/images/IMG_3287.JPG.jpeg')"></div>
+                <div class="gallery-image" style="background-image: url('https://poiseonly.github.io/images/IMG_3292.JPG.jpeg')"></div>
+                <button class="close-gallery-btn" onclick="toggleGallery('sanctuary')">Close Gallery</button>
+            </div>
+        </div>
     </div>
 
     <footer class="footer">
@@ -630,10 +509,6 @@
     </footer>
 
     <script>
-        let projectData = {};
-        let currentProjectId = '';
-        let currentImageIndex = 0;
-        
         function openMenu() {
             document.getElementById('mobileMenu').classList.add('active');
             document.getElementById('overlay').classList.add('active');
@@ -644,214 +519,34 @@
             document.getElementById('overlay').classList.remove('active');
         }
 
-        // Animation for project cards
-        function animateProjectCards() {
-            const cards = document.querySelectorAll('.project-card');
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                    }
-                });
-            }, { threshold: 0.1 });
+        function toggleGallery(projectId) {
+            const gallery = document.getElementById('gallery-' + projectId);
+            const projectBlock = document.getElementById('project-' + projectId);
             
-            cards.forEach((card, index) => {
-                card.style.transitionDelay = (index * 0.1) + 's';
-                observer.observe(card);
-            });
-        }
-        
-        function initProjects() {
-            projectData = {
-                atelier: {
-                    title: 'Midnight Atelier',
-                    images: [
-                        'https://res.cloudinary.com/de9pinegl/image/upload/v1786929713/ABA03F76-E5F0-4C0B-9D76-8D5719B46F5D_hwodse.jpg',
-                        'https://res.cloudinary.com/de9pinegl/image/upload/v1786930132/663368F7-C67B-4A9B-B7A6-9CEE4135727D_uq4xkb.jpg',
-                        'https://res.cloudinary.com/de9pinegl/image/upload/v1786930190/00AA9908-79C2-47EE-A4C3-0B20DC0B2F49_b8htxm.jpg',
-                        'https://res.cloudinary.com/de9pinegl/image/upload/v1786930303/46BBC0CA-0AD4-4825-B95B-7CAF364D81D5_z46pnw.jpg',
-                        'https://res.cloudinary.com/de9pinegl/image/upload/v1786930351/33F679D6-28F0-4F74-8BFA-F862782E4710_fco9xf.jpg',
-                        'https://res.cloudinary.com/de9pinegl/image/upload/v1786930404/2C826A09-1F93-4521-891F-2AAF544B2A07_lxxyyn.jpg',
-                    ]
-                },
-                fabrics: {
-                    title: 'Fabrics by Uche',
-                    images: [
-                        'https://poiseonly.github.io/images/IMG_3326.jpg',
-                        'https://poiseonly.github.io/images/IMG_3325.jpg',
-                        'https://poiseonly.github.io/images/IMG_3323.jpg',
-                        'https://poiseonly.github.io/images/IMG_3322.jpg',
-                        'https://poiseonly.github.io/images/IMG_3319.jpg',
-                        'https://poiseonly.github.io/images/IMG_3318.jpg',
-                        'https://poiseonly.github.io/images/IMG_3317.jpg',
-                        'https://poiseonly.github.io/images/IMG_3315.jpg'
-                    ]
-                },
-                outterspace: {
-                    title: 'Outterspace',
-                    images: [
-                        'https://poiseonly.github.io/images/IMG_3275.JPG.jpeg',
-                        'https://poiseonly.github.io/images/IMG_3271.JPG.jpeg',
-                        'https://poiseonly.github.io/images/IMG_3272.JPG.jpeg',
-                        'https://poiseonly.github.io/images/IMG_3278.JPG.jpeg',
-                        'https://poiseonly.github.io/images/IMG_3279.JPG.jpeg'
-                    ]
-                },
-                monada: {
-                    title: 'Project Monada',
-                    images: [
-                        'https://poiseonly.github.io/images/IMG_3256.JPG.jpeg',
-                        'https://poiseonly.github.io/images/IMG_3250.JPG.jpeg',
-                        'https://poiseonly.github.io/images/IMG_3259.JPG.jpeg',
-                        'https://poiseonly.github.io/images/IMG_3265.JPG.jpeg'
-                    ]
-                },
-                Earls: {
-                    title: 'Earls',
-                    images: [
-                        'https://poiseonly.github.io/images/IMG_9366.JPG.jpeg',
-                        'https://poiseonly.github.io/images/IMG_9367.JPG.jpeg',
-                        'https://poiseonly.github.io/images/IMG_9397.JPG.jpeg',
-                        'https://poiseonly.github.io/images/poise10.JPEG',
-                        'https://poiseonly.github.io/images/IMG_9463.JPG.jpeg',
-                        'https://poiseonly.github.io/images/poise13.JPEG',
-                        'https://poiseonly.github.io/images/poise12.JPEG',
-                        'https://poiseonly.github.io/images/IMG_9533.JPG.jpeg'
-                    ]
-                },
-                Sanctuary: {
-                    title: 'Sanctuary',
-                    images: [
-                        'https://poiseonly.github.io/images/IMG_3290.JPG.jpeg',
-                        'https://poiseonly.github.io/images/IMG_3289.JPG.jpeg',
-                        'https://poiseonly.github.io/images/IMG_3287.JPG.jpeg',
-                        'https://poiseonly.github.io/images/IMG_3292.JPG.jpeg'
-                    ]
-                }
-            };
-        }
-        
-        function openProject(projectId) {
-            initProjects();
-            currentProjectId = projectId;
-            currentImageIndex = 0;
-            
-            const project = projectData[projectId];
-            if (!project) return;
-            
-            document.getElementById('projectName').textContent = project.title;
-            document.getElementById('totalCounter').textContent = project.images.length;
-            
-            updateMainImage();
-            generateThumbnails();
-            
-            const modal = document.getElementById('projectModal');
-            modal.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
-        
-        function updateMainImage() {
-            const project = projectData[currentProjectId];
-            if (!project) return;
-            
-            const mainImage = document.getElementById('mainImage');
-            mainImage.src = project.images[currentImageIndex];
-            mainImage.alt = project.title + ' ' + (currentImageIndex + 1);
-            
-            document.getElementById('currentCounter').textContent = currentImageIndex + 1;
-            
-            const thumbnails = document.querySelectorAll('.thumbnail');
-            thumbnails.forEach((thumb, index) => {
-                if (index === currentImageIndex) {
-                    thumb.classList.add('active');
-                } else {
-                    thumb.classList.remove('active');
-                }
-            });
-        }
-        
-        function generateThumbnails() {
-            const project = projectData[currentProjectId];
-            if (!project) return;
-            
-            const strip = document.getElementById('thumbnailStrip');
-            strip.innerHTML = '';
-            
-            project.images.forEach((imgUrl, index) => {
-                const thumb = document.createElement('img');
-                thumb.src = imgUrl;
-                thumb.loading = 'lazy';
-                thumb.decoding = 'async';
-                thumb.className = 'thumbnail';
-                if (index === currentImageIndex) thumb.classList.add('active');
-                thumb.onclick = () => {
-                    currentImageIndex = index;
-                    updateMainImage();
-                };
-                strip.appendChild(thumb);
-            });
-        }
-        
-        function nextImage() {
-            const project = projectData[currentProjectId];
-            if (!project) return;
-            
-            currentImageIndex = (currentImageIndex + 1) % project.images.length;
-            updateMainImage();
-        }
-        
-        function prevImage() {
-            const project = projectData[currentProjectId];
-            if (!project) return;
-            
-            currentImageIndex = (currentImageIndex - 1 + project.images.length) % project.images.length;
-            updateMainImage();
-        }
-        
-        function closeModal() {
-            const modal = document.getElementById('projectModal');
-            modal.classList.remove('active');
-            document.body.style.overflow = 'auto';
-        }
-        
-        function openFullscreen() {
-            const mainImage = document.getElementById('mainImage');
-            const fullscreenView = document.getElementById('fullscreenView');
-            const fullscreenImage = document.getElementById('fullscreenImage');
-            
-            fullscreenImage.src = mainImage.src;
-            fullscreenView.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
-        
-        function closeFullscreen() {
-            const fullscreenView = document.getElementById('fullscreenView');
-            fullscreenView.classList.remove('active');
-            document.body.style.overflow = '';
-        }
-        
-        document.addEventListener('keydown', function(e) {
-            const modal = document.getElementById('projectModal');
-            if (!modal.classList.contains('active')) return;
-            
-            if (e.key === 'ArrowRight') {
-                nextImage();
-            } else if (e.key === 'ArrowLeft') {
-                prevImage();
-            } else if (e.key === 'Escape') {
-                closeModal();
+            if (gallery.classList.contains('active')) {
+                gallery.classList.remove('active');
+                // Scroll back to project info
+                projectBlock.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            } else {
+                gallery.classList.add('active');
+                // Scroll to gallery
+                setTimeout(() => {
+                    gallery.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 100);
+                
+                // Animate gallery images
+                const images = gallery.querySelectorAll('.gallery-image');
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('visible');
+                        }
+                    });
+                }, { threshold: 0.1 });
+                
+                images.forEach(img => observer.observe(img));
             }
-        });
-        
-        document.getElementById('projectModal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeModal();
-            }
-        });
-        
-        // Initialize
-        initProjects();
-        animateProjectCards();
+        }
     </script>
 </body>
 </html>
