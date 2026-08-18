@@ -53,9 +53,10 @@
 
         /* Projects Container */
         .projects-container { max-width:1400px; margin:0 auto; padding:2rem 1.2rem 3rem; }
-        .project-block { margin-bottom:3rem; position:relative; overflow:hidden; border-radius:10px; cursor:pointer; transition:all .5s cubic-bezier(.25,.46,.45,.94); }
+        .project-block { margin-bottom:3rem; position:relative; overflow:hidden; border-radius:10px; cursor:pointer; transition:all .5s cubic-bezier(.25,.46,.45,.94); box-shadow:0 5px 20px rgba(0,0,0,0.05); }
         .project-preview { width:100%; height:50vh; min-height:280px; background-size:cover; background-position:center; border-radius:10px; position:relative; }
-        .project-info { padding:1.5rem 0; }
+        .project-info { padding:1.5rem 0; opacity:0; transform:translateY(20px); transition:opacity .6s ease, transform .6s ease; }
+        .project-block.visible .project-info { opacity:1; transform:translateY(0); transition-delay:.3s; }
         .project-info h3 { font-family:'Playfair Display',serif; font-size:1.5rem; font-weight:700; color:#1a1a1a; margin-bottom:.4rem; letter-spacing:1px; }
         .project-info p { color:#666; font-weight:500; font-size:.9rem; margin-bottom:.4rem; }
         .view-gallery-btn { display:inline-block; padding:.8rem 2rem; border:2px solid #1a1a1a; color:#1a1a1a; text-decoration:none; text-transform:uppercase; letter-spacing:1.5px; font-size:.75rem; font-weight:700; border-radius:50px; transition:all .3s; cursor:pointer; background:transparent; margin-top:.8rem; }
@@ -69,8 +70,9 @@
         .gallery-close-btn { background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.2); border-radius:50%; width:48px; height:48px; display:flex; align-items:center; justify-content:center; cursor:pointer; transition:all .3s; }
         .gallery-close-btn i { font-size:1.5rem; color:#fff; }
         .gallery-close-btn:hover { background:rgba(255,255,255,0.2); transform:rotate(90deg); border-color:#b89b7b; }
-        .gallery-images-container { display:flex; flex-direction:column; }
-        .gallery-full-image { width:100%; height:100vh; background-size:cover; background-position:center; background-repeat:no-repeat; }
+        .gallery-images-container { display:flex; flex-direction:column; padding:2rem 0; }
+        .gallery-full-image { width:100%; height:85vh; background-size:cover; background-position:center; background-repeat:no-repeat; margin-bottom:3rem; border-radius:8px; box-shadow:0 15px 40px rgba(0,0,0,0.4); }
+        .gallery-full-image:last-child { margin-bottom:0; }
 
         /* Mobile Responsive */
         @media (max-width: 767px) {
@@ -78,7 +80,7 @@
             .gallery-modal-title { font-size:1.2rem; }
             .gallery-close-btn { width:40px; height:40px; }
             .gallery-close-btn i { font-size:1.2rem; }
-            .gallery-full-image { height:80vh; }
+            .gallery-full-image { height:75vh; margin-bottom:2rem; }
         }
 
         /* Desktop */
@@ -99,7 +101,7 @@
             .project-info p { color:#f0f0f0; }
             .view-gallery-btn { border-color:#fff; color:#fff; background:rgba(255,255,255,0.15); backdrop-filter:blur(5px); }
             .view-gallery-btn:hover { background:#fff; color:#1a1a1a; }
-            .gallery-full-image { height:100vh; }
+            .gallery-full-image { height:90vh; }
         }
 
         @media (min-width: 1024px) {
@@ -151,8 +153,8 @@
         <p>featured projects</p>
     </div>
 
-    <div class="projects-container">
-        <!-- Project Cards -->
+    <div class="projects-container" id="projectsGrid">
+        <!-- Project 1: Midnight Atelier -->
         <div class="project-block" onclick="openGallery('atelier')">
             <div class="project-preview" style="background-image:url('https://res.cloudinary.com/de9pinegl/image/upload/v1786929713/ABA03F76-E5F0-4C0B-9D76-8D5719B46F5D_hwodse.jpg')"></div>
             <div class="project-info">
@@ -233,74 +235,46 @@
 
     <script>
         const projectData = {
-            atelier: {
-                title: 'Midnight Atelier',
-                images: [
-                    'https://res.cloudinary.com/de9pinegl/image/upload/v1786929713/ABA03F76-E5F0-4C0B-9D76-8D5719B46F5D_hwodse.jpg',
-                    'https://res.cloudinary.com/de9pinegl/image/upload/v1786930132/663368F7-C67B-4A9B-B7A6-9CEE4135727D_uq4xkb.jpg',
-                    'https://res.cloudinary.com/de9pinegl/image/upload/v1786930190/00AA9908-79C2-47EE-A4C3-0B20DC0B2F49_b8htxm.jpg',
-                    'https://res.cloudinary.com/de9pinegl/image/upload/v1786930303/46BBC0CA-0AD4-4825-B95B-7CAF364D81D5_z46pnw.jpg',
-                    'https://res.cloudinary.com/de9pinegl/image/upload/v1786930351/33F679D6-28F0-4F74-8BFA-F862782E4710_fco9xf.jpg',
-                    'https://res.cloudinary.com/de9pinegl/image/upload/v1786930404/2C826A09-1F93-4521-891F-2AAF544B2A07_lxxyyn.jpg'
-                ]
-            },
-            fabrics: {
-                title: 'Fabrics by Uche',
-                images: [
-                    'https://res.cloudinary.com/de9pinegl/image/upload/v1782830825/IMG_3326_ydsg59.png',
-                    'https://res.cloudinary.com/de9pinegl/image/upload/v1782829906/IMG_3325_yju9vi.png',
-                    'https://res.cloudinary.com/de9pinegl/image/upload/v1782830827/IMG_3323_ifcgwf.png',
-                    'https://res.cloudinary.com/de9pinegl/image/upload/v1782830834/IMG_3322_ic1oy8.png',
-                    'https://res.cloudinary.com/de9pinegl/image/upload/v1782830830/IMG_3318_eovmze.png',
-                    'https://res.cloudinary.com/de9pinegl/image/upload/v1782830828/IMG_3315_rlylhp.png'
-                ]
-            },
-            outterspace: {
-                title: 'Outterspace',
-                images: [
-                    'https://res.cloudinary.com/de9pinegl/image/upload/v1782830755/IMG_3275.JPG_kv4ofv.jpg',
-                    'https://res.cloudinary.com/de9pinegl/image/upload/v1782830773/IMG_3271.JPG_oe2vjl.jpg',
-                    'https://res.cloudinary.com/de9pinegl/image/upload/v1782830752/IMG_3272.JPG_fufpgy.jpg',
-                    'https://res.cloudinary.com/de9pinegl/image/upload/v1782830776/IMG_3278.JPG_ljmgtg.jpg'
-                ]
-            },
-            monada: {
-                title: 'Project Monada',
-                images: [
-                    'https://res.cloudinary.com/de9pinegl/image/upload/v1782830704/IMG_3256.JPG_rvifu0.jpg',
-                    'https://res.cloudinary.com/de9pinegl/image/upload/v1782830704/IMG_3250.JPG_v3tb8q.jpg',
-                    'https://res.cloudinary.com/de9pinegl/image/upload/v1782830705/IMG_3259.JPG_nhujcg.jpg',
-                    'https://res.cloudinary.com/de9pinegl/image/upload/v1786961329/IMG_3265.JPG_zs5n1n.jpg'
-                ]
-            },
-            earls: {
-                title: 'Earls',
-                images: [
-                    'https://res.cloudinary.com/de9pinegl/image/upload/v1782830319/IMG_9366.JPG_jyhmhr.jpg',
-                    'https://res.cloudinary.com/de9pinegl/image/upload/v1782830681/IMG_9367.JPG_ri54ox.jpg',
-                    'https://res.cloudinary.com/de9pinegl/image/upload/v1782830382/IMG_9463.JPG_o85xvr.jpg',
-                    'https://res.cloudinary.com/de9pinegl/image/upload/v1782830704/IMG_9533.JPG_aegmlv.jpg',
-                    'https://res.cloudinary.com/de9pinegl/image/upload/v1782830487/IMG_9516.JPG_oh5pqb.jpg'
-                ]
-            },
-            sanctuary: {
-                title: 'Sanctuary',
-                images: [
-                    'https://res.cloudinary.com/de9pinegl/image/upload/v1782830805/IMG_3290.JPG_s3nm4s.jpg',
-                    'https://res.cloudinary.com/de9pinegl/image/upload/v1782830792/IMG_3289.JPG_iq4qfo.jpg',
-                    'https://res.cloudinary.com/de9pinegl/image/upload/v1782830792/IMG_3287.JPG_drskdh.jpg',
-                    'https://res.cloudinary.com/de9pinegl/image/upload/v1782830809/IMG_3292.JPG_aicpqp.jpg'
-                ]
-            },
-            neutralhour: {
-                title: 'The Neutral Hour',
-                images: [
-                    'https://res.cloudinary.com/de9pinegl/image/upload/v1786910451/IMG_5351_s1coc5.jpg',
-                    'https://res.cloudinary.com/de9pinegl/image/upload/v1786963223/IMG_5352_uwyxmy.jpg',
-                    'https://res.cloudinary.com/de9pinegl/image/upload/v1786963263/IMG_5348_hzm5bd.jpg',
-                    'https://res.cloudinary.com/de9pinegl/image/upload/v1786963204/IMG_5358_aamte7.jpg'
-                ]
-            }
+            atelier: { title:'Midnight Atelier', images:[
+                'https://res.cloudinary.com/de9pinegl/image/upload/v1786929713/ABA03F76-E5F0-4C0B-9D76-8D5719B46F5D_hwodse.jpg',
+                'https://res.cloudinary.com/de9pinegl/image/upload/v1786930132/663368F7-C67B-4A9B-B7A6-9CEE4135727D_uq4xkb.jpg',
+                'https://res.cloudinary.com/de9pinegl/image/upload/v1786930190/00AA9908-79C2-47EE-A4C3-0B20DC0B2F49_b8htxm.jpg',
+                'https://res.cloudinary.com/de9pinegl/image/upload/v1786930303/46BBC0CA-0AD4-4825-B95B-7CAF364D81D5_z46pnw.jpg',
+                'https://res.cloudinary.com/de9pinegl/image/upload/v1786930351/33F679D6-28F0-4F74-8BFA-F862782E4710_fco9xf.jpg',
+                'https://res.cloudinary.com/de9pinegl/image/upload/v1786930404/2C826A09-1F93-4521-891F-2AAF544B2A07_lxxyyn.jpg']},
+            fabrics: { title:'Fabrics by Uche', images:[
+                'https://res.cloudinary.com/de9pinegl/image/upload/v1782830825/IMG_3326_ydsg59.png',
+                'https://res.cloudinary.com/de9pinegl/image/upload/v1782829906/IMG_3325_yju9vi.png',
+                'https://res.cloudinary.com/de9pinegl/image/upload/v1782830827/IMG_3323_ifcgwf.png',
+                'https://res.cloudinary.com/de9pinegl/image/upload/v1782830834/IMG_3322_ic1oy8.png',
+                'https://res.cloudinary.com/de9pinegl/image/upload/v1782830830/IMG_3318_eovmze.png',
+                'https://res.cloudinary.com/de9pinegl/image/upload/v1782830828/IMG_3315_rlylhp.png']},
+            outterspace: { title:'Outterspace', images:[
+                'https://res.cloudinary.com/de9pinegl/image/upload/v1782830755/IMG_3275.JPG_kv4ofv.jpg',
+                'https://res.cloudinary.com/de9pinegl/image/upload/v1782830773/IMG_3271.JPG_oe2vjl.jpg',
+                'https://res.cloudinary.com/de9pinegl/image/upload/v1782830752/IMG_3272.JPG_fufpgy.jpg',
+                'https://res.cloudinary.com/de9pinegl/image/upload/v1782830776/IMG_3278.JPG_ljmgtg.jpg']},
+            monada: { title:'Project Monada', images:[
+                'https://res.cloudinary.com/de9pinegl/image/upload/v1782830704/IMG_3256.JPG_rvifu0.jpg',
+                'https://res.cloudinary.com/de9pinegl/image/upload/v1782830704/IMG_3250.JPG_v3tb8q.jpg',
+                'https://res.cloudinary.com/de9pinegl/image/upload/v1782830705/IMG_3259.JPG_nhujcg.jpg',
+                'https://res.cloudinary.com/de9pinegl/image/upload/v1786961329/IMG_3265.JPG_zs5n1n.jpg']},
+            earls: { title:'Earls', images:[
+                'https://res.cloudinary.com/de9pinegl/image/upload/v1782830319/IMG_9366.JPG_jyhmhr.jpg',
+                'https://res.cloudinary.com/de9pinegl/image/upload/v1782830681/IMG_9367.JPG_ri54ox.jpg',
+                'https://res.cloudinary.com/de9pinegl/image/upload/v1782830382/IMG_9463.JPG_o85xvr.jpg',
+                'https://res.cloudinary.com/de9pinegl/image/upload/v1782830704/IMG_9533.JPG_aegmlv.jpg',
+                'https://res.cloudinary.com/de9pinegl/image/upload/v1782830487/IMG_9516.JPG_oh5pqb.jpg']},
+            sanctuary: { title:'Sanctuary', images:[
+                'https://res.cloudinary.com/de9pinegl/image/upload/v1782830805/IMG_3290.JPG_s3nm4s.jpg',
+                'https://res.cloudinary.com/de9pinegl/image/upload/v1782830792/IMG_3289.JPG_iq4qfo.jpg',
+                'https://res.cloudinary.com/de9pinegl/image/upload/v1782830792/IMG_3287.JPG_drskdh.jpg',
+                'https://res.cloudinary.com/de9pinegl/image/upload/v1782830809/IMG_3292.JPG_aicpqp.jpg']},
+            neutralhour: { title:'The Neutral Hour', images:[
+                'https://res.cloudinary.com/de9pinegl/image/upload/v1786910451/IMG_5351_s1coc5.jpg',
+                'https://res.cloudinary.com/de9pinegl/image/upload/v1786963223/IMG_5352_uwyxmy.jpg',
+                'https://res.cloudinary.com/de9pinegl/image/upload/v1786963263/IMG_5348_hzm5bd.jpg',
+                'https://res.cloudinary.com/de9pinegl/image/upload/v1786963204/IMG_5358_aamte7.jpg']}
         };
 
         function openMenu() {
@@ -326,7 +300,6 @@
             });
             document.getElementById('galleryModal').classList.add('active');
             document.body.style.overflow = 'hidden';
-            // scroll to top of modal
             document.getElementById('galleryModal').scrollTop = 0;
         }
 
@@ -335,12 +308,21 @@
             document.body.style.overflow = 'auto';
         }
 
-        // Close modal with Escape key
         document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                closeGallery();
-            }
+            if (e.key === 'Escape') closeGallery();
         });
+
+        // Scroll-triggered fade-in for project cards and their text
+        const blocks = document.querySelectorAll('.project-block');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.2 });
+        blocks.forEach(block => observer.observe(block));
     </script>
 </body>
 </html>
