@@ -15,389 +15,107 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-        }
-
-        html, body {
-            overflow-x: hidden;
-            width: 100%;
-            max-width: 100%;
-            position: relative;
-        }
-
-        body {
-            background-color: #ffffff;
-            color: #1a1a1a;
-            line-height: 1.6;
-            -webkit-font-smoothing: antialiased;
-        }
+        * { margin:0; padding:0; box-sizing:border-box; font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif; }
+        html, body { overflow-x:hidden; width:100%; max-width:100%; position:relative; }
+        body { background:#fff; color:#1a1a1a; line-height:1.6; -webkit-font-smoothing:antialiased; }
 
         /* Navigation */
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 1.5rem;
-            background: #ffffff;
-            border-bottom: 1px solid #f4f4f4;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 20px rgba(0,0,0,0.05);
-            gap: 1rem;
-        }
-        .logo {
-            font-family: 'Playfair Display', serif;
-            font-weight: 700;
-            letter-spacing: 0.5px;
-            font-size: 1.2rem;
-            text-decoration: none;
-            color: #1a1a1a;
-            transition: all 0.3s;
-            position: relative;
-            white-space: nowrap;
-        }
-        .logo::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 0; height: 2px; background: #b89b7b; transition: width 0.3s; }
-        .logo:hover::after { width: 100%; }
-        .logo:hover { color: #b89b7b; }
-        .menu-icon { font-size: 1.3rem; cursor: pointer; }
-        .mobile-menu {
-            position: fixed; top: 0; left: -100%; width: 80%; height: 100vh;
-            background: #ffffff; z-index: 2000; padding: 1.5rem;
-            transition: 0.4s cubic-bezier(0.77, 0, 0.175, 1);
-            box-shadow: 2px 0 20px rgba(0,0,0,0.05); overflow-y: auto;
-        }
-        .mobile-menu.active { left: 0; }
-        .close-menu { text-align: right; font-size: 1.3rem; margin-bottom: 1.5rem; cursor: pointer; }
-        .mobile-menu-links { display: flex; flex-direction: column; gap: 1.2rem; }
-        .mobile-menu-links a {
-            text-decoration: none; color: #1a1a1a; font-size: 0.95rem;
-            text-transform: uppercase; letter-spacing: 1.5px; font-weight: 600;
-            border-bottom: 1px solid #f4f4f4; padding-bottom: 0.8rem;
-        }
-        .overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.4); backdrop-filter: blur(3px);
-            z-index: 1500; display: none;
-        }
-        .overlay.active { display: block; }
-        .desktop-nav { display: none; }
-        .desktop-nav a, .dropdown-toggle {
-            text-decoration: none; color: #1a1a1a; font-size: 0.85rem;
-            text-transform: uppercase; letter-spacing: 1.5px; font-weight: 600;
-            padding: 0.5rem 0; cursor: pointer; background: transparent; border: none;
-            transition: all 0.3s; position: relative; white-space: nowrap;
-        }
-        .desktop-nav a::after, .dropdown-toggle::after {
-            content: ''; position: absolute; bottom: 0; left: 0;
-            width: 0; height: 2px; background: #b89b7b; transition: width 0.3s;
-        }
-        .desktop-nav a:hover::after, .dropdown-toggle:hover::after { width: 100%; }
-        .desktop-nav a:hover, .dropdown-toggle:hover { color: #b89b7b; }
-        .dropdown { position: relative; display: inline-block; }
-        .dropdown-toggle i { margin-left: 5px; font-size: 0.75rem; transition: transform 0.3s; }
-        .dropdown:hover .dropdown-toggle i { transform: rotate(180deg); }
-        .dropdown-menu {
-            position: absolute; top: 100%; left: 0; background: #ffffff;
-            min-width: 200px; box-shadow: 0 15px 40px rgba(0,0,0,0.08);
-            border: 1px solid #f5f5f5; opacity: 0; visibility: hidden;
-            transform: translateY(-10px); transition: all 0.3s ease; z-index: 1000; padding: 1rem 0;
-            border-radius: 8px;
-        }
-        .dropdown:hover .dropdown-menu { opacity: 1; visibility: visible; transform: translateY(0); }
-        .dropdown-menu a {
-            display: block; padding: 0.8rem 1.5rem; text-decoration: none;
-            color: #1a1a1a; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; font-weight: 500;
-        }
-        .dropdown-menu a:hover { background: #fcfcfc; color: #b89b7b; padding-left: 2rem; }
+        .navbar { display:flex; justify-content:space-between; align-items:center; padding:1rem 1.5rem; background:#fff; border-bottom:1px solid #f4f4f4; position:sticky; top:0; z-index:1000; box-shadow:0 2px 20px rgba(0,0,0,0.05); gap:1rem; }
+        .logo { font-family:'Playfair Display',serif; font-weight:700; letter-spacing:0.5px; font-size:1.2rem; text-decoration:none; color:#1a1a1a; transition:all .3s; position:relative; white-space:nowrap; }
+        .logo::after { content:''; position:absolute; bottom:-2px; left:0; width:0; height:2px; background:#b89b7b; transition:width .3s; }
+        .logo:hover::after { width:100%; }
+        .logo:hover { color:#b89b7b; }
+        .menu-icon { font-size:1.3rem; cursor:pointer; }
+        .mobile-menu { position:fixed; top:0; left:-100%; width:80%; height:100vh; background:#fff; z-index:2000; padding:1.5rem; transition:.4s cubic-bezier(.77,0,.175,1); box-shadow:2px 0 20px rgba(0,0,0,0.05); overflow-y:auto; }
+        .mobile-menu.active { left:0; }
+        .close-menu { text-align:right; font-size:1.3rem; margin-bottom:1.5rem; cursor:pointer; }
+        .mobile-menu-links { display:flex; flex-direction:column; gap:1.2rem; }
+        .mobile-menu-links a { text-decoration:none; color:#1a1a1a; font-size:.95rem; text-transform:uppercase; letter-spacing:1.5px; font-weight:600; border-bottom:1px solid #f4f4f4; padding-bottom:.8rem; }
+        .overlay { position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,.4); backdrop-filter:blur(3px); z-index:1500; display:none; }
+        .overlay.active { display:block; }
+        .desktop-nav { display:none; }
+        .desktop-nav a, .dropdown-toggle { text-decoration:none; color:#1a1a1a; font-size:.85rem; text-transform:uppercase; letter-spacing:1.5px; font-weight:600; padding:.5rem 0; cursor:pointer; background:transparent; border:none; transition:all .3s; position:relative; white-space:nowrap; }
+        .desktop-nav a::after, .dropdown-toggle::after { content:''; position:absolute; bottom:0; left:0; width:0; height:2px; background:#b89b7b; transition:width .3s; }
+        .desktop-nav a:hover::after, .dropdown-toggle:hover::after { width:100%; }
+        .desktop-nav a:hover, .dropdown-toggle:hover { color:#b89b7b; }
+        .dropdown { position:relative; display:inline-block; }
+        .dropdown-toggle i { margin-left:5px; font-size:.75rem; transition:transform .3s; }
+        .dropdown:hover .dropdown-toggle i { transform:rotate(180deg); }
+        .dropdown-menu { position:absolute; top:100%; left:0; background:#fff; min-width:200px; box-shadow:0 15px 40px rgba(0,0,0,.08); border:1px solid #f5f5f5; opacity:0; visibility:hidden; transform:translateY(-10px); transition:all .3s ease; z-index:1000; padding:1rem 0; border-radius:8px; }
+        .dropdown:hover .dropdown-menu { opacity:1; visibility:visible; transform:translateY(0); }
+        .dropdown-menu a { display:block; padding:.8rem 1.5rem; text-decoration:none; color:#1a1a1a; font-size:.85rem; text-transform:uppercase; letter-spacing:1px; font-weight:500; }
+        .dropdown-menu a:hover { background:#fcfcfc; color:#b89b7b; padding-left:2rem; }
 
         /* Page Header */
-        .page-header {
-            padding: 3rem 1.5rem 2rem;
-            text-align: center;
-            background: linear-gradient(135deg, #fafafa 0%, #ffffff 100%);
-            border-bottom: 1px solid #f4f4f4;
-        }
-        .page-header h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.2rem;
-            font-weight: 900;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            margin-bottom: 0.8rem;
-            color: #1a1a1a;
-        }
-        .page-header p {
-            color: #b89b7b;
-            font-style: italic;
-            font-size: 1rem;
-            font-weight: 500;
+        .page-header { padding:3rem 1.5rem 2rem; text-align:center; background:linear-gradient(135deg,#fafafa 0%,#fff 100%); border-bottom:1px solid #f4f4f4; }
+        .page-header h1 { font-family:'Playfair Display',serif; font-size:2.2rem; font-weight:900; letter-spacing:2px; text-transform:uppercase; margin-bottom:.8rem; color:#1a1a1a; }
+        .page-header p { color:#b89b7b; font-style:italic; font-size:1rem; font-weight:500; }
+
+        /* Projects Container */
+        .projects-container { max-width:1400px; margin:0 auto; padding:2rem 1.2rem 3rem; }
+        .project-block { margin-bottom:3rem; position:relative; overflow:hidden; border-radius:10px; cursor:pointer; transition:all .5s cubic-bezier(.25,.46,.45,.94); }
+        .project-preview { width:100%; height:50vh; min-height:280px; background-size:cover; background-position:center; border-radius:10px; position:relative; }
+        .project-info { padding:1.5rem 0; }
+        .project-info h3 { font-family:'Playfair Display',serif; font-size:1.5rem; font-weight:700; color:#1a1a1a; margin-bottom:.4rem; letter-spacing:1px; }
+        .project-info p { color:#666; font-weight:500; font-size:.9rem; margin-bottom:.4rem; }
+        .view-gallery-btn { display:inline-block; padding:.8rem 2rem; border:2px solid #1a1a1a; color:#1a1a1a; text-decoration:none; text-transform:uppercase; letter-spacing:1.5px; font-size:.75rem; font-weight:700; border-radius:50px; transition:all .3s; cursor:pointer; background:transparent; margin-top:.8rem; }
+        .view-gallery-btn:hover { background:#1a1a1a; color:#fff; transform:translateY(-2px); box-shadow:0 10px 25px rgba(0,0,0,.15); }
+
+        /* Fullscreen Gallery Modal */
+        .gallery-modal { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.95); z-index:3000; overflow-y:auto; }
+        .gallery-modal.active { display:block; }
+        .gallery-modal-header { position:sticky; top:0; display:flex; justify-content:space-between; align-items:center; padding:1.5rem 2rem; background:rgba(0,0,0,0.8); backdrop-filter:blur(10px); z-index:10; border-bottom:1px solid rgba(255,255,255,0.1); }
+        .gallery-modal-title { font-family:'Playfair Display',serif; font-size:1.5rem; color:#fff; font-weight:700; letter-spacing:1px; }
+        .gallery-close-btn { background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.2); border-radius:50%; width:48px; height:48px; display:flex; align-items:center; justify-content:center; cursor:pointer; transition:all .3s; }
+        .gallery-close-btn i { font-size:1.5rem; color:#fff; }
+        .gallery-close-btn:hover { background:rgba(255,255,255,0.2); transform:rotate(90deg); border-color:#b89b7b; }
+        .gallery-images-container { display:flex; flex-direction:column; }
+        .gallery-full-image { width:100%; height:100vh; background-size:cover; background-position:center; background-repeat:no-repeat; }
+
+        /* Mobile Responsive */
+        @media (max-width: 767px) {
+            .gallery-modal-header { padding:1rem 1.5rem; }
+            .gallery-modal-title { font-size:1.2rem; }
+            .gallery-close-btn { width:40px; height:40px; }
+            .gallery-close-btn i { font-size:1.2rem; }
+            .gallery-full-image { height:80vh; }
         }
 
-        /* Mobile styles */
-        .projects-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 2rem 1.2rem 3rem;
-        }
-        .project-block {
-            margin-bottom: 3rem;
-            position: relative;
-            overflow: hidden;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
-        .project-preview {
-            width: 100%;
-            height: 50vh;
-            min-height: 280px;
-            background-size: cover;
-            background-position: center;
-            border-radius: 10px;
-            position: relative;
-        }
-        .project-info {
-            padding: 1.5rem 0;
-        }
-        .project-info h3 {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: #1a1a1a;
-            margin-bottom: 0.4rem;
-            letter-spacing: 1px;
-        }
-        .project-info p {
-            color: #666;
-            font-weight: 500;
-            font-size: 0.9rem;
-            margin-bottom: 0.4rem;
-        }
-        .view-gallery-btn {
-            display: inline-block;
-            padding: 0.8rem 2rem;
-            border: 2px solid #1a1a1a;
-            color: #1a1a1a;
-            text-decoration: none;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            font-size: 0.75rem;
-            font-weight: 700;
-            border-radius: 50px;
-            transition: all 0.3s;
-            cursor: pointer;
-            background: transparent;
-            margin-top: 0.8rem;
-        }
-        .view-gallery-btn:hover {
-            background: #1a1a1a;
-            color: #ffffff;
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-        }
-        .full-gallery {
-            display: none;
-            margin-top: 1.5rem;
-            animation: fadeInGallery 0.5s ease;
-        }
-        .full-gallery.active { display: block; }
-        @keyframes fadeInGallery {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .gallery-image {
-            width: 100%;
-            height: 55vh;
-            min-height: 280px;
-            background-size: cover;
-            background-position: center;
-            margin-bottom: 1.5rem;
-            border-radius: 10px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
-        .gallery-image.visible { opacity: 1; transform: translateY(0); }
-        .close-gallery-btn {
-            display: inline-block;
-            padding: 0.7rem 2rem;
-            border: 2px solid #b89b7b;
-            color: #b89b7b;
-            text-decoration: none;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            font-size: 0.7rem;
-            font-weight: 700;
-            border-radius: 50px;
-            transition: all 0.3s;
-            cursor: pointer;
-            background: transparent;
-            margin-top: 1rem;
-        }
-        .close-gallery-btn:hover { background: #b89b7b; color: #ffffff; }
-        .footer {
-            background: #1a1a1a; color: #ffffff; padding: 2.5rem 1.5rem;
-            text-align: center; margin-top: 0;
-        }
-        .footer-logo { 
-            font-family: 'Playfair Display', serif;
-            font-size: 1.3rem; font-weight: 700; letter-spacing: 1px; 
-            margin-bottom: 0.8rem; color: #ffffff; 
-        }
-        .footer-location { font-size: 0.8rem; letter-spacing: 1px; color: #aaa; font-weight: 500; margin-bottom: 1.2rem; }
-        .footer-social { display: flex; justify-content: center; gap: 1.2rem; margin: 1.2rem 0; }
-        .footer-social a { color: #ffffff; font-size: 1.1rem; transition: color 0.3s; }
-        .footer-social a:hover { color: #b89b7b; }
-        .footer-copyright { font-size: 0.7rem; color: #888; margin-top: 1.5rem; letter-spacing: 1px; font-weight: 500; }
-
-        /* Desktop Styles */
+        /* Desktop */
         @media (min-width: 768px) {
-            .navbar { padding: 1.2rem 3rem; }
-            .logo { font-size: 1.5rem; }
-            .menu-icon { font-size: 1.5rem; }
-            .desktop-nav { display: flex; gap: 2rem; align-items: center; }
-            .menu-icon, .mobile-menu, .overlay { display: none; }
-            .page-header { padding: 5rem 1.5rem 3rem; }
-            .page-header h1 { font-size: 3.5rem; letter-spacing: 3px; }
-            .page-header p { font-size: 1.1rem; }
-            .projects-container { padding: 3rem 2rem 5rem; display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
-            .project-block {
-                margin-bottom: 0;
-                border-radius: 12px;
-                opacity: 0;
-                transform: translateY(30px);
-                transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-                box-shadow: 0 5px 20px rgba(0,0,0,0.05);
-            }
-            .project-block.visible { opacity: 1; transform: translateY(0); }
-            .project-block:hover { box-shadow: 0 25px 50px rgba(0,0,0,0.15); }
-            .project-block:nth-child(1) .project-preview { height: 450px; }
-            .project-block:nth-child(2) .project-preview { height: 380px; }
-            .project-block:nth-child(3) .project-preview { height: 500px; }
-            .project-block:nth-child(4) .project-preview { height: 350px; }
-            .project-block:nth-child(5) .project-preview { height: 420px; }
-            .project-block:nth-child(6) .project-preview { height: 380px; }
-            .project-block:nth-child(7) .project-preview { height: 450px; }
-            .project-preview {
-                width: 100%;
-                height: 450px;
-                border-radius: 12px;
-                position: relative;
-                overflow: hidden;
-            }
-            .project-preview::after {
-                content: '';
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0) 100%);
-                opacity: 0;
-                transition: opacity 0.5s ease;
-                pointer-events: none;
-            }
-            .project-block:hover .project-preview::after { opacity: 1; }
-            .project-info {
-                position: absolute;
-                bottom: 0;
-                left: 0;
-                right: 0;
-                padding: 2rem;
-                z-index: 2;
-                opacity: 0;
-                transform: translateY(20px);
-                transition: all 0.5s ease 0.1s;
-                pointer-events: none;
-            }
-            .project-block:hover .project-info {
-                opacity: 1;
-                transform: translateY(0);
-                pointer-events: auto;
-            }
-            .project-info h3 {
-                font-size: 1.6rem;
-                color: #ffffff;
-                margin-bottom: 0.3rem;
-            }
-            .project-info p {
-                color: #f0f0f0;
-                font-size: 0.85rem;
-                margin-bottom: 0.6rem;
-            }
-            .view-gallery-btn {
-                border: 2px solid #ffffff;
-                color: #ffffff;
-                background: rgba(255,255,255,0.1);
-                backdrop-filter: blur(5px);
-                font-size: 0.7rem;
-                padding: 0.7rem 1.8rem;
-            }
-            .view-gallery-btn:hover {
-                background: #ffffff;
-                color: #1a1a1a;
-            }
-            .full-gallery {
-                display: none;
-                grid-column: 1 / -1;
-                margin-top: 0;
-                animation: fadeInGallery 0.5s ease;
-                background: linear-gradient(135deg, #fafafa 0%, #ffffff 100%);
-                border-radius: 16px;
-                padding: 2rem;
-                border: 1px solid #f0f0f0;
-            }
-            .full-gallery.active {
-                display: grid;
-                grid-template-columns: repeat(2, 1fr);
-                gap: 1.5rem;
-            }
-            .gallery-image {
-                width: 100%;
-                height: 60vh;
-                min-height: 400px;
-                margin-bottom: 0;
-                border-radius: 12px;
-                opacity: 0;
-                transform: translateY(20px);
-                transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            }
-            .gallery-image:first-child {
-                grid-column: span 2;
-                height: 70vh;
-            }
-            .gallery-image.visible { opacity: 1; transform: translateY(0); }
-            .close-gallery-btn {
-                grid-column: span 2;
-                justify-self: center;
-                margin-top: 1rem;
-            }
-            .footer { padding: 3rem 1.5rem; }
-            .footer-logo { font-size: 1.5rem; }
-            .footer-location { font-size: 0.85rem; }
-            .footer-social { gap: 1.5rem; margin: 1.5rem 0; }
-            .footer-social a { font-size: 1.2rem; }
-            .footer-copyright { font-size: 0.75rem; margin-top: 2rem; }
+            .navbar { padding:1.2rem 3rem; }
+            .logo { font-size:1.5rem; }
+            .menu-icon { font-size:1.5rem; }
+            .desktop-nav { display:flex; gap:2rem; align-items:center; }
+            .menu-icon, .mobile-menu, .overlay { display:none; }
+            .page-header { padding:5rem 1.5rem 3rem; }
+            .page-header h1 { font-size:3.5rem; letter-spacing:3px; }
+            .projects-container { padding:3rem 2rem 5rem; display:grid; grid-template-columns:repeat(3,1fr); gap:2rem; }
+            .project-block { margin-bottom:0; border-radius:12px; box-shadow:0 5px 20px rgba(0,0,0,0.05); }
+            .project-block:hover { box-shadow:0 25px 50px rgba(0,0,0,0.15); }
+            .project-preview { height:450px; border-radius:12px; }
+            .project-info { position:absolute; bottom:0; left:0; right:0; padding:2rem; background:linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 60%, rgba(0,0,0,0) 100%); border-radius:0 0 12px 12px; }
+            .project-info h3 { font-size:1.6rem; color:#fff; }
+            .project-info p { color:#f0f0f0; }
+            .view-gallery-btn { border-color:#fff; color:#fff; background:rgba(255,255,255,0.15); backdrop-filter:blur(5px); }
+            .view-gallery-btn:hover { background:#fff; color:#1a1a1a; }
+            .gallery-full-image { height:100vh; }
         }
 
         @media (min-width: 1024px) {
-            .navbar { padding: 1.2rem 4rem; }
-            .desktop-nav { gap: 2.5rem; }
-            .projects-container { gap: 2.5rem; }
+            .navbar { padding:1.2rem 4rem; }
+            .desktop-nav { gap:2.5rem; }
+            .projects-container { gap:2.5rem; }
         }
 
-        @media (max-width: 767px) {
-            .project-preview { height: 45vh; min-height: 250px; }
-            .gallery-image { height: 50vh; min-height: 250px; }
-            .projects-container { padding: 1.5rem 1rem 2.5rem; }
-            .project-block { margin-bottom: 2.5rem; }
-        }
+        /* Footer */
+        .footer { background:#1a1a1a; color:#fff; padding:2.5rem 1.5rem; text-align:center; }
+        .footer-logo { font-family:'Playfair Display',serif; font-size:1.3rem; font-weight:700; letter-spacing:1px; margin-bottom:.8rem; }
+        .footer-location { font-size:.8rem; letter-spacing:1px; color:#aaa; font-weight:500; margin-bottom:1.2rem; }
+        .footer-social { display:flex; justify-content:center; gap:1.2rem; margin:1.2rem 0; }
+        .footer-social a { color:#fff; font-size:1.1rem; transition:color .3s; }
+        .footer-social a:hover { color:#b89b7b; }
+        .footer-copyright { font-size:.7rem; color:#888; margin-top:1.5rem; letter-spacing:1px; font-weight:500; }
     </style>
 </head>
 <body>
@@ -433,130 +151,75 @@
         <p>featured projects</p>
     </div>
 
-    <div class="projects-container" id="projectsGrid">
-        <!-- Project 1: Midnight Atelier -->
-        <div class="project-block" id="project-atelier">
-            <div class="project-preview" style="background-image: url('https://res.cloudinary.com/de9pinegl/image/upload/v1786929713/ABA03F76-E5F0-4C0B-9D76-8D5719B46F5D_hwodse.jpg')"></div>
+    <div class="projects-container">
+        <!-- Project Cards -->
+        <div class="project-block" onclick="openGallery('atelier')">
+            <div class="project-preview" style="background-image:url('https://res.cloudinary.com/de9pinegl/image/upload/v1786929713/ABA03F76-E5F0-4C0B-9D76-8D5719B46F5D_hwodse.jpg')"></div>
             <div class="project-info">
                 <h3>Midnight Atelier</h3>
                 <p>Interior Design</p>
-                <button class="view-gallery-btn" onclick="toggleGallery('atelier')">View Full Gallery</button>
-            </div>
-            <div class="full-gallery" id="gallery-atelier">
-                <div class="gallery-image" style="background-image: url('https://res.cloudinary.com/de9pinegl/image/upload/v1786929713/ABA03F76-E5F0-4C0B-9D76-8D5719B46F5D_hwodse.jpg')"></div>
-                <div class="gallery-image" style="background-image: url('https://res.cloudinary.com/de9pinegl/image/upload/v1786930132/663368F7-C67B-4A9B-B7A6-9CEE4135727D_uq4xkb.jpg')"></div>
-                <div class="gallery-image" style="background-image: url('https://res.cloudinary.com/de9pinegl/image/upload/v1786930190/00AA9908-79C2-47EE-A4C3-0B20DC0B2F49_b8htxm.jpg')"></div>
-                <div class="gallery-image" style="background-image: url('https://res.cloudinary.com/de9pinegl/image/upload/v1786930303/46BBC0CA-0AD4-4825-B95B-7CAF364D81D5_z46pnw.jpg')"></div>
-                <div class="gallery-image" style="background-image: url('https://res.cloudinary.com/de9pinegl/image/upload/v1786930351/33F679D6-28F0-4F74-8BFA-F862782E4710_fco9xf.jpg')"></div>
-                <div class="gallery-image" style="background-image: url('https://res.cloudinary.com/de9pinegl/image/upload/v1786930404/2C826A09-1F93-4521-891F-2AAF544B2A07_lxxyyn.jpg')"></div>
-                <button class="close-gallery-btn" onclick="toggleGallery('atelier')">Close Gallery</button>
+                <button class="view-gallery-btn">View Full Gallery</button>
             </div>
         </div>
-
-        <!-- Project 2: Fabrics by Uche -->
-        <div class="project-block" id="project-fabrics">
-            <div class="project-preview" style="background-image: url('https://res.cloudinary.com/de9pinegl/image/upload/v1782830825/IMG_3326_ydsg59.png')"></div>
+        <div class="project-block" onclick="openGallery('fabrics')">
+            <div class="project-preview" style="background-image:url('https://res.cloudinary.com/de9pinegl/image/upload/v1782830825/IMG_3326_ydsg59.png')"></div>
             <div class="project-info">
                 <h3>Fabrics by Uche</h3>
                 <p>Interior Design</p>
-                <button class="view-gallery-btn" onclick="toggleGallery('fabrics')">View Full Gallery</button>
-            </div>
-            <div class="full-gallery" id="gallery-fabrics">
-                <div class="gallery-image" style="background-image: url('https://res.cloudinary.com/de9pinegl/image/upload/v1782830825/IMG_3326_ydsg59.png')"></div>
-                <div class="gallery-image" style="background-image: url('https://res.cloudinary.com/de9pinegl/image/upload/v1782829906/IMG_3325_yju9vi.png')"></div>
-                <div class="gallery-image" style="background-image: url('https://res.cloudinary.com/de9pinegl/image/upload/v1782830827/IMG_3323_ifcgwf.png')"></div>
-                <div class="gallery-image" style="background-image: url('https://res.cloudinary.com/de9pinegl/image/upload/v1782830834/IMG_3322_ic1oy8.png')"></div>
-                <div class="gallery-image" style="background-image: url('https://res.cloudinary.com/de9pinegl/image/upload/v1782830830/IMG_3318_eovmze.png')"></div>
-                <div class="gallery-image" style="background-image: url('https://res.cloudinary.com/de9pinegl/image/upload/v1782830828/IMG_3315_rlylhp.png')"></div>
-                <button class="close-gallery-btn" onclick="toggleGallery('fabrics')">Close Gallery</button>
+                <button class="view-gallery-btn">View Full Gallery</button>
             </div>
         </div>
-
-        <!-- Project 3: Outterspace -->
-        <div class="project-block" id="project-outterspace">
-            <div class="project-preview" style="background-image: url('https://res.cloudinary.com/de9pinegl/image/upload/v1782830755/IMG_3275.JPG_kv4ofv.jpg')"></div>
+        <div class="project-block" onclick="openGallery('outterspace')">
+            <div class="project-preview" style="background-image:url('https://res.cloudinary.com/de9pinegl/image/upload/v1782830755/IMG_3275.JPG_kv4ofv.jpg')"></div>
             <div class="project-info">
                 <h3>Outterspace</h3>
                 <p>Creative Direction & Design</p>
-                <button class="view-gallery-btn" onclick="toggleGallery('outterspace')">View Full Gallery</button>
-            </div>
-            <div class="full-gallery" id="gallery-outterspace">
-                <div class="gallery-image" style="background-image: url('https://res.cloudinary.com/de9pinegl/image/upload/v1782830755/IMG_3275.JPG_kv4ofv.jpg')"></div>
-                <div class="gallery-image" style="background-image: url('https://res.cloudinary.com/de9pinegl/image/upload/v1782830773/IMG_3271.JPG_oe2vjl.jpg')"></div>
-                <div class="gallery-image" style="background-image: url('https://res.cloudinary.com/de9pinegl/image/upload/v1782830752/IMG_3272.JPG_fufpgy.jpg')"></div>
-                <div class="gallery-image" style="background-image: url('https://res.cloudinary.com/de9pinegl/image/upload/v1782830776/IMG_3278.JPG_ljmgtg.jpg')"></div>
-                <button class="close-gallery-btn" onclick="toggleGallery('outterspace')">Close Gallery</button>
+                <button class="view-gallery-btn">View Full Gallery</button>
             </div>
         </div>
-
-        <!-- Project 4: Project Monada -->
-        <div class="project-block" id="project-monada">
-            <div class="project-preview" style="background-image: url('https://res.cloudinary.com/de9pinegl/image/upload/v1782830704/IMG_3256.JPG_rvifu0.jpg')"></div>
+        <div class="project-block" onclick="openGallery('monada')">
+            <div class="project-preview" style="background-image:url('https://res.cloudinary.com/de9pinegl/image/upload/v1782830704/IMG_3256.JPG_rvifu0.jpg')"></div>
             <div class="project-info">
                 <h3>Project Monada</h3>
                 <p>Experiential Design</p>
-                <button class="view-gallery-btn" onclick="toggleGallery('monada')">View Full Gallery</button>
-            </div>
-            <div class="full-gallery" id="gallery-monada">
-                <div class="gallery-image" style="background-image: url('https://res.cloudinary.com/de9pinegl/image/upload/v1782830704/IMG_3256.JPG_rvifu0.jpg')"></div>
-                <div class="gallery-image" style="background-image: url('https://res.cloudinary.com/de9pinegl/image/upload/v1782830704/IMG_3250.JPG_v3tb8q.jpg')"></div>
-                <div class="gallery-image" style="background-image: url('https://res.cloudinary.com/de9pinegl/image/upload/v1782830705/IMG_3259.JPG_nhujcg.jpg')"></div>
-                <div class="gallery-image" style="background-image: url('https://res.cloudinary.com/de9pinegl/image/upload/v1786961329/IMG_3265.JPG_zs5n1n.jpg')"></div>
-                <button class="close-gallery-btn" onclick="toggleGallery('monada')">Close Gallery</button>
+                <button class="view-gallery-btn">View Full Gallery</button>
             </div>
         </div>
-
-        <!-- Project 5: Earls -->
-        <div class="project-block" id="project-earls">
-            <div class="project-preview" style="background-image: url('https://res.cloudinary.com/de9pinegl/image/upload/v1782830319/IMG_9366.JPG_jyhmhr.jpg')"></div>
+        <div class="project-block" onclick="openGallery('earls')">
+            <div class="project-preview" style="background-image:url('https://res.cloudinary.com/de9pinegl/image/upload/v1782830319/IMG_9366.JPG_jyhmhr.jpg')"></div>
             <div class="project-info">
                 <h3>Earls</h3>
                 <p>Interior Design</p>
-                <button class="view-gallery-btn" onclick="toggleGallery('earls')">View Full Gallery</button>
-            </div>
-            <div class="full-gallery" id="gallery-earls">
-                <div class="gallery-image" style="background-image: url('https://res.cloudinary.com/de9pinegl/image/upload/v1782830319/IMG_9366.JPG_jyhmhr.jpg')"></div>
-                <div class="gallery-image" style="background-image: url('https://res.cloudinary.com/de9pinegl/image/upload/v1782830681/IMG_9367.JPG_ri54ox.jpg')"></div>
-                <div class="gallery-image" style="background-image: url('https://res.cloudinary.com/de9pinegl/image/upload/v1782830382/IMG_9463.JPG_o85xvr.jpg')"></div>
-                <div class="gallery-image" style="background-image: url('https://res.cloudinary.com/de9pinegl/image/upload/v1782830704/IMG_9533.JPG_aegmlv.jpg')"></div>
-                <div class="gallery-image" style="background-image: url('https://res.cloudinary.com/de9pinegl/image/upload/v1782830487/IMG_9516.JPG_oh5pqb.jpg')"></div>
-                <button class="close-gallery-btn" onclick="toggleGallery('earls')">Close Gallery</button>
+                <button class="view-gallery-btn">View Full Gallery</button>
             </div>
         </div>
-
-        <!-- Project 6: Sanctuary -->
-        <div class="project-block" id="project-sanctuary">
-            <div class="project-preview" style="background-image: url('https://res.cloudinary.com/de9pinegl/image/upload/v1782830805/IMG_3290.JPG_s3nm4s.jpg')"></div>
+        <div class="project-block" onclick="openGallery('sanctuary')">
+            <div class="project-preview" style="background-image:url('https://res.cloudinary.com/de9pinegl/image/upload/v1782830805/IMG_3290.JPG_s3nm4s.jpg')"></div>
             <div class="project-info">
                 <h3>Sanctuary</h3>
                 <p>Interior Design</p>
-                <button class="view-gallery-btn" onclick="toggleGallery('sanctuary')">View Full Gallery</button>
-            </div>
-            <div class="full-gallery" id="gallery-sanctuary">
-                <div class="gallery-image" style="background-image: url('https://res.cloudinary.com/de9pinegl/image/upload/v1782830805/IMG_3290.JPG_s3nm4s.jpg')"></div>
-                <div class="gallery-image" style="background-image: url('https://res.cloudinary.com/de9pinegl/image/upload/v1782830792/IMG_3289.JPG_iq4qfo.jpg')"></div>
-                <div class="gallery-image" style="background-image: url('https://res.cloudinary.com/de9pinegl/image/upload/v1782830792/IMG_3287.JPG_drskdh.jpg')"></div>
-                <div class="gallery-image" style="background-image: url('https://res.cloudinary.com/de9pinegl/image/upload/v1782830809/IMG_3292.JPG_aicpqp.jpg')"></div>
-                <button class="close-gallery-btn" onclick="toggleGallery('sanctuary')">Close Gallery</button>
+                <button class="view-gallery-btn">View Full Gallery</button>
             </div>
         </div>
-
-        <!-- Project 7: The Neutral Hour -->
-        <div class="project-block" id="project-neutralhour">
-            <div class="project-preview" style="background-image: url('https://res.cloudinary.com/de9pinegl/image/upload/v1786910451/IMG_5351_s1coc5.jpg')"></div>
+        <div class="project-block" onclick="openGallery('neutralhour')">
+            <div class="project-preview" style="background-image:url('https://res.cloudinary.com/de9pinegl/image/upload/v1786910451/IMG_5351_s1coc5.jpg')"></div>
             <div class="project-info">
                 <h3>The Neutral Hour</h3>
                 <p>Interior Design</p>
-                <button class="view-gallery-btn" onclick="toggleGallery('neutralhour')">View Full Gallery</button>
-            </div>
-            <div class="full-gallery" id="gallery-neutralhour">
-                <div class="gallery-image" style="background-image: url('https://res.cloudinary.com/de9pinegl/image/upload/v1786910451/IMG_5351_s1coc5.jpg')"></div>
-                <div class="gallery-image" style="background-image: url('https://res.cloudinary.com/de9pinegl/image/upload/v1786963223/IMG_5352_uwyxmy.jpg')"></div>
-                <div class="gallery-image" style="background-image: url('https://res.cloudinary.com/de9pinegl/image/upload/v1786963263/IMG_5348_hzm5bd.jpg')"></div>
-                <div class="gallery-image" style="background-image: url('https://res.cloudinary.com/de9pinegl/image/upload/v1786963204/IMG_5358_aamte7.jpg')"></div>
-                <button class="close-gallery-btn" onclick="toggleGallery('neutralhour')">Close Gallery</button>
+                <button class="view-gallery-btn">View Full Gallery</button>
             </div>
         </div>
+    </div>
+
+    <!-- Fullscreen Gallery Modal -->
+    <div class="gallery-modal" id="galleryModal">
+        <div class="gallery-modal-header">
+            <div class="gallery-modal-title" id="galleryModalTitle">Project</div>
+            <div class="gallery-close-btn" onclick="closeGallery()">
+                <i class="fas fa-times"></i>
+            </div>
+        </div>
+        <div class="gallery-images-container" id="galleryImagesContainer"></div>
     </div>
 
     <footer class="footer">
@@ -565,75 +228,119 @@
         <div class="footer-social">
             <a href="https://www.instagram.com/29thavenuedesigns/" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
         </div>
-        <div class="footer-copyright">
-            ©️ 2026 29thAvenueDesigns STUDIO. ALL RIGHTS RESERVED.
-        </div>
+        <div class="footer-copyright">©️ 2026 29thAvenueDesigns STUDIO. ALL RIGHTS RESERVED.</div>
     </footer>
 
     <script>
+        const projectData = {
+            atelier: {
+                title: 'Midnight Atelier',
+                images: [
+                    'https://res.cloudinary.com/de9pinegl/image/upload/v1786929713/ABA03F76-E5F0-4C0B-9D76-8D5719B46F5D_hwodse.jpg',
+                    'https://res.cloudinary.com/de9pinegl/image/upload/v1786930132/663368F7-C67B-4A9B-B7A6-9CEE4135727D_uq4xkb.jpg',
+                    'https://res.cloudinary.com/de9pinegl/image/upload/v1786930190/00AA9908-79C2-47EE-A4C3-0B20DC0B2F49_b8htxm.jpg',
+                    'https://res.cloudinary.com/de9pinegl/image/upload/v1786930303/46BBC0CA-0AD4-4825-B95B-7CAF364D81D5_z46pnw.jpg',
+                    'https://res.cloudinary.com/de9pinegl/image/upload/v1786930351/33F679D6-28F0-4F74-8BFA-F862782E4710_fco9xf.jpg',
+                    'https://res.cloudinary.com/de9pinegl/image/upload/v1786930404/2C826A09-1F93-4521-891F-2AAF544B2A07_lxxyyn.jpg'
+                ]
+            },
+            fabrics: {
+                title: 'Fabrics by Uche',
+                images: [
+                    'https://res.cloudinary.com/de9pinegl/image/upload/v1782830825/IMG_3326_ydsg59.png',
+                    'https://res.cloudinary.com/de9pinegl/image/upload/v1782829906/IMG_3325_yju9vi.png',
+                    'https://res.cloudinary.com/de9pinegl/image/upload/v1782830827/IMG_3323_ifcgwf.png',
+                    'https://res.cloudinary.com/de9pinegl/image/upload/v1782830834/IMG_3322_ic1oy8.png',
+                    'https://res.cloudinary.com/de9pinegl/image/upload/v1782830830/IMG_3318_eovmze.png',
+                    'https://res.cloudinary.com/de9pinegl/image/upload/v1782830828/IMG_3315_rlylhp.png'
+                ]
+            },
+            outterspace: {
+                title: 'Outterspace',
+                images: [
+                    'https://res.cloudinary.com/de9pinegl/image/upload/v1782830755/IMG_3275.JPG_kv4ofv.jpg',
+                    'https://res.cloudinary.com/de9pinegl/image/upload/v1782830773/IMG_3271.JPG_oe2vjl.jpg',
+                    'https://res.cloudinary.com/de9pinegl/image/upload/v1782830752/IMG_3272.JPG_fufpgy.jpg',
+                    'https://res.cloudinary.com/de9pinegl/image/upload/v1782830776/IMG_3278.JPG_ljmgtg.jpg'
+                ]
+            },
+            monada: {
+                title: 'Project Monada',
+                images: [
+                    'https://res.cloudinary.com/de9pinegl/image/upload/v1782830704/IMG_3256.JPG_rvifu0.jpg',
+                    'https://res.cloudinary.com/de9pinegl/image/upload/v1782830704/IMG_3250.JPG_v3tb8q.jpg',
+                    'https://res.cloudinary.com/de9pinegl/image/upload/v1782830705/IMG_3259.JPG_nhujcg.jpg',
+                    'https://res.cloudinary.com/de9pinegl/image/upload/v1786961329/IMG_3265.JPG_zs5n1n.jpg'
+                ]
+            },
+            earls: {
+                title: 'Earls',
+                images: [
+                    'https://res.cloudinary.com/de9pinegl/image/upload/v1782830319/IMG_9366.JPG_jyhmhr.jpg',
+                    'https://res.cloudinary.com/de9pinegl/image/upload/v1782830681/IMG_9367.JPG_ri54ox.jpg',
+                    'https://res.cloudinary.com/de9pinegl/image/upload/v1782830382/IMG_9463.JPG_o85xvr.jpg',
+                    'https://res.cloudinary.com/de9pinegl/image/upload/v1782830704/IMG_9533.JPG_aegmlv.jpg',
+                    'https://res.cloudinary.com/de9pinegl/image/upload/v1782830487/IMG_9516.JPG_oh5pqb.jpg'
+                ]
+            },
+            sanctuary: {
+                title: 'Sanctuary',
+                images: [
+                    'https://res.cloudinary.com/de9pinegl/image/upload/v1782830805/IMG_3290.JPG_s3nm4s.jpg',
+                    'https://res.cloudinary.com/de9pinegl/image/upload/v1782830792/IMG_3289.JPG_iq4qfo.jpg',
+                    'https://res.cloudinary.com/de9pinegl/image/upload/v1782830792/IMG_3287.JPG_drskdh.jpg',
+                    'https://res.cloudinary.com/de9pinegl/image/upload/v1782830809/IMG_3292.JPG_aicpqp.jpg'
+                ]
+            },
+            neutralhour: {
+                title: 'The Neutral Hour',
+                images: [
+                    'https://res.cloudinary.com/de9pinegl/image/upload/v1786910451/IMG_5351_s1coc5.jpg',
+                    'https://res.cloudinary.com/de9pinegl/image/upload/v1786963223/IMG_5352_uwyxmy.jpg',
+                    'https://res.cloudinary.com/de9pinegl/image/upload/v1786963263/IMG_5348_hzm5bd.jpg',
+                    'https://res.cloudinary.com/de9pinegl/image/upload/v1786963204/IMG_5358_aamte7.jpg'
+                ]
+            }
+        };
+
         function openMenu() {
             document.getElementById('mobileMenu').classList.add('active');
             document.getElementById('overlay').classList.add('active');
         }
-        
         function closeMenu() {
             document.getElementById('mobileMenu').classList.remove('active');
             document.getElementById('overlay').classList.remove('active');
         }
 
-        function toggleGallery(projectId) {
-            const gallery = document.getElementById('gallery-' + projectId);
-            const projectBlock = document.getElementById('project-' + projectId);
-            
-            // Close all other galleries first
-            document.querySelectorAll('.full-gallery.active').forEach(g => {
-                if (g.id !== 'gallery-' + projectId) {
-                    g.classList.remove('active');
-                }
+        function openGallery(projectId) {
+            const project = projectData[projectId];
+            if (!project) return;
+            document.getElementById('galleryModalTitle').textContent = project.title;
+            const container = document.getElementById('galleryImagesContainer');
+            container.innerHTML = '';
+            project.images.forEach(img => {
+                const div = document.createElement('div');
+                div.className = 'gallery-full-image';
+                div.style.backgroundImage = `url('${img}')`;
+                container.appendChild(div);
             });
-            
-            if (gallery.classList.contains('active')) {
-                gallery.classList.remove('active');
-                projectBlock.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            } else {
-                gallery.classList.add('active');
-                setTimeout(() => {
-                    gallery.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }, 100);
-                
-                const images = gallery.querySelectorAll('.gallery-image');
-                images.forEach(img => img.classList.remove('visible'));
-                
-                const observer = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            entry.target.classList.add('visible');
-                        }
-                    });
-                }, { threshold: 0.05 });
-                
-                images.forEach(img => observer.observe(img));
+            document.getElementById('galleryModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+            // scroll to top of modal
+            document.getElementById('galleryModal').scrollTop = 0;
+        }
+
+        function closeGallery() {
+            document.getElementById('galleryModal').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeGallery();
             }
-        }
-
-        // Animation for project cards
-        function animateProjectCards() {
-            const cards = document.querySelectorAll('.project-block');
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                    }
-                });
-            }, { threshold: 0.1 });
-            
-            cards.forEach((card, index) => {
-                card.style.transitionDelay = (index * 0.1) + 's';
-                observer.observe(card);
-            });
-        }
-
-        animateProjectCards();
+        });
     </script>
 </body>
 </html>
