@@ -149,7 +149,7 @@
 
         /* Projects Container */
         .projects-container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             padding: 2rem 1.2rem 3rem;
         }
@@ -158,6 +158,7 @@
             margin-bottom: 3rem;
         }
 
+        /* Mobile: Single column cards */
         .project-preview {
             width: 100%;
             height: 50vh;
@@ -171,11 +172,9 @@
             cursor: pointer;
             transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
-
         .project-preview:hover {
             box-shadow: 0 15px 35px rgba(0,0,0,0.12);
         }
-
         .project-preview::after {
             content: '';
             position: absolute;
@@ -186,11 +185,9 @@
             background: linear-gradient(to top, rgba(0,0,0,0.3) 0%, transparent 100%);
             pointer-events: none;
         }
-
         .project-info {
             padding: 1.5rem 0;
         }
-
         .project-info h3 {
             font-family: 'Playfair Display', serif;
             font-size: 1.5rem;
@@ -199,14 +196,12 @@
             margin-bottom: 0.4rem;
             letter-spacing: 1px;
         }
-
         .project-info p {
             color: #666;
             font-weight: 500;
             font-size: 0.9rem;
             margin-bottom: 0.4rem;
         }
-
         .view-gallery-btn {
             display: inline-block;
             padding: 0.8rem 2rem;
@@ -223,7 +218,6 @@
             background: transparent;
             margin-top: 0.8rem;
         }
-
         .view-gallery-btn:hover {
             background: #1a1a1a;
             color: #ffffff;
@@ -237,16 +231,13 @@
             margin-top: 1.5rem;
             animation: fadeInGallery 0.5s ease;
         }
-
         .full-gallery.active {
             display: block;
         }
-
         @keyframes fadeInGallery {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
-
         .gallery-image {
             width: 100%;
             height: 55vh;
@@ -260,12 +251,10 @@
             transform: translateY(20px);
             transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
-
         .gallery-image.visible {
             opacity: 1;
             transform: translateY(0);
         }
-
         .close-gallery-btn {
             display: inline-block;
             padding: 0.7rem 2rem;
@@ -282,7 +271,6 @@
             background: transparent;
             margin-top: 1rem;
         }
-
         .close-gallery-btn:hover {
             background: #b89b7b;
             color: #ffffff;
@@ -328,7 +316,7 @@
             font-weight: 500;
         }
 
-        /* Desktop Styles */
+        /* Desktop Styles - Grid Layout */
         @media (min-width: 768px) {
             .navbar { padding: 1.2rem 3rem; }
             .logo { font-size: 1.5rem; }
@@ -338,15 +326,178 @@
             .page-header { padding: 5rem 1.5rem 3rem; }
             .page-header h1 { font-size: 3.5rem; letter-spacing: 3px; }
             .page-header p { font-size: 1.1rem; }
-            .projects-container { padding: 3rem 1.5rem 5rem; }
-            .project-block { margin-bottom: 5rem; }
-            .project-preview { height: 75vh; min-height: 500px; border-radius: 12px; }
-            .project-info { padding: 2rem 0; }
-            .project-info h3 { font-size: 2rem; }
-            .project-info p { font-size: 1rem; }
-            .view-gallery-btn { font-size: 0.85rem; padding: 1rem 3rem; letter-spacing: 2px; }
-            .gallery-image { height: 85vh; min-height: 500px; margin-bottom: 2rem; border-radius: 12px; }
-            .close-gallery-btn { font-size: 0.8rem; padding: 0.8rem 2.5rem; letter-spacing: 2px; margin-top: 2rem; }
+            .projects-container { padding: 3rem 2rem 5rem; }
+
+            /* Desktop Grid Container */
+            .projects-container {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 2rem;
+            }
+
+            .project-block {
+                margin-bottom: 0;
+                position: relative;
+                overflow: hidden;
+                border-radius: 12px;
+                cursor: pointer;
+                transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            .project-block.visible {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+            .project-block:hover {
+                box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+            }
+
+            /* Varied heights for staggered grid */
+            .project-block:nth-child(1) { grid-column: span 1; grid-row: span 1; }
+            .project-block:nth-child(2) { grid-column: span 1; grid-row: span 1; transform: translateY(40px); }
+            .project-block:nth-child(2).visible { transform: translateY(40px); }
+            .project-block:nth-child(3) { grid-column: span 1; grid-row: span 1; }
+            .project-block:nth-child(4) { grid-column: span 1; grid-row: span 1; transform: translateY(60px); }
+            .project-block:nth-child(4).visible { transform: translateY(60px); }
+            .project-block:nth-child(5) { grid-column: span 1; grid-row: span 1; }
+            .project-block:nth-child(6) { grid-column: span 1; grid-row: span 1; transform: translateY(40px); }
+            .project-block:nth-child(6).visible { transform: translateY(40px); }
+            .project-block:nth-child(7) { grid-column: span 1; grid-row: span 1; }
+
+            .project-block:nth-child(1) .project-preview { height: 450px; }
+            .project-block:nth-child(2) .project-preview { height: 380px; }
+            .project-block:nth-child(3) .project-preview { height: 500px; }
+            .project-block:nth-child(4) .project-preview { height: 350px; }
+            .project-block:nth-child(5) .project-preview { height: 450px; }
+            .project-block:nth-child(6) .project-preview { height: 400px; }
+            .project-block:nth-child(7) .project-preview { height: 450px; }
+
+            /* Overlay on card */
+            .project-preview {
+                width: 100%;
+                height: 450px;
+                border-radius: 12px;
+                position: relative;
+            }
+
+            .project-preview::after {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0) 100%);
+                opacity: 0;
+                transition: opacity 0.5s ease;
+            }
+
+            .project-block:hover .project-preview::after {
+                opacity: 1;
+            }
+
+            /* Info overlay inside card */
+            .project-info {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                padding: 2rem;
+                z-index: 2;
+                opacity: 0;
+                transform: translateY(20px);
+                transition: all 0.5s ease 0.1s;
+            }
+
+            .project-block:hover .project-info {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+            .project-info h3 {
+                font-family: 'Playfair Display', serif;
+                font-size: 1.8rem;
+                font-weight: 700;
+                color: #ffffff;
+                margin-bottom: 0.3rem;
+                letter-spacing: 1px;
+            }
+
+            .project-info p {
+                color: #f0f0f0;
+                font-weight: 500;
+                font-size: 0.9rem;
+                margin-bottom: 0.8rem;
+            }
+
+            .view-gallery-btn {
+                display: inline-block;
+                padding: 0.8rem 2rem;
+                border: 2px solid #ffffff;
+                color: #ffffff;
+                text-decoration: none;
+                text-transform: uppercase;
+                letter-spacing: 1.5px;
+                font-size: 0.75rem;
+                font-weight: 700;
+                border-radius: 50px;
+                transition: all 0.3s;
+                cursor: pointer;
+                background: rgba(255,255,255,0.1);
+                backdrop-filter: blur(5px);
+                margin-top: 0.5rem;
+            }
+
+            .view-gallery-btn:hover {
+                background: #ffffff;
+                color: #1a1a1a;
+                transform: translateY(-2px);
+                box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            }
+
+            /* Full Gallery Grid for Desktop */
+            .full-gallery {
+                display: none;
+                grid-column: 1 / -1;
+                margin-top: 2rem;
+                animation: fadeInGallery 0.5s ease;
+            }
+
+            .full-gallery.active {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+            }
+
+            .gallery-image {
+                width: 100%;
+                height: 70vh;
+                min-height: 500px;
+                margin-bottom: 0;
+                border-radius: 12px;
+                opacity: 0;
+                transform: translateY(20px);
+                transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            }
+
+            .gallery-image:first-child {
+                grid-column: span 2;
+                height: 80vh;
+            }
+
+            .gallery-image.visible {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+            .close-gallery-btn {
+                grid-column: span 2;
+                justify-self: center;
+            }
+
             .footer { padding: 3rem 1.5rem; }
             .footer-logo { font-size: 1.5rem; }
             .footer-location { font-size: 0.85rem; }
@@ -358,9 +509,10 @@
         @media (min-width: 1024px) {
             .navbar { padding: 1.2rem 4rem; }
             .desktop-nav { gap: 2.5rem; }
+            .projects-container { gap: 2.5rem; }
         }
 
-        /* Mobile Specific Styles */
+        /* Mobile Specific Styles - Keep as is */
         @media (max-width: 767px) {
             .project-preview { height: 45vh; min-height: 250px; }
             .gallery-image { height: 50vh; min-height: 250px; }
@@ -402,14 +554,13 @@
         <p>featured projects</p>
     </div>
 
-    <div class="projects-container">
+    <div class="projects-container" id="projectsGrid">
         <!-- Project 1: Midnight Atelier -->
         <div class="project-block" id="project-atelier">
             <div class="project-preview" style="background-image: url('https://res.cloudinary.com/de9pinegl/image/upload/v1786929713/ABA03F76-E5F0-4C0B-9D76-8D5719B46F5D_hwodse.jpg')"></div>
             <div class="project-info">
                 <h3>Midnight Atelier</h3>
                 <p>Interior Design</p>
-                <p>A moody, sophisticated space where darkness meets luxury.</p>
                 <button class="view-gallery-btn" onclick="toggleGallery('atelier')">View Full Gallery</button>
             </div>
             <div class="full-gallery" id="gallery-atelier">
@@ -429,7 +580,6 @@
             <div class="project-info">
                 <h3>Fabrics by Uche</h3>
                 <p>Interior Design</p>
-                <p>A celebration of texture, color, and artisanal craftsmanship.</p>
                 <button class="view-gallery-btn" onclick="toggleGallery('fabrics')">View Full Gallery</button>
             </div>
             <div class="full-gallery" id="gallery-fabrics">
@@ -449,7 +599,6 @@
             <div class="project-info">
                 <h3>Outterspace</h3>
                 <p>Creative Direction & Design</p>
-                <p>Where imagination meets reality in bold new ways.</p>
                 <button class="view-gallery-btn" onclick="toggleGallery('outterspace')">View Full Gallery</button>
             </div>
             <div class="full-gallery" id="gallery-outterspace">
@@ -467,7 +616,6 @@
             <div class="project-info">
                 <h3>Project Monada</h3>
                 <p>Experiential Design</p>
-                <p>Immersive spaces that engage all the senses.</p>
                 <button class="view-gallery-btn" onclick="toggleGallery('monada')">View Full Gallery</button>
             </div>
             <div class="full-gallery" id="gallery-monada">
@@ -485,7 +633,6 @@
             <div class="project-info">
                 <h3>Earls</h3>
                 <p>Interior Design</p>
-                <p>Classic elegance reimagined for contemporary living.</p>
                 <button class="view-gallery-btn" onclick="toggleGallery('earls')">View Full Gallery</button>
             </div>
             <div class="full-gallery" id="gallery-earls">
@@ -504,7 +651,6 @@
             <div class="project-info">
                 <h3>Sanctuary</h3>
                 <p>Interior Design</p>
-                <p>A peaceful retreat designed for rest and restoration.</p>
                 <button class="view-gallery-btn" onclick="toggleGallery('sanctuary')">View Full Gallery</button>
             </div>
             <div class="full-gallery" id="gallery-sanctuary">
@@ -522,7 +668,6 @@
             <div class="project-info">
                 <h3>The Neutral Hour</h3>
                 <p>Interior Design</p>
-                <p>A cozy and perfect welcome.</p>
                 <button class="view-gallery-btn" onclick="toggleGallery('neutralhour')">View Full Gallery</button>
             </div>
             <div class="full-gallery" id="gallery-neutralhour">
@@ -563,16 +708,13 @@
             
             if (gallery.classList.contains('active')) {
                 gallery.classList.remove('active');
-                // Scroll back to project info
                 projectBlock.scrollIntoView({ behavior: 'smooth', block: 'start' });
             } else {
                 gallery.classList.add('active');
-                // Scroll to gallery
                 setTimeout(() => {
                     gallery.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }, 100);
                 
-                // Animate gallery images
                 const images = gallery.querySelectorAll('.gallery-image');
                 const observer = new IntersectionObserver((entries) => {
                     entries.forEach(entry => {
@@ -585,6 +727,25 @@
                 images.forEach(img => observer.observe(img));
             }
         }
+
+        // Animation for desktop project cards
+        function animateProjectCards() {
+            const cards = document.querySelectorAll('.project-block');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            cards.forEach((card, index) => {
+                card.style.transitionDelay = (index * 0.1) + 's';
+                observer.observe(card);
+            });
+        }
+
+        animateProjectCards();
     </script>
 </body>
 </html>
