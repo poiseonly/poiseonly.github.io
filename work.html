@@ -73,6 +73,11 @@
         .gallery-images-container { display:flex; flex-direction:column; padding:2rem 0; }
         .gallery-full-image { width:100%; height:85vh; background-size:cover; background-position:center; background-repeat:no-repeat; margin-bottom:3rem; border-radius:8px; box-shadow:0 15px 40px rgba(0,0,0,0.4); }
         .gallery-full-image:last-child { margin-bottom:0; }
+        .gallery-full-video { width:100%; height:85vh; margin-bottom:3rem; border-radius:8px; box-shadow:0 15px 40px rgba(0,0,0,0.4); object-fit:cover; }
+
+        /* Video badge in preview */
+        .video-badge { position:absolute; top:1rem; right:1rem; z-index:3; background:rgba(0,0,0,0.6); backdrop-filter:blur(5px); color:#fff; padding:.5rem 1rem; border-radius:50px; font-size:.7rem; font-weight:600; letter-spacing:1px; text-transform:uppercase; display:flex; align-items:center; gap:.5rem; border:1px solid rgba(255,255,255,0.2); }
+        .video-badge i { font-size:.8rem; }
 
         /* Mobile Responsive */
         @media (max-width: 767px) {
@@ -81,6 +86,7 @@
             .gallery-close-btn { width:40px; height:40px; }
             .gallery-close-btn i { font-size:1.2rem; }
             .gallery-full-image { height:75vh; margin-bottom:2rem; }
+            .gallery-full-video { height:75vh; margin-bottom:2rem; }
         }
 
         /* Desktop */
@@ -102,6 +108,7 @@
             .view-gallery-btn { border-color:#fff; color:#fff; background:rgba(255,255,255,0.15); backdrop-filter:blur(5px); }
             .view-gallery-btn:hover { background:#fff; color:#1a1a1a; }
             .gallery-full-image { height:90vh; }
+            .gallery-full-video { height:90vh; }
         }
 
         @media (min-width: 1024px) {
@@ -214,9 +221,11 @@
             </div>
         </div>
 
-        <!-- Project 7: The Neutral Hour -->
+        <!-- Project 7: The Neutral Hour (with video badge) -->
         <div class="project-block" onclick="openGallery('neutralhour')">
-            <div class="project-preview" style="background-image:url('https://res.cloudinary.com/de9pinegl/image/upload/v1786910451/IMG_5351_s1coc5.jpg')"></div>
+            <div class="project-preview" style="background-image:url('https://res.cloudinary.com/de9pinegl/image/upload/v1786910451/IMG_5351_s1coc5.jpg')">
+                <div class="video-badge"><i class="fas fa-play"></i> Video Included</div>
+            </div>
             <div class="project-info">
                 <h3>The Neutral Hour</h3>
                 <p>Interior Design</p>
@@ -282,7 +291,7 @@
                 'https://res.cloudinary.com/de9pinegl/image/upload/v1782830704/IMG_3250.JPG_v3tb8q.jpg',
                 'https://res.cloudinary.com/de9pinegl/image/upload/v1782830705/IMG_3259.JPG_nhujcg.jpg',
                 'https://res.cloudinary.com/de9pinegl/image/upload/v1786961329/IMG_3265.JPG_zs5n1n.jpg']},
-            neutralhour: { title:'The Neutral Hour', images:[
+            neutralhour: { title:'The Neutral Hour', video:'https://res.cloudinary.com/de9pinegl/video/upload/v1788264824/Video_Project_msiwoh.mp4', images:[
                 'https://res.cloudinary.com/de9pinegl/image/upload/v1786910451/IMG_5351_s1coc5.jpg',
                 'https://res.cloudinary.com/de9pinegl/image/upload/v1786963223/IMG_5352_uwyxmy.jpg',
                 'https://res.cloudinary.com/de9pinegl/image/upload/v1786963263/IMG_5348_hzm5bd.jpg',
@@ -304,12 +313,27 @@
             document.getElementById('galleryModalTitle').textContent = project.title;
             const container = document.getElementById('galleryImagesContainer');
             container.innerHTML = '';
+            
+            // If project has a video, add it first
+            if (project.video) {
+                const video = document.createElement('video');
+                video.className = 'gallery-full-video';
+                video.autoplay = true;
+                video.muted = true;
+                video.loop = true;
+                video.playsInline = true;
+                video.controls = true;
+                video.src = project.video;
+                container.appendChild(video);
+            }
+            
             project.images.forEach(img => {
                 const div = document.createElement('div');
                 div.className = 'gallery-full-image';
                 div.style.backgroundImage = `url('${img}')`;
                 container.appendChild(div);
             });
+            
             document.getElementById('galleryModal').classList.add('active');
             document.body.style.overflow = 'hidden';
             document.getElementById('galleryModal').scrollTop = 0;
@@ -318,6 +342,9 @@
         function closeGallery() {
             document.getElementById('galleryModal').classList.remove('active');
             document.body.style.overflow = 'auto';
+            // Pause any playing videos
+            const videos = document.querySelectorAll('.gallery-full-video');
+            videos.forEach(v => v.pause());
         }
 
         document.addEventListener('keydown', function(e) {
