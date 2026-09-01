@@ -292,6 +292,8 @@
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
             text-decoration: none;
             display: block;
+            overflow-wrap: break-word;
+            word-break: break-word;
         }
         .contact-card:hover {
             transform: translateY(-8px);
@@ -321,9 +323,12 @@
         }
         .contact-card p {
             color: #f0f0f0;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             font-weight: 500;
-            line-height: 1.6;
+            line-height: 1.5;
+            overflow-wrap: break-word;
+            word-break: break-word;
+            max-width: 100%;
         }
 
         /* Page header below hero (hidden for inquire section) */
@@ -762,7 +767,7 @@
             .contact-card { padding: 2.5rem 1.5rem; border-radius: 16px; }
             .contact-card i { font-size: 2.5rem; margin-bottom: 1.5rem; }
             .contact-card h4 { font-size: 1.1rem; letter-spacing: 2px; }
-            .contact-card p { font-size: 0.95rem; }
+            .contact-card p { font-size: 0.85rem; }
             .questionnaire-section { padding: 0 1.5rem; margin-bottom: 5rem; }
             .questionnaire-intro { padding: 4rem 2rem; border-radius: 20px; margin-top: -2rem; }
             .questionnaire-intro h3 { font-size: 2.2rem; }
@@ -1424,4 +1429,3 @@
     </script>
 </body>
 </html>
-    
